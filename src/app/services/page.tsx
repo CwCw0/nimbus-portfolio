@@ -135,8 +135,8 @@ export default function ServicesPage() {
                 Book a Call
                 <ArrowUpRight className="h-[18px] w-[18px]" />
               </a>
-              <a href="mailto:hello@nimbus.studio" className="flex items-center gap-2.5 border border-[var(--color-border-light)] px-9 py-[18px] font-inter text-sm tracking-[0.5px] text-[var(--color-text-secondary)] transition-all duration-300 hover:border-[var(--color-accent-border)] hover:text-white">
-                hello@nimbus.studio
+              <a href="mailto:heyitsnimbus@gmail.com" className="flex items-center gap-2.5 border border-[var(--color-border-light)] px-9 py-[18px] font-inter text-sm tracking-[0.5px] text-[var(--color-text-secondary)] transition-all duration-300 hover:border-[var(--color-accent-border)] hover:text-white">
+                heyitsnimbus@gmail.com
               </a>
             </div>
           </div>

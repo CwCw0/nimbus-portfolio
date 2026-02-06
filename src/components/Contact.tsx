@@ -29,7 +29,7 @@ export default function Contact() {
           <div className="flex items-center gap-4">
             <Mail className="h-5 w-5 text-[var(--color-accent)]" />
             <span className="font-poppins text-[15px] text-[var(--color-text-secondary)]">
-              hello@nimbus.dev
+              heyitsnimbus@gmail.com
             </span>
           </div>
           <div className="flex items-center gap-4">

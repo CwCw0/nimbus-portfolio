@@ -139,7 +139,7 @@ export default function ContactPage() {
                 </span>
                 <div className="flex flex-col gap-5">
                   {[
-                    { icon: Mail, label: "Email", value: "hello@nimbus.dev" },
+                    { icon: Mail, label: "Email", value: "heyitsnimbus@gmail.com" },
                     { icon: MapPin, label: "Location", value: "Remote — Worldwide" },
                     { icon: Clock, label: "Response", value: "Within 24 hours" },
                   ].map((item) => (
@@ -162,13 +162,15 @@ export default function ContactPage() {
                   SOCIAL
                 </span>
                 {[
-                  { icon: Twitter, name: "Twitter / X", handle: "@nimbus_dev" },
-                  { icon: Linkedin, name: "LinkedIn", handle: "nimbus-studio" },
-                  { icon: Github, name: "GitHub", handle: "nimbus-dev" },
+                  { icon: Github, name: "GitHub", handle: "CwCw0", href: "https://github.com/CwCw0" },
+                  { icon: Twitter, name: "Twitter / X", handle: "@nimbus_dev", href: "#" },
+                  { icon: Linkedin, name: "LinkedIn", handle: "nimbus-studio", href: "#" },
                 ].map((social) => (
                   <a
                     key={social.name}
-                    href="#"
+                    href={social.href}
+                    target={social.href !== "#" ? "_blank" : undefined}
+                    rel={social.href !== "#" ? "noopener noreferrer" : undefined}
                     className="group flex items-center gap-3 transition-colors"
                   >
                     <social.icon className="h-4 w-4 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)]" />

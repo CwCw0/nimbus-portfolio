@@ -5,9 +5,9 @@ import { useRef } from "react";
 import { useCountUp } from "../hooks/useScrollReveal";
 
 const stats = [
-  { num: "50+", label: "Projects delivered across 12 countries", color: "text-white" },
-  { num: "4+", label: "Years of experience", color: "text-[var(--color-accent)]" },
-  { num: "98%", label: "Client satisfaction rate", color: "text-white" },
+  { num: "4+", label: "Projects currently in the works", color: "text-white" },
+  { num: "100%", label: "Self-taught", color: "text-[var(--color-accent)]" },
+  { num: "24/7", label: "Always building", color: "text-white" },
 ];
 
 export default function About() {
@@ -40,17 +40,16 @@ export default function About() {
             02 / ABOUT
           </span>
           <h2 className="font-space-grotesk text-[42px] font-bold leading-[1.15] tracking-[-1px] text-white max-md:text-[32px]">
-            Part-time dev.
+            Not just a dev.
             <br />
-            Full-time obsession
+            A builder from
             <br />
-            with craft.
+            end to end.
           </h2>
           <p className="font-inter text-base leading-[1.7] text-[var(--color-text-dim)]">
-            I&apos;m a contract-based developer and designer available for
-            part-time engagements. Whether you need a polished web presence, a
-            brand refresh, or an AI chatbot that actually works — I bring focused
-            expertise without the overhead of an agency.
+            Self-taught developer and builder. I don&apos;t just
+            write code — I study the systems, the design, the business, and the
+            user. I build things that work for real people.
           </p>
           <div>
             <a
@@ -69,12 +68,12 @@ export default function About() {
           <div className="flex flex-col gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-7">
             <span
               className="count-up font-inter text-[40px] font-semibold tracking-[-1px] text-white"
-              data-target="50+"
+              data-target="4+"
             >
               0+
             </span>
             <span className="font-inter text-sm text-[var(--color-text-dim)]">
-              Projects delivered across 12 countries
+              Projects currently in the works
             </span>
           </div>
           {/* Bottom row */}
@@ -82,23 +81,20 @@ export default function About() {
             <div className="flex flex-1 flex-col gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-7">
               <span
                 className="count-up font-inter text-[40px] font-semibold tracking-[-1px] text-[var(--color-accent)]"
-                data-target="4+"
-              >
-                0+
-              </span>
-              <span className="font-inter text-sm text-[var(--color-text-dim)]">
-                Years of experience
-              </span>
-            </div>
-            <div className="flex flex-1 flex-col gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-7">
-              <span
-                className="count-up font-inter text-[40px] font-semibold tracking-[-1px] text-white"
-                data-target="98%"
+                data-target="100%"
               >
                 0%
               </span>
               <span className="font-inter text-sm text-[var(--color-text-dim)]">
-                Client satisfaction rate
+                Self-taught
+              </span>
+            </div>
+            <div className="flex flex-1 flex-col gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-7">
+              <span className="font-inter text-[40px] font-semibold tracking-[-1px] text-white">
+                24/7
+              </span>
+              <span className="font-inter text-sm text-[var(--color-text-dim)]">
+                Always building
               </span>
             </div>
           </div>

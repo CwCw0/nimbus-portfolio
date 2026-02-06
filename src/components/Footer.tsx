@@ -28,7 +28,7 @@ export default function Footer() {
             </span>
             {[
               { label: "Services", href: "/services" },
-              { label: "Work", href: "/work/flowstate" },
+              { label: "Work", href: "/work/omnifood" },
               { label: "About", href: "/about" },
               { label: "Blog", href: "/blog" },
             ].map((link) => (
@@ -45,13 +45,19 @@ export default function Footer() {
             <span className="font-inter text-xs font-semibold tracking-[1px] text-white">
               Connect
             </span>
-            {["Twitter / X", "LinkedIn", "Dribbble", "GitHub"].map((link) => (
+            {[
+              { label: "GitHub", href: "https://github.com/CwCw0" },
+              { label: "Twitter / X", href: "#" },
+              { label: "LinkedIn", href: "#" },
+            ].map((link) => (
               <a
-                key={link}
-                href="#"
+                key={link.label}
+                href={link.href}
+                target={link.href !== "#" ? "_blank" : undefined}
+                rel={link.href !== "#" ? "noopener noreferrer" : undefined}
                 className="font-inter text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
               >
-                {link}
+                {link.label}
               </a>
             ))}
           </div>

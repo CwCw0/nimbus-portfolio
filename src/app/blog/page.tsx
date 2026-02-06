@@ -7,75 +7,10 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useState, useRef } from "react";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
+import { blogPosts, categories } from "../../data/blog";
 
-const categories = [
-  "All Posts",
-  "Design",
-  "Development",
-  "SEO & Growth",
-  "AI Tools",
-  "Process",
-];
-
-const featuredPost = {
-  slug: "why-i-stopped-using-templates",
-  tag: "Design",
-  date: "January 15, 2025",
-  title: "Why I Stopped Using Templates and Started Building From Scratch",
-  excerpt:
-    "Templates are convenient. But after years of bending them to fit client needs, I realized starting from scratch wasn’t just faster — it was better for everyone.",
-};
-
-const posts = [
-  {
-    slug: "building-accessible-web-apps",
-    tag: "Development",
-    date: "Jan 10, 2025",
-    title: "Building Accessible Web Apps That Don’t Suck",
-    excerpt:
-      "Accessibility isn’t a checkbox. Here’s how I bake it into every project from day one.",
-  },
-  {
-    slug: "core-web-vitals",
-    tag: "SEO",
-    date: "Dec 28, 2024",
-    title: "Core Web Vitals: What Actually Matters in 2025",
-    excerpt:
-      "Google keeps changing the goalposts. Here’s what really moves the needle on performance.",
-  },
-  {
-    slug: "ai-to-ship-faster",
-    tag: "AI Tools",
-    date: "Dec 15, 2024",
-    title: "How I Use AI to Ship 3x Faster",
-    excerpt:
-      "From code generation to design iteration, here’s my AI-powered workflow.",
-  },
-  {
-    slug: "solo-dev-workflow",
-    tag: "Process",
-    date: "Dec 2, 2024",
-    title: "My Solo Dev Workflow: Tools, Habits & Systems",
-    excerpt:
-      "How I stay productive, organized and sane as a one-person studio.",
-  },
-  {
-    slug: "psychology-of-dark-ui",
-    tag: "Design",
-    date: "Nov 20, 2024",
-    title: "The Psychology of Dark UI Design",
-    excerpt:
-      "Why dark interfaces feel premium and how to design them without sacrificing readability.",
-  },
-  {
-    slug: "freelance-pricing",
-    tag: "Growth",
-    date: "Nov 8, 2024",
-    title: "Freelance Pricing: How I Stopped Undercharging",
-    excerpt:
-      "The mindset shifts and pricing frameworks that tripled my project rates.",
-  },
-];
+const featuredPost = blogPosts[0];
+const allPosts = blogPosts.slice(1);
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("All Posts");
@@ -84,8 +19,8 @@ export default function BlogPage() {
 
   const filteredPosts =
     activeCategory === "All Posts"
-      ? posts
-      : posts.filter((p) => p.tag === activeCategory);
+      ? allPosts
+      : allPosts.filter((p) => p.tag === activeCategory);
 
   return (
     <>
@@ -100,7 +35,7 @@ export default function BlogPage() {
               BLOG
             </span>
             <h1 className="font-space-grotesk text-[52px] font-bold leading-[1.1] tracking-[-2px] text-white max-md:text-[32px]">
-              Thoughts on design, development, and building online.
+              Thoughts on learning, building, and growing as a developer.
             </h1>
           </div>
         </section>
@@ -130,10 +65,12 @@ export default function BlogPage() {
             href={`/blog/${featuredPost.slug}`}
             className="group flex gap-8 border border-[var(--color-border)] bg-[var(--color-bg-card)] transition-all duration-300 hover:border-[var(--color-accent-border)] max-md:flex-col"
           >
-            <div className="flex h-[340px] w-[580px] items-center justify-center bg-gradient-to-br from-[#7C5CFC12] to-[#7C5CFC06] max-md:w-full max-md:h-[200px]">
-              <span className="font-inter text-sm tracking-[2px] text-[var(--color-text-subtle)]">
-                FEATURED IMAGE
-              </span>
+            <div className="w-[580px] h-[340px] overflow-hidden max-md:w-full max-md:h-[200px]">
+              <img
+                src={featuredPost.image}
+                alt={featuredPost.title}
+                className="h-full w-full object-cover"
+              />
             </div>
             <div className="flex flex-1 flex-col justify-center gap-4 p-8 max-md:p-6">
               <div className="w-fit bg-[#7C5CFC18] px-3 py-1">
@@ -175,10 +112,12 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="blog-card group flex flex-col border border-[var(--color-border)] opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)]"
               >
-                <div className="flex h-[200px] items-center justify-center bg-gradient-to-br from-[#7C5CFC10] to-[#7C5CFC05]">
-                  <span className="font-inter text-xs tracking-[2px] text-[var(--color-text-subtle)]">
-                    IMAGE
-                  </span>
+                <div className="h-[200px] overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <div className="flex flex-col gap-3 p-6">
                   <div className="flex items-center gap-3">
@@ -202,13 +141,6 @@ export default function BlogPage() {
                 </div>
               </Link>
             ))}
-          </div>
-
-          {/* Load More */}
-          <div className="mt-12 flex justify-center">
-            <button className="flex items-center gap-2 border border-[var(--color-border)] px-8 py-3.5 font-inter text-sm font-medium text-[var(--color-text-secondary)] transition-all duration-300 hover:border-[var(--color-accent-border)] hover:text-white">
-              Load More Articles
-            </button>
           </div>
         </section>
 

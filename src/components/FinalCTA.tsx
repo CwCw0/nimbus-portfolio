@@ -50,10 +50,10 @@ export default function FinalCTA() {
             <ArrowUpRight className="h-[18px] w-[18px]" />
           </a>
           <a
-            href="mailto:hello@nimbus.studio"
+            href="mailto:heyitsnimbus@gmail.com"
             className="flex items-center gap-2.5 border border-[var(--color-border-light)] px-9 py-[18px] font-inter text-sm tracking-[0.5px] text-[var(--color-text-secondary)] transition-all duration-300 hover:border-[var(--color-accent-border)] hover:text-white max-md:w-full max-md:justify-center"
           >
-            hello@nimbus.studio
+            heyitsnimbus@gmail.com
           </a>
         </div>
       </div>
