@@ -144,7 +144,13 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={submitState !== "idle"}
-                className="flex h-[52px] w-full items-center justify-center gap-2.5 rounded-lg bg-gradient-to-b from-[var(--color-accent)] to-[#6B4FE0] font-poppins text-[15px] font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_24px_#7C5CFC20] disabled:opacity-70"
+                className={`flex h-[52px] w-full items-center justify-center gap-2.5 rounded-lg font-poppins text-[15px] font-semibold text-white transition-all duration-300 ${
+                  submitState === "sent"
+                    ? "bg-emerald-500"
+                    : submitState === "error"
+                    ? "bg-red-500"
+                    : "bg-gradient-to-b from-[var(--color-accent)] to-[#6B4FE0] hover:scale-[1.02] hover:shadow-[0_0_24px_#7C5CFC20]"
+                } disabled:cursor-not-allowed`}
               >
                 {submitState === "idle" && (
                   <>
