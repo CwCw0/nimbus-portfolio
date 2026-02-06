@@ -6,14 +6,37 @@ import CustomCursor from "../../components/CustomCursor";
 import { Mail, MapPin, Clock, ArrowRight, Send, Twitter, Linkedin, Github, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-export default function ContactPage() {
-  const [submitState, setSubmitState] = useState<"idle" | "sending" | "sent">("idle");
+const FORMSPREE_ID = "xjgebdwg";
 
-  const handleSubmit = (e: React.FormEvent) => {
+export default function ContactPage() {
+  const [submitState, setSubmitState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitState("sending");
-    setTimeout(() => setSubmitState("sent"), 2000);
-    setTimeout(() => setSubmitState("idle"), 4000);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setSubmitState("sent");
+        form.reset();
+        setTimeout(() => setSubmitState("idle"), 4000);
+      } else {
+        setSubmitState("error");
+        setTimeout(() => setSubmitState("idle"), 4000);
+      }
+    } catch {
+      setSubmitState("error");
+      setTimeout(() => setSubmitState("idle"), 4000);
+    }
   };
 
   return (
@@ -52,6 +75,8 @@ export default function ContactPage() {
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    required
                     placeholder="Your name"
                     className="h-12 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-white placeholder:text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all"
                   />
@@ -62,6 +87,8 @@ export default function ContactPage() {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    required
                     placeholder="you@example.com"
                     className="h-12 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-white placeholder:text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all"
                   />
@@ -73,7 +100,7 @@ export default function ContactPage() {
                   Subject
                 </label>
                 <div className="relative">
-                  <select className="h-12 w-full appearance-none rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all">
+                  <select name="subject" className="h-12 w-full appearance-none rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all">
                     <option>Select a subject...</option>
                     <option>Website Design & Development</option>
                     <option>Brand Identity</option>
@@ -90,7 +117,7 @@ export default function ContactPage() {
                   Budget Range
                 </label>
                 <div className="relative">
-                  <select className="h-12 w-full appearance-none rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all">
+                  <select name="budget" className="h-12 w-full appearance-none rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all">
                     <option>Select range...</option>
                     <option>$1k - $3k</option>
                     <option>$3k - $5k</option>
@@ -107,6 +134,8 @@ export default function ContactPage() {
                 </label>
                 <textarea
                   rows={6}
+                  name="message"
+                  required
                   placeholder="Tell me about your project..."
                   className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] p-4 font-poppins text-sm text-white placeholder:text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all resize-none"
                 />
@@ -127,6 +156,7 @@ export default function ContactPage() {
                   <div className="h-5 w-5 rounded-full border-2 border-white/30 border-t-white submit-spinner" />
                 )}
                 {submitState === "sent" && "Message Sent ✓"}
+                {submitState === "error" && "Something went wrong — try again"}
               </button>
             </form>
 
