@@ -7,9 +7,9 @@ export const voidframe: CaseStudy = {
   tags: ["Next.js", "Real-time", "Gaming", "Full-Stack"],
   title: "Voidframe — Gaming Community Platform",
   shortTitle: "Voidframe",
-  desc: "A unified hub for gaming communities — combining event scheduling, real-time chat, and squad management. Actively in progress.",
+  desc: "Built from my love of gaming — a community platform designed the way gamers actually organize, communicate, and compete. Actively in progress.",
   heroDesc:
-    "Voidframe is a community platform built for competitive and casual gamers alike. It replaces the scattered mess of Discord servers, Reddit threads, and spreadsheets with one cohesive space for organizing, communicating, and competing.",
+    "Gaming has been a huge part of my life for as long as I can remember. The communities, the competition, the friendships formed through shared passion — that's what makes gaming special. But the tools we use to organize around it? They're a mess. Voidframe is the platform I wish existed: one place where your community lives, your events are organized, your squads are ready, and the vibe actually feels like gaming.",
   heroImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=80",
   gallery: [
     "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80",
@@ -18,9 +18,9 @@ export const voidframe: CaseStudy = {
     "https://images.unsplash.com/photo-1552820728-8b83bb6b2b28?w=1200&q=80",
   ],
   challenge:
-    "Gaming communities are fragmented across platforms. Event scheduling lives in Google Calendar, team comms are on Discord, strategy docs are on Notion, and recruiting happens on Reddit. There was no single platform that understood the gaming use case from end to end. The challenge was to design a unified platform that handles real-time communication, event management, team rosters, and community discovery — all with the performance expectations gamers have (instant load, zero lag, dark-mode native).",
+    "As a gamer, I've lived the frustration. Your squad coordinates on Discord, events are tracked in a Google Sheet someone made at 3am, tournament brackets are on a random website, and finding new communities means scrolling through Reddit. Nothing was built for how gamers actually operate — fast-paced, always-on, and deeply community-driven. I wanted to build something that understands gaming culture from the ground up. Not a corporate collaboration tool with a dark skin slapped on — a platform that feels native to gaming, where the design language speaks the same language as the people using it.",
   solution:
-    "I designed and developed Voidframe using Next.js for the frontend with a Node.js/Socket.io backend for real-time features. The platform is organized around Communities (think servers), each containing Channels (text/voice), Events (tournaments, scrims, casual sessions), and Squads (persistent teams). The chat system supports threading, reactions, and media embeds with sub-100ms message delivery. Events integrate a bracket system for tournaments and RSVP tracking for casual play. The design language is dark-first with neon accent colors, heavy use of glassmorphism, and micro-animations that make the interface feel alive. I built a custom notification system that respects gaming hours — no alerts during active sessions unless it's marked urgent.",
+    "I built Voidframe as a community-first platform organized around the things gamers actually need. Communities are the core — each one has Channels for real-time chat with threading, reactions, and typing indicators. Events let you schedule tournaments, casual sessions, and scrims with RSVP tracking and a calendar view. Squads are persistent teams you can manage with rosters and roles. A Discover page helps you find new communities to join. The entire design is dark-first with neon purple and cyan accents, heavy glassmorphism, and micro-animations that make the interface feel alive — because a gaming platform should look and feel like a gaming platform. Built with Next.js, date-fns for calendar logic, and a notification system that surfaces what matters without interrupting your session.",
   liveUrl: "https://voidframe-three.vercel.app/",
   results: [
     { value: "<100ms", label: "Message Latency", color: "text-white" },

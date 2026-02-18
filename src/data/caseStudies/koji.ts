@@ -7,9 +7,9 @@ export const koji: CaseStudy = {
   tags: ["React", "TypeScript", "SaaS", "Productivity"],
   title: "Kōji — Minimal Productivity Platform",
   shortTitle: "Kōji",
-  desc: "A stripped-back, keyboard-first productivity tool built for developers and makers who hate bloat. Actively in progress.",
+  desc: "My second brain — a keyboard-first tool built around how I actually think, plan, and ship. Actively in progress.",
   heroDesc:
-    "Kōji is a productivity platform designed for people who build things. No feature bloat, no unnecessary complexity. Just tasks, notes, and focus — organized the way your brain actually works.",
+    "Kōji started as a personal problem. My brain doesn't work in neat categories — thoughts come fast, tasks pile up, and I need to capture everything before it disappears. I built Kōji as my second brain: a place to dump raw thoughts, turn them into tasks, and stay focused without the friction of switching between five different apps. If my thought process can help other builders too, even better.",
   heroImage: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&q=80",
   gallery: [
     "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80",
@@ -18,9 +18,9 @@ export const koji: CaseStudy = {
     "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=1200&q=80",
   ],
   challenge:
-    "Every productivity tool tries to do everything — and ends up doing nothing well. Notion is powerful but slow. Todoist is fast but shallow. Linear is great but engineering-only. The challenge was to build something that sits in the sweet spot: fast, minimal, flexible, and designed specifically for solo builders and small teams who need to ship, not organize. The interface had to feel like a tool, not an app. Keyboard-first. Zero friction between thought and capture.",
+    "I tried everything — Notion, Todoist, Linear, Apple Notes, random text files. Nothing matched how my brain actually works. I think in bursts. A random idea at 2am, a task I need to remember mid-conversation, a note that connects to something I wrote three days ago. Every tool either forced me into someone else's workflow or was so bloated I spent more time organizing than doing. I needed something that gets out of the way — captures thoughts instantly, lets me sort them later, and keeps me focused when it's time to actually work.",
   solution:
-    "I designed and developed Kōji as a React + TypeScript SaaS application with a command-palette-driven interface. Everything is accessible via keyboard shortcuts — create tasks, switch views, search, and navigate without ever touching the mouse. The architecture uses an offline-first approach with Supabase for sync, so the app feels instant even on slow connections. The UI is intentionally stark: monochrome with a single accent color, generous whitespace, and typography that gets out of the way. Three views — Today, Board, and Timeline — cover 95% of use cases without settings bloat. I implemented drag-and-drop reordering, markdown notes attached to any task, and a focus mode that hides everything except the current task.",
+    "I built Kōji around my own thought process. Brain Dump mode lets me capture raw thoughts in a full-screen, distraction-free overlay — just type and hit Enter, sort it later. Those thoughts live on the Today page where I can convert them into real tasks when I'm ready. Three views cover how I actually work: Today for what needs to happen now, Board for seeing the bigger picture, and Notes for longer-form thinking in markdown. Everything is keyboard-driven — Cmd+K command palette, 40+ shortcuts, view switching with number keys. The design is intentionally monochrome and stark because color is a distraction when you're trying to think. A built-in focus timer with Pomodoro sessions keeps me honest about deep work. Dark mode because I code at night. No accounts, no servers — everything runs locally in your browser.",
   liveUrl: "https://koji-seven.vercel.app/",
   results: [
     { value: "3", label: "Core Views", color: "text-white" },
