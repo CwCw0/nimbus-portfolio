@@ -4,16 +4,21 @@ import { Mail, MapPin, Timer, ArrowRight, ChevronDown, Send } from "lucide-react
 import { useState } from "react";
 import Link from "next/link";
 
-const FORMSPREE_ID = "xjgebdwg";
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "xjgebdwg";
 
 export default function Contact() {
   const [submitState, setSubmitState] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitState("sending");
+
     const form = e.currentTarget;
     const data = new FormData(form);
+
+    // Honeypot — bots fill hidden fields, real users don't
+    if (data.get("_gotcha")) return;
+
+    setSubmitState("sending");
     try {
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: "POST",
@@ -83,6 +88,9 @@ export default function Contact() {
           onSubmit={handleSubmit}
           className="flex flex-1 flex-col gap-6 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-10 max-md:p-6"
         >
+          {/* Honeypot — hidden from real users, bots fill it */}
+          <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" />
+
           <div className="flex gap-4 max-md:flex-col">
             <div className="flex flex-1 flex-col gap-2">
               <label htmlFor="hp-name" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">Name</label>

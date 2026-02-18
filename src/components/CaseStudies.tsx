@@ -4,16 +4,15 @@ import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import Link from "next/link";
 import { useScrollReveal } from "../hooks/useScrollReveal";
+import { allCaseStudies } from "../data/caseStudies";
 
-const studies = [
-  {
-    tags: ["Website", "Landing Page"],
-    title: "Omnifood",
-    desc: "A modern landing page for a premium meal subscription service, featuring responsive design and clean UI.",
-    slug: "omnifood",
-    image: "/images/omnifood/hero.png",
-  },
-];
+const studies = allCaseStudies.map((s) => ({
+  tags: [s.category, ...s.tags.slice(0, 1)],
+  title: s.shortTitle,
+  desc: s.desc,
+  slug: s.slug,
+  image: s.heroImage || "",
+}));
 
 export default function CaseStudies() {
   const ref = useRef<HTMLElement>(null);
@@ -41,11 +40,11 @@ export default function CaseStudies() {
       </div>
 
       {/* Grid */}
-      <div className="flex w-full gap-6 max-md:flex-col">
+      <div className="grid w-full grid-cols-2 gap-6 max-md:grid-cols-1">
         {studies.map((s, i) => (
-          <Link key={i} href={`/work/${s.slug}`} className="flex w-full max-w-[600px]">
+          <Link key={i} href={`/work/${s.slug}`} className="flex">
             <div className="case-card flex w-full flex-col border border-[var(--color-border)] opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)] hover:shadow-[0_0_30px_#7C5CFC10]">
-              <div className="h-[260px] overflow-hidden bg-[#F5F0EB] max-md:h-[200px]">
+              <div className="h-[260px] overflow-hidden bg-[var(--color-bg-card)] max-md:h-[200px]">
                 <img
                   src={s.image}
                   alt={s.title}
@@ -79,9 +78,12 @@ export default function CaseStudies() {
         ))}
       </div>
 
-      <p className="mt-10 text-center font-inter text-sm text-[var(--color-text-dim)]">
-        More projects coming soon.
-      </p>
+      <div className="mt-10 flex justify-center">
+        <Link href="/work" className="flex items-center gap-2 border border-[var(--color-border)] px-6 py-3 font-inter text-sm font-medium text-[var(--color-text-secondary)] transition-all hover:border-[var(--color-accent-border)] hover:text-white">
+          View All Projects
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
     </section>
   );
 }

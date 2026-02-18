@@ -52,6 +52,7 @@ export default function CustomCursor() {
       animFrame = requestAnimationFrame(animateRing);
     };
 
+    document.body.classList.add("cursor-ready");
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mousedown", handleMouseDown);
     document.addEventListener("mouseover", handleMouseOver);
@@ -59,6 +60,7 @@ export default function CustomCursor() {
     animFrame = requestAnimationFrame(animateRing);
 
     return () => {
+      document.body.classList.remove("cursor-ready");
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mousedown", handleMouseDown);
       document.removeEventListener("mouseover", handleMouseOver);

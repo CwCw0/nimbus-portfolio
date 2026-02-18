@@ -55,9 +55,9 @@ export default function Hero() {
 
         <div className="flex flex-col items-center gap-6">
           <h1 className="hero-animate font-space-grotesk text-center text-[72px] font-bold leading-[1.05] tracking-[-2.5px] text-white max-md:text-[40px] max-md:tracking-[-1.5px]">
-            Design. Develop.
+            For Builders,
             <br />
-            Deliver.
+            By Builders.
           </h1>
           <p className="hero-animate w-[600px] text-center font-inter text-base leading-[1.6] text-[var(--color-text-dim)] max-md:w-full max-md:text-sm">
             Nimbus is a creative studio specializing in websites, branding, UI/UX, SEO

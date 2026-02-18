@@ -28,7 +28,7 @@ export default function Footer() {
             </span>
             {[
               { label: "Services", href: "/services" },
-              { label: "Work", href: "/work/omnifood" },
+              { label: "Work", href: "/work" },
               { label: "About", href: "/about" },
               { label: "Blog", href: "/blog" },
             ].map((link) => (

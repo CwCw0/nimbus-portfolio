@@ -12,11 +12,11 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   useEffect(() => {
     const exitTimer = setTimeout(() => {
       setExiting(true);
-    }, 2500);
+    }, 1800);
 
     const completeTimer = setTimeout(() => {
       onComplete();
-    }, 3000);
+    }, 2300);
 
     return () => {
       clearTimeout(exitTimer);
