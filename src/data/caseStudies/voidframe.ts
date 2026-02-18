@@ -10,12 +10,12 @@ export const voidframe: CaseStudy = {
   desc: "Built from my love of gaming — a community platform designed the way gamers actually organize, communicate, and compete. Actively in progress.",
   heroDesc:
     "Gaming has been a huge part of my life for as long as I can remember. The communities, the competition, the friendships formed through shared passion — that's what makes gaming special. But the tools we use to organize around it? They're a mess. Voidframe is the platform I wish existed: one place where your community lives, your events are organized, your squads are ready, and the vibe actually feels like gaming.",
-  heroImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=80",
+  heroImage: "/images/voidframe/hero.png",
   gallery: [
-    "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80",
-    "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=1200&q=80",
-    "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=1200&q=80",
-    "https://images.unsplash.com/photo-1552820728-8b83bb6b2b28?w=1200&q=80",
+    "/images/voidframe/community.png",
+    "/images/voidframe/events.png",
+    "/images/voidframe/squads.png",
+    "/images/voidframe/members.png",
   ],
   challenge:
     "As a gamer, I've lived the frustration. Your squad coordinates on Discord, events are tracked in a Google Sheet someone made at 3am, tournament brackets are on a random website, and finding new communities means scrolling through Reddit. Nothing was built for how gamers actually operate — fast-paced, always-on, and deeply community-driven. I wanted to build something that understands gaming culture from the ground up. Not a corporate collaboration tool with a dark skin slapped on — a platform that feels native to gaming, where the design language speaks the same language as the people using it.",

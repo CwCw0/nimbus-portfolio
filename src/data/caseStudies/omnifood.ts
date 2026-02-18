@@ -2,6 +2,7 @@ import { CaseStudy } from "./types";
 
 export const omnifood: CaseStudy = {
   slug: "omnifood",
+  status: "live",
   category: "Website",
   tags: ["HTML/CSS", "Landing Page", "Responsive"],
   title: "Omnifood — Meal Subscription Landing Page",

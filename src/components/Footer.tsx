@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Heart } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -58,6 +59,30 @@ export default function Footer() {
               className="font-inter text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
             >
               Email
+            </a>
+            <a
+              href="https://ko-fi.com/heyitsnimbus"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-inter text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
+            >
+              Ko-fi
+            </a>
+          </div>
+          <div className="flex flex-col gap-4">
+            <span className="font-inter text-xs font-semibold tracking-[1px] text-white">
+              Support
+            </span>
+            <a
+              href="https://ko-fi.com/heyitsnimbus"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 transition-all duration-200 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)]"
+            >
+              <Heart className="h-3.5 w-3.5 text-[#FF5E5B] transition-transform group-hover:scale-110" />
+              <span className="font-inter text-[13px] font-medium text-white">
+                Buy me a coffee
+              </span>
             </a>
           </div>
         </div>

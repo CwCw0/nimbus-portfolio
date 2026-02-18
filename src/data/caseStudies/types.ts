@@ -1,3 +1,5 @@
+export type ProjectStatus = "live" | "in-development" | "coming-soon";
+
 export type CaseStudy = {
   slug: string;
   category: string;
@@ -11,5 +13,6 @@ export type CaseStudy = {
   challenge: string;
   solution: string;
   liveUrl?: string;
+  status?: ProjectStatus;
   results: { value: string; label: string; color: string }[];
 };

@@ -43,7 +43,7 @@ export default function WorkContent() {
                 href={`/work/${study.slug}`}
                 className="work-card group flex flex-col border border-[var(--color-border)] opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)] hover:shadow-[0_0_30px_#7C5CFC10]"
               >
-                <div className="h-[280px] overflow-hidden bg-[var(--color-bg-card)] max-md:h-[200px]">
+                <div className="relative h-[280px] overflow-hidden bg-[var(--color-bg-card)] max-md:h-[200px]">
                   {study.heroImage ? (
                     <img
                       src={study.heroImage}
@@ -56,6 +56,11 @@ export default function WorkContent() {
                         {study.shortTitle}
                       </span>
                     </div>
+                  )}
+                  {study.status === "in-development" && (
+                    <span className="absolute top-3 right-3 bg-amber-500/15 border border-amber-500/25 px-2.5 py-1 font-inter text-[10px] font-semibold tracking-[1px] text-amber-400">
+                      IN DEVELOPMENT
+                    </span>
                   )}
                 </div>
                 <div className="flex flex-col gap-3 p-6">

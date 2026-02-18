@@ -10,12 +10,10 @@ export const koji: CaseStudy = {
   desc: "My second brain — a keyboard-first tool built around how I actually think, plan, and ship. Actively in progress.",
   heroDesc:
     "Kōji started as a personal problem. My brain doesn't work in neat categories — thoughts come fast, tasks pile up, and I need to capture everything before it disappears. I built Kōji as my second brain: a place to dump raw thoughts, turn them into tasks, and stay focused without the friction of switching between five different apps. If my thought process can help other builders too, even better.",
-  heroImage: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&q=80",
+  heroImage: "/images/koji/hero.png",
   gallery: [
-    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80",
-    "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&q=80",
-    "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=1200&q=80",
-    "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=1200&q=80",
+    "/images/koji/board.png",
+    "/images/koji/notes.png",
   ],
   challenge:
     "I tried everything — Notion, Todoist, Linear, Apple Notes, random text files. Nothing matched how my brain actually works. I think in bursts. A random idea at 2am, a task I need to remember mid-conversation, a note that connects to something I wrote three days ago. Every tool either forced me into someone else's workflow or was so bloated I spent more time organizing than doing. I needed something that gets out of the way — captures thoughts instantly, lets me sort them later, and keeps me focused when it's time to actually work.",

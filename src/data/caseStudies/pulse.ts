@@ -10,12 +10,9 @@ export const pulse: CaseStudy = {
   desc: "Born from a genuine passion for healthtech — a dashboard that makes health data feel calm, clear, and actionable. Actively in progress.",
   heroDesc:
     "Healthcare has always fascinated me. Not just the science, but the design problem — how do you take something as complex and personal as someone's health and present it in a way that actually helps them? Pulse is my answer. A dashboard that doesn't overwhelm you with numbers, but gives you the clarity to understand your own body at a glance.",
-  heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+  heroImage: "/images/pulse/hero.png",
   gallery: [
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
-    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&q=80",
-    "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&q=80",
-    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80",
+    "/images/pulse/about.png",
   ],
   challenge:
     "I've always been drawn to healthtech because of how personal and impactful it is. But every health app I've used gets it wrong in the same way — they dump raw data at you and expect you to figure it out. Heart rate is on one app, sleep on another, nutrition in a spreadsheet. Nothing talks to each other. The real challenge isn't collecting data — it's designing an experience that turns noise into understanding. I wanted to build something that feels calm and trustworthy, not clinical and intimidating. Something where you open it up and immediately know how you're doing.",

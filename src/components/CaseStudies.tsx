@@ -12,6 +12,7 @@ const studies = allCaseStudies.map((s) => ({
   desc: s.desc,
   slug: s.slug,
   image: s.heroImage || "",
+  status: s.status,
 }));
 
 export default function CaseStudies() {
@@ -44,12 +45,17 @@ export default function CaseStudies() {
         {studies.map((s, i) => (
           <Link key={i} href={`/work/${s.slug}`} className="flex">
             <div className="case-card flex w-full flex-col border border-[var(--color-border)] opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)] hover:shadow-[0_0_30px_#7C5CFC10]">
-              <div className="h-[260px] overflow-hidden bg-[var(--color-bg-card)] max-md:h-[200px]">
+              <div className="relative h-[260px] overflow-hidden bg-[var(--color-bg-card)] max-md:h-[200px]">
                 <img
                   src={s.image}
                   alt={s.title}
                   className="h-full w-full object-cover object-top"
                 />
+                {s.status === "in-development" && (
+                  <span className="absolute top-3 right-3 bg-amber-500/15 border border-amber-500/25 px-2.5 py-1 font-inter text-[10px] font-semibold tracking-[1px] text-amber-400">
+                    IN DEVELOPMENT
+                  </span>
+                )}
               </div>
               <div className="flex flex-col gap-3 p-6">
                 <div className="flex gap-2">
