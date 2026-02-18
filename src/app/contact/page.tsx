@@ -3,7 +3,7 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
-import { Mail, MapPin, Clock, ArrowRight, Send, Twitter, Linkedin, Github, ChevronDown } from "lucide-react";
+import { Mail, MapPin, Clock, ArrowRight, Send, Github, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 const FORMSPREE_ID = "xjgebdwg";
@@ -42,7 +42,7 @@ export default function ContactPage() {
   return (
     <>
       <CustomCursor />
-      <div className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
+      <main id="main-content" className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />
 
         {/* Contact Hero */}
@@ -70,10 +70,11 @@ export default function ContactPage() {
             >
               <div className="flex gap-4 max-md:flex-col">
                 <div className="flex flex-1 flex-col gap-2">
-                  <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
+                  <label htmlFor="contact-name" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
                     Name
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     name="name"
                     required
@@ -82,10 +83,11 @@ export default function ContactPage() {
                   />
                 </div>
                 <div className="flex flex-1 flex-col gap-2">
-                  <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
+                  <label htmlFor="contact-email" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
                     Email
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     name="email"
                     required
@@ -96,11 +98,11 @@ export default function ContactPage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
+                <label htmlFor="contact-subject" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
                   Subject
                 </label>
                 <div className="relative">
-                  <select name="subject" className="h-12 w-full appearance-none rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all">
+                  <select id="contact-subject" name="subject" className="h-12 w-full appearance-none rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all">
                     <option>Select a subject...</option>
                     <option>Website Design & Development</option>
                     <option>Brand Identity</option>
@@ -113,11 +115,11 @@ export default function ContactPage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
+                <label htmlFor="contact-budget" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
                   Budget Range
                 </label>
                 <div className="relative">
-                  <select name="budget" className="h-12 w-full appearance-none rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all">
+                  <select id="contact-budget" name="budget" className="h-12 w-full appearance-none rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none focus:ring-4 focus:ring-[#7C5CFC15] transition-all">
                     <option>Select range...</option>
                     <option>$1k - $3k</option>
                     <option>$3k - $5k</option>
@@ -129,10 +131,11 @@ export default function ContactPage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
+                <label htmlFor="contact-message" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
                   Message
                 </label>
                 <textarea
+                  id="contact-message"
                   rows={6}
                   name="message"
                   required
@@ -197,37 +200,30 @@ export default function ContactPage() {
                 <span className="font-inter text-xs font-semibold tracking-[1px] text-white">
                   SOCIAL
                 </span>
-                {[
-                  { icon: Github, name: "GitHub", handle: "CwCw0", href: "https://github.com/CwCw0" },
-                  { icon: Twitter, name: "Twitter / X", handle: "@nimbus_dev", href: "#" },
-                  { icon: Linkedin, name: "LinkedIn", handle: "nimbus-studio", href: "#" },
-                ].map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target={social.href !== "#" ? "_blank" : undefined}
-                    rel={social.href !== "#" ? "noopener noreferrer" : undefined}
-                    className="group flex items-center gap-3 transition-colors"
-                  >
-                    <social.icon className="h-4 w-4 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)]" />
-                    <div className="flex flex-col">
-                      <span className="font-inter text-sm text-white group-hover:text-[var(--color-accent)]">
-                        {social.name}
-                      </span>
-                      <span className="font-inter text-xs text-[var(--color-text-subtle)]">
-                        {social.handle}
-                      </span>
-                    </div>
-                    <ArrowRight className="ml-auto h-3.5 w-3.5 text-[var(--color-text-faint)] transition-all group-hover:translate-x-1 group-hover:text-[var(--color-accent)]" />
-                  </a>
-                ))}
+                <a
+                  href="https://github.com/CwCw0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 transition-colors"
+                >
+                  <Github className="h-4 w-4 text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)]" />
+                  <div className="flex flex-col">
+                    <span className="font-inter text-sm text-white group-hover:text-[var(--color-accent)]">
+                      GitHub
+                    </span>
+                    <span className="font-inter text-xs text-[var(--color-text-subtle)]">
+                      CwCw0
+                    </span>
+                  </div>
+                  <ArrowRight className="ml-auto h-3.5 w-3.5 text-[var(--color-text-faint)] transition-all group-hover:translate-x-1 group-hover:text-[var(--color-accent)]" />
+                </a>
               </div>
             </div>
           </div>
         </section>
 
         <Footer />
-      </div>
+      </main>
     </>
   );
 }

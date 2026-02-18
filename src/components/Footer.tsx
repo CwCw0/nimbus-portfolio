@@ -45,21 +45,20 @@ export default function Footer() {
             <span className="font-inter text-xs font-semibold tracking-[1px] text-white">
               Connect
             </span>
-            {[
-              { label: "GitHub", href: "https://github.com/CwCw0" },
-              { label: "Twitter / X", href: "#" },
-              { label: "LinkedIn", href: "#" },
-            ].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href !== "#" ? "_blank" : undefined}
-                rel={link.href !== "#" ? "noopener noreferrer" : undefined}
-                className="font-inter text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
-              >
-                {link.label}
-              </a>
-            ))}
+            <a
+              href="https://github.com/CwCw0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-inter text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
+            >
+              GitHub
+            </a>
+            <a
+              href="mailto:heyitsnimbus@gmail.com"
+              className="font-inter text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
+            >
+              Email
+            </a>
           </div>
         </div>
       </div>

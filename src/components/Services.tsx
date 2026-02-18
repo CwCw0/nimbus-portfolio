@@ -9,6 +9,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { useRef } from "react";
+import Link from "next/link";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const services = [
@@ -55,14 +56,13 @@ export default function Services() {
       id="services"
       className="snap-section w-full px-16 py-[100px] max-md:px-6 max-md:py-16"
     >
-      {/* Header */}
       <div className="mb-14 flex w-full items-end justify-between max-md:flex-col max-md:items-start max-md:gap-4">
         <div className="flex flex-col gap-4">
           <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
             01 / SERVICES
           </span>
           <h2 className="font-space-grotesk text-5xl font-bold tracking-[-1px] text-white">
-            What we do
+            What I do
           </h2>
         </div>
         <p className="w-[400px] text-right font-inter text-base leading-[1.6] text-[var(--color-text-dim)] max-md:w-full max-md:text-left">
@@ -72,15 +72,12 @@ export default function Services() {
         </p>
       </div>
 
-      {/* Cards grid */}
       <div className="flex flex-col gap-5">
-        {/* Row 1 */}
         <div className="flex gap-5 max-md:flex-col">
           {services.slice(0, 3).map((s) => (
             <ServiceCard key={s.num} {...s} />
           ))}
         </div>
-        {/* Row 2 */}
         <div className="flex gap-5 max-md:flex-col">
           {services.slice(3).map((s) => (
             <ServiceCard key={s.num} {...s} />
@@ -105,7 +102,8 @@ function ServiceCard({
   featured?: boolean;
 }) {
   return (
-    <div
+    <Link
+      href="/services"
       className={`service-card group relative flex flex-1 flex-col justify-between gap-6 overflow-hidden border p-9 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:shadow-[0_0_30px_#7C5CFC10] ${
         featured
           ? "border-[var(--color-accent-border)] bg-gradient-to-b from-[var(--color-bg-card-alt)] to-[var(--color-bg-card)]"
@@ -144,6 +142,6 @@ function ServiceCard({
             : "text-[#3A3A3E] group-hover:text-[var(--color-accent)]"
         }`}
       />
-    </div>
+    </Link>
   );
 }

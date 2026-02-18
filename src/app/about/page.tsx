@@ -18,7 +18,7 @@ export default function AboutPage() {
   return (
     <>
       <CustomCursor />
-      <div className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
+      <main id="main-content" className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />
         
         {/* About Hero */}
@@ -63,9 +63,12 @@ export default function AboutPage() {
             </div>
             {/* Photo + Stats */}
             <div className="flex w-[440px] flex-col gap-6 max-md:w-full">
-              {/* Photo placeholder */}
-              <div className="flex h-[300px] items-center justify-center rounded-lg bg-gradient-to-br from-[#7C5CFC15] to-[#7C5CFC08] border border-[var(--color-border)]">
-                <span className="font-inter text-sm tracking-[2px] text-[var(--color-text-subtle)]">PHOTO</span>
+              {/* Branded Avatar */}
+              <div className="flex h-[300px] items-center justify-center rounded-lg bg-gradient-to-br from-[#7C5CFC20] to-[#7C5CFC08] border border-[var(--color-border)] relative overflow-hidden">
+                <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #7C5CFC 1px, transparent 0)", backgroundSize: "24px 24px" }} />
+                <div className="flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)]">
+                  <span className="font-space-grotesk text-[48px] font-bold text-[#0A0A0B]">D</span>
+                </div>
               </div>
               {/* Stats */}
               <div className="flex gap-4">
@@ -158,7 +161,7 @@ export default function AboutPage() {
         </section>
 
         <Footer />
-      </div>
+      </main>
     </>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Image as ImageIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import Link from "next/link";
 import { useScrollReveal } from "../hooks/useScrollReveal";
@@ -11,18 +11,7 @@ const studies = [
     title: "Omnifood",
     desc: "A modern landing page for a premium meal subscription service, featuring responsive design and clean UI.",
     slug: "omnifood",
-  },
-  {
-    tags: ["UI/UX", "SaaS"],
-    title: "Project Name",
-    desc: "Brief description of the project scope, goals, and outcome delivered.",
-    slug: "",
-  },
-  {
-    tags: ["AI Tools", "Chatbot"],
-    title: "Project Name",
-    desc: "Brief description of the project scope, goals, and outcome delivered.",
-    slug: "",
+    image: "/images/omnifood/hero.png",
   },
 ];
 
@@ -49,29 +38,20 @@ export default function CaseStudies() {
             Selected projects showcasing design, development, and strategy.
           </p>
         </div>
-        <button className="flex items-center gap-2 border border-[var(--color-border)] px-6 py-3 font-poppins text-[13px] font-medium text-[var(--color-text-secondary)] transition-all duration-300 hover:border-[var(--color-accent-border)] hover:text-white max-md:w-full max-md:justify-center">
-          View All
-          <ArrowRight className="h-4 w-4" />
-        </button>
       </div>
 
       {/* Grid */}
       <div className="flex w-full gap-6 max-md:flex-col">
-        {studies.map((s, i) => {
-          const card = (
-            <div
-              className="case-card flex flex-1 flex-col border border-[var(--color-border)] opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)] hover:shadow-[0_0_30px_#7C5CFC10]"
-            >
-              {/* Placeholder image */}
-              <div className="flex h-[260px] items-center justify-center bg-[var(--color-bg-card)] max-md:h-[200px]">
-                <div className="flex flex-col items-center gap-3">
-                  <ImageIcon className="h-8 w-8 text-[var(--color-border-light)]" />
-                  <span className="font-poppins text-xs font-medium tracking-[2px] text-[var(--color-border-light)]">
-                    {s.slug ? "VIEW PROJECT" : "Coming Soon"}
-                  </span>
-                </div>
+        {studies.map((s, i) => (
+          <Link key={i} href={`/work/${s.slug}`} className="flex w-full max-w-[600px]">
+            <div className="case-card flex w-full flex-col border border-[var(--color-border)] opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)] hover:shadow-[0_0_30px_#7C5CFC10]">
+              <div className="h-[260px] overflow-hidden bg-[#F5F0EB] max-md:h-[200px]">
+                <img
+                  src={s.image}
+                  alt={s.title}
+                  className="h-full w-full object-cover object-top"
+                />
               </div>
-              {/* Info */}
               <div className="flex flex-col gap-3 p-6">
                 <div className="flex gap-2">
                   {s.tags.map((tag) => (
@@ -89,19 +69,19 @@ export default function CaseStudies() {
                 <p className="font-poppins text-[13px] leading-[1.5] text-[var(--color-text-dim)]">
                   {s.desc}
                 </p>
+                <span className="flex items-center gap-2 font-inter text-sm font-medium text-[var(--color-accent)]">
+                  View Case Study
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </span>
               </div>
             </div>
-          );
-
-          return s.slug ? (
-            <Link key={i} href={`/work/${s.slug}`} className="flex flex-1">
-              {card}
-            </Link>
-          ) : (
-            <div key={i} className="flex flex-1">{card}</div>
-          );
-        })}
+          </Link>
+        ))}
       </div>
+
+      <p className="mt-10 text-center font-inter text-sm text-[var(--color-text-dim)]">
+        More projects coming soon.
+      </p>
     </section>
   );
 }

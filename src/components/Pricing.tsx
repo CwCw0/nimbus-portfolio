@@ -2,6 +2,7 @@
 
 import { Check } from "lucide-react";
 import { useRef } from "react";
+import Link from "next/link";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const tiers = [
@@ -25,7 +26,7 @@ const tiers = [
     nameColor: "text-[var(--color-accent)]",
     price: "$5,000",
     period: "/ project",
-    desc: "For SMEs and startups ready to scale with a full digital presence.",
+    desc: "For startups and small businesses ready to scale with a full digital presence.",
     features: [
       "Multi-page website + blog",
       "Brand identity + UI/UX design",
@@ -64,7 +65,6 @@ export default function Pricing() {
       id="pricing"
       className="snap-section w-full bg-[var(--color-bg-secondary)] px-16 py-[100px] max-md:px-6 max-md:py-16"
     >
-      {/* Header */}
       <div className="mb-14 flex flex-col items-center gap-4">
         <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
           05 / PRICING
@@ -73,12 +73,10 @@ export default function Pricing() {
           Simple, transparent pricing
         </h2>
         <p className="text-center font-inter text-base text-[var(--color-text-dim)]">
-          No hidden fees. No surprises. Pick the engagement model that fits your
-          needs.
+          No hidden fees. No surprises. Pick the engagement model that fits your needs.
         </p>
       </div>
 
-      {/* Cards */}
       <div className="flex w-full gap-5 max-md:flex-col">
         {tiers.map((t) => (
           <div
@@ -98,9 +96,7 @@ export default function Pricing() {
             )}
 
             <div className="flex flex-col gap-2">
-              <span
-                className={`font-inter text-sm font-semibold tracking-[1px] ${t.nameColor}`}
-              >
+              <span className={`font-inter text-sm font-semibold tracking-[1px] ${t.nameColor}`}>
                 {t.name}
               </span>
               <div className="flex items-end gap-1">
@@ -129,7 +125,8 @@ export default function Pricing() {
               ))}
             </div>
 
-            <button
+            <Link
+              href="/contact"
               className={`flex w-full items-center justify-center py-3.5 font-inter text-sm font-semibold transition-all duration-300 hover:scale-[1.03] ${
                 t.featured
                   ? "bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] text-[#0A0A0B] hover:shadow-[0_0_24px_#7C5CFC20]"
@@ -137,7 +134,7 @@ export default function Pricing() {
               }`}
             >
               {t.btnText}
-            </button>
+            </Link>
           </div>
         ))}
       </div>

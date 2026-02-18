@@ -1,29 +1,24 @@
 "use client";
 
 import { useRef } from "react";
+import { Zap, Shield, MessageSquare } from "lucide-react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
-const testimonials = [
+const reasons = [
   {
-    quote:
-      "\u201CNimbus transformed our brand from forgettable to unforgettable. The website alone doubled our inbound leads within 3 months.\u201D",
-    name: "Sarah Rodriguez",
-    role: "Founder, Flowstate",
-    initials: "SR",
+    icon: Zap,
+    title: "Full-Stack Thinking",
+    desc: "I don\u2019t just write code \u2014 I think about the product, the user, and the business. Every project gets the full picture, not just pixels.",
   },
   {
-    quote:
-      "\u201CThe AI chatbot Nimbus built handles 70% of our support tickets. It paid for itself in the first week. Best investment we made.\u201D",
-    name: "Marcus Kim",
-    role: "CEO, Arcline Studios",
-    initials: "MK",
+    icon: Shield,
+    title: "Transparent Process",
+    desc: "No hidden fees, no scope creep, no surprises. You get regular updates, clear timelines, and honest communication from day one.",
   },
   {
-    quote:
-      "\u201CAs a freelancer, I needed someone who got it. Nimbus delivered a site and SEO strategy that tripled my organic traffic in 6 months.\u201D",
-    name: "Jamie Lee",
-    role: "Freelance Consultant",
-    initials: "JL",
+    icon: MessageSquare,
+    title: "Built to Perform",
+    desc: "Every site I build is fast, responsive, and optimized for search. Clean code, modern tech, and real results \u2014 not just a pretty design.",
   },
 ];
 
@@ -39,38 +34,29 @@ export default function SocialProof() {
       {/* Header */}
       <div className="mb-14 flex flex-col items-center gap-4">
         <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
-          04 / TESTIMONIALS
+          04 / WHY NIMBUS
         </span>
         <h2 className="font-space-grotesk text-5xl max-md:text-3xl font-bold tracking-[-1px] text-white">
-          What clients say
+          Why work with me
         </h2>
       </div>
 
       {/* Cards */}
       <div className="flex max-md:flex-col w-full gap-5">
-        {testimonials.map((t, i) => (
+        {reasons.map((r, i) => (
           <div
             key={i}
             className="testimonial-card flex flex-1 flex-col gap-6 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-8 opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)]"
           >
-            <p className="font-inter text-base leading-[1.7] text-[var(--color-text-secondary)]">
-              {t.quote}
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-grid)]">
-                <span className="font-inter text-xs font-semibold text-[var(--color-accent)]">
-                  {t.initials}
-                </span>
-              </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="font-inter text-sm font-semibold text-white">
-                  {t.name}
-                </span>
-                <span className="font-inter text-xs text-[var(--color-text-dim)]">
-                  {t.role}
-                </span>
-              </div>
+            <div className="flex h-12 w-12 items-center justify-center bg-[var(--color-grid)]">
+              <r.icon className="h-[22px] w-[22px] text-[var(--color-accent)]" />
             </div>
+            <h3 className="font-inter text-xl font-semibold text-white">
+              {r.title}
+            </h3>
+            <p className="font-inter text-sm leading-[1.7] text-[var(--color-text-dim)]">
+              {r.desc}
+            </p>
           </div>
         ))}
       </div>

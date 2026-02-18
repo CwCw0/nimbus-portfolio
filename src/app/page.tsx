@@ -38,7 +38,7 @@ export default function Home() {
       {loading && <LoadingScreen onComplete={handleLoadingComplete} />}
       <CustomCursor />
       <ScrollToTop />
-      <div className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
+      <main id="main-content" className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />
         <Hero />
         <MarqueeStrip />
@@ -53,7 +53,7 @@ export default function Home() {
         <Pricing />
         <FinalCTA />
         <Footer />
-      </div>
+      </main>
     </>
   );
 }

@@ -1,14 +1,44 @@
 "use client";
 
-import { Mail, MapPin, Timer, ArrowRight, ChevronDown } from "lucide-react";
+import { Mail, MapPin, Timer, ArrowRight, ChevronDown, Send } from "lucide-react";
+import { useState } from "react";
+import Link from "next/link";
+
+const FORMSPREE_ID = "xjgebdwg";
 
 export default function Contact() {
+  const [submitState, setSubmitState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitState("sending");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setSubmitState("sent");
+        form.reset();
+        setTimeout(() => setSubmitState("idle"), 4000);
+      } else {
+        setSubmitState("error");
+        setTimeout(() => setSubmitState("idle"), 4000);
+      }
+    } catch {
+      setSubmitState("error");
+      setTimeout(() => setSubmitState("idle"), 4000);
+    }
+  };
+
   return (
     <section
       id="contact"
       className="snap-section w-full bg-[var(--color-bg-primary)] px-16 py-[100px] max-md:px-6 max-md:py-16"
     >
-      {/* Header */}
       <div className="mb-14 flex flex-col gap-4">
         <span className="font-poppins text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
           GET IN TOUCH
@@ -17,14 +47,11 @@ export default function Contact() {
           Let&apos;s Build Something Together
         </h2>
         <p className="w-[600px] font-poppins text-base text-[var(--color-text-muted)] max-md:w-full">
-          Have a project in mind? Fill out the form below and I&apos;ll get back
-          to you within 24 hours.
+          Have a project in mind? Fill out the form below and I&apos;ll get back to you within 24 hours.
         </p>
       </div>
 
-      {/* Body */}
       <div className="flex w-full gap-12 max-md:flex-col max-md:gap-8">
-        {/* Info */}
         <div className="flex w-[360px] flex-col gap-8 max-md:w-full">
           <div className="flex items-center gap-4">
             <Mail className="h-5 w-5 text-[var(--color-accent)]" />
@@ -45,67 +72,33 @@ export default function Contact() {
             </span>
           </div>
 
-          {/* Social */}
           <div className="flex gap-4 pt-6">
-            {["twitter", "linkedin", "github", "dribbble"].map((social) => (
-              <div
-                key={social}
-                className="flex h-10 w-10 items-center justify-center border border-[var(--color-border)] bg-[var(--color-bg-card)] transition-all duration-200 hover:border-[var(--color-accent-border)]"
-              >
-                <span className="font-inter text-xs font-medium capitalize text-[var(--color-text-muted)]">
-                  {social.charAt(0).toUpperCase()}
-                </span>
-              </div>
-            ))}
+            <Link href="https://github.com/CwCw0" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center border border-[var(--color-border)] bg-[var(--color-bg-card)] transition-all duration-200 hover:border-[var(--color-accent-border)]">
+              <span className="font-inter text-xs font-medium text-[var(--color-text-muted)]">G</span>
+            </Link>
           </div>
         </div>
 
-        {/* Form */}
-        <div className="flex flex-1 flex-col gap-6 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-10 max-md:p-6">
-          {/* Name row */}
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-1 flex-col gap-6 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-10 max-md:p-6"
+        >
           <div className="flex gap-4 max-md:flex-col">
             <div className="flex flex-1 flex-col gap-2">
-              <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
-                First Name
-              </label>
-              <input
-                type="text"
-                placeholder="John"
-                className="h-11 border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-white placeholder:text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none"
-              />
+              <label htmlFor="hp-name" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">Name</label>
+              <input id="hp-name" type="text" name="name" required placeholder="Your name" className="h-11 border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-white placeholder:text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none" />
             </div>
             <div className="flex flex-1 flex-col gap-2">
-              <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
-                Last Name
-              </label>
-              <input
-                type="text"
-                placeholder="Doe"
-                className="h-11 border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-white placeholder:text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none"
-              />
+              <label htmlFor="hp-email" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">Email</label>
+              <input id="hp-email" type="email" name="email" required placeholder="you@example.com" className="h-11 border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-white placeholder:text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none" />
             </div>
           </div>
 
-          {/* Email */}
-          <div className="flex flex-col gap-2">
-            <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
-              Email Address
-            </label>
-            <input
-              type="email"
-              placeholder="john@example.com"
-              className="h-11 border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-poppins text-sm text-white placeholder:text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none"
-            />
-          </div>
-
-          {/* Project row */}
           <div className="flex gap-4 max-md:flex-col">
             <div className="flex flex-1 flex-col gap-2">
-              <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
-                Project Type
-              </label>
+              <label htmlFor="hp-project" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">Project Type</label>
               <div className="relative">
-                <select className="h-11 w-full appearance-none border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 pr-10 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none">
+                <select id="hp-project" name="subject" className="h-11 w-full appearance-none border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 pr-10 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none">
                   <option>Select type...</option>
                   <option>Website</option>
                   <option>Branding</option>
@@ -117,11 +110,9 @@ export default function Contact() {
               </div>
             </div>
             <div className="flex flex-1 flex-col gap-2">
-              <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
-                Budget Range
-              </label>
+              <label htmlFor="hp-budget" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">Budget Range</label>
               <div className="relative">
-                <select className="h-11 w-full appearance-none border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 pr-10 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none">
+                <select id="hp-budget" name="budget" className="h-11 w-full appearance-none border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 pr-10 font-poppins text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none">
                   <option>Select range...</option>
                   <option>$1k - $3k</option>
                   <option>$3k - $5k</option>
@@ -133,24 +124,35 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Message */}
           <div className="flex flex-col gap-2">
-            <label className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">
-              Project Details
-            </label>
-            <textarea
-              rows={5}
-              placeholder="Tell me about your project..."
-              className="border border-[var(--color-border)] bg-[var(--color-bg-primary)] p-4 font-poppins text-sm text-white placeholder:text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none"
-            />
+            <label htmlFor="hp-message" className="font-poppins text-xs font-medium text-[var(--color-text-secondary)]">Project Details</label>
+            <textarea id="hp-message" rows={5} name="message" required placeholder="Tell me about your project..." className="border border-[var(--color-border)] bg-[var(--color-bg-primary)] p-4 font-poppins text-sm text-white placeholder:text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none resize-none" />
           </div>
 
-          {/* Submit */}
-          <button className="flex h-[52px] w-full items-center justify-center gap-2.5 bg-gradient-to-b from-[var(--color-accent)] to-[#6B4FE0] font-poppins text-[15px] font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20]">
-            Send Message
-            <ArrowRight className="h-[18px] w-[18px]" />
+          <button
+            type="submit"
+            disabled={submitState !== "idle"}
+            className={`flex h-[52px] w-full items-center justify-center gap-2.5 font-poppins text-[15px] font-semibold text-white transition-all duration-300 ${
+              submitState === "sent"
+                ? "bg-emerald-500"
+                : submitState === "error"
+                ? "bg-red-500"
+                : "bg-gradient-to-b from-[var(--color-accent)] to-[#6B4FE0] hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20]"
+            } disabled:cursor-not-allowed`}
+          >
+            {submitState === "idle" && (
+              <>
+                Send Message
+                <Send className="h-[18px] w-[18px]" />
+              </>
+            )}
+            {submitState === "sending" && (
+              <div className="h-5 w-5 rounded-full border-2 border-white/30 border-t-white submit-spinner" />
+            )}
+            {submitState === "sent" && "Message Sent \u2713"}
+            {submitState === "error" && "Something went wrong \u2014 try again"}
           </button>
-        </div>
+        </form>
       </div>
     </section>
   );

@@ -3,7 +3,7 @@
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import CustomCursor from "../../../components/CustomCursor";
-import { ArrowLeft, ArrowRight, Twitter, Linkedin, Link2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Twitter, Linkedin, Link2, Check } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
@@ -16,7 +16,30 @@ export default function BlogPostPage() {
 
   const [progress, setProgress] = useState(0);
   const [activeSection, setActiveSection] = useState(0);
+  const [copied, setCopied] = useState(false);
   const articleRef = useRef<HTMLElement>(null);
+
+  const fullUrl = typeof window !== "undefined" ? window.location.href : "";
+
+  const shareOnTwitter = () => {
+    window.open(
+      `https://twitter.com/intent/tweet?url=${encodeURIComponent(fullUrl)}&text=${encodeURIComponent(post?.title || "")}`,
+      "_blank"
+    );
+  };
+
+  const shareOnLinkedin = () => {
+    window.open(
+      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(fullUrl)}`,
+      "_blank"
+    );
+  };
+
+  const copyLink = async () => {
+    await navigator.clipboard.writeText(fullUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,7 +84,7 @@ export default function BlogPostPage() {
     <>
       <CustomCursor />
       <div className="reading-progress" style={{ width: `${progress}%` }} />
-      <div className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
+      <main id="main-content" className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />
 
         {/* Breadcrumb */}
@@ -169,6 +192,12 @@ export default function BlogPostPage() {
                     {post.tocItems.map((item, i) => (
                       <button
                         key={item}
+                        onClick={() => {
+                          const headings = articleRef.current?.querySelectorAll("h2");
+                          if (headings?.[i]) {
+                            headings[i].scrollIntoView({ behavior: "smooth", block: "start" });
+                          }
+                        }}
                         className={`text-left font-inter text-[13px] transition-colors ${
                           activeSection === i
                             ? "text-[var(--color-accent)]"
@@ -187,14 +216,14 @@ export default function BlogPostPage() {
                     SHARE
                   </span>
                   <div className="flex gap-3">
-                    <button className="flex h-10 w-10 items-center justify-center border border-[var(--color-border)] transition-all hover:border-[var(--color-accent-border)]">
+                    <button onClick={shareOnTwitter} className="flex h-10 w-10 items-center justify-center border border-[var(--color-border)] transition-all hover:border-[var(--color-accent-border)]">
                       <Twitter className="h-4 w-4 text-[var(--color-text-muted)]" />
                     </button>
-                    <button className="flex h-10 w-10 items-center justify-center border border-[var(--color-border)] transition-all hover:border-[var(--color-accent-border)]">
+                    <button onClick={shareOnLinkedin} className="flex h-10 w-10 items-center justify-center border border-[var(--color-border)] transition-all hover:border-[var(--color-accent-border)]">
                       <Linkedin className="h-4 w-4 text-[var(--color-text-muted)]" />
                     </button>
-                    <button className="flex h-10 w-10 items-center justify-center border border-[var(--color-border)] transition-all hover:border-[var(--color-accent-border)]">
-                      <Link2 className="h-4 w-4 text-[var(--color-text-muted)]" />
+                    <button onClick={copyLink} className="flex h-10 w-10 items-center justify-center border border-[var(--color-border)] transition-all hover:border-[var(--color-accent-border)]">
+                      {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Link2 className="h-4 w-4 text-[var(--color-text-muted)]" />}
                     </button>
                   </div>
                 </div>
@@ -270,7 +299,7 @@ export default function BlogPostPage() {
         )}
 
         <Footer />
-      </div>
+      </main>
     </>
   );
 }

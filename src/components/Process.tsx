@@ -7,7 +7,7 @@ const steps = [
   {
     num: "01",
     title: "Discovery",
-    desc: "We talk about your goals, audience and vision. I research your market and competitors.",
+    desc: "I learn about your goals, audience and vision. I research your market and competitors to find the right approach.",
   },
   {
     num: "02",
@@ -17,7 +17,7 @@ const steps = [
   {
     num: "03",
     title: "Launch & Grow",
-    desc: "We go live, monitor performance, and iterate. I stay available for ongoing support and optimizations.",
+    desc: "I launch your project, monitor performance, and iterate. I stay available for ongoing support and optimizations.",
   },
 ];
 
@@ -30,39 +30,25 @@ export default function Process() {
       ref={ref}
       className="snap-section relative h-[480px] max-md:h-auto max-md:py-16 w-full bg-[var(--color-bg-secondary)]"
     >
-      {/* Decorative */}
-      <div
-        className="max-md:hidden pointer-events-none absolute left-[500px] top-[50px] h-[440px] w-[440px] rounded-full"
-        style={{
-          background: "radial-gradient(circle, #7C5CFC08 0%, transparent 100%)",
-        }}
-      />
+      <div className="max-md:hidden pointer-events-none absolute left-[500px] top-[50px] h-[440px] w-[440px] rounded-full" style={{ background: "radial-gradient(circle, #7C5CFC08 0%, transparent 100%)" }} />
       <div className="max-md:hidden absolute left-[480px] top-0 h-[480px] w-px bg-[var(--color-grid)] opacity-[0.12]" />
       <div className="max-md:hidden absolute left-[960px] top-0 h-[480px] w-px bg-[var(--color-grid)] opacity-[0.12]" />
-      <span className="max-md:hidden absolute left-[485px] top-[175px] font-poppins text-sm font-extralight text-[#7C5CFC20]">
-        +
-      </span>
-      <span className="max-md:hidden absolute left-[965px] top-[175px] font-poppins text-sm font-extralight text-[#7C5CFC20]">
-        +
-      </span>
+      <span className="max-md:hidden absolute left-[485px] top-[175px] font-poppins text-sm font-extralight text-[#7C5CFC20]">+</span>
+      <span className="max-md:hidden absolute left-[965px] top-[175px] font-poppins text-sm font-extralight text-[#7C5CFC20]">+</span>
 
-      {/* Content */}
       <div className="relative z-10 px-16 max-md:px-6">
-        {/* Header */}
         <div className="flex w-full flex-col items-center gap-4 pt-[60px]">
           <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
             03 / PROCESS
           </span>
           <h2 className="font-space-grotesk text-5xl font-bold tracking-[-1px] text-white">
-            How it works
+            How I work
           </h2>
           <p className="text-center font-inter text-base text-[var(--color-text-dim)]">
-            A streamlined process designed to get you from idea to launch with
-            zero friction.
+            A streamlined process designed to get you from idea to launch with zero friction.
           </p>
         </div>
 
-        {/* Steps */}
         <div className="mt-[130px] max-md:mt-10 flex max-md:flex-col gap-6">
           {steps.map((s) => (
             <div
