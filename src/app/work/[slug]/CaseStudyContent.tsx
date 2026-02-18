@@ -49,7 +49,12 @@ export default function CaseStudyContent({
         {/* Case Hero */}
         <section className="snap-section w-full px-16 pt-12 pb-[60px] max-md:px-6">
           <div className="flex flex-col gap-6 max-w-[800px]">
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-2 flex-wrap items-center">
+              {caseStudy?.status === "in-development" && (
+                <span className="bg-amber-500/15 border border-amber-500/25 px-3 py-1 font-inter text-[11px] font-semibold tracking-[1px] text-amber-400">
+                  IN DEVELOPMENT
+                </span>
+              )}
               {study.tags.map((tag) => (
                 <span
                   key={tag}
@@ -67,6 +72,18 @@ export default function CaseStudyContent({
             </p>
           </div>
         </section>
+
+        {/* In Development Banner */}
+        {caseStudy?.status === "in-development" && (
+          <section className="w-full px-16 pb-6 max-md:px-6">
+            <div className="flex items-center gap-3 border border-amber-500/20 bg-amber-500/5 px-5 py-3">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-amber-400 animate-pulse" />
+              <p className="font-inter text-sm text-amber-300/90">
+                This project is actively in progress — features and design are being built and improved continuously.
+              </p>
+            </div>
+          </section>
+        )}
 
         {/* Hero Image */}
         <section className="w-full px-16 pb-[80px] max-md:px-6">
