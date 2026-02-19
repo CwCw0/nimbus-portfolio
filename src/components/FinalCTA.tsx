@@ -30,7 +30,7 @@ export default function FinalCTA() {
       </span>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto flex w-[1000px] flex-col items-center gap-8 pt-[100px] max-md:w-full max-md:px-6 max-md:pt-0">
+      <div className="relative z-10 mx-auto flex w-[1000px] max-w-full flex-col items-center gap-8 pt-[100px] max-lg:w-[800px] max-md:w-full max-md:px-6 max-md:pt-0">
         <h2 className="text-center font-space-grotesk text-[52px] font-bold leading-[1.1] tracking-[-2px] text-white max-md:text-[32px]">
           Ready to build
           <br />

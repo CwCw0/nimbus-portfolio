@@ -65,7 +65,7 @@ export default function BlogPage() {
             href={`/blog/${featuredPost.slug}`}
             className="group flex gap-8 border border-[var(--color-border)] bg-[var(--color-bg-card)] transition-all duration-300 hover:border-[var(--color-accent-border)] max-md:flex-col"
           >
-            <div className="w-[580px] h-[340px] overflow-hidden max-md:w-full max-md:h-[200px]">
+            <div className="w-[580px] h-[340px] overflow-hidden max-lg:w-[400px] max-md:w-full max-md:h-[200px]">
               <img
                 src={featuredPost.image}
                 alt={featuredPost.title}
@@ -105,7 +105,7 @@ export default function BlogPage() {
           <span className="mb-8 block font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-text-muted)]">
             ALL ARTICLES
           </span>
-          <div className="grid grid-cols-3 gap-6 max-md:grid-cols-1">
+          <div className="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-md:grid-cols-1">
             {filteredPosts.map((post) => (
               <Link
                 key={post.slug}

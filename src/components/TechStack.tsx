@@ -40,7 +40,7 @@ export default function TechStack() {
         <div className="h-px flex-1 bg-[var(--color-border)] ml-6" />
       </div>
 
-      <div className="flex w-full justify-between gap-4 max-md:grid max-md:grid-cols-4 max-md:gap-3 max-md:flex-wrap">
+      <div className="flex w-full justify-between gap-4 max-lg:grid max-lg:grid-cols-4 max-lg:gap-3 max-md:grid-cols-2">
         {techs.map((t) => (
           <div
             key={t.name}
