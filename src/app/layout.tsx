@@ -25,6 +25,8 @@ const dmMono = DM_Mono({
   weight: ["400", "500"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbus-portfolio.vercel.app";
+
 export const metadata: Metadata = {
   title: {
     default: "Nimbus — Creative Studio | Websites, Branding & AI Tools",
@@ -32,26 +34,46 @@ export const metadata: Metadata = {
   },
   description:
     "Nimbus is a creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses.",
-  keywords: ["web development", "branding", "UI/UX design", "SEO", "AI tools", "creative studio", "freelance developer"],
+  keywords: ["web development", "branding", "UI/UX design", "SEO", "AI tools", "creative studio", "freelance developer", "Next.js developer", "React developer", "web designer"],
   authors: [{ name: "Nimbus" }],
   creator: "Nimbus",
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
+    url: siteUrl,
     siteName: "Nimbus",
     title: "Nimbus — Creative Studio | Websites, Branding & AI Tools",
     description:
       "Nimbus is a creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses.",
+    images: [
+      {
+        url: `${siteUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Nimbus — Creative Studio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nimbus — Creative Studio",
     description:
       "Websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses.",
+    images: [`${siteUrl}/og-image.png`],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -65,6 +87,46 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "@id": `${siteUrl}/#person`,
+                  name: "Nimbus",
+                  url: siteUrl,
+                  email: "heyitsnimbus@gmail.com",
+                  sameAs: ["https://github.com/CwCw0"],
+                  jobTitle: "Freelance Web Developer & Creative Studio Founder",
+                  knowsAbout: ["Web Development", "UI/UX Design", "Brand Identity", "AI Tools", "Next.js", "React", "TypeScript", "Tailwind CSS"],
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": `${siteUrl}/#website`,
+                  url: siteUrl,
+                  name: "Nimbus",
+                  description: "Creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools",
+                  publisher: { "@id": `${siteUrl}/#person` },
+                },
+                {
+                  "@type": "ProfessionalService",
+                  "@id": `${siteUrl}/#business`,
+                  name: "Nimbus",
+                  description: "Creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses.",
+                  url: siteUrl,
+                  email: "heyitsnimbus@gmail.com",
+                  priceRange: "$$",
+                  areaServed: "Worldwide",
+                  serviceType: ["Web Design", "Web Development", "Brand Identity", "AI Tools & Automation", "SEO"],
+                  founder: { "@id": `${siteUrl}/#person` },
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} ${poppins.variable} ${dmMono.variable} h-full antialiased`}
