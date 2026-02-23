@@ -98,9 +98,14 @@ export default function ServicesPage() {
                   <p className="font-inter text-base leading-[1.7] text-[var(--color-text-dim)]">
                     {service.desc}
                   </p>
-                  <span className="font-inter text-lg font-semibold text-[var(--color-accent)]">
-                    {service.price}
-                  </span>
+                  <div className="flex flex-col gap-1">
+                    <span className="font-inter text-lg font-semibold text-[var(--color-accent)]">
+                      {service.price}
+                    </span>
+                    <span className="font-inter text-xs text-(--color-text-subtle)">
+                      Malaysian clients — MYR pricing available. <a href="/contact" className="text-(--color-accent) hover:underline">Book a call</a>
+                    </span>
+                  </div>
                 </div>
                 <div className="flex w-[380px] flex-col gap-5 max-md:w-full">
                   <span className="font-inter text-xs font-semibold tracking-[1px] text-white">

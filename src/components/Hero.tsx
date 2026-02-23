@@ -60,9 +60,9 @@ export default function Hero() {
             By Builders.
           </h1>
           <p className="hero-animate w-[600px] text-center font-inter text-base leading-[1.6] text-[var(--color-text-dim)] max-md:w-full max-md:text-sm">
-            Nimbus is a creative studio specializing in websites, branding, UI/UX, SEO
+            A creative studio for businesses that want more than a template.
             <br />
-            and AI-powered tools for freelancers, startups and growing businesses.
+            Design, development, and AI — built with precision, launched with purpose.
           </p>
         </div>
 
