@@ -2,7 +2,6 @@
 
 import { Check } from "lucide-react";
 import { useRef } from "react";
-import Link from "next/link";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const tiers = [
@@ -125,8 +124,10 @@ export default function Pricing() {
               ))}
             </div>
 
-            <Link
-              href="/contact"
+            <a
+              href="https://calendly.com/heyitsnimbus/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`flex w-full items-center justify-center py-3.5 font-inter text-sm font-semibold transition-all duration-300 hover:scale-[1.03] ${
                 t.featured
                   ? "bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] text-[#0A0A0B] hover:shadow-[0_0_24px_#7C5CFC20]"
@@ -134,7 +135,7 @@ export default function Pricing() {
               }`}
             >
               {t.btnText}
-            </Link>
+            </a>
           </div>
         ))}
       </div>

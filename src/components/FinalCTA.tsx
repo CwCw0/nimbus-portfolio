@@ -43,7 +43,9 @@ export default function FinalCTA() {
         </p>
         <div className="flex items-center gap-4 max-md:flex-col max-md:w-full">
           <a
-            href="#contact"
+            href="https://calendly.com/heyitsnimbus/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2.5 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-[18px] font-inter text-base font-semibold text-[#0A0A0B] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20] max-md:w-full max-md:justify-center"
           >
             Start a Project

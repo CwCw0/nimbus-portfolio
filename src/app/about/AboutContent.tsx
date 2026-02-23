@@ -250,7 +250,7 @@ export default function AboutPage() {
             <p className="w-[500px] text-center font-inter text-lg text-[var(--color-text-dim)] max-md:w-full max-md:text-base">
               Always open to collaborating on interesting projects and new opportunities.
             </p>
-            <a href="/contact" className="flex items-center gap-2.5 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-[18px] font-inter text-base font-semibold text-[#0A0A0B] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20]">
+            <a href="https://calendly.com/heyitsnimbus/30min" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-[18px] font-inter text-base font-semibold text-[#0A0A0B] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20]">
               Get in Touch
               <ArrowUpRight className="h-[18px] w-[18px]" />
             </a>

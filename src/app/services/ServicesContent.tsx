@@ -98,14 +98,9 @@ export default function ServicesPage() {
                   <p className="font-inter text-base leading-[1.7] text-[var(--color-text-dim)]">
                     {service.desc}
                   </p>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-inter text-lg font-semibold text-[var(--color-accent)]">
-                      {service.price}
-                    </span>
-                    <span className="font-inter text-xs text-(--color-text-subtle)">
-                      Malaysian clients — MYR pricing available. <a href="/contact" className="text-(--color-accent) hover:underline">Book a call</a>
-                    </span>
-                  </div>
+                  <span className="font-inter text-lg font-semibold text-[var(--color-accent)]">
+                    {service.price}
+                  </span>
                 </div>
                 <div className="flex w-[380px] flex-col gap-5 max-md:w-full">
                   <span className="font-inter text-xs font-semibold tracking-[1px] text-white">
@@ -136,7 +131,7 @@ export default function ServicesPage() {
               Book a free discovery call. We&apos;ll figure out the best approach together.
             </p>
             <div className="flex items-center gap-4 max-md:flex-col">
-              <a href="/contact" className="flex items-center gap-2.5 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-[18px] font-inter text-base font-semibold text-[#0A0A0B] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20]">
+              <a href="https://calendly.com/heyitsnimbus/30min" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-[18px] font-inter text-base font-semibold text-[#0A0A0B] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20]">
                 Book a Call
                 <ArrowUpRight className="h-[18px] w-[18px]" />
               </a>
