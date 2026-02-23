@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, Poppins, DM_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const inter = Inter({
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
       "Nimbus is a creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses.",
     images: [
       {
-        url: `${siteUrl}/og-image.png`,
+        url: `${siteUrl}/opengraph-image`,
         width: 1200,
         height: 630,
         alt: "Nimbus — Creative Studio",
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     title: "Nimbus — Creative Studio",
     description:
       "Websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses.",
-    images: [`${siteUrl}/og-image.png`],
+    images: [`${siteUrl}/opengraph-image`],
   },
   robots: {
     index: true,
@@ -135,6 +136,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   );
