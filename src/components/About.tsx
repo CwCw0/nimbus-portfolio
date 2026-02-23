@@ -47,7 +47,7 @@ export default function About() {
             end to end.
           </h2>
           <p className="font-inter text-base leading-[1.7] text-[var(--color-text-dim)]">
-            Self-taught developer and builder. I don&apos;t just
+            Developer, designer, and founder of Nimbus. I don&apos;t just
             write code — I study the systems, the design, the business, and the
             user. I build things that work for real people.
           </p>
@@ -81,12 +81,12 @@ export default function About() {
             <div className="flex flex-1 flex-col gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-7">
               <span
                 className="count-up font-inter text-[40px] font-semibold tracking-[-1px] text-[var(--color-accent)]"
-                data-target="100%"
+                data-target="3"
               >
-                0%
+                0
               </span>
               <span className="font-inter text-sm text-[var(--color-text-dim)]">
-                Self-taught
+                Products building
               </span>
             </div>
             <div className="flex flex-1 flex-col gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-7">

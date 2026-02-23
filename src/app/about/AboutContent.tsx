@@ -60,12 +60,10 @@ export default function AboutPage() {
               ABOUT ME
             </span>
             <h1 className="font-space-grotesk text-[56px] font-bold leading-[1.1] tracking-[-2px] text-white max-md:text-[36px]">
-              Not just a developer.<br />A builder.
+              Not just code.<br />Full products.
             </h1>
             <p className="w-[600px] font-inter text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:w-full max-md:text-base">
-              Self-taught developer. Founder of Nimbus. I study the full picture —
-              code, design, systems, product, and business — because I don&apos;t just want
-              to write code. I want to build things that matter.
+              Founder of Nimbus. I build websites, branding, and AI tools for clients — and ship my own products when I spot gaps worth solving. Code, design, systems, business. I study and build all of it.
             </p>
           </div>
         </section>
@@ -109,8 +107,8 @@ export default function AboutPage() {
                   <span className="font-inter text-xs text-[var(--color-text-dim)]">Projects</span>
                 </div>
                 <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
-                  <span className="count-up font-inter text-[32px] font-semibold tracking-[-1px] text-[var(--color-accent)]" data-target="100%">0%</span>
-                  <span className="font-inter text-xs text-[var(--color-text-dim)]">Self-taught</span>
+                  <span className="count-up font-inter text-[32px] font-semibold tracking-[-1px] text-[var(--color-accent)]" data-target="3">0</span>
+                  <span className="font-inter text-xs text-[var(--color-text-dim)]">Products building</span>
                 </div>
                 <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
                   <span className="font-inter text-[32px] font-semibold tracking-[-1px] text-white">24/7</span>
@@ -185,7 +183,10 @@ export default function AboutPage() {
               What I&apos;m building
             </h2>
             <p className="max-w-[600px] font-inter text-base leading-[1.8] text-[var(--color-text-dim)]">
-              Nimbus is a one-person studio shipping real software across different niches. Not mockups, not templates — full products built from the ground up, each solving a genuine problem.
+              Alongside client work, I build my own products — not because someone paid me to, but because I saw gaps worth solving. Not mockups, not templates. Full products, built from scratch, each with a real reason to exist.
+            </p>
+            <p className="max-w-140 font-inter text-sm leading-[1.8] text-(--color-text-subtle)">
+              These are actively in development. You can explore them now — full auth, accounts, and features are shipping progressively.
             </p>
           </div>
           <div className="grid grid-cols-3 gap-5 max-lg:grid-cols-1">
@@ -230,7 +231,7 @@ export default function AboutPage() {
                     ))}
                   </div>
                   <span className="flex items-center gap-1.5 font-inter text-xs font-medium text-[var(--color-accent)] transition-all group-hover:gap-2.5">
-                    View live
+                    Explore preview
                     <ArrowUpRight className="h-3 w-3" />
                   </span>
                 </div>
