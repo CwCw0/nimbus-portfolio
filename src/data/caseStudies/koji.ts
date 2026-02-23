@@ -10,8 +10,9 @@ export const koji: CaseStudy = {
   desc: "My second brain — a keyboard-first tool built around how I actually think, plan, and ship. Actively in progress.",
   heroDesc:
     "Kōji started as a personal problem. My brain doesn't work in neat categories — thoughts come fast, tasks pile up, and I need to capture everything before it disappears. I built Kōji as my second brain: a place to dump raw thoughts, turn them into tasks, and stay focused without the friction of switching between five different apps. If my thought process can help other builders too, even better.",
-  heroImage: "/images/koji/hero.png",
+  heroImage: "/images/koji/homepage.png",
   gallery: [
+    "/images/koji/homepage.png",
     "/images/koji/board.png",
     "/images/koji/notes.png",
   ],
