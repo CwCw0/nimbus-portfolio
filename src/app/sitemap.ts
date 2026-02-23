@@ -3,7 +3,7 @@ import { blogPosts } from "../data/blog";
 import { allCaseStudies } from "../data/caseStudies";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbus-portfolio.vercel.app";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbus-studio-1.vercel.app";
 
   const blogRoutes = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,

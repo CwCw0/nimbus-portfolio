@@ -26,7 +26,7 @@ const dmMono = DM_Mono({
   weight: ["400", "500"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbus-portfolio.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbus-studio-1.vercel.app";
 
 export const metadata: Metadata = {
   title: {
