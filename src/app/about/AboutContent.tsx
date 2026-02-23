@@ -3,16 +3,48 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
-import { ArrowUpRight, Code, Palette, Server, Bot } from "lucide-react";
+import { ArrowUpRight, Code, Palette, Server, Bot, HeartPulse, CheckSquare, Gamepad2 } from "lucide-react";
 import { useRef } from "react";
 import { useScrollReveal, useCountUp } from "../../hooks/useScrollReveal";
+
+const products = [
+  {
+    name: "Pulse",
+    desc: "Health & wellness dashboard aggregating wearable data from Apple Watch, Fitbit, Garmin, and Oura Ring into one calm, actionable view.",
+    href: "https://pulse-khaki-nine.vercel.app",
+    accent: "#E91E8C",
+    accentDim: "#E91E8C14",
+    icon: HeartPulse,
+    tags: ["Next.js", "Recharts", "Healthtech"],
+  },
+  {
+    name: "Kōji",
+    desc: "Keyboard-first productivity platform — Brain Dump, kanban, notes, focus timer. Built around how you actually think, not how productivity gurus say you should.",
+    href: "https://koji-seven.vercel.app",
+    accent: "#7C5CFC",
+    accentDim: "#7C5CFC14",
+    icon: CheckSquare,
+    tags: ["Next.js", "localStorage", "Productivity"],
+  },
+  {
+    name: "Voidframe",
+    desc: "Gaming community platform with real-time chat, squad management, events, and tournament tooling. Built for how gamers actually coordinate.",
+    href: "https://voidframe-three.vercel.app",
+    accent: "#7C3AED",
+    accentDim: "#7C3AED14",
+    icon: Gamepad2,
+    tags: ["Next.js", "TypeScript", "Gaming"],
+  },
+];
 
 export default function AboutPage() {
   const skillsRef = useRef<HTMLElement>(null);
   const valuesRef = useRef<HTMLElement>(null);
   const statsRef = useRef<HTMLElement>(null);
+  const productsRef = useRef<HTMLElement>(null);
   useScrollReveal(skillsRef, ".skill-card", 120);
   useScrollReveal(valuesRef, ".value-card", 100);
+  useScrollReveal(productsRef, ".product-card", 100);
   useCountUp(statsRef, ".count-up");
 
   return (
@@ -139,6 +171,70 @@ export default function AboutPage() {
                 <h3 className="font-inter text-lg font-semibold text-white">{value.title}</h3>
                 <p className="font-inter text-sm leading-[1.7] text-[var(--color-text-dim)]">{value.desc}</p>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* The Studio */}
+        <section ref={productsRef} className="snap-section w-full bg-[var(--color-bg-secondary)] px-16 py-[100px] max-md:px-6 max-md:py-16">
+          <div className="mb-14 flex flex-col gap-4">
+            <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+              THE STUDIO
+            </span>
+            <h2 className="font-space-grotesk text-[40px] font-bold tracking-[-1px] text-white max-md:text-3xl">
+              What I&apos;m building
+            </h2>
+            <p className="max-w-[600px] font-inter text-base leading-[1.8] text-[var(--color-text-dim)]">
+              Nimbus is a one-person studio shipping real software across different niches. Not mockups, not templates — full products built from the ground up, each solving a genuine problem.
+            </p>
+          </div>
+          <div className="grid grid-cols-3 gap-5 max-lg:grid-cols-1">
+            {products.map((product) => (
+              <a
+                key={product.name}
+                href={product.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="product-card group flex flex-col border border-[var(--color-border)] bg-[var(--color-bg-card)] opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)] hover:shadow-[0_0_30px_#7C5CFC10]"
+              >
+                {/* Visual header */}
+                <div
+                  className="relative flex h-[140px] items-center justify-center overflow-hidden"
+                  style={{ background: `radial-gradient(ellipse at 50% 80%, ${product.accentDim} 0%, transparent 70%), var(--color-bg-primary)` }}
+                >
+                  <div
+                    className="absolute inset-0 opacity-[0.03]"
+                    style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)", backgroundSize: "20px 20px" }}
+                  />
+                  <div className="relative flex flex-col items-center gap-3">
+                    <div
+                      className="flex h-12 w-12 items-center justify-center"
+                      style={{ background: product.accentDim, border: `1px solid ${product.accent}30` }}
+                    >
+                      <product.icon className="h-6 w-6" style={{ color: product.accent }} />
+                    </div>
+                    <span className="font-space-grotesk text-base font-bold text-white">{product.name}</span>
+                  </div>
+                  <span className="absolute top-3 right-3 border border-amber-500/25 bg-amber-500/15 px-2.5 py-1 font-inter text-[10px] font-semibold tracking-[1px] text-amber-400">
+                    IN DEVELOPMENT
+                  </span>
+                </div>
+                {/* Content */}
+                <div className="flex flex-1 flex-col gap-4 p-5">
+                  <p className="font-inter text-[13px] leading-[1.7] text-[var(--color-text-dim)]">{product.desc}</p>
+                  <div className="mt-auto flex flex-wrap gap-1.5 border-t border-[var(--color-border)] pt-4">
+                    {product.tags.map((tag) => (
+                      <span key={tag} className="bg-[var(--color-accent-subtle)] px-2 py-0.5 font-inter text-[10px] font-medium text-[var(--color-accent)]">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="flex items-center gap-1.5 font-inter text-xs font-medium text-[var(--color-accent)] transition-all group-hover:gap-2.5">
+                    View live
+                    <ArrowUpRight className="h-3 w-3" />
+                  </span>
+                </div>
+              </a>
             ))}
           </div>
         </section>
