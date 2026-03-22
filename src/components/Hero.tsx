@@ -2,21 +2,139 @@
 
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const subtextRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const techRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    el.querySelectorAll(".hero-line").forEach((line, i) => {
-      (line as HTMLElement).style.animationDelay = `${200 + i * 150}ms`;
-      line.classList.add("clip-reveal");
-    });
-    el.querySelectorAll(".hero-fade").forEach((child, i) => {
-      (child as HTMLElement).style.animationDelay = `${700 + i * 120}ms`;
-      child.classList.add("drift-up");
-    });
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const ctx = gsap.context(() => {
+      if (prefersReducedMotion) return;
+
+      // Text line reveals — each line slides up from behind overflow-hidden wrapper
+      const lines = headingRef.current?.querySelectorAll(".hero-line-inner");
+      if (lines) {
+        gsap.set(lines, { y: "100%" });
+        gsap.to(lines, {
+          y: "0%",
+          duration: 1,
+          stagger: 0.15,
+          ease: "power3.out",
+          delay: 0.2,
+        });
+      }
+
+      // Subtext fade in
+      if (subtextRef.current) {
+        gsap.set(subtextRef.current, { opacity: 0, y: 30 });
+        gsap.to(subtextRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 0.7,
+        });
+      }
+
+      // CTA fade in
+      if (ctaRef.current) {
+        gsap.set(ctaRef.current, { opacity: 0, y: 20 });
+        gsap.to(ctaRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 0.9,
+        });
+      }
+
+      // Tech strip fade in
+      if (techRef.current) {
+        gsap.set(techRef.current, { opacity: 0 });
+        gsap.to(techRef.current, {
+          opacity: 1,
+          duration: 0.6,
+          delay: 1.1,
+        });
+
+        // Tech strip fades out on scroll past 30vh
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          end: "30% top",
+          scrub: true,
+          onUpdate: (self) => {
+            if (techRef.current) {
+              gsap.set(techRef.current, { opacity: 1 - self.progress });
+            }
+          },
+        });
+      }
+
+      // Parallax on scroll — desktop only
+      ScrollTrigger.matchMedia({
+        "(min-width: 769px)": () => {
+          // Heading moves slower (0.3x)
+          if (headingRef.current) {
+            gsap.to(headingRef.current, {
+              yPercent: -15,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+          }
+
+          // Subtext moves at 0.5x
+          if (subtextRef.current) {
+            gsap.to(subtextRef.current, {
+              yPercent: -25,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+          }
+
+          // Watermark barely moves (0.1x)
+          const watermark = section.querySelector(".hero-watermark");
+          if (watermark) {
+            gsap.to(watermark, {
+              yPercent: -5,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+          }
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -25,9 +143,9 @@ export default function Hero() {
       id="hero"
       className="snap-section relative min-h-[820px] max-md:min-h-[100svh] w-full overflow-hidden bg-[var(--color-bg-primary)]"
     >
-      {/* Grain texture overlay */}
+      {/* Grain texture overlay with drift animation */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        className="pointer-events-none absolute inset-0 opacity-[0.03] grain-shift"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat",
@@ -44,7 +162,7 @@ export default function Hero() {
 
       {/* Vertical NIMBUS watermark — right side */}
       <div
-        className="pointer-events-none absolute right-16 top-1/2 -translate-y-1/2 max-md:hidden"
+        className="hero-watermark pointer-events-none absolute right-16 top-1/2 -translate-y-1/2 max-md:hidden"
         style={{
           writingMode: "vertical-rl",
           fontSize: "120px",
@@ -61,31 +179,36 @@ export default function Hero() {
       {/* Main content — left-heavy */}
       <div className="relative z-10 flex h-full min-h-[820px] max-md:min-h-[100svh] w-full flex-col justify-center px-16 max-md:px-6">
         <div className="flex max-w-[900px] flex-col gap-10 max-md:gap-8">
-          {/* Stepped heading */}
-          <div className="flex flex-col gap-0">
-            <h1 className="hero-line font-display text-[96px] leading-[1.0] tracking-[-3px] text-[var(--color-text-primary)] max-md:text-[48px] max-md:tracking-[-2px]">
-              For Builders,
-            </h1>
-            <h1
-              className="hero-line font-display text-[96px] leading-[1.0] tracking-[-3px] text-[var(--color-accent)] max-md:text-[48px] max-md:tracking-[-2px] max-md:pl-0"
-              style={{ paddingLeft: "80px" }}
-            >
-              By Builders.
-            </h1>
+          {/* Stepped heading with overflow-hidden line reveals */}
+          <div ref={headingRef} className="flex flex-col gap-0">
+            <div className="overflow-hidden">
+              <h1 className="hero-line-inner font-display text-[96px] leading-[1.0] tracking-[-3px] text-[var(--color-text-primary)] max-md:text-[48px] max-md:tracking-[-2px]">
+                For Builders,
+              </h1>
+            </div>
+            <div className="overflow-hidden">
+              <h1
+                className="hero-line-inner font-display text-[96px] leading-[1.0] tracking-[-3px] text-[var(--color-accent)] max-md:text-[48px] max-md:tracking-[-2px] max-md:pl-0"
+                style={{ paddingLeft: "80px" }}
+              >
+                By Builders.
+              </h1>
+            </div>
           </div>
 
           {/* Subtext */}
-          <p className="hero-fade max-w-[520px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:text-base">
+          <p ref={subtextRef} className="max-w-[520px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:text-base">
             A creative studio for businesses that want more than a template.
             Design, development, and AI — built with precision, launched with purpose.
           </p>
 
           {/* CTAs — asymmetric */}
-          <div className="hero-fade flex items-center gap-6 max-md:flex-col max-md:items-start max-md:gap-4 max-md:w-full">
+          <div ref={ctaRef} className="flex items-center gap-6 max-md:flex-col max-md:items-start max-md:gap-4 max-md:w-full">
             <a
               href="https://calendly.com/heyitsnimbus/30min"
               target="_blank"
               rel="noopener noreferrer"
+              data-magnetic
               className="flex items-center gap-3 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-4 font-body text-[15px] font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_#7C5CFC25] max-md:w-full max-md:justify-center"
             >
               Start a Project
@@ -102,7 +225,7 @@ export default function Hero() {
         </div>
 
         {/* Full-width tech strip — bottom edge */}
-        <div className="hero-fade absolute bottom-0 left-0 right-0 flex items-center border-t border-[var(--color-border)] max-md:hidden">
+        <div ref={techRef} className="absolute bottom-0 left-0 right-0 flex items-center border-t border-[var(--color-border)] max-md:hidden">
           <span className="shrink-0 px-8 font-body text-[10px] font-medium tracking-[2px] text-[var(--color-text-subtle)]">
             BUILT WITH
           </span>

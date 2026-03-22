@@ -1,10 +1,45 @@
+"use client";
+
 import Link from "next/link";
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
+  const quoteRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const quote = quoteRef.current;
+    if (!quote) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(quote, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: quote,
+          start: "top 90%",
+          once: true,
+        },
+      });
+    }, quote);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <footer className="flex w-full flex-col bg-[var(--color-bg-footer)] px-16 py-12 max-md:px-6 max-md:py-10">
       {/* Pull quote */}
-      <div className="flex justify-center py-8 max-md:py-6">
+      <div ref={quoteRef} className="flex justify-center py-8 max-md:py-6">
         <p className="max-w-[600px] text-center font-display text-[22px] italic leading-[1.5] text-[var(--color-text-subtle)] max-md:text-lg">
           &ldquo;Good design is as little design as possible.&rdquo;
           <span className="mt-2 block font-body text-[12px] not-italic tracking-[2px] text-[var(--color-text-faint)]">

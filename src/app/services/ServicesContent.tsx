@@ -3,6 +3,7 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
+import SmoothScroll from "../../components/SmoothScroll";
 import { Check, ArrowUpRight } from "lucide-react";
 import { useRef } from "react";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
@@ -53,6 +54,7 @@ export default function ServicesPage() {
   return (
     <>
       <CustomCursor />
+      <SmoothScroll>
       <div className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />
 
@@ -144,6 +146,7 @@ export default function ServicesPage() {
 
         <Footer />
       </div>
+      </SmoothScroll>
     </>
   );
 }

@@ -124,7 +124,7 @@ function BentoCard({
   return (
     <Link
       href="/services"
-      className={`bento-card group relative flex flex-col justify-between overflow-hidden border p-9 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] max-md:p-7 ${
+      className={`bento-card group relative flex flex-col justify-between overflow-hidden border p-9 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] max-md:p-7 ${
         featured
           ? "border-[var(--color-accent-border)] bg-gradient-to-br from-[var(--color-accent)] to-[#5B3FCC] hover:shadow-[0_0_40px_#7C5CFC20]"
           : "border-[var(--color-border)] bg-[var(--color-bg-card)] hover:border-[var(--color-accent-border)]"

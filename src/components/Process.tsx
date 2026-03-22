@@ -1,6 +1,10 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
   {
@@ -26,33 +30,70 @@ export default function Process() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Circles appear first
-            el.querySelectorAll(".timeline-circle").forEach((c, i) => {
-              (c as HTMLElement).style.animationDelay = `${i * 200}ms`;
-              c.classList.add("drift-up");
-            });
-            // Connectors draw in
-            el.querySelectorAll(".timeline-connector").forEach((c, i) => {
-              (c as HTMLElement).style.animationDelay = `${400 + i * 200}ms`;
-              (c as HTMLElement).style.animation = `connectorDraw 600ms cubic-bezier(0.16,1,0.3,1) ${400 + i * 200}ms forwards`;
-            });
-            // Text fades in
-            el.querySelectorAll(".timeline-text").forEach((c, i) => {
-              (c as HTMLElement).style.animationDelay = `${600 + i * 200}ms`;
-              c.classList.add("drift-up");
-            });
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const ctx = gsap.context(() => {
+      const circles = el.querySelectorAll(".timeline-circle");
+      const connectors = el.querySelectorAll(".timeline-connector");
+      const texts = el.querySelectorAll(".timeline-text");
+
+      if (prefersReducedMotion) {
+        gsap.set([circles, connectors, texts], { opacity: 1, y: 0 });
+        gsap.set(connectors, { scaleX: 1 });
+        return;
+      }
+
+      // Set initial states
+      gsap.set(circles, { opacity: 0, scale: 0.5 });
+      gsap.set(texts, { opacity: 0, y: 30 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: "top 75%",
+          once: true,
+        },
+      });
+
+      // Circles pop in
+      tl.to(circles, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "back.out(1.7)",
+      });
+
+      // Connectors draw in (overlapping with circles)
+      tl.to(
+        connectors,
+        {
+          scaleX: 1,
+          duration: 0.6,
+          stagger: 0.2,
+          ease: "power2.inOut",
+        },
+        "-=0.4"
+      );
+
+      // Text fades in
+      tl.to(
+        texts,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power3.out",
+        },
+        "-=0.3"
+      );
+    }, el);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -79,7 +120,7 @@ export default function Process() {
           {steps.map((s, i) => (
             <div key={s.num} className="relative flex flex-col items-center" style={{ width: "30%" }}>
               {/* Circle */}
-              <div className="timeline-circle relative z-10 flex h-[48px] w-[48px] items-center justify-center rounded-full border-2 border-[var(--color-accent)] bg-[var(--color-bg-secondary)] opacity-0 transition-all duration-300 hover:bg-[var(--color-accent)] group">
+              <div className="timeline-circle relative z-10 flex h-[48px] w-[48px] items-center justify-center rounded-full border-2 border-[var(--color-accent)] bg-[var(--color-bg-secondary)] transition-all duration-300 hover:bg-[var(--color-accent)] group">
                 <span className="font-body text-sm font-semibold text-[var(--color-accent)] transition-colors group-hover:text-white" style={{ cursor: "default" }}>
                   {s.num}
                 </span>
@@ -106,7 +147,7 @@ export default function Process() {
               )}
 
               {/* Text below */}
-              <div className="timeline-text mt-8 flex flex-col items-center gap-3 text-center opacity-0">
+              <div className="timeline-text mt-8 flex flex-col items-center gap-3 text-center">
                 <h3 className="font-body text-lg font-semibold text-[var(--color-text-primary)]">
                   {s.title}
                 </h3>
@@ -125,7 +166,7 @@ export default function Process() {
           <div key={s.num} className="flex gap-6">
             {/* Left: circle + vertical line */}
             <div className="flex flex-col items-center">
-              <div className="timeline-circle flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full border-2 border-[var(--color-accent)] bg-[var(--color-bg-secondary)] opacity-0">
+              <div className="timeline-circle flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full border-2 border-[var(--color-accent)] bg-[var(--color-bg-secondary)]">
                 <span className="font-body text-xs font-semibold text-[var(--color-accent)]">
                   {s.num}
                 </span>
@@ -135,7 +176,7 @@ export default function Process() {
               )}
             </div>
             {/* Right: text */}
-            <div className="timeline-text flex flex-col gap-2 pb-10 opacity-0">
+            <div className="timeline-text flex flex-col gap-2 pb-10">
               <h3 className="font-body text-lg font-semibold text-[var(--color-text-primary)]">
                 {s.title}
               </h3>
