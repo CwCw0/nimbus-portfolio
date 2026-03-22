@@ -5,6 +5,7 @@ import Footer from "../../../components/Footer";
 import CustomCursor from "../../../components/CustomCursor";
 import { ArrowLeft, ArrowRight, Twitter, Linkedin, Link2, Check } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import { getPostBySlug, getRelatedPosts } from "../../../data/blog";
 
@@ -64,8 +65,8 @@ export default function BlogPostContent({ slug }: { slug: string }) {
         <div className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
           <Header />
           <section className="flex flex-col items-center justify-center gap-6 px-16 py-[200px] max-md:px-6">
-            <h1 className="font-space-grotesk text-[48px] font-bold text-white">Post not found</h1>
-            <Link href="/blog" className="font-inter text-[var(--color-accent)] hover:underline">
+            <h1 className="font-display text-[48px] text-[var(--color-text-primary)]">Post not found</h1>
+            <Link href="/blog" className="font-body text-[var(--color-accent)] hover:underline">
               Back to Blog
             </Link>
           </section>
@@ -88,7 +89,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
         <div className="flex items-center gap-2 px-16 pt-8 max-md:px-6">
           <Link
             href="/blog"
-            className="flex items-center gap-2 font-inter text-sm text-[var(--color-text-muted)] transition-colors hover:text-white"
+            className="flex items-center gap-2 font-body text-sm text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text-primary)]"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Blog
@@ -99,17 +100,17 @@ export default function BlogPostContent({ slug }: { slug: string }) {
         <section className="w-full px-16 pt-12 pb-8 max-md:px-6">
           <div className="flex flex-col gap-5 max-w-[800px]">
             <div className="flex items-center gap-3">
-              <span className="bg-[var(--color-accent-subtle)] px-3 py-1 font-inter text-[11px] font-medium text-[var(--color-accent)]">
+              <span className="bg-[var(--color-accent-subtle)] px-3 py-1 font-body text-[11px] font-medium text-[var(--color-accent)]">
                 {post.tag}
               </span>
-              <span className="font-inter text-xs text-[var(--color-text-subtle)]">
+              <span className="font-body text-xs text-[var(--color-text-subtle)]">
                 {post.date}
               </span>
-              <span className="font-inter text-xs text-[var(--color-text-subtle)]">
+              <span className="font-body text-xs text-[var(--color-text-subtle)]">
                 · {post.readTime}
               </span>
             </div>
-            <h1 className="font-space-grotesk text-[48px] font-bold leading-[1.1] tracking-[-2px] text-white max-md:text-[28px]">
+            <h1 className="font-display text-[48px] leading-[1.1] tracking-[-2px] text-[var(--color-text-primary)] max-md:text-[28px]">
               {post.title}
             </h1>
           </div>
@@ -117,11 +118,12 @@ export default function BlogPostContent({ slug }: { slug: string }) {
 
         {/* Hero Image */}
         <section className="w-full px-16 pb-12 max-md:px-6">
-          <div className="w-full overflow-hidden border border-[var(--color-border)]">
-            <img
+          <div className="relative w-full h-[480px] overflow-hidden border border-[var(--color-border)] max-md:h-[220px]">
+            <Image
               src={post.image}
               alt={post.title}
-              className="h-[480px] w-full object-cover max-md:h-[220px]"
+              fill
+              className="object-cover"
             />
           </div>
         </section>
@@ -134,21 +136,21 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               {post.content.map((block, i) => {
                 if (block.type === "p") {
                   return (
-                    <p key={i} className="font-inter text-base leading-[1.9] text-[var(--color-text-secondary)]">
+                    <p key={i} className="font-body text-base leading-[1.9] text-[var(--color-text-secondary)]">
                       {block.text}
                     </p>
                   );
                 }
                 if (block.type === "h2") {
                   return (
-                    <h2 key={i} className="font-space-grotesk text-[28px] font-bold tracking-[-1px] text-white">
+                    <h2 key={i} className="font-display text-[28px] tracking-[-1px] text-[var(--color-text-primary)]">
                       {block.text}
                     </h2>
                   );
                 }
                 if (block.type === "quote") {
                   return (
-                    <blockquote key={i} className="border-l-2 border-[var(--color-accent)] pl-6 font-inter text-lg italic leading-[1.8] text-[var(--color-text-muted)]">
+                    <blockquote key={i} className="border-l-2 border-[var(--color-accent)] pl-6 font-body text-lg italic leading-[1.8] text-[var(--color-text-muted)]">
                       &quot;{block.text}&quot;
                     </blockquote>
                   );
@@ -159,10 +161,10 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                       {block.items.map((item, j) => {
                         const parts = item.split("**");
                         return (
-                          <li key={j} className="font-inter text-base leading-[1.8] text-[var(--color-text-secondary)]">
+                          <li key={j} className="font-body text-base leading-[1.8] text-[var(--color-text-secondary)]">
                             {parts.map((part, k) =>
                               k % 2 === 1 ? (
-                                <strong key={k} className="text-white">{part}</strong>
+                                <strong key={k} className="text-[var(--color-text-primary)]">{part}</strong>
                               ) : (
                                 <span key={k}>{part}</span>
                               )
@@ -182,7 +184,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               <div className="sticky top-24 flex flex-col gap-8">
                 {/* TOC */}
                 <div className="flex flex-col gap-4 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-6">
-                  <span className="font-inter text-xs font-semibold tracking-[1px] text-white">
+                  <span className="font-body text-xs font-semibold tracking-[1px] text-[var(--color-text-primary)]">
                     TABLE OF CONTENTS
                   </span>
                   <div className="flex flex-col gap-3">
@@ -195,10 +197,10 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                             headings[i].scrollIntoView({ behavior: "smooth", block: "start" });
                           }
                         }}
-                        className={`text-left font-inter text-[13px] transition-colors ${
+                        className={`text-left font-body text-[13px] transition-colors ${
                           activeSection === i
                             ? "text-[var(--color-accent)]"
-                            : "text-[var(--color-text-dim)] hover:text-white"
+                            : "text-[var(--color-text-dim)] hover:text-[var(--color-text-primary)]"
                         }`}
                       >
                         {item}
@@ -209,7 +211,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
 
                 {/* Share */}
                 <div className="flex flex-col gap-4 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-6">
-                  <span className="font-inter text-xs font-semibold tracking-[1px] text-white">
+                  <span className="font-body text-xs font-semibold tracking-[1px] text-[var(--color-text-primary)]">
                     SHARE
                   </span>
                   <div className="flex gap-3">
@@ -236,16 +238,16 @@ export default function BlogPostContent({ slug }: { slug: string }) {
         <section className="w-full px-16 py-[60px] max-md:px-6">
           <div className="flex items-center gap-6 max-md:flex-col max-md:items-start">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)]">
-              <span className="font-inter text-lg font-bold text-[#0A0A0B]">D</span>
+              <span className="font-body text-lg font-bold text-white">D</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="font-inter text-sm text-[var(--color-text-subtle)]">
+              <span className="font-body text-sm text-[var(--color-text-subtle)]">
                 Written by
               </span>
-              <span className="font-inter text-lg font-semibold text-white">
+              <span className="font-body text-lg font-semibold text-[var(--color-text-primary)]">
                 Dee
               </span>
-              <p className="font-inter text-sm text-[var(--color-text-dim)]">
+              <p className="font-body text-sm text-[var(--color-text-dim)]">
                 Builder. Founder of Nimbus. Always learning, always shipping.
               </p>
             </div>
@@ -255,7 +257,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
         {/* Related Posts */}
         {related.length > 0 && (
           <section className="w-full bg-[var(--color-bg-secondary)] px-16 py-[80px] max-md:px-6 max-md:py-16">
-            <span className="mb-8 block font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+            <span className="mb-8 block font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
               RELATED ARTICLES
             </span>
             <div className="grid grid-cols-3 gap-6 max-md:grid-cols-1">
@@ -265,26 +267,27 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                   href={`/blog/${rPost.slug}`}
                   className="group flex flex-col border border-[var(--color-border)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)]"
                 >
-                  <div className="h-[180px] overflow-hidden">
-                    <img
+                  <div className="relative h-[180px] overflow-hidden">
+                    <Image
                       src={rPost.image}
                       alt={rPost.title}
-                      className="h-full w-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="flex flex-col gap-3 p-6">
                     <div className="flex items-center gap-3">
-                      <span className="bg-[var(--color-accent-subtle)] px-2.5 py-1 font-inter text-[10px] font-medium text-[var(--color-accent)]">
+                      <span className="bg-[var(--color-accent-subtle)] px-2.5 py-1 font-body text-[10px] font-medium text-[var(--color-accent)]">
                         {rPost.tag}
                       </span>
-                      <span className="font-inter text-[11px] text-[var(--color-text-subtle)]">
+                      <span className="font-body text-[11px] text-[var(--color-text-subtle)]">
                         {rPost.date}
                       </span>
                     </div>
-                    <h3 className="font-inter text-base font-semibold text-white group-hover:text-[var(--color-accent)] transition-colors">
+                    <h3 className="font-body text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
                       {rPost.title}
                     </h3>
-                    <span className="flex items-center gap-2 font-inter text-sm font-medium text-[var(--color-accent)]">
+                    <span className="flex items-center gap-2 font-body text-sm font-medium text-[var(--color-accent)]">
                       Read more
                       <ArrowRight className="h-3.5 w-3.5" />
                     </span>

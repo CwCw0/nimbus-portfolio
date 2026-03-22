@@ -16,7 +16,7 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "flex-end",
-          background: "#0C0B10",
+          background: "#0A0A0F",
           padding: "72px 80px",
           position: "relative",
           fontFamily: "sans-serif",
@@ -83,7 +83,7 @@ export default async function Image() {
             style={{
               fontSize: "80px",
               fontWeight: 700,
-              color: "#ffffff",
+              color: "#EEEDF5",
               lineHeight: 1.05,
               letterSpacing: "-2px",
             }}
@@ -98,7 +98,7 @@ export default async function Image() {
           <p
             style={{
               fontSize: "22px",
-              color: "#8A8894",
+              color: "#6B6880",
               marginTop: "8px",
               fontWeight: 400,
             }}

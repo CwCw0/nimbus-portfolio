@@ -33,10 +33,10 @@ export default function SocialProof() {
     >
       {/* Header */}
       <div className="mb-14 flex flex-col items-center gap-4">
-        <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+        <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
           04 / WHY NIMBUS
         </span>
-        <h2 className="font-space-grotesk text-5xl max-md:text-3xl font-bold tracking-[-1px] text-white">
+        <h2 className="font-display text-5xl max-md:text-3xl tracking-[-1px] text-[var(--color-text-primary)]">
           Why work with me
         </h2>
       </div>
@@ -51,10 +51,10 @@ export default function SocialProof() {
             <div className="flex h-12 w-12 items-center justify-center bg-[var(--color-grid)]">
               <r.icon className="h-[22px] w-[22px] text-[var(--color-accent)]" />
             </div>
-            <h3 className="font-inter text-xl font-semibold text-white">
+            <h3 className="font-body text-xl font-semibold text-[var(--color-text-primary)]">
               {r.title}
             </h3>
-            <p className="font-inter text-sm leading-[1.7] text-[var(--color-text-dim)]">
+            <p className="font-body text-sm leading-[1.7] text-[var(--color-text-dim)]">
               {r.desc}
             </p>
           </div>

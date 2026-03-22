@@ -52,17 +52,17 @@ export default function AboutPage() {
       <CustomCursor />
       <main id="main-content" className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />
-        
+
         {/* About Hero */}
         <section className="snap-section relative w-full px-16 pt-[100px] pb-[80px] max-md:px-6 max-md:pt-16 max-md:pb-12">
           <div className="flex flex-col gap-6 max-w-[800px]">
-            <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+            <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
               ABOUT ME
             </span>
-            <h1 className="font-space-grotesk text-[56px] font-bold leading-[1.1] tracking-[-2px] text-white max-md:text-[36px]">
+            <h1 className="font-display text-[56px] leading-[1.1] tracking-[-2px] text-[var(--color-text-primary)] max-md:text-[36px]">
               Not just code.<br />Full products.
             </h1>
-            <p className="w-[600px] font-inter text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:w-full max-md:text-base">
+            <p className="w-[600px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:w-full max-md:text-base">
               Founder of Nimbus. I build websites, branding, and AI tools for clients — and ship my own products when I spot gaps worth solving. Code, design, systems, business. I study and build all of it.
             </p>
           </div>
@@ -73,20 +73,20 @@ export default function AboutPage() {
           <div className="flex gap-16 max-md:flex-col max-md:gap-10">
             {/* Story text */}
             <div className="flex flex-1 flex-col gap-8">
-              <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+              <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
                 MY STORY
               </span>
-              <h2 className="font-space-grotesk text-[40px] font-bold tracking-[-1px] text-white max-md:text-3xl">
+              <h2 className="font-display text-[40px] tracking-[-1px] text-[var(--color-text-primary)] max-md:text-3xl">
                 How I got here
               </h2>
               <div className="flex flex-col gap-5">
-                <p className="font-inter text-base leading-[1.8] text-[var(--color-text-dim)]">
+                <p className="font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
                   I picked up coding out of pure curiosity — and it clicked. What started as tinkering with HTML and CSS turned into a deep obsession with building things. The drive to create and connect found a home in tech.
                 </p>
-                <p className="font-inter text-base leading-[1.8] text-[var(--color-text-dim)]">
+                <p className="font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
                   I&apos;ve always been obsessed with understanding the full picture. Not just how to write code, but what makes a product good, a website effective, and an application worth using. I study frontend, backend, UI/UX, marketing, and business — because building something great takes all of it.
                 </p>
-                <p className="font-inter text-base leading-[1.8] text-[var(--color-text-dim)]">
+                <p className="font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
                   Now I&apos;m building across different niches — from healthtech to productivity apps to gaming. Always reading, always shipping, always learning.
                 </p>
               </div>
@@ -97,22 +97,22 @@ export default function AboutPage() {
               <div className="flex h-[300px] items-center justify-center rounded-lg bg-gradient-to-br from-[#7C5CFC20] to-[#7C5CFC08] border border-[var(--color-border)] relative overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #7C5CFC 1px, transparent 0)", backgroundSize: "24px 24px" }} />
                 <div className="flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)]">
-                  <span className="font-space-grotesk text-[48px] font-bold text-[#0A0A0B]">D</span>
+                  <span className="font-display text-[48px] text-white">D</span>
                 </div>
               </div>
               {/* Stats */}
               <div className="flex gap-4">
                 <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
-                  <span className="count-up font-inter text-[32px] font-semibold tracking-[-1px] text-white" data-target="4+">0+</span>
-                  <span className="font-inter text-xs text-[var(--color-text-dim)]">Projects</span>
+                  <span className="count-up font-body text-[32px] font-semibold tracking-[-1px] text-[var(--color-text-primary)]" data-target="4+">0+</span>
+                  <span className="font-body text-xs text-[var(--color-text-dim)]">Projects</span>
                 </div>
                 <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
-                  <span className="count-up font-inter text-[32px] font-semibold tracking-[-1px] text-[var(--color-accent)]" data-target="3">0</span>
-                  <span className="font-inter text-xs text-[var(--color-text-dim)]">Products building</span>
+                  <span className="count-up font-body text-[32px] font-semibold tracking-[-1px] text-[var(--color-accent)]" data-target="3">0</span>
+                  <span className="font-body text-xs text-[var(--color-text-dim)]">Products building</span>
                 </div>
                 <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
-                  <span className="font-inter text-[32px] font-semibold tracking-[-1px] text-white">24/7</span>
-                  <span className="font-inter text-xs text-[var(--color-text-dim)]">Building</span>
+                  <span className="font-body text-[32px] font-semibold tracking-[-1px] text-[var(--color-text-primary)]">24/7</span>
+                  <span className="font-body text-xs text-[var(--color-text-dim)]">Building</span>
                 </div>
               </div>
             </div>
@@ -122,26 +122,26 @@ export default function AboutPage() {
         {/* Skills */}
         <section ref={skillsRef} className="snap-section w-full px-16 py-[100px] max-md:px-6 max-md:py-16">
           <div className="mb-14 flex flex-col gap-4">
-            <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+            <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
               SKILLS & EXPERTISE
             </span>
-            <h2 className="font-space-grotesk text-[40px] font-bold tracking-[-1px] text-white max-md:text-3xl">
+            <h2 className="font-display text-[40px] tracking-[-1px] text-[var(--color-text-primary)] max-md:text-3xl">
               What I bring to the table
             </h2>
           </div>
           <div className="grid grid-cols-2 gap-5 max-md:grid-cols-1">
             {[
-              { icon: Code, title: "Frontend Development", desc: "HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind CSS. Building responsive, polished interfaces." },
+              { icon: Code, title: "Frontend Development", desc: "HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind, Swift, Flutter. Building responsive, polished interfaces across web and mobile." },
               { icon: Palette, title: "UI/UX & Design", desc: "Studying what makes products intuitive. From wireframes to finished designs — always thinking about the user." },
-              { icon: Server, title: "Backend & Systems", desc: "Node.js, databases, APIs. Learning the full stack because great products need solid foundations." },
-              { icon: Bot, title: "AI & Emerging Tech", desc: "Exploring AI tools and integrations. Building smarter applications that go beyond the basics." },
+              { icon: Server, title: "Backend & Systems", desc: "Python, Node.js, .NET, databases, APIs. Full-stack development with solid foundations and scalable architecture." },
+              { icon: Bot, title: "AI, LLMs & Agents", desc: "Building with large language models, autonomous agents, and AI-powered automation. Custom chatbots, intelligent workflows, and tool-use integrations." },
             ].map((skill) => (
               <div key={skill.title} className="skill-card flex flex-col gap-5 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-8 opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)]">
                 <div className="flex h-12 w-12 items-center justify-center bg-[var(--color-grid)]">
                   <skill.icon className="h-[22px] w-[22px] text-[var(--color-accent)]" />
                 </div>
-                <h3 className="font-inter text-lg font-semibold text-white">{skill.title}</h3>
-                <p className="font-inter text-sm leading-[1.7] text-[var(--color-text-dim)]">{skill.desc}</p>
+                <h3 className="font-body text-lg font-semibold text-[var(--color-text-primary)]">{skill.title}</h3>
+                <p className="font-body text-sm leading-[1.7] text-[var(--color-text-dim)]">{skill.desc}</p>
               </div>
             ))}
           </div>
@@ -150,10 +150,10 @@ export default function AboutPage() {
         {/* Values */}
         <section ref={valuesRef} className="snap-section w-full bg-[var(--color-bg-secondary)] px-16 py-[100px] max-md:px-6 max-md:py-16">
           <div className="mb-14 flex flex-col gap-4">
-            <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+            <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
               VALUES
             </span>
-            <h2 className="font-space-grotesk text-[40px] font-bold tracking-[-1px] text-white max-md:text-3xl">
+            <h2 className="font-display text-[40px] tracking-[-1px] text-[var(--color-text-primary)] max-md:text-3xl">
               How I work
             </h2>
           </div>
@@ -165,9 +165,9 @@ export default function AboutPage() {
               { num: "04", title: "Stay Curious", desc: "From healthtech to gaming to journalling apps — I follow what interests me and build across niches." },
             ].map((value) => (
               <div key={value.num} className="value-card flex flex-col gap-4 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-8 opacity-0 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)]">
-                <span className="font-inter text-[48px] font-extralight leading-none text-[#1F1F23]">{value.num}</span>
-                <h3 className="font-inter text-lg font-semibold text-white">{value.title}</h3>
-                <p className="font-inter text-sm leading-[1.7] text-[var(--color-text-dim)]">{value.desc}</p>
+                <span className="font-body text-[48px] font-extralight leading-none text-[#1E1C2A]">{value.num}</span>
+                <h3 className="font-body text-lg font-semibold text-[var(--color-text-primary)]">{value.title}</h3>
+                <p className="font-body text-sm leading-[1.7] text-[var(--color-text-dim)]">{value.desc}</p>
               </div>
             ))}
           </div>
@@ -176,16 +176,16 @@ export default function AboutPage() {
         {/* The Studio */}
         <section ref={productsRef} className="snap-section w-full bg-[var(--color-bg-secondary)] px-16 py-[100px] max-md:px-6 max-md:py-16">
           <div className="mb-14 flex flex-col gap-4">
-            <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+            <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
               THE STUDIO
             </span>
-            <h2 className="font-space-grotesk text-[40px] font-bold tracking-[-1px] text-white max-md:text-3xl">
+            <h2 className="font-display text-[40px] tracking-[-1px] text-[var(--color-text-primary)] max-md:text-3xl">
               What I&apos;m building
             </h2>
-            <p className="max-w-[600px] font-inter text-base leading-[1.8] text-[var(--color-text-dim)]">
+            <p className="max-w-[600px] font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
               Alongside client work, I build my own products — not because someone paid me to, but because I saw gaps worth solving. Not mockups, not templates. Full products, built from scratch, each with a real reason to exist.
             </p>
-            <p className="max-w-140 font-inter text-sm leading-[1.8] text-(--color-text-subtle)">
+            <p className="max-w-140 font-body text-sm leading-[1.8] text-[var(--color-text-subtle)]">
               These are actively in development. You can explore them now — full auth, accounts, and features are shipping progressively.
             </p>
           </div>
@@ -214,23 +214,23 @@ export default function AboutPage() {
                     >
                       <product.icon className="h-6 w-6" style={{ color: product.accent }} />
                     </div>
-                    <span className="font-space-grotesk text-base font-bold text-white">{product.name}</span>
+                    <span className="font-display text-base text-[var(--color-text-primary)]">{product.name}</span>
                   </div>
-                  <span className="absolute top-3 right-3 border border-amber-500/25 bg-amber-500/15 px-2.5 py-1 font-inter text-[10px] font-semibold tracking-[1px] text-amber-400">
+                  <span className="absolute top-3 right-3 border border-amber-500/25 bg-amber-500/15 px-2.5 py-1 font-body text-[10px] font-semibold tracking-[1px] text-amber-400">
                     IN DEVELOPMENT
                   </span>
                 </div>
                 {/* Content */}
                 <div className="flex flex-1 flex-col gap-4 p-5">
-                  <p className="font-inter text-[13px] leading-[1.7] text-[var(--color-text-dim)]">{product.desc}</p>
+                  <p className="font-body text-[13px] leading-[1.7] text-[var(--color-text-dim)]">{product.desc}</p>
                   <div className="mt-auto flex flex-wrap gap-1.5 border-t border-[var(--color-border)] pt-4">
                     {product.tags.map((tag) => (
-                      <span key={tag} className="bg-[var(--color-accent-subtle)] px-2 py-0.5 font-inter text-[10px] font-medium text-[var(--color-accent)]">
+                      <span key={tag} className="bg-[var(--color-accent-subtle)] px-2 py-0.5 font-body text-[10px] font-medium text-[var(--color-accent)]">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <span className="flex items-center gap-1.5 font-inter text-xs font-medium text-[var(--color-accent)] transition-all group-hover:gap-2.5">
+                  <span className="flex items-center gap-1.5 font-body text-xs font-medium text-[var(--color-accent)] transition-all group-hover:gap-2.5">
                     Explore preview
                     <ArrowUpRight className="h-3 w-3" />
                   </span>
@@ -244,13 +244,13 @@ export default function AboutPage() {
         <section className="snap-section relative w-full px-16 py-[100px] max-md:px-6 max-md:py-16">
           <div className="pointer-events-none absolute left-[420px] top-[50px] h-[300px] w-[500px] rounded-full opacity-80" style={{ background: "radial-gradient(circle, #7C5CFC12 0%, transparent 100%)" }} />
           <div className="relative z-10 flex flex-col items-center gap-8">
-            <h2 className="font-space-grotesk text-[48px] font-bold tracking-[-2px] text-white text-center max-md:text-3xl">
+            <h2 className="font-display text-[48px] tracking-[-2px] text-[var(--color-text-primary)] text-center max-md:text-3xl">
               Let&apos;s build something.
             </h2>
-            <p className="w-[500px] text-center font-inter text-lg text-[var(--color-text-dim)] max-md:w-full max-md:text-base">
+            <p className="w-[500px] text-center font-body text-lg text-[var(--color-text-dim)] max-md:w-full max-md:text-base">
               Always open to collaborating on interesting projects and new opportunities.
             </p>
-            <a href="https://calendly.com/heyitsnimbus/30min" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-[18px] font-inter text-base font-semibold text-[#0A0A0B] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20]">
+            <a href="https://calendly.com/heyitsnimbus/30min" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-[18px] font-body text-base font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20]">
               Get in Touch
               <ArrowUpRight className="h-[18px] w-[18px]" />
             </a>

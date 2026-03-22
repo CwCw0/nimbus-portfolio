@@ -2,14 +2,34 @@ export default function MarqueeStrip() {
   const words = ["DESIGN", "DEVELOP", "DEPLOY", "AUTOMATE", "SCALE"];
 
   return (
-    <div className="flex h-[100px] w-full items-center overflow-hidden bg-[var(--color-bg-primary)] max-md:h-[60px]">
-      <div className="marquee-track flex items-center gap-[60px] whitespace-nowrap max-md:gap-[30px]">
+    <div className="flex w-full flex-col gap-2 overflow-hidden py-6 max-md:py-4 max-md:gap-1">
+      {/* Top row — filled text, scrolls left */}
+      <div className="marquee-track flex items-center gap-12 whitespace-nowrap max-md:gap-6">
         {[...words, ...words, ...words, ...words].map((word, i) => (
-          <div key={i} className="flex items-center gap-[60px] max-md:gap-[30px]">
-            <span className="font-poppins text-[64px] font-extralight tracking-[8px] text-[#1A1820] max-md:text-[32px] max-md:tracking-[4px]">
+          <div key={`filled-${i}`} className="flex items-center gap-12 max-md:gap-6">
+            <span className="font-display text-[48px] tracking-[6px] text-[var(--color-accent)] opacity-20 max-md:text-[28px] max-md:tracking-[3px]">
               {word}
             </span>
-            <div className="h-2 w-2 rounded-full bg-[#7C5CFC30] max-md:h-1.5 max-md:w-1.5" />
+            <span className="text-[var(--color-accent)] opacity-30 text-sm">&#x25C6;</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Bottom row — outlined/stroke text, scrolls right */}
+      <div className="marquee-track-reverse flex items-center gap-12 whitespace-nowrap max-md:gap-6">
+        {[...words, ...words, ...words, ...words].map((word, i) => (
+          <div key={`outlined-${i}`} className="flex items-center gap-12 max-md:gap-6">
+            <span
+              className="font-display text-[48px] tracking-[6px] max-md:text-[28px] max-md:tracking-[3px]"
+              style={{
+                color: "transparent",
+                WebkitTextStroke: "1px var(--color-accent)",
+                opacity: 0.15,
+              }}
+            >
+              {word}
+            </span>
+            <span className="text-[var(--color-accent)] opacity-20 text-sm">&#x25C6;</span>
           </div>
         ))}
       </div>

@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "Are you available for ongoing contract work?",
-    a: "Yes. I offer flexible part-time contract arrangements for businesses that need consistent design and development support. This works well for teams that need a dedicated resource without the overhead of a full-time hire. Let’s discuss what works for your needs.",
+    a: "Yes. I offer flexible part-time contract arrangements for businesses that need consistent design and development support. This works well for teams that need a dedicated resource without the overhead of a full-time hire. Let's discuss what works for your needs.",
   },
 ];
 
@@ -37,13 +37,13 @@ export default function FAQ() {
       {/* Header */}
       <div className="mb-14 flex w-full items-end justify-between max-md:flex-col max-md:items-start">
         <div className="flex flex-col gap-4">
-          <span className="font-poppins text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+          <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
             FAQ
           </span>
-          <h2 className="font-poppins text-[40px] font-semibold tracking-[-1px] text-white max-md:text-[28px]">
+          <h2 className="font-display text-[40px] tracking-[-1px] text-[var(--color-text-primary)] max-md:text-[28px]">
             Common Questions
           </h2>
-          <p className="w-[500px] font-poppins text-base text-[var(--color-text-muted)] max-md:w-full">
+          <p className="w-[500px] font-body text-base text-[var(--color-text-muted)] max-md:w-full">
             Everything you need to know about working with me.
           </p>
         </div>
@@ -65,7 +65,7 @@ export default function FAQ() {
                 onClick={() => setOpenIndex(isOpen ? null : i)}
                 className="flex w-full items-center justify-between"
               >
-                <span className="font-poppins text-lg font-medium text-white">
+                <span className="font-body text-lg font-medium text-[var(--color-text-primary)]">
                   {faq.q}
                 </span>
                 {isOpen ? (
@@ -79,7 +79,7 @@ export default function FAQ() {
                   isOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
-                <p className="font-poppins text-sm leading-[1.7] text-[var(--color-text-muted)]">
+                <p className="font-body text-sm leading-[1.7] text-[var(--color-text-muted)]">
                   {faq.a}
                 </p>
               </div>
