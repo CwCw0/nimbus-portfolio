@@ -3,6 +3,7 @@
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import CustomCursor from "../../../components/CustomCursor";
+import SmoothScroll from "../../../components/SmoothScroll";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -33,6 +34,7 @@ export default function CaseStudyContent({
   return (
     <>
       <CustomCursor />
+      <SmoothScroll>
       <main id="main-content" className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />
 
@@ -241,6 +243,7 @@ export default function CaseStudyContent({
 
         <Footer />
       </main>
+      </SmoothScroll>
     </>
   );
 }

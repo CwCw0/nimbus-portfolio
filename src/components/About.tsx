@@ -2,6 +2,10 @@
 
 import { ArrowUpRight } from "lucide-react";
 import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   const ref = useRef<HTMLElement>(null);
@@ -9,22 +13,36 @@ export default function About() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.querySelectorAll(".about-reveal").forEach((child, i) => {
-              (child as HTMLElement).style.animationDelay = `${i * 150}ms`;
-              child.classList.add("drift-up");
-            });
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const ctx = gsap.context(() => {
+      const items = el.querySelectorAll(".about-reveal");
+
+      if (prefersReducedMotion) {
+        gsap.set(items, { opacity: 1, y: 0 });
+        return;
+      }
+
+      gsap.set(items, { opacity: 0, y: 40 });
+
+      gsap.to(items, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 75%",
+          once: true,
+        },
+      });
+    }, el);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -44,7 +62,7 @@ export default function About() {
       {/* Two-column editorial */}
       <div className="flex gap-20 max-md:flex-col max-md:gap-10">
         {/* Left column — larger intro */}
-        <div className="about-reveal flex flex-1 flex-col gap-8">
+        <div className="about-reveal flex flex-1 flex-col gap-8 max-md:static" style={{ position: "sticky", top: "120px", alignSelf: "flex-start" }}>
           <h2 className="font-display text-[42px] leading-[1.15] tracking-[-1px] text-[var(--color-text-primary)] max-md:text-[32px]">
             Not just a dev.
             <br />

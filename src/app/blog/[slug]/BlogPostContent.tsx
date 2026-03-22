@@ -3,6 +3,7 @@
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import CustomCursor from "../../../components/CustomCursor";
+import SmoothScroll from "../../../components/SmoothScroll";
 import { ArrowLeft, ArrowRight, Twitter, Linkedin, Link2, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -82,6 +83,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
     <>
       <CustomCursor />
       <div className="reading-progress" style={{ width: `${progress}%` }} />
+      <SmoothScroll>
       <main id="main-content" className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />
 
@@ -300,6 +302,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
 
         <Footer />
       </main>
+      </SmoothScroll>
     </>
   );
 }

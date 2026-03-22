@@ -1,7 +1,11 @@
 "use client";
 
-import { ArrowRight, Send } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "xjgebdwg";
 
@@ -12,22 +16,36 @@ export default function Contact() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.querySelectorAll(".contact-reveal").forEach((child, i) => {
-              (child as HTMLElement).style.animationDelay = `${i * 120}ms`;
-              child.classList.add("drift-up");
-            });
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const ctx = gsap.context(() => {
+      const items = el.querySelectorAll(".contact-reveal");
+
+      if (prefersReducedMotion) {
+        gsap.set(items, { opacity: 1, y: 0 });
+        return;
+      }
+
+      gsap.set(items, { opacity: 0, y: 40 });
+
+      gsap.to(items, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 75%",
+          once: true,
+        },
+      });
+    }, el);
+
+    return () => ctx.revert();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

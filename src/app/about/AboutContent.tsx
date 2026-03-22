@@ -3,6 +3,7 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
+import SmoothScroll from "../../components/SmoothScroll";
 import { ArrowUpRight, Code, Palette, Server, Bot, HeartPulse, CheckSquare, Gamepad2 } from "lucide-react";
 import { useRef } from "react";
 import { useScrollReveal, useCountUp } from "../../hooks/useScrollReveal";
@@ -50,6 +51,7 @@ export default function AboutPage() {
   return (
     <>
       <CustomCursor />
+      <SmoothScroll>
       <main id="main-content" className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />
 
@@ -259,6 +261,7 @@ export default function AboutPage() {
 
         <Footer />
       </main>
+      </SmoothScroll>
     </>
   );
 }

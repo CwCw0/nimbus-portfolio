@@ -2,10 +2,14 @@
 
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import { allCaseStudies } from "../data/caseStudies";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const studies = allCaseStudies.map((s) => ({
   tags: [s.category, ...s.tags.slice(0, 1)],
@@ -18,16 +22,66 @@ const studies = allCaseStudies.map((s) => ({
 
 export default function CaseStudies() {
   const ref = useRef<HTMLElement>(null);
+  const featuredImgRef = useRef<HTMLDivElement>(null);
   useScrollReveal(ref, ".case-card", 120);
 
   const featured = studies[0];
   const rest = studies.slice(1);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      // Featured image parallax
+      if (featuredImgRef.current) {
+        const img = featuredImgRef.current.querySelector("img");
+        if (img) {
+          gsap.to(img, {
+            yPercent: -15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: featuredImgRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
+      }
+
+      // Sub-cards subtle rotateX on scroll
+      const subCards = el.querySelectorAll(".case-sub-card");
+      subCards.forEach((card) => {
+        gsap.from(card, {
+          rotateX: 8,
+          opacity: 0,
+          y: 40,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            once: true,
+          },
+        });
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       ref={ref}
       id="work"
       className="snap-section w-full bg-[var(--color-bg-secondary)] px-16 py-[100px] max-md:px-6 max-md:py-16"
+      style={{ perspective: "1000px" }}
     >
       {/* Header with extending line */}
       <div className="mb-14 flex items-end gap-6">
@@ -43,13 +97,14 @@ export default function CaseStudies() {
       </div>
 
       {/* Featured — full-width hero card */}
-      <Link href={`/work/${featured.slug}`} className="case-card group relative block w-full opacity-0">
-        <div className="relative h-[500px] w-full overflow-hidden max-md:h-[300px]">
+      <Link href={`/work/${featured.slug}`} className="case-card group relative block w-full" data-cursor="view">
+        <div ref={featuredImgRef} className="relative h-[500px] w-full overflow-hidden max-md:h-[300px]">
           <Image
             src={featured.image}
             alt={featured.title}
             fill
             className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+            style={{ willChange: "transform" }}
           />
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F80] to-transparent" />
@@ -94,8 +149,9 @@ export default function CaseStudies() {
           <Link
             key={s.slug}
             href={`/work/${s.slug}`}
-            className="case-card group relative flex flex-col opacity-0"
-            style={{ marginTop: i === 1 ? "40px" : "0" }}
+            className="case-card case-sub-card group relative flex flex-col"
+            data-cursor="view"
+            style={{ marginTop: i === 1 ? "40px" : "0", transformStyle: "preserve-3d" }}
           >
             <div className="relative h-[220px] overflow-hidden bg-[var(--color-bg-card)] max-md:h-[200px]">
               <Image

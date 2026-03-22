@@ -72,9 +72,12 @@ export default function Header() {
             >
               {item.label}
               <span
-                className={`absolute -bottom-1 left-0 h-[2px] bg-[var(--color-accent)] transition-all duration-200 ease-out ${
-                  isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"
+                className={`absolute -bottom-1 left-0 h-[2px] bg-[var(--color-accent)] transition-all duration-300 origin-left ${
+                  isActive(item.href)
+                    ? "scale-x-100"
+                    : "scale-x-0 group-hover:scale-x-100"
                 }`}
+                style={{ transitionTimingFunction: "cubic-bezier(.19,1,.22,1)" }}
               />
             </Link>
           ))}
@@ -83,6 +86,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
+            data-magnetic
             className="flex items-center gap-2 bg-[var(--color-accent)] px-6 py-2.5 font-body text-[13px] font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20] max-md:px-4 max-md:py-2 max-md:text-xs"
           >
             Let&apos;s Talk
