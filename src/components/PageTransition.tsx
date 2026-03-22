@@ -54,7 +54,7 @@ export default function PageTransition({ children }: PageTransitionProps) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "#0C0B10",
+            backgroundColor: "#0A0A0F",
           }}
         >
           {/* Small Nimbus logo pulsing in center */}
@@ -73,7 +73,7 @@ export default function PageTransition({ children }: PageTransitionProps) {
               }}
             />
             <span
-              className="font-inter text-white"
+              className="font-body text-[var(--color-text-primary)]"
               style={{
                 fontSize: 18,
                 letterSpacing: 6,

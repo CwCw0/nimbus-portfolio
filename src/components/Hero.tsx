@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 export default function Hero() {
@@ -9,9 +9,13 @@ export default function Hero() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-    el.querySelectorAll(".hero-animate").forEach((child, i) => {
-      (child as HTMLElement).style.animationDelay = `${i * 80}ms`;
-      child.classList.add("animate-fade-in-up");
+    el.querySelectorAll(".hero-line").forEach((line, i) => {
+      (line as HTMLElement).style.animationDelay = `${200 + i * 150}ms`;
+      line.classList.add("clip-reveal");
+    });
+    el.querySelectorAll(".hero-fade").forEach((child, i) => {
+      (child as HTMLElement).style.animationDelay = `${700 + i * 120}ms`;
+      child.classList.add("drift-up");
     });
   }, []);
 
@@ -19,68 +23,96 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="snap-section relative h-[820px] max-md:h-auto max-md:min-h-screen w-full overflow-hidden bg-[var(--color-bg-primary)]"
+      className="snap-section relative min-h-[820px] max-md:min-h-[100svh] w-full overflow-hidden bg-[var(--color-bg-primary)]"
     >
-      {/* Fluid Abstract BG - static fallback */}
+      {/* Grain texture overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "128px 128px",
+        }}
+      />
+
+      {/* Subtle grid lines */}
       <div className="pointer-events-none absolute inset-0 max-md:hidden">
-        <div className="absolute left-[400px] top-[50px] h-[650px] w-[900px] rounded-full opacity-40" style={{ background: "radial-gradient(circle, #7C5CFC0A 0%, #7C5CFC04 50%, transparent 100%)" }} />
-        <div className="absolute left-[850px] top-[150px] h-[420px] w-[460px] rounded-full opacity-20" style={{ background: "radial-gradient(circle, #7C5CFC30 0%, #7C5CFC18 50%, transparent 100%)" }} />
-        <div className="absolute left-[920px] top-[230px] h-[300px] w-[340px] rotate-[15deg] rounded-full opacity-35" style={{ background: "radial-gradient(circle, #7C5CFC20 0%, #7C5CFC0C 50%, transparent 100%)" }} />
-        <div className="absolute left-[1050px] top-[330px] h-[120px] w-[140px] rounded-full opacity-50" style={{ background: "radial-gradient(circle, #7C5CFC30 0%, #7C5CFC10 40%, transparent 100%)" }} />
-        <div className="absolute left-[200px] top-[500px] h-[240px] w-[280px] rounded-full opacity-10" style={{ background: "radial-gradient(circle, #7C5CFC0C 0%, #7C5CFC05 50%, transparent 100%)" }} />
-        <div className="absolute left-[480px] top-0 h-full w-px bg-[var(--color-accent)] opacity-[0.03]" />
-        <div className="absolute left-[960px] top-0 h-full w-px bg-[var(--color-accent)] opacity-[0.03]" />
-        <div className="absolute left-0 top-[270px] h-px w-full bg-[var(--color-accent)] opacity-[0.03]" />
-        <div className="absolute left-0 top-[540px] h-px w-full bg-[var(--color-accent)] opacity-[0.03]" />
-        {[
-          { x: 850, y: 180, s: 3, o: 0.6 },
-          { x: 1100, y: 250, s: 2, o: 0.4 },
-          { x: 780, y: 420, s: 4, o: 0.3 },
-          { x: 1200, y: 380, s: 2, o: 0.5, color: "#A78BFA" },
-          { x: 950, y: 520, s: 3, o: 0.25 },
-          { x: 700, y: 280, s: 2, o: 0.35, color: "#A78BFA" },
-          { x: 200, y: 450, s: 3, o: 0.15 },
-          { x: 1150, y: 160, s: 2, o: 0.45 },
-          { x: 650, y: 150, s: 3, o: 0.2 },
-        ].map((p, i) => (
-          <div key={i} className="animate-float absolute rounded-full" style={{ left: p.x, top: p.y, width: p.s, height: p.s, background: p.color || "#7C5CFC", opacity: p.o, animationDelay: `${i * 0.5}s` }} />
-        ))}
+        <div className="absolute left-[64px] top-0 h-full w-px bg-[var(--color-accent)] opacity-[0.04]" />
+        <div className="absolute right-[64px] top-0 h-full w-px bg-[var(--color-accent)] opacity-[0.04]" />
+        <div className="absolute left-0 top-[50%] h-px w-full bg-[var(--color-accent)] opacity-[0.03]" />
       </div>
 
-      <div className="relative z-10 flex h-full w-full flex-col items-center gap-10 px-16 pb-10 pt-[100px] max-md:px-6 max-md:pt-20 max-md:pb-16 max-md:gap-8">
-        <div className="hero-animate flex items-center gap-2 rounded-full border border-[var(--color-border-light)] px-5 py-2">
-          <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-          <span className="font-inter text-[11px] tracking-[1px] text-[var(--color-text-muted)]">Available for projects &amp; contracts</span>
-        </div>
+      {/* Vertical NIMBUS watermark — right side */}
+      <div
+        className="pointer-events-none absolute right-16 top-1/2 -translate-y-1/2 max-md:hidden"
+        style={{
+          writingMode: "vertical-rl",
+          fontSize: "120px",
+          fontWeight: 400,
+          letterSpacing: "16px",
+          opacity: 0.03,
+          color: "var(--color-text-primary)",
+          fontFamily: "var(--font-display), 'Instrument Serif', serif",
+        }}
+      >
+        NIMBUS
+      </div>
 
-        <div className="flex flex-col items-center gap-6">
-          <h1 className="hero-animate font-space-grotesk text-center text-[72px] font-bold leading-[1.05] tracking-[-2.5px] text-white max-md:text-[40px] max-md:tracking-[-1.5px]">
-            For Builders,
-            <br />
-            By Builders.
-          </h1>
-          <p className="hero-animate w-[600px] text-center font-inter text-base leading-[1.6] text-[var(--color-text-dim)] max-md:w-full max-md:text-sm">
+      {/* Main content — left-heavy */}
+      <div className="relative z-10 flex h-full min-h-[820px] max-md:min-h-[100svh] w-full flex-col justify-center px-16 max-md:px-6">
+        <div className="flex max-w-[900px] flex-col gap-10 max-md:gap-8">
+          {/* Stepped heading */}
+          <div className="flex flex-col gap-0">
+            <h1 className="hero-line font-display text-[96px] leading-[1.0] tracking-[-3px] text-[var(--color-text-primary)] max-md:text-[48px] max-md:tracking-[-2px]">
+              For Builders,
+            </h1>
+            <h1
+              className="hero-line font-display text-[96px] leading-[1.0] tracking-[-3px] text-[var(--color-accent)] max-md:text-[48px] max-md:tracking-[-2px] max-md:pl-0"
+              style={{ paddingLeft: "80px" }}
+            >
+              By Builders.
+            </h1>
+          </div>
+
+          {/* Subtext */}
+          <p className="hero-fade max-w-[520px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:text-base">
             A creative studio for businesses that want more than a template.
-            <br />
             Design, development, and AI — built with precision, launched with purpose.
           </p>
+
+          {/* CTAs — asymmetric */}
+          <div className="hero-fade flex items-center gap-6 max-md:flex-col max-md:items-start max-md:gap-4 max-md:w-full">
+            <a
+              href="https://calendly.com/heyitsnimbus/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-4 font-body text-[15px] font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_#7C5CFC25] max-md:w-full max-md:justify-center"
+            >
+              Start a Project
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+            <a
+              href="#work"
+              className="group flex items-center gap-2 font-body text-[15px] text-[var(--color-text-muted)] transition-all duration-300 hover:text-[var(--color-text-primary)]"
+            >
+              View Work
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+          </div>
         </div>
 
-        <div className="hero-animate flex items-center gap-4 max-md:flex-col max-md:w-full">
-          <a href="https://calendly.com/heyitsnimbus/30min" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-8 py-4 font-inter text-[15px] font-semibold text-[#0A0A0B] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20] max-md:w-full max-md:justify-center">
-            Start a Project
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-          <a href="#work" className="flex items-center gap-2.5 border border-[var(--color-border-light)] px-8 py-4 font-inter text-[15px] font-medium text-[var(--color-text-secondary)] transition-all duration-300 hover:border-[var(--color-accent-border)] hover:text-white max-md:w-full max-md:justify-center">
-            View Work
-          </a>
-        </div>
-
-        <div className="hero-animate flex w-full items-center gap-9 pt-10 max-md:hidden">
-          <span className="font-inter text-[10px] font-medium tracking-[2px] text-[var(--color-text-subtle)]">Built with</span>
-          <div className="h-4 w-px bg-[#2A2A2E]" />
-          {["NEXT.JS", "REACT", "TYPESCRIPT", "TAILWIND", "NODE.JS"].map((tech) => (
-            <span key={tech} className="font-inter text-[11px] font-semibold tracking-[3px] text-[var(--color-text-subtle)]">{tech}</span>
+        {/* Full-width tech strip — bottom edge */}
+        <div className="hero-fade absolute bottom-0 left-0 right-0 flex items-center border-t border-[var(--color-border)] max-md:hidden">
+          <span className="shrink-0 px-8 font-body text-[10px] font-medium tracking-[2px] text-[var(--color-text-subtle)]">
+            BUILT WITH
+          </span>
+          {["NEXT.JS", "REACT", "PYTHON", "NODE.JS", "SWIFT", "FLUTTER", ".NET", "LLMs & AGENTS"].map((tech) => (
+            <span
+              key={tech}
+              className="flex h-14 items-center border-l border-[var(--color-border)] px-8 font-body text-[11px] font-semibold tracking-[3px] text-[var(--color-text-subtle)]"
+            >
+              {tech}
+            </span>
           ))}
         </div>
       </div>

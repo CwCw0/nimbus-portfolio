@@ -48,13 +48,13 @@ export default function Header() {
       <header
         className={`sticky top-0 z-50 flex items-center justify-between px-16 py-5 transition-all duration-300 max-md:px-6 max-md:py-4 ${
           scrolled
-            ? "border-b border-[var(--color-border)] bg-[#0C0B10E6] backdrop-blur-[16px]"
+            ? "border-b border-[var(--color-border)] bg-[#0A0A0FE6] backdrop-blur-[16px]"
             : "bg-transparent"
         }`}
       >
         <Link href="/" className="flex items-center gap-2.5">
           <div className="h-2 w-2 rounded-full bg-[var(--color-accent)]" />
-          <span className="font-inter text-[15px] font-bold tracking-[5px] text-white">
+          <span className="font-body text-[15px] font-bold tracking-[5px] text-[var(--color-text-primary)]">
             NIMBUS
           </span>
         </Link>
@@ -64,9 +64,9 @@ export default function Header() {
             <Link
               key={item.label}
               href={item.href}
-              className={`group relative font-inter text-sm transition-colors duration-200 hover:text-white ${
+              className={`group relative font-body text-sm transition-colors duration-200 hover:text-[var(--color-text-primary)] ${
                 isActive(item.href)
-                  ? "text-white"
+                  ? "text-[var(--color-text-primary)]"
                   : "text-[var(--color-text-muted)]"
               }`}
             >
@@ -83,7 +83,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
-            className="flex items-center gap-2 bg-[var(--color-accent)] px-6 py-2.5 font-inter text-[13px] font-semibold text-[#0A0A0B] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20] max-md:px-4 max-md:py-2 max-md:text-xs"
+            className="flex items-center gap-2 bg-[var(--color-accent)] px-6 py-2.5 font-body text-[13px] font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20] max-md:px-4 max-md:py-2 max-md:text-xs"
           >
             Let&apos;s Talk
             <ArrowRight className="h-3.5 w-3.5" />
@@ -95,26 +95,26 @@ export default function Header() {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? (
-              <X className="h-5 w-5 text-white" />
+              <X className="h-5 w-5 text-[var(--color-text-primary)]" />
             ) : (
-              <Menu className="h-5 w-5 text-white" />
+              <Menu className="h-5 w-5 text-[var(--color-text-primary)]" />
             )}
           </button>
         </div>
       </header>
 
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 bg-[#0C0B10F2] backdrop-blur-md md:hidden">
+        <div className="fixed inset-0 z-40 bg-[#0A0A0FF2] backdrop-blur-md md:hidden">
           <nav className="flex flex-col items-center justify-center gap-8 h-full">
             {navItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`font-space-grotesk text-3xl font-bold transition-colors ${
+                className={`font-display text-3xl transition-colors ${
                   isActive(item.href)
                     ? "text-[var(--color-accent)]"
-                    : "text-white"
+                    : "text-[var(--color-text-primary)]"
                 }`}
               >
                 {item.label}
@@ -123,7 +123,7 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-4 flex items-center gap-2 bg-[var(--color-accent)] px-8 py-3 font-inter text-[15px] font-semibold text-[#0A0A0B]"
+              className="mt-4 flex items-center gap-2 bg-[var(--color-accent)] px-8 py-3 font-body text-[15px] font-semibold text-white"
             >
               Let&apos;s Talk
               <ArrowRight className="h-4 w-4" />

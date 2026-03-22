@@ -5,15 +5,10 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import MarqueeStrip from "../components/MarqueeStrip";
 import Services from "../components/Services";
-import TechStack from "../components/TechStack";
 import CaseStudies from "../components/CaseStudies";
 import About from "../components/About";
 import Process from "../components/Process";
-import SocialProof from "../components/SocialProof";
-import FAQ from "../components/FAQ";
 import Contact from "../components/Contact";
-import Pricing from "../components/Pricing";
-import FinalCTA from "../components/FinalCTA";
 import Footer from "../components/Footer";
 import CustomCursor from "../components/CustomCursor";
 import LoadingScreen from "../components/LoadingScreen";
@@ -43,15 +38,10 @@ export default function Home() {
         <Hero />
         <MarqueeStrip />
         <Services />
-        <TechStack />
         <CaseStudies />
         <About />
         <Process />
-        <SocialProof />
-        <FAQ />
         <Contact />
-        <Pricing />
-        <FinalCTA />
         <Footer />
       </main>
     </>

@@ -1,109 +1,67 @@
 import Link from "next/link";
-import { Heart } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="flex w-full flex-col gap-12 bg-[var(--color-bg-footer)] px-16 py-14 max-md:px-6 max-md:py-10 max-md:gap-8">
-      {/* Top */}
-      <div className="flex w-full justify-between max-md:flex-col max-md:gap-10">
-        {/* Brand */}
-        <div className="flex w-[300px] flex-col gap-4 max-md:w-full">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="h-2 w-2 rounded-full bg-[var(--color-accent)]" />
-            <span className="font-inter text-base font-semibold tracking-[6px] text-white">
-              NIMBUS
-            </span>
-          </Link>
-          <p className="font-inter text-sm leading-[1.6] text-[var(--color-text-subtle)]">
-            Crafting digital experiences that
-            <br />
-            elevate brands and businesses.
-          </p>
-        </div>
-
-        {/* Nav columns */}
-        <div className="flex gap-20 max-md:gap-12">
-          <div className="flex flex-col gap-4">
-            <span className="font-inter text-xs font-semibold tracking-[1px] text-white">
-              Navigation
-            </span>
-            {[
-              { label: "Services", href: "/services" },
-              { label: "Work", href: "/work" },
-              { label: "About", href: "/about" },
-              { label: "Blog", href: "/blog" },
-            ].map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="font-inter text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col gap-4">
-            <span className="font-inter text-xs font-semibold tracking-[1px] text-white">
-              Connect
-            </span>
-            <a
-              href="https://github.com/CwCw0"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-inter text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
-            >
-              GitHub
-            </a>
-            <a
-              href="mailto:heyitsnimbus@gmail.com"
-              className="font-inter text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
-            >
-              Email
-            </a>
-            <a
-              href="https://ko-fi.com/heyitsnimbus"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-inter text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
-            >
-              Ko-fi
-            </a>
-          </div>
-          <div className="flex flex-col gap-4">
-            <span className="font-inter text-xs font-semibold tracking-[1px] text-white">
-              Support
-            </span>
-            <a
-              href="https://ko-fi.com/heyitsnimbus"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 transition-all duration-200 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)]"
-            >
-              <Heart className="h-3.5 w-3.5 text-[#FF5E5B] transition-transform group-hover:scale-110" />
-              <span className="font-inter text-[13px] font-medium text-white">
-                Buy me a coffee
-              </span>
-            </a>
-          </div>
-        </div>
+    <footer className="flex w-full flex-col bg-[var(--color-bg-footer)] px-16 py-12 max-md:px-6 max-md:py-10">
+      {/* Pull quote */}
+      <div className="flex justify-center py-8 max-md:py-6">
+        <p className="max-w-[600px] text-center font-display text-[22px] italic leading-[1.5] text-[var(--color-text-subtle)] max-md:text-lg">
+          &ldquo;Good design is as little design as possible.&rdquo;
+          <span className="mt-2 block font-body text-[12px] not-italic tracking-[2px] text-[var(--color-text-faint)]">
+            — DIETER RAMS
+          </span>
+        </p>
       </div>
 
       {/* Divider */}
-      <div className="h-px w-full bg-[var(--color-grid)]" />
+      <div className="h-px w-full bg-[var(--color-border)]" />
 
-      {/* Bottom */}
-      <div className="flex w-full items-center justify-between max-md:flex-col max-md:gap-2">
-        <span className="font-dm-mono text-xs text-[var(--color-text-faint)]">
+      {/* Bottom row — brand / nav / email */}
+      <div className="flex items-center justify-between pt-8 max-md:flex-col max-md:gap-6 max-md:items-start">
+        {/* Brand */}
+        <Link href="/" className="flex items-center gap-2.5">
+          <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+          <span className="font-body text-sm font-semibold tracking-[6px] text-[var(--color-text-primary)]">
+            NIMBUS
+          </span>
+        </Link>
+
+        {/* Nav */}
+        <div className="flex items-center gap-8 max-md:flex-wrap max-md:gap-5">
+          {[
+            { label: "Services", href: "/services" },
+            { label: "Work", href: "/work" },
+            { label: "About", href: "/about" },
+            { label: "Blog", href: "/blog" },
+            { label: "Contact", href: "#contact" },
+          ].map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="font-body text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Email */}
+        <a
+          href="mailto:heyitsnimbus@gmail.com"
+          className="font-body text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
+        >
+          heyitsnimbus@gmail.com
+        </a>
+      </div>
+
+      {/* Copyright */}
+      <div className="mt-6 flex items-center justify-between max-md:flex-col max-md:gap-2">
+        <span className="font-body text-[11px] tracking-[0.5px] text-[var(--color-text-faint)]">
           &copy; 2026 Nimbus. All rights reserved.
         </span>
-        <div className="flex items-center gap-1.5">
-          <span className="font-dm-mono text-xs text-[var(--color-text-faint)]">
-            Designed &amp; built with
-          </span>
-          <span className="font-dm-mono text-xs font-medium text-[var(--color-accent)]">
-            precision
-          </span>
-        </div>
+        <span className="font-body text-[11px] tracking-[0.5px] text-[var(--color-text-faint)]">
+          Designed & built with <span className="text-[var(--color-accent)]">precision</span>
+        </span>
       </div>
     </footer>
   );

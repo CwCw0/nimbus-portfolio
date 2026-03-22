@@ -5,6 +5,7 @@ import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 import { allCaseStudies } from "../../data/caseStudies";
@@ -22,13 +23,13 @@ export default function WorkContent() {
         {/* Work Hero */}
         <section className="snap-section w-full px-16 pt-[100px] pb-[60px] max-md:px-6 max-md:pt-16 max-md:pb-8">
           <div className="flex flex-col gap-6 max-w-[800px]">
-            <span className="font-inter text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+            <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
               WORK
             </span>
-            <h1 className="font-space-grotesk text-[52px] font-bold leading-[1.1] tracking-[-2px] text-white max-md:text-[32px]">
+            <h1 className="font-display text-[52px] leading-[1.1] tracking-[-2px] text-[var(--color-text-primary)] max-md:text-[32px]">
               Selected projects &amp; case studies.
             </h1>
-            <p className="max-w-[600px] font-inter text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:text-base">
+            <p className="max-w-[600px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:text-base">
               A collection of work spanning web apps, landing pages, SaaS platforms, and more. Each project is a story of solving real problems with design and code.
             </p>
           </div>
@@ -45,20 +46,21 @@ export default function WorkContent() {
               >
                 <div className="relative h-[280px] overflow-hidden bg-[var(--color-bg-card)] max-md:h-[200px]">
                   {study.heroImage ? (
-                    <img
+                    <Image
                       src={study.heroImage}
                       alt={study.shortTitle}
-                      className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      fill
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center">
-                      <span className="font-inter text-sm tracking-[2px] text-[var(--color-text-subtle)]">
+                      <span className="font-body text-sm tracking-[2px] text-[var(--color-text-subtle)]">
                         {study.shortTitle}
                       </span>
                     </div>
                   )}
                   {study.status === "in-development" && (
-                    <span className="absolute top-3 right-3 bg-amber-500/15 border border-amber-500/25 px-2.5 py-1 font-inter text-[10px] font-semibold tracking-[1px] text-amber-400">
+                    <span className="absolute top-3 right-3 bg-amber-500/15 border border-amber-500/25 px-2.5 py-1 font-body text-[10px] font-semibold tracking-[1px] text-amber-400">
                       IN DEVELOPMENT
                     </span>
                   )}
@@ -68,19 +70,19 @@ export default function WorkContent() {
                     {study.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="bg-[var(--color-accent-subtle)] px-2.5 py-1 font-inter text-[10px] font-medium text-[var(--color-accent)]"
+                        className="bg-[var(--color-accent-subtle)] px-2.5 py-1 font-body text-[10px] font-medium text-[var(--color-accent)]"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <h2 className="font-space-grotesk text-xl font-bold text-white group-hover:text-[var(--color-accent)] transition-colors">
+                  <h2 className="font-display text-xl text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
                     {study.shortTitle}
                   </h2>
-                  <p className="font-inter text-[13px] leading-[1.6] text-[var(--color-text-dim)]">
+                  <p className="font-body text-[13px] leading-[1.6] text-[var(--color-text-dim)]">
                     {study.desc}
                   </p>
-                  <span className="flex items-center gap-2 font-inter text-sm font-medium text-[var(--color-accent)] transition-all group-hover:gap-3">
+                  <span className="flex items-center gap-2 font-body text-sm font-medium text-[var(--color-accent)] transition-all group-hover:gap-3">
                     View Case Study
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>
