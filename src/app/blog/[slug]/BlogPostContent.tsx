@@ -8,6 +8,8 @@ import { ArrowLeft, ArrowRight, Twitter, Linkedin, Link2, Check } from "lucide-r
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
+import { gsap } from "gsap";
+import SplitType from "split-type";
 import { getPostBySlug, getRelatedPosts } from "../../../data/blog";
 
 export default function BlogPostContent({ slug }: { slug: string }) {
@@ -17,6 +19,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
   const [activeSection, setActiveSection] = useState(0);
   const [copied, setCopied] = useState(false);
   const articleRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   const fullUrl = typeof window !== "undefined" ? window.location.href : "";
 
@@ -59,6 +62,32 @@ export default function BlogPostContent({ slug }: { slug: string }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const heading = headingRef.current;
+    if (!heading || !post) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const split = new SplitType(heading, { types: "chars" });
+    if (prefersReducedMotion) {
+      gsap.set(split.chars || [], { opacity: 1, y: 0 });
+    } else {
+      gsap.set(split.chars || [], { opacity: 0, y: 40 });
+      gsap.to(split.chars || [], {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.015,
+        ease: "power3.out",
+        delay: 0.2,
+      });
+    }
+
+    return () => split.revert();
+  }, [post]);
+
   if (!post) {
     return (
       <>
@@ -98,9 +127,9 @@ export default function BlogPostContent({ slug }: { slug: string }) {
           </Link>
         </div>
 
-        {/* Article Hero */}
+        {/* Article Hero — centered, dramatic */}
         <section className="w-full px-16 pt-12 pb-8 max-md:px-6">
-          <div className="flex flex-col gap-5 max-w-[800px]">
+          <div className="mx-auto flex flex-col items-center gap-6 text-center max-w-[800px]">
             <div className="flex items-center gap-3">
               <span className="bg-[var(--color-accent-subtle)] px-3 py-1 font-body text-[11px] font-medium text-[var(--color-accent)]">
                 {post.tag}
@@ -112,7 +141,11 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                 · {post.readTime}
               </span>
             </div>
-            <h1 className="font-display text-[48px] leading-[1.1] tracking-[-2px] text-[var(--color-text-primary)] max-md:text-[28px]">
+            <h1
+              ref={headingRef}
+              className="font-display tracking-[-2px] text-[var(--color-text-primary)]"
+              style={{ fontSize: "clamp(32px, 5vw, 64px)", lineHeight: 1.1 }}
+            >
               {post.title}
             </h1>
           </div>
@@ -120,7 +153,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
 
         {/* Hero Image */}
         <section className="w-full px-16 pb-12 max-md:px-6">
-          <div className="relative w-full h-[480px] overflow-hidden border border-[var(--color-border)] max-md:h-[220px]">
+          <div className="mx-auto max-w-[1000px] relative w-full overflow-hidden border border-[var(--color-border)]" style={{ height: "clamp(240px, 40vh, 500px)" }}>
             <Image
               src={post.image}
               alt={post.title}
@@ -131,10 +164,10 @@ export default function BlogPostContent({ slug }: { slug: string }) {
         </section>
 
         {/* Article Content + Sidebar */}
-        <section ref={articleRef} className="w-full px-16 pb-[80px] max-md:px-6">
-          <div className="flex gap-16 max-md:flex-col">
+        <section ref={articleRef} className="w-full px-16 pb-20 max-md:px-6">
+          <div className="mx-auto flex max-w-[1000px] gap-16 max-md:flex-col">
             {/* Article Body */}
-            <article className="flex flex-1 flex-col gap-8 max-w-[720px]">
+            <article className="flex flex-1 flex-col gap-8 max-w-[680px]">
               {post.content.map((block, i) => {
                 if (block.type === "p") {
                   return (
@@ -182,7 +215,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             </article>
 
             {/* Sidebar */}
-            <aside className="w-[280px] max-md:w-full">
+            <aside className="w-[260px] max-md:w-full">
               <div className="sticky top-24 flex flex-col gap-8">
                 {/* TOC */}
                 <div className="flex flex-col gap-4 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-6">
@@ -234,11 +267,11 @@ export default function BlogPostContent({ slug }: { slug: string }) {
         </section>
 
         {/* Divider */}
-        <div className="mx-16 h-px bg-[var(--color-border)] max-md:mx-6" />
+        <div className="mx-auto h-px w-full max-w-[1000px] bg-[var(--color-border)]" />
 
         {/* Author Bio */}
-        <section className="w-full px-16 py-[60px] max-md:px-6">
-          <div className="flex items-center gap-6 max-md:flex-col max-md:items-start">
+        <section className="w-full px-16 py-16 max-md:px-6 max-md:py-10">
+          <div className="mx-auto flex max-w-[1000px] items-center gap-6 max-md:flex-col max-md:items-start">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)]">
               <span className="font-body text-lg font-bold text-white">D</span>
             </div>
@@ -258,44 +291,46 @@ export default function BlogPostContent({ slug }: { slug: string }) {
 
         {/* Related Posts */}
         {related.length > 0 && (
-          <section className="w-full bg-[var(--color-bg-secondary)] px-16 py-[80px] max-md:px-6 max-md:py-16">
-            <span className="mb-8 block font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
-              RELATED ARTICLES
-            </span>
-            <div className="grid grid-cols-3 gap-6 max-md:grid-cols-1">
-              {related.map((rPost) => (
-                <Link
-                  key={rPost.slug}
-                  href={`/blog/${rPost.slug}`}
-                  className="group flex flex-col border border-[var(--color-border)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)]"
-                >
-                  <div className="relative h-[180px] overflow-hidden">
-                    <Image
-                      src={rPost.image}
-                      alt={rPost.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-3 p-6">
-                    <div className="flex items-center gap-3">
-                      <span className="bg-[var(--color-accent-subtle)] px-2.5 py-1 font-body text-[10px] font-medium text-[var(--color-accent)]">
-                        {rPost.tag}
-                      </span>
-                      <span className="font-body text-[11px] text-[var(--color-text-subtle)]">
-                        {rPost.date}
+          <section className="w-full bg-[#0D0C14] px-16 py-24 max-md:px-6 max-md:py-16">
+            <div className="mx-auto max-w-[1200px]">
+              <span className="mb-10 block font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+                RELATED ARTICLES
+              </span>
+              <div className="grid grid-cols-3 gap-6 max-md:grid-cols-1">
+                {related.map((rPost) => (
+                  <Link
+                    key={rPost.slug}
+                    href={`/blog/${rPost.slug}`}
+                    className="group flex flex-col border border-[var(--color-border)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)]"
+                  >
+                    <div className="relative overflow-hidden" style={{ height: "clamp(140px, 18vh, 200px)" }}>
+                      <Image
+                        src={rPost.image}
+                        alt={rPost.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-3 p-6">
+                      <div className="flex items-center gap-3">
+                        <span className="bg-[var(--color-accent-subtle)] px-2.5 py-1 font-body text-[10px] font-medium text-[var(--color-accent)]">
+                          {rPost.tag}
+                        </span>
+                        <span className="font-body text-[11px] text-[var(--color-text-subtle)]">
+                          {rPost.date}
+                        </span>
+                      </div>
+                      <h3 className="font-body text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                        {rPost.title}
+                      </h3>
+                      <span className="flex items-center gap-2 font-body text-sm font-medium text-[var(--color-accent)]">
+                        Read more
+                        <ArrowRight className="h-3.5 w-3.5" />
                       </span>
                     </div>
-                    <h3 className="font-body text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-                      {rPost.title}
-                    </h3>
-                    <span className="flex items-center gap-2 font-body text-sm font-medium text-[var(--color-accent)]">
-                      Read more
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))}
+              </div>
             </div>
           </section>
         )}

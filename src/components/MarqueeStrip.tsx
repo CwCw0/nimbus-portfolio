@@ -9,6 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 export default function MarqueeStrip() {
   const words = ["DESIGN", "DEVELOP", "DEPLOY", "AUTOMATE", "SCALE"];
   const containerRef = useRef<HTMLDivElement>(null);
+  const track1Ref = useRef<HTMLDivElement>(null);
+  const track2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -22,18 +24,18 @@ export default function MarqueeStrip() {
     const tracks = el.querySelectorAll(".marquee-skew-track");
 
     const ctx = gsap.context(() => {
-      // Scroll-velocity skew: faster scroll = more tilt
+      // Scroll-velocity skew only (no animationDuration mutation — causes layout thrash)
       ScrollTrigger.create({
         trigger: el,
         start: "top bottom",
         end: "bottom top",
         onUpdate: (self) => {
-          const skew = self.getVelocity() / 300;
-          const clamped = gsap.utils.clamp(-5, 5, skew);
+          const skew = gsap.utils.clamp(-5, 5, self.getVelocity() / 300);
           gsap.to(tracks, {
-            skewX: clamped,
+            skewX: skew,
             duration: 0.3,
             ease: "power2.out",
+            overwrite: "auto",
           });
         },
       });
@@ -43,34 +45,54 @@ export default function MarqueeStrip() {
   }, []);
 
   return (
-    <div ref={containerRef} className="flex w-full flex-col gap-2 overflow-hidden py-6 max-md:py-4 max-md:gap-1">
+    <div
+      ref={containerRef}
+      className="relative flex w-full flex-col gap-3 overflow-hidden py-12 max-md:py-6 max-md:gap-1"
+      style={{
+        background: "linear-gradient(180deg, #7C5CFC08 0%, transparent 50%, #7C5CFC05 100%)",
+      }}
+    >
       {/* Top row — filled text, scrolls left */}
-      <div className="marquee-track marquee-skew-track flex items-center gap-12 whitespace-nowrap max-md:gap-6">
+      <div
+        ref={track1Ref}
+        className="marquee-track marquee-skew-track flex items-center gap-16 whitespace-nowrap max-md:gap-8"
+      >
         {[...words, ...words, ...words, ...words].map((word, i) => (
-          <div key={`filled-${i}`} className="flex items-center gap-12 max-md:gap-6">
-            <span className="font-display text-[48px] tracking-[6px] text-[var(--color-accent)] opacity-20 max-md:text-[28px] max-md:tracking-[3px]">
+          <div key={`filled-${i}`} className="flex items-center gap-16 max-md:gap-8">
+            <span
+              className="font-display text-[var(--color-accent)] opacity-20 max-md:text-[32px] max-md:tracking-[4px]"
+              style={{
+                fontSize: "clamp(48px, 5.5vw, 90px)",
+                letterSpacing: "0.12em",
+              }}
+            >
               {word}
             </span>
-            <span className="text-[var(--color-accent)] opacity-30 text-sm">&#x25C6;</span>
+            <span className="text-[var(--color-accent)] opacity-20 font-body text-xs">|</span>
           </div>
         ))}
       </div>
 
       {/* Bottom row — outlined/stroke text, scrolls right */}
-      <div className="marquee-track-reverse marquee-skew-track flex items-center gap-12 whitespace-nowrap max-md:gap-6">
+      <div
+        ref={track2Ref}
+        className="marquee-track-reverse marquee-skew-track flex items-center gap-16 whitespace-nowrap max-md:gap-8"
+      >
         {[...words, ...words, ...words, ...words].map((word, i) => (
-          <div key={`outlined-${i}`} className="flex items-center gap-12 max-md:gap-6">
+          <div key={`outlined-${i}`} className="flex items-center gap-16 max-md:gap-8">
             <span
-              className="font-display text-[48px] tracking-[6px] max-md:text-[28px] max-md:tracking-[3px]"
+              className="font-display max-md:text-[32px] max-md:tracking-[4px]"
               style={{
+                fontSize: "clamp(48px, 5.5vw, 90px)",
+                letterSpacing: "0.12em",
                 color: "transparent",
                 WebkitTextStroke: "1px var(--color-accent)",
-                opacity: 0.15,
+                opacity: 0.12,
               }}
             >
               {word}
             </span>
-            <span className="text-[var(--color-accent)] opacity-20 text-sm">&#x25C6;</span>
+            <span className="text-[var(--color-accent)] opacity-15 font-body text-xs">|</span>
           </div>
         ))}
       </div>

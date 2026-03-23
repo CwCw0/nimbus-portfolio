@@ -5,20 +5,92 @@ import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
 import SmoothScroll from "../../components/SmoothScroll";
 import { Mail, MapPin, Clock, ArrowRight, Send, Github, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitType from "split-type";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "xjgebdwg";
 
 export default function ContactPage() {
   const [submitState, setSubmitState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const cleanups: (() => void)[] = [];
+
+    // Hero heading split
+    const heading = headingRef.current;
+    if (heading) {
+      const split = new SplitType(heading, { types: "chars" });
+      if (prefersReducedMotion) {
+        gsap.set(split.chars || [], { opacity: 1, y: 0 });
+      } else {
+        gsap.set(split.chars || [], { opacity: 0, y: 50 });
+        gsap.to(split.chars || [], {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.02,
+          ease: "power3.out",
+          delay: 0.3,
+        });
+      }
+      cleanups.push(() => split.revert());
+    }
+
+    // Hero subtext
+    const hero = heroRef.current;
+    if (hero && !prefersReducedMotion) {
+      const subs = hero.querySelectorAll(".hero-fade");
+      gsap.set(subs, { opacity: 0, y: 30 });
+      gsap.to(subs, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        delay: 0.5,
+      });
+    }
+
+    // Form reveal
+    const formEl = formRef.current;
+    if (formEl && !prefersReducedMotion) {
+      const ctx = gsap.context(() => {
+        const items = formEl.querySelectorAll(".form-reveal");
+        gsap.set(items, { opacity: 0, y: 40 });
+        gsap.to(items, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: formEl,
+            start: "top 80%",
+            once: true,
+          },
+        });
+      }, formEl);
+      cleanups.push(() => ctx.revert());
+    }
+
+    return () => cleanups.forEach((fn) => fn());
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const form = e.currentTarget;
     const data = new FormData(form);
-
-    // Honeypot — bots fill hidden fields, real users don't
     if (data.get("_gotcha")) return;
 
     setSubmitState("sending");
@@ -28,7 +100,6 @@ export default function ContactPage() {
         body: data,
         headers: { Accept: "application/json" },
       });
-
       if (res.ok) {
         setSubmitState("sent");
         form.reset();
@@ -50,30 +121,43 @@ export default function ContactPage() {
       <main id="main-content" className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />
 
-        {/* Contact Hero */}
-        <section className="snap-section w-full px-16 pt-[100px] pb-[60px] max-md:px-6 max-md:pt-16 max-md:pb-8">
-          <div className="flex flex-col gap-6 max-w-[800px]">
-            <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+        {/* Hero — Full viewport, massive heading */}
+        <section
+          ref={heroRef}
+          className="relative flex min-h-screen w-full flex-col items-center justify-center px-16 pt-24 pb-20 max-md:px-6 max-md:pt-20 max-md:pb-12"
+        >
+          <span
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-display text-[var(--color-text-primary)]"
+            style={{ fontSize: "clamp(80px, 16vw, 260px)", opacity: 0.02, letterSpacing: "0.1em" }}
+          >
+            CONTACT
+          </span>
+
+          <div className="relative z-10 flex flex-col items-center gap-8 text-center">
+            <span className="hero-fade font-body text-[11px] font-medium tracking-[4px] text-[var(--color-accent)]">
               CONTACT
             </span>
-            <h1 className="font-display text-[52px] leading-[1.1] tracking-[-2px] text-[var(--color-text-primary)] max-md:text-[32px]">
-              Let&apos;s build something great together.
+            <h1
+              ref={headingRef}
+              className="font-display tracking-[-2px] text-[var(--color-text-primary)]"
+              style={{ fontSize: "clamp(32px, 7vw, 110px)", lineHeight: 1.05 }}
+            >
+              Let&apos;s talk.
             </h1>
-            <p className="w-[600px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:w-full max-md:text-base">
+            <p className="hero-fade max-w-[550px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:text-base">
               Have a project in mind? Fill out the form below and I&apos;ll get back to you within 24 hours.
             </p>
           </div>
         </section>
 
-        {/* Contact Content */}
-        <section className="w-full px-16 pb-[100px] max-md:px-6 max-md:pb-16">
-          <div className="flex gap-12 max-md:flex-col">
+        {/* Contact Content — Centered form + sidebar */}
+        <section ref={formRef} className="w-full px-16 pb-32 max-md:px-6 max-md:pb-16">
+          <div className="mx-auto flex max-w-[1100px] gap-12 max-md:flex-col">
             {/* Form */}
             <form
               onSubmit={handleSubmit}
-              className="flex flex-1 flex-col gap-6 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-10 max-md:p-6"
+              className="form-reveal flex flex-1 flex-col gap-6 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-10 max-md:p-6"
             >
-              {/* Honeypot — hidden from real users, bots fill it */}
               <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" />
 
               <div className="flex gap-4 max-md:flex-col">
@@ -159,7 +243,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={submitState !== "idle"}
-                className={`flex h-[52px] w-full items-center justify-center gap-2.5 font-body text-[15px] font-semibold text-white transition-all duration-300 ${
+                className={`flex h-[56px] w-full items-center justify-center gap-2.5 font-body text-[15px] font-semibold text-white transition-all duration-300 ${
                   submitState === "sent"
                     ? "bg-emerald-500"
                     : submitState === "error"
@@ -182,8 +266,7 @@ export default function ContactPage() {
             </form>
 
             {/* Sidebar */}
-            <div className="flex w-[380px] flex-col gap-6 max-md:w-full">
-              {/* Details Card */}
+            <div className="form-reveal flex w-[360px] flex-col gap-6 max-md:w-full">
               <div className="flex flex-col gap-6 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-8">
                 <span className="font-body text-xs font-semibold tracking-[1px] text-[var(--color-text-primary)]">
                   DETAILS
@@ -207,7 +290,6 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Social Card */}
               <div className="flex flex-col gap-5 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-8">
                 <span className="font-body text-xs font-semibold tracking-[1px] text-[var(--color-text-primary)]">
                   SOCIAL
