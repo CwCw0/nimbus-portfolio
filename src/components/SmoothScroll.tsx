@@ -15,7 +15,6 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Respect reduced motion preference
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -26,7 +25,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       lerp: 0.082,
       duration: 1.2,
       smoothWheel: true,
-      touchMultiplier: 0, // native scroll on touch devices
+      touchMultiplier: 0,
     });
 
     lenisRef.current = lenis;
@@ -34,16 +33,18 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     // Bridge Lenis to GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    // Store the callback so we can remove it properly
+    const rafCallback = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
 
+    gsap.ticker.add(rafCallback);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(rafCallback);
       lenis.destroy();
       lenisRef.current = null;
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
     };
   }, []);
 

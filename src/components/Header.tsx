@@ -3,7 +3,7 @@
 import { ArrowRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const navItems = [
   { label: "Services", href: "/services" },
@@ -14,13 +14,26 @@ const navItems = [
 
 export default function Header() {
   const pathname = usePathname();
+  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
+      const currentY = window.scrollY;
+      setScrolled(currentY > 20);
+
+      // Directional hide/show
+      if (currentY > lastScrollY.current && currentY > 100) {
+        setHidden(true); // scrolling down — hide
+      } else {
+        setHidden(false); // scrolling up — show
+      }
+
+      lastScrollY.current = currentY;
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -46,11 +59,14 @@ export default function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 flex items-center justify-between px-16 py-5 transition-all duration-300 max-md:px-6 max-md:py-4 ${
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-5 transition-all duration-300 max-md:px-6 max-md:py-4 ${
           scrolled
             ? "border-b border-[var(--color-border)] bg-[#0A0A0FE6] backdrop-blur-[16px]"
             : "bg-transparent"
         }`}
+        style={{
+          transform: hidden && !mobileOpen ? "translateY(-100%)" : "translateY(0)",
+        }}
       >
         <Link href="/" className="flex items-center gap-2.5">
           <div className="h-2 w-2 rounded-full bg-[var(--color-accent)]" />

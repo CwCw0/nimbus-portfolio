@@ -40,9 +40,13 @@ export default function Home() {
           <Hero />
           <MarqueeStrip />
           <Services />
+          <div className="h-[15rem] bg-[var(--color-bg-primary)]" />
           <CaseStudies />
+          <div className="h-[20rem] bg-[var(--color-bg-secondary)]" />
           <About />
+          <div className="h-[15rem]" style={{ background: "linear-gradient(#0D0C14, var(--color-bg-secondary))" }} />
           <Process />
+          <div className="h-[20rem] bg-[var(--color-bg-secondary)]" />
           <Contact />
           <Footer />
         </main>

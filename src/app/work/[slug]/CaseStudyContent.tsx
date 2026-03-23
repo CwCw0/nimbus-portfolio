@@ -7,9 +7,13 @@ import SmoothScroll from "../../../components/SmoothScroll";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRef } from "react";
-import { useCountUp } from "../../../hooks/useScrollReveal";
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitType from "split-type";
 import type { CaseStudy } from "../../../data/caseStudies";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const defaultStudy = {
   tags: ["UI/UX Design", "Dashboard", "React"],
@@ -28,8 +32,155 @@ export default function CaseStudyContent({
   nextProject: { title: string; slug: string };
 }) {
   const study = caseStudy || defaultStudy;
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const overviewRef = useRef<HTMLElement>(null);
   const resultsRef = useRef<HTMLElement>(null);
-  useCountUp(resultsRef, ".count-up");
+  const galleryRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const cleanups: (() => void)[] = [];
+
+    // Hero heading split
+    const heading = headingRef.current;
+    if (heading) {
+      const split = new SplitType(heading, { types: "chars" });
+      if (prefersReducedMotion) {
+        gsap.set(split.chars || [], { opacity: 1, y: 0 });
+      } else {
+        gsap.set(split.chars || [], { opacity: 0, y: 40 });
+        gsap.to(split.chars || [], {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.02,
+          ease: "power3.out",
+          delay: 0.3,
+        });
+      }
+      cleanups.push(() => split.revert());
+    }
+
+    // Hero subtext fade
+    const hero = heroRef.current;
+    if (hero && !prefersReducedMotion) {
+      const subs = hero.querySelectorAll(".hero-fade");
+      gsap.set(subs, { opacity: 0, y: 30 });
+      gsap.to(subs, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        delay: 0.5,
+      });
+    }
+
+    // Overview reveal
+    const overview = overviewRef.current;
+    if (overview && !prefersReducedMotion) {
+      const ctx = gsap.context(() => {
+        const cols = overview.querySelectorAll(".overview-col");
+        gsap.set(cols, { opacity: 0, y: 40 });
+        gsap.to(cols, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: overview,
+            start: "top 75%",
+            once: true,
+          },
+        });
+      }, overview);
+      cleanups.push(() => ctx.revert());
+    }
+
+    // Results count-up
+    const results = resultsRef.current;
+    if (results && !prefersReducedMotion) {
+      const ctx = gsap.context(() => {
+        const cards = results.querySelectorAll(".result-card");
+        gsap.set(cards, { opacity: 0, y: 40 });
+        gsap.to(cards, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: results,
+            start: "top 80%",
+            once: true,
+          },
+        });
+
+        // Count-up
+        const stats = results.querySelectorAll(".count-up");
+        stats.forEach((stat) => {
+          const el = stat as HTMLElement;
+          const target = el.dataset.target || "0";
+          const isPlus = target.startsWith("+");
+          const isPercent = target.includes("%");
+          const num = parseInt(target.replace(/[^0-9]/g, ""), 10);
+
+          gsap.fromTo(
+            { val: 0 },
+            { val: 0 },
+            {
+              val: num,
+              duration: 1.5,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                once: true,
+              },
+              onUpdate: function () {
+                const current = Math.round(this.targets()[0].val);
+                el.textContent = (isPlus ? "+" : "") + current + (isPercent ? "%" : "");
+              },
+            }
+          );
+        });
+      }, results);
+      cleanups.push(() => ctx.revert());
+    }
+
+    // Gallery reveal
+    const gallery = galleryRef.current;
+    if (gallery && !prefersReducedMotion) {
+      const ctx = gsap.context(() => {
+        const items = gallery.querySelectorAll(".gallery-item");
+        items.forEach((item) => {
+          gsap.fromTo(
+            item,
+            { opacity: 0, scale: 0.95 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: item,
+                start: "top 85%",
+                once: true,
+              },
+            }
+          );
+        });
+      }, gallery);
+      cleanups.push(() => ctx.revert());
+    }
+
+    return () => cleanups.forEach((fn) => fn());
+  }, [study.title]);
 
   return (
     <>
@@ -49,10 +200,13 @@ export default function CaseStudyContent({
           </Link>
         </div>
 
-        {/* Case Hero */}
-        <section className="snap-section w-full px-16 pt-12 pb-[60px] max-md:px-6">
-          <div className="flex flex-col gap-6 max-w-[800px]">
-            <div className="flex gap-2 flex-wrap items-center">
+        {/* Hero — dramatic centered */}
+        <section
+          ref={heroRef}
+          className="relative flex w-full flex-col items-center justify-center px-16 pt-16 pb-12 max-md:px-6 max-md:pt-10"
+        >
+          <div className="flex flex-col items-center gap-6 text-center max-w-[900px]">
+            <div className="hero-fade flex gap-2 flex-wrap items-center justify-center">
               {caseStudy?.status === "in-development" && (
                 <span className="bg-amber-500/15 border border-amber-500/25 px-3 py-1 font-body text-[11px] font-semibold tracking-[1px] text-amber-400">
                   IN DEVELOPMENT
@@ -67,10 +221,14 @@ export default function CaseStudyContent({
                 </span>
               ))}
             </div>
-            <h1 className="font-display text-[48px] leading-[1.1] tracking-[-2px] text-[var(--color-text-primary)] max-md:text-[32px]">
+            <h1
+              ref={headingRef}
+              className="font-display tracking-[-2px] text-[var(--color-text-primary)]"
+              style={{ fontSize: "clamp(36px, 6vw, 80px)", lineHeight: 1.1 }}
+            >
               {study.title}
             </h1>
-            <p className="font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:text-base">
+            <p className="hero-fade max-w-[600px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:text-base">
               {study.heroDesc}
             </p>
           </div>
@@ -79,7 +237,7 @@ export default function CaseStudyContent({
         {/* In Development Banner */}
         {caseStudy?.status === "in-development" && (
           <section className="w-full px-16 pb-6 max-md:px-6">
-            <div className="flex items-center gap-3 border border-amber-500/20 bg-amber-500/5 px-5 py-3">
+            <div className="mx-auto max-w-[1000px] flex items-center gap-3 border border-amber-500/20 bg-amber-500/5 px-5 py-3">
               <span className="h-2 w-2 shrink-0 rounded-full bg-amber-400 animate-pulse" />
               <p className="font-body text-sm text-amber-300/90">
                 This project is actively in progress — features and design are being built and improved continuously.
@@ -88,11 +246,11 @@ export default function CaseStudyContent({
           </section>
         )}
 
-        {/* Hero Image */}
-        <section className="w-full px-16 pb-[80px] max-md:px-6">
-          <div className="relative w-full overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)]">
+        {/* Hero Image — Full width dramatic */}
+        <section className="w-full px-16 pb-20 max-md:px-6 max-md:pb-10">
+          <div className="mx-auto max-w-[1200px] relative w-full overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-card)]">
             {caseStudy?.heroImage ? (
-              <div className="relative h-[500px] max-md:h-[240px]">
+              <div className="relative" style={{ height: "clamp(280px, 50vh, 560px)" }}>
                 <Image
                   src={caseStudy.heroImage}
                   alt={study.title}
@@ -101,7 +259,7 @@ export default function CaseStudyContent({
                 />
               </div>
             ) : (
-              <div className="flex h-[500px] w-full items-center justify-center bg-gradient-to-br from-[#7C5CFC12] to-[#7C5CFC06] max-md:h-[240px]">
+              <div className="flex w-full items-center justify-center bg-gradient-to-br from-[#7C5CFC12] to-[#7C5CFC06]" style={{ height: "clamp(280px, 50vh, 560px)" }}>
                 <span className="font-body text-sm tracking-[2px] text-[var(--color-text-subtle)]">
                   PROJECT IMAGE
                 </span>
@@ -121,25 +279,31 @@ export default function CaseStudyContent({
           </div>
         </section>
 
-        {/* Overview */}
-        <section className="snap-section w-full bg-[var(--color-bg-secondary)] px-16 py-[80px] max-md:px-6 max-md:py-16">
-          <div className="flex gap-16 max-md:flex-col max-md:gap-10">
-            <div className="flex flex-1 flex-col gap-5">
+        {/* Overview — Challenge / Solution */}
+        <section ref={overviewRef} className="w-full bg-[#0D0C14] px-16 py-24 max-md:px-6 max-md:py-16">
+          <div className="mx-auto flex max-w-[1000px] gap-20 max-md:flex-col max-md:gap-12">
+            <div className="overview-col flex flex-1 flex-col gap-5">
               <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
                 THE CHALLENGE
               </span>
-              <h3 className="font-display text-[28px] tracking-[-1px] text-[var(--color-text-primary)]">
+              <h3
+                className="font-display tracking-[-1px] text-[var(--color-text-primary)]"
+                style={{ fontSize: "clamp(24px, 3vw, 36px)" }}
+              >
                 Challenge
               </h3>
               <p className="font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
                 {study.challenge}
               </p>
             </div>
-            <div className="flex flex-1 flex-col gap-5">
+            <div className="overview-col flex flex-1 flex-col gap-5">
               <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
                 THE SOLUTION
               </span>
-              <h3 className="font-display text-[28px] tracking-[-1px] text-[var(--color-text-primary)]">
+              <h3
+                className="font-display tracking-[-1px] text-[var(--color-text-primary)]"
+                style={{ fontSize: "clamp(24px, 3vw, 36px)" }}
+              >
                 Solution
               </h3>
               <p className="font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
@@ -151,93 +315,104 @@ export default function CaseStudyContent({
 
         {/* Results */}
         {study.results.length > 0 && (
-          <section ref={resultsRef} className="snap-section w-full px-16 py-[80px] max-md:px-6 max-md:py-16">
-            <div className="mb-10 flex flex-col gap-4">
-              <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
-                RESULTS
-              </span>
-              <h3 className="font-display text-[28px] tracking-[-1px] text-[var(--color-text-primary)]">
-                The impact
-              </h3>
-            </div>
-            <div className="flex gap-5 max-md:grid max-md:grid-cols-2 max-md:gap-4">
-              {study.results.map((r) => (
-                <div
-                  key={r.label}
-                  className="flex flex-1 flex-col gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-7"
+          <section ref={resultsRef} className="w-full px-16 py-24 max-md:px-6 max-md:py-16">
+            <div className="mx-auto max-w-[1000px]">
+              <div className="mb-12 flex flex-col gap-4">
+                <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
+                  RESULTS
+                </span>
+                <h3
+                  className="font-display tracking-[-1px] text-[var(--color-text-primary)]"
+                  style={{ fontSize: "clamp(24px, 3vw, 36px)" }}
                 >
-                  <span
-                    className={`count-up font-body text-[40px] font-semibold tracking-[-1px] ${r.color}`}
-                    data-target={r.value}
+                  The impact
+                </h3>
+              </div>
+              <div className="flex gap-5 max-md:grid max-md:grid-cols-2 max-md:gap-4">
+                {study.results.map((r) => (
+                  <div
+                    key={r.label}
+                    className="result-card flex flex-1 flex-col gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-7"
                   >
-                    {r.value.startsWith("+") ? "+0" : "0"}
-                  </span>
-                  <span className="font-body text-sm text-[var(--color-text-dim)]">
-                    {r.label}
-                  </span>
-                </div>
-              ))}
+                    <span
+                      className={`count-up font-display tracking-[-1px] ${r.color}`}
+                      data-target={r.value}
+                      style={{ fontSize: "clamp(32px, 4vw, 52px)" }}
+                    >
+                      {r.value.startsWith("+") ? "+0" : "0"}
+                    </span>
+                    <span className="font-body text-sm text-[var(--color-text-dim)]">
+                      {r.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         )}
 
         {/* Gallery */}
-        <section className="w-full px-16 pb-[80px] max-md:px-6">
-          {caseStudy?.gallery && caseStudy.gallery.length > 0 ? (
-            <div className="flex flex-col gap-6">
-              <div className="flex gap-6 max-md:flex-col">
-                {caseStudy.gallery.slice(0, 2).map((src, i) => (
-                  <div key={i} className="relative flex-1 h-[380px] overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] max-md:h-[220px]">
-                    <Image src={src} alt={`${study.title} screenshot ${i + 1}`} fill className="object-cover object-top" />
+        <section ref={galleryRef} className="w-full px-16 pb-24 max-md:px-6 max-md:pb-12">
+          <div className="mx-auto max-w-[1200px]">
+            {caseStudy?.gallery && caseStudy.gallery.length > 0 ? (
+              <div className="flex flex-col gap-6">
+                <div className="flex gap-6 max-md:flex-col">
+                  {caseStudy.gallery.slice(0, 2).map((src, i) => (
+                    <div key={i} className="gallery-item relative flex-1 overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-card)]" style={{ height: "clamp(240px, 35vh, 400px)" }}>
+                      <Image src={src} alt={`${study.title} screenshot ${i + 1}`} fill className="object-cover object-top" />
+                    </div>
+                  ))}
+                </div>
+                {caseStudy.gallery.length > 2 && (
+                  <div className="flex gap-6 max-md:flex-col">
+                    {caseStudy.gallery.slice(2, 4).map((src, i) => (
+                      <div key={i} className="gallery-item relative flex-1 overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-card)]" style={{ height: "clamp(240px, 35vh, 400px)" }}>
+                        <Image src={src} alt={`${study.title} screenshot ${i + 3}`} fill className="object-cover object-top" />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
+                {caseStudy.gallery.length > 4 && (
+                  <div className="flex gap-6 max-md:flex-col">
+                    {caseStudy.gallery.slice(4).map((src, i) => (
+                      <div key={i} className={`gallery-item relative overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-card)] ${caseStudy.gallery!.slice(4).length === 1 ? "w-full" : "flex-1"}`} style={{ height: "clamp(240px, 35vh, 400px)" }}>
+                        <Image src={src} alt={`${study.title} screenshot ${i + 5}`} fill className="object-cover object-top" />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-              {caseStudy.gallery.length > 2 && (
-                <div className="flex gap-6 max-md:flex-col">
-                  {caseStudy.gallery.slice(2, 4).map((src, i) => (
-                    <div key={i} className="relative flex-1 h-[380px] overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] max-md:h-[220px]">
-                      <Image src={src} alt={`${study.title} screenshot ${i + 3}`} fill className="object-cover object-top" />
-                    </div>
-                  ))}
+            ) : (
+              <div className="flex gap-6 max-md:flex-col">
+                <div className="gallery-item flex flex-1 items-center justify-center bg-gradient-to-br from-[#7C5CFC10] to-[#7C5CFC05] border border-[var(--color-border)]" style={{ height: "clamp(240px, 35vh, 400px)" }}>
+                  <span className="font-body text-sm tracking-[2px] text-[var(--color-text-subtle)]">GALLERY 1</span>
                 </div>
-              )}
-              {caseStudy.gallery.length > 4 && (
-                <div className="flex gap-6 max-md:flex-col">
-                  {caseStudy.gallery.slice(4).map((src, i) => (
-                    <div key={i} className={`relative h-[380px] overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] max-md:h-[220px] ${caseStudy.gallery!.slice(4).length === 1 ? "w-full" : "flex-1"}`}>
-                      <Image src={src} alt={`${study.title} screenshot ${i + 5}`} fill className="object-cover object-top" />
-                    </div>
-                  ))}
+                <div className="gallery-item flex flex-1 items-center justify-center bg-gradient-to-br from-[#7C5CFC10] to-[#7C5CFC05] border border-[var(--color-border)]" style={{ height: "clamp(240px, 35vh, 400px)" }}>
+                  <span className="font-body text-sm tracking-[2px] text-[var(--color-text-subtle)]">GALLERY 2</span>
                 </div>
-              )}
-            </div>
-          ) : (
-            <div className="flex gap-6 max-md:flex-col">
-              <div className="flex flex-1 h-[340px] items-center justify-center bg-gradient-to-br from-[#7C5CFC10] to-[#7C5CFC05] border border-[var(--color-border)]">
-                <span className="font-body text-sm tracking-[2px] text-[var(--color-text-subtle)]">GALLERY 1</span>
               </div>
-              <div className="flex flex-1 h-[340px] items-center justify-center bg-gradient-to-br from-[#7C5CFC10] to-[#7C5CFC05] border border-[var(--color-border)]">
-                <span className="font-body text-sm tracking-[2px] text-[var(--color-text-subtle)]">GALLERY 2</span>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </section>
 
-        {/* Next Project */}
-        <section className="w-full border-t border-[var(--color-border)] bg-[var(--color-bg-secondary)] px-16 py-[60px] max-md:px-6">
+        {/* Next Project — dramatic */}
+        <section className="w-full border-t border-[var(--color-border)] bg-[#0D0C14] px-16 py-20 max-md:px-6 max-md:py-12">
           <Link
             href={`/work/${nextProject.slug}`}
-            className="group flex items-center justify-between"
+            className="group mx-auto flex max-w-[1000px] items-center justify-between"
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-3">
               <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-text-muted)]">
                 NEXT PROJECT
               </span>
-              <span className="font-display text-[32px] tracking-[-1px] text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)] max-md:text-2xl">
+              <span
+                className="font-display tracking-[-1px] text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)]"
+                style={{ fontSize: "clamp(28px, 4vw, 48px)" }}
+              >
                 {nextProject.title}
               </span>
             </div>
-            <ArrowRight className="h-6 w-6 text-[var(--color-text-muted)] transition-all group-hover:translate-x-2 group-hover:text-[var(--color-accent)]" />
+            <ArrowRight className="h-8 w-8 text-[var(--color-text-muted)] transition-all group-hover:translate-x-2 group-hover:text-[var(--color-accent)]" />
           </Link>
         </section>
 
