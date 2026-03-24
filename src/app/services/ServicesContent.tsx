@@ -196,7 +196,7 @@ export default function ServicesPage() {
             {services.map((service) => (
               <div
                 key={service.num}
-                className={`service-block flex gap-16 border p-12 max-md:flex-col max-md:gap-8 max-md:p-6 ${
+                className={`service-block flex gap-16 border p-12 max-lg:flex-col max-lg:gap-8 max-md:p-6 ${
                   service.featured
                     ? "border-[var(--color-accent-border)] bg-gradient-to-r from-[var(--color-bg-card-alt)] to-[var(--color-bg-card)]"
                     : "border-[var(--color-border)] bg-[var(--color-bg-card)]"
@@ -229,7 +229,7 @@ export default function ServicesPage() {
                     {service.price}
                   </span>
                 </div>
-                <div className="flex w-[380px] flex-col gap-5 max-md:w-full">
+                <div className="flex w-[380px] flex-col gap-5 max-lg:w-full">
                   <span className="font-body text-xs font-semibold tracking-[1px] text-[var(--color-text-primary)]">
                     WHAT&apos;S INCLUDED
                   </span>

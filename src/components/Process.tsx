@@ -37,18 +37,39 @@ export default function Process() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    const ctx = gsap.context(() => {
-      const circles = el.querySelectorAll(".vt-circle");
-      const contents = el.querySelectorAll(".vt-content");
-      const numbers = el.querySelectorAll(".vt-number");
+    const isMobile = window.innerWidth < 769;
 
-      if (prefersReducedMotion) {
-        gsap.set([circles, contents, numbers], { opacity: 1, y: 0, scale: 1 });
-        gsap.set(line, { scaleY: 1 });
+    const ctx = gsap.context(() => {
+      if (prefersReducedMotion) return;
+
+      if (isMobile) {
+        // Mobile — simple staggered fade-in for each step
+        const mobileSteps = el.querySelectorAll(".mobile-step");
+        gsap.set(mobileSteps, { opacity: 0, y: 30 });
+        mobileSteps.forEach((step) => {
+          gsap.to(step, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: step,
+              start: "top 85%",
+              once: true,
+            },
+          });
+        });
         return;
       }
 
-      // Set initial states
+      // Desktop — scoped to .vt-timeline only
+      const timeline = el.querySelector(".vt-timeline");
+      if (!timeline) return;
+
+      const circles = timeline.querySelectorAll(".vt-circle");
+      const contents = timeline.querySelectorAll(".vt-content");
+      const numbers = timeline.querySelectorAll(".vt-number");
+
       gsap.set(circles, { scale: 0, opacity: 0 });
       gsap.set(contents, { opacity: 0, x: (i) => (i % 2 === 0 ? -40 : 40) });
       gsap.set(numbers, { opacity: 0 });
@@ -59,7 +80,7 @@ export default function Process() {
         scaleY: 1,
         ease: "none",
         scrollTrigger: {
-          trigger: el.querySelector(".vt-timeline"),
+          trigger: timeline,
           start: "top 70%",
           end: "bottom 70%",
           scrub: true,
@@ -68,7 +89,7 @@ export default function Process() {
 
       // Each step reveals as scrolling
       steps.forEach((_, i) => {
-        const stepEl = el.querySelector(`.vt-step-${i}`);
+        const stepEl = timeline.querySelector(`.vt-step-${i}`);
         if (!stepEl) return;
 
         const tl = gsap.timeline({
@@ -220,7 +241,7 @@ export default function Process() {
       {/* Mobile — single column, line on left */}
       <div className="hidden max-md:flex flex-col">
         {steps.map((s, i) => (
-          <div key={s.num} className="flex gap-6">
+          <div key={s.num} className="mobile-step flex gap-6">
             <div className="flex flex-col items-center">
               <div className="vt-circle flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[var(--color-accent)] bg-[var(--color-bg-secondary)]">
                 <span className="font-body text-xs font-semibold text-[var(--color-accent)]">

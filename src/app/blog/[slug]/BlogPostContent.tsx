@@ -165,9 +165,9 @@ export default function BlogPostContent({ slug }: { slug: string }) {
 
         {/* Article Content + Sidebar */}
         <section ref={articleRef} className="w-full px-16 pb-20 max-md:px-6">
-          <div className="mx-auto flex max-w-[1000px] gap-16 max-md:flex-col">
+          <div className="mx-auto flex max-w-[1000px] gap-16 max-lg:flex-col">
             {/* Article Body */}
-            <article className="flex flex-1 flex-col gap-8 max-w-[680px]">
+            <article className="flex flex-1 flex-col gap-8 max-w-[680px] max-lg:max-w-none">
               {post.content.map((block, i) => {
                 if (block.type === "p") {
                   return (
@@ -215,7 +215,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             </article>
 
             {/* Sidebar */}
-            <aside className="w-[260px] max-md:w-full">
+            <aside className="w-[260px] max-lg:w-full">
               <div className="sticky top-24 flex flex-col gap-8">
                 {/* TOC */}
                 <div className="flex flex-col gap-4 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-6">

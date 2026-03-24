@@ -286,7 +286,7 @@ export default function AboutPage() {
 
         {/* Story — Dramatic split layout */}
         <section ref={storyRef} className="w-full bg-[#0D0C14] px-16 py-32 max-md:px-6 max-md:py-16">
-          <div className="mx-auto flex max-w-[1100px] gap-20 max-md:flex-col max-md:gap-10">
+          <div className="mx-auto flex max-w-[1100px] gap-20 max-lg:flex-col max-lg:gap-12 max-md:gap-10">
             {/* Story text */}
             <div className="flex flex-1 flex-col gap-8">
               <span className="story-reveal font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
@@ -312,7 +312,7 @@ export default function AboutPage() {
             </div>
 
             {/* Avatar + Stats */}
-            <div className="flex w-[400px] flex-col gap-6 max-md:w-full">
+            <div className="flex w-[400px] flex-col gap-6 max-lg:w-full">
               <div className="story-reveal flex h-[280px] items-center justify-center overflow-hidden border border-[var(--color-border)] bg-gradient-to-br from-[#7C5CFC15] to-[#7C5CFC05] relative">
                 <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #7C5CFC 1px, transparent 0)", backgroundSize: "24px 24px" }} />
                 <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)]">

@@ -111,7 +111,7 @@ export default function Header() {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="hidden max-md:flex h-10 w-10 items-center justify-center"
+            className="hidden max-md:flex h-11 w-11 items-center justify-center"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? (

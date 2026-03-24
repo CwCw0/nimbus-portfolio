@@ -152,7 +152,7 @@ export default function ContactPage() {
 
         {/* Contact Content — Centered form + sidebar */}
         <section ref={formRef} className="w-full px-16 pb-32 max-md:px-6 max-md:pb-16">
-          <div className="mx-auto flex max-w-[1100px] gap-12 max-md:flex-col">
+          <div className="mx-auto flex max-w-[1100px] gap-12 max-lg:flex-col">
             {/* Form */}
             <form
               onSubmit={handleSubmit}
@@ -266,7 +266,7 @@ export default function ContactPage() {
             </form>
 
             {/* Sidebar */}
-            <div className="form-reveal flex w-[360px] flex-col gap-6 max-md:w-full">
+            <div className="form-reveal flex w-[360px] flex-col gap-6 max-lg:w-full">
               <div className="flex flex-col gap-6 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-8">
                 <span className="font-body text-xs font-semibold tracking-[1px] text-[var(--color-text-primary)]">
                   DETAILS
