@@ -80,6 +80,12 @@ export default function Services() {
         end: "bottom bottom",
         pin: pin,
         pinSpacing: false,
+        snap: {
+          snapTo: 1 / totalServices,
+          duration: { min: 0.25, max: 0.6 },
+          delay: 0.1,
+          ease: "power1.inOut",
+        },
         onUpdate: (self) => {
           const progress = self.progress;
           const serviceIndex = Math.min(
