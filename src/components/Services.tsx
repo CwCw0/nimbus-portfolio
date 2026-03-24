@@ -73,19 +73,14 @@ export default function Services() {
 
     const ctx = gsap.context(() => {
       const totalServices = services.length;
+      let snapTimeout: ReturnType<typeof setTimeout>;
 
-      ScrollTrigger.create({
+      const st = ScrollTrigger.create({
         trigger: section,
         start: "top top",
         end: "bottom bottom",
         pin: pin,
         pinSpacing: false,
-        snap: {
-          snapTo: 1 / totalServices,
-          duration: { min: 0.25, max: 0.6 },
-          delay: 0.1,
-          ease: "power1.inOut",
-        },
         onUpdate: (self) => {
           const progress = self.progress;
           const serviceIndex = Math.min(
@@ -133,6 +128,38 @@ export default function Services() {
           }
         },
       });
+
+      // Manual snap via Lenis — debounce on wheel stop
+      const handleWheel = () => {
+        clearTimeout(snapTimeout);
+        snapTimeout = setTimeout(() => {
+          const progress = st.progress;
+          // Don't snap at the very edges so user can scroll past the section
+          if (progress <= 0.01 || progress >= 0.99) return;
+
+          const snapIncrement = 1 / totalServices;
+          const nearestSnap = Math.round(progress / snapIncrement) * snapIncrement;
+          const clamped = Math.max(0, Math.min(1, nearestSnap));
+
+          if (Math.abs(progress - clamped) > 0.02) {
+            const targetScroll = st.start + clamped * (st.end - st.start);
+            const lenis = (window as unknown as Record<string, unknown>).__lenis as { scrollTo?: (target: number, opts?: Record<string, unknown>) => void } | undefined;
+            if (lenis?.scrollTo) {
+              lenis.scrollTo(targetScroll, { duration: 0.8 });
+            } else {
+              window.scrollTo({ top: targetScroll, behavior: "smooth" });
+            }
+          }
+        }, 250);
+      };
+
+      window.addEventListener("wheel", handleWheel, { passive: true });
+
+      // Cleanup wheel listener when context reverts
+      return () => {
+        clearTimeout(snapTimeout);
+        window.removeEventListener("wheel", handleWheel);
+      };
     }, section);
 
     return () => ctx.revert();

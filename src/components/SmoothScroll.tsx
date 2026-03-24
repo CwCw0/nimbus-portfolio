@@ -29,6 +29,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     });
 
     lenisRef.current = lenis;
+    (window as unknown as Record<string, unknown>).__lenis = lenis;
 
     // Bridge Lenis to GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
@@ -45,6 +46,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       gsap.ticker.remove(rafCallback);
       lenis.destroy();
       lenisRef.current = null;
+      delete (window as unknown as Record<string, unknown>).__lenis;
     };
   }, []);
 

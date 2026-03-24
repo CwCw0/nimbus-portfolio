@@ -294,7 +294,7 @@ html.lenis, html.lenis body {
 .float-field textarea:focus ~ label,
 .float-field textarea:not(:placeholder-shown) ~ label,
 .float-field select:focus ~ label,
-.float-field .has-value ~ label {
+.float-field label.has-value {
   top: 0;
   font-size: 11px;
   color: var(--color-accent);
