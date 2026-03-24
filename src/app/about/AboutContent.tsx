@@ -321,8 +321,8 @@ export default function AboutPage() {
               </div>
 
               {/* Stats — large numbers */}
-              <div className="story-reveal flex gap-4">
-                <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
+              <div className="story-reveal flex gap-4 max-md:gap-2">
+                <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 max-md:p-3">
                   <span
                     className="stat-num font-display tracking-[-1px] text-[var(--color-text-primary)]"
                     data-target="4+"
@@ -332,7 +332,7 @@ export default function AboutPage() {
                   </span>
                   <span className="font-body text-xs text-[var(--color-text-dim)]">Projects</span>
                 </div>
-                <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
+                <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 max-md:p-3">
                   <span
                     className="stat-num font-display tracking-[-1px] text-[var(--color-accent)]"
                     data-target="3"
@@ -342,7 +342,7 @@ export default function AboutPage() {
                   </span>
                   <span className="font-body text-xs text-[var(--color-text-dim)]">Products building</span>
                 </div>
-                <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
+                <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 max-md:p-3">
                   <span
                     className="font-display tracking-[-1px] text-[var(--color-text-primary)]"
                     style={{ fontSize: "clamp(32px, 3vw, 48px)" }}

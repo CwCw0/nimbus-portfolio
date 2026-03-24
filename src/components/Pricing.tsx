@@ -80,7 +80,7 @@ export default function Pricing() {
         {tiers.map((t) => (
           <div
             key={t.name}
-            className={`pricing-card flex flex-1 flex-col gap-7 border p-9 opacity-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_#7C5CFC10] ${
+            className={`pricing-card flex flex-1 flex-col gap-7 border p-9 max-md:p-6 opacity-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_#7C5CFC10] ${
               t.featured
                 ? "border-[#7C5CFC44] bg-gradient-to-b from-[var(--color-bg-card-alt)] to-[var(--color-bg-primary)]"
                 : "border-[var(--color-border)] bg-[var(--color-bg-card)]"
