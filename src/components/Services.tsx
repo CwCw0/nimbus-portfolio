@@ -138,13 +138,13 @@ export default function Services() {
     <section
       ref={sectionRef}
       id="services"
-      className="relative w-full"
+      className="relative w-full max-md:!h-auto"
       style={{ height: `${services.length * 100}vh` }}
     >
       {/* Pinned viewport */}
       <div
         ref={pinRef}
-        className="flex h-[100vh] w-full items-center bg-[var(--color-bg-primary)]"
+        className="flex h-[100vh] w-full items-center bg-[var(--color-bg-primary)] max-md:h-auto"
       >
         {/* Desktop — pinned showcase */}
         <div className="relative flex h-full w-full max-md:hidden">

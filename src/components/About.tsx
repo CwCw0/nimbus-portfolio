@@ -49,7 +49,7 @@ export default function About() {
     <section
       ref={ref}
       id="about"
-      className="relative flex min-h-[100vh] w-full items-center overflow-hidden px-16 py-24 max-md:px-6 max-md:py-16"
+      className="relative flex min-h-[100vh] w-full items-center overflow-hidden px-16 py-24 max-md:flex-col max-md:items-start max-md:min-h-0 max-md:px-6 max-md:py-16"
       style={{ background: "#0D0C14" }}
     >
       {/* Massive "ABOUT" watermark */}

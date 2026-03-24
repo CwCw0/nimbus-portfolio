@@ -489,4 +489,5 @@ nav a:not(:hover) span[class*="scale-x-0"] {
 @media (max-width: 768px) {
   *, *::before, *::after { cursor: auto !important; }
   #custom-cursor-dot, #custom-cursor-ring { display: none; }
+  .scroll-to-top { bottom: 20px; right: 20px; }
 }

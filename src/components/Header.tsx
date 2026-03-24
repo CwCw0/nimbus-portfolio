@@ -124,7 +124,7 @@ export default function Header() {
       </header>
 
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 bg-[#0A0A0FF2] backdrop-blur-md md:hidden">
+        <div className="fixed inset-0 z-40 bg-[#0A0A0FF2] backdrop-blur-md md:hidden" data-lenis-prevent>
           <nav className="flex flex-col items-center justify-center gap-8 h-full">
             {navItems.map((item) => (
               <Link

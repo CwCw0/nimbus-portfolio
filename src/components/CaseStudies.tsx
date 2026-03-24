@@ -32,6 +32,8 @@ export default function CaseStudies() {
 
     if (prefersReducedMotion) return;
 
+    const isMobile = window.innerWidth < 769;
+
     const ctx = gsap.context(() => {
       // Each card reveals with a dramatic clip + scale + parallax
       const cards = section.querySelectorAll(".cs-card");
@@ -39,8 +41,8 @@ export default function CaseStudies() {
         const img = card.querySelector(".cs-img") as HTMLElement;
         const content = card.querySelector(".cs-content") as HTMLElement;
 
-        // Image parallax — slight upward shift as card scrolls through viewport
-        if (img) {
+        // Image parallax — desktop only (skip on mobile for performance)
+        if (img && !isMobile) {
           gsap.fromTo(
             img,
             { yPercent: 8 },
@@ -129,7 +131,7 @@ export default function CaseStudies() {
           >
             {/* Image container with overflow for parallax */}
             <div className="relative w-full overflow-hidden" style={{ height: "clamp(280px, 50vh, 560px)" }}>
-              <div className="cs-img absolute inset-[-16%] h-[132%] w-[132%]">
+              <div className="cs-img absolute inset-[-16%] h-[132%] w-[132%] max-md:inset-0 max-md:h-full max-md:w-full">
                 {s.image ? (
                   <Image
                     src={s.image}

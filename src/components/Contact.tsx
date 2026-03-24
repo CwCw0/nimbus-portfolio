@@ -104,7 +104,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative flex min-h-[100vh] w-full flex-col items-center justify-center bg-[var(--color-bg-primary)] px-16 py-24 max-md:px-6 max-md:py-16"
+      className="relative flex min-h-[100vh] w-full flex-col items-center justify-center bg-[var(--color-bg-primary)] px-16 py-24 max-md:min-h-0 max-md:justify-start max-md:px-6 max-md:py-16"
     >
       {/* Massive heading */}
       <h2
