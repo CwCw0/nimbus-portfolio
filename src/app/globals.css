@@ -293,8 +293,7 @@ html.lenis, html.lenis body {
 .float-field input:not(:placeholder-shown) ~ label,
 .float-field textarea:focus ~ label,
 .float-field textarea:not(:placeholder-shown) ~ label,
-.float-field select:focus ~ label,
-.float-field label.has-value {
+.float-field select ~ label {
   top: 0;
   font-size: 11px;
   color: var(--color-accent);

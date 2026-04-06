@@ -149,7 +149,7 @@ export default function Contact() {
                 <option>SEO</option>
                 <option>AI / LLM Agents</option>
               </select>
-              <label htmlFor="ct-project" className="has-value">Project Type</label>
+              <label htmlFor="ct-project">Project Type</label>
             </div>
             <div className="float-field flex-1">
               <select id="ct-budget" name="budget" className="appearance-none" defaultValue="">
@@ -159,7 +159,7 @@ export default function Contact() {
                 <option>$5k - $10k</option>
                 <option>$10k+</option>
               </select>
-              <label htmlFor="ct-budget" className="has-value">Budget Range</label>
+              <label htmlFor="ct-budget">Budget Range</label>
             </div>
           </div>
 

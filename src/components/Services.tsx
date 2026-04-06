@@ -71,98 +71,107 @@ export default function Services() {
 
     if (isMobile || prefersReducedMotion) return;
 
-    const ctx = gsap.context(() => {
-      const totalServices = services.length;
-      let snapTimeout: ReturnType<typeof setTimeout>;
+    const totalServices = services.length;
+    let activeServiceIndex = 0;
+    let isLocked = false;
 
-      const st = ScrollTrigger.create({
+    // Get Lenis instance for programmatic scrolling
+    const getLenis = () =>
+      (window as unknown as Record<string, unknown>).__lenis as
+        | { scrollTo?: (target: number, opts?: Record<string, unknown>) => void; stop?: () => void; start?: () => void }
+        | undefined;
+
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
         trigger: section,
         start: "top top",
         end: "bottom bottom",
         pin: pin,
         pinSpacing: false,
         onUpdate: (self) => {
-          const progress = self.progress;
-          const serviceIndex = Math.min(
-            Math.floor(progress * totalServices),
-            totalServices - 1
-          );
-
-          // Update progress bar (cheap DOM write)
+          // Update progress bar
           if (progressRef.current) {
-            progressRef.current.style.height = `${progress * 100}%`;
-          }
-
-          // Only animate content swap when index changes
-          if (serviceIndex !== currentIndexRef.current && !isAnimatingRef.current) {
-            currentIndexRef.current = serviceIndex;
-            const service = services[serviceIndex];
-            isAnimatingRef.current = true;
-
-            // Update counter + watermark immediately (no animation needed)
-            if (counterRef.current) counterRef.current.textContent = service.num;
-            if (numWatermarkRef.current) numWatermarkRef.current.textContent = service.num;
-
-            // Kill any in-flight tweens before starting new ones
-            if (titleRef.current) gsap.killTweensOf(titleRef.current);
-            if (descRef.current) gsap.killTweensOf(descRef.current);
-            if (iconRef.current) gsap.killTweensOf(iconRef.current);
-
-            // Crossfade title
-            const tl = gsap.timeline({
-              onComplete: () => { isAnimatingRef.current = false; },
-            });
-
-            tl.to(titleRef.current, { opacity: 0, y: -15, duration: 0.15 });
-            tl.to(descRef.current, { opacity: 0, y: 10, duration: 0.15 }, "<");
-
-            tl.call(() => {
-              if (titleRef.current) titleRef.current.textContent = service.title;
-              if (descRef.current) descRef.current.textContent = service.desc;
-              if (iconRef.current) iconRef.current.setAttribute("data-icon", service.num);
-            });
-
-            tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" });
-            tl.to(descRef.current, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" }, "<0.05");
-            tl.fromTo(iconRef.current, { scale: 0.85, opacity: 0.5 }, { scale: 1, opacity: 1, duration: 0.25, ease: "power2.out" }, "<");
+            progressRef.current.style.height = `${self.progress * 100}%`;
           }
         },
       });
-
-      // Manual snap via Lenis — debounce on wheel stop
-      const handleWheel = () => {
-        clearTimeout(snapTimeout);
-        snapTimeout = setTimeout(() => {
-          const progress = st.progress;
-          // Don't snap at the very edges so user can scroll past the section
-          if (progress <= 0.01 || progress >= 0.99) return;
-
-          const snapIncrement = 1 / totalServices;
-          const nearestSnap = Math.round(progress / snapIncrement) * snapIncrement;
-          const clamped = Math.max(0, Math.min(1, nearestSnap));
-
-          if (Math.abs(progress - clamped) > 0.02) {
-            const targetScroll = st.start + clamped * (st.end - st.start);
-            const lenis = (window as unknown as Record<string, unknown>).__lenis as { scrollTo?: (target: number, opts?: Record<string, unknown>) => void } | undefined;
-            if (lenis?.scrollTo) {
-              lenis.scrollTo(targetScroll, { duration: 0.8 });
-            } else {
-              window.scrollTo({ top: targetScroll, behavior: "smooth" });
-            }
-          }
-        }, 250);
-      };
-
-      window.addEventListener("wheel", handleWheel, { passive: true });
-
-      // Cleanup wheel listener when context reverts
-      return () => {
-        clearTimeout(snapTimeout);
-        window.removeEventListener("wheel", handleWheel);
-      };
     }, section);
 
-    return () => ctx.revert();
+    // Crossfade to a specific service index
+    const goToService = (index: number) => {
+      if (index === activeServiceIndex || isAnimatingRef.current) return;
+
+      const service = services[index];
+      activeServiceIndex = index;
+      currentIndexRef.current = index;
+      isAnimatingRef.current = true;
+
+      if (counterRef.current) counterRef.current.textContent = service.num;
+      if (numWatermarkRef.current) numWatermarkRef.current.textContent = service.num;
+
+      if (titleRef.current) gsap.killTweensOf(titleRef.current);
+      if (descRef.current) gsap.killTweensOf(descRef.current);
+      if (iconRef.current) gsap.killTweensOf(iconRef.current);
+
+      const tl = gsap.timeline({
+        onComplete: () => { isAnimatingRef.current = false; },
+      });
+
+      tl.to(titleRef.current, { opacity: 0, y: -15, duration: 0.15 });
+      tl.to(descRef.current, { opacity: 0, y: 10, duration: 0.15 }, "<");
+
+      tl.call(() => {
+        if (titleRef.current) titleRef.current.textContent = service.title;
+        if (descRef.current) descRef.current.textContent = service.desc;
+        if (iconRef.current) iconRef.current.setAttribute("data-icon", service.num);
+      });
+
+      tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" });
+      tl.to(descRef.current, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" }, "<0.05");
+      tl.fromTo(iconRef.current, { scale: 0.85, opacity: 0.5 }, { scale: 1, opacity: 1, duration: 0.25, ease: "power2.out" }, "<");
+
+      // Scroll to corresponding position
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.scrollHeight;
+      const targetScroll = sectionTop + (index / totalServices) * sectionHeight;
+
+      const lenis = getLenis();
+      if (lenis?.scrollTo) {
+        lenis.scrollTo(targetScroll, { duration: 0.6 });
+      }
+    };
+
+    // Wheel interception — each scroll tick = one service step
+    const handleWheel = (e: WheelEvent) => {
+      // Check if Services section is in the pinned viewport
+      const rect = pin.getBoundingClientRect();
+      const isPinned = rect.top <= 1 && rect.bottom >= window.innerHeight - 1;
+      if (!isPinned) return;
+
+      const direction = e.deltaY > 0 ? 1 : -1;
+      const nextIndex = activeServiceIndex + direction;
+
+      // At boundaries, release scroll so user can leave the section
+      if (nextIndex < 0 || nextIndex >= totalServices) return;
+
+      // Prevent native scroll — we handle it
+      e.preventDefault();
+
+      if (isLocked) return;
+      isLocked = true;
+
+      goToService(nextIndex);
+
+      // Cooldown to prevent rapid-fire jumping
+      setTimeout(() => { isLocked = false; }, 700);
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("wheel", handleWheel);
+    };
   }, []);
 
   const firstService = services[0];

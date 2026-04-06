@@ -17,7 +17,6 @@ const services = [
     num: "01",
     title: "Web Design & Development",
     desc: "Custom websites built with modern frameworks, optimized for performance, SEO, and conversion. From single landing pages to full-scale web applications.",
-    price: "Starting at $2,500",
     features: [
       "Custom design tailored to your brand",
       "Mobile-first, fully responsive",
@@ -30,7 +29,6 @@ const services = [
     num: "02",
     title: "Brand Identity & Strategy",
     desc: "A cohesive visual identity system that tells your brand story. From logo design to full brand guidelines, everything you need to stand out.",
-    price: "Starting at $2,000",
     features: [
       "Logo design + variations",
       "Color palette & typography system",
@@ -43,7 +41,6 @@ const services = [
     num: "03",
     title: "AI, LLMs & Agents",
     desc: "Custom AI agents, LLM-powered tools, chatbots, and automation workflows that help you scale operations and deliver intelligent customer experiences.",
-    price: "Starting at $5,000",
     featured: true,
     features: [
       "Custom LLM agent development",
@@ -225,9 +222,6 @@ export default function ServicesPage() {
                   <p className="font-body text-base leading-[1.7] text-[var(--color-text-dim)]">
                     {service.desc}
                   </p>
-                  <span className="font-body text-lg font-semibold text-[var(--color-accent)]">
-                    {service.price}
-                  </span>
                 </div>
                 <div className="flex w-[380px] flex-col gap-5 max-lg:w-full">
                   <span className="font-body text-xs font-semibold tracking-[1px] text-[var(--color-text-primary)]">
