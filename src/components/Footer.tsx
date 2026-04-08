@@ -99,6 +99,7 @@ export default function Footer() {
         {[
           { label: "Services", href: "/services" },
           { label: "Work", href: "/work" },
+          { label: "Products", href: "/products" },
           { label: "About", href: "/about" },
           { label: "Blog", href: "/blog" },
           { label: "Contact", href: "#contact" },

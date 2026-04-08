@@ -8,6 +8,7 @@ import { useEffect, useState, useRef } from "react";
 const navItems = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
+  { label: "Products", href: "/products" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
 ];
@@ -76,27 +77,42 @@ export default function Header() {
         </Link>
 
         <nav className="flex items-center gap-10 max-md:hidden">
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`group relative font-body text-sm transition-colors duration-200 hover:text-[var(--color-text-primary)] ${
-                isActive(item.href)
-                  ? "text-[var(--color-text-primary)]"
-                  : "text-[var(--color-text-muted)]"
-              }`}
-            >
-              {item.label}
-              <span
-                className={`absolute -bottom-1 left-0 h-[2px] bg-[var(--color-accent)] transition-all duration-300 origin-left ${
+          {navItems.map((item) => {
+            if (item.label === "Products") {
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`nav-link-products ${isActive(item.href) ? "active" : ""}`}
+                >
+                  <span className="products-spark" aria-hidden="true" />
+                  <span className="products-text">{item.label}</span>
+                  <span className="products-underline" aria-hidden="true" />
+                </Link>
+              );
+            }
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`group relative font-body text-sm transition-colors duration-200 hover:text-[var(--color-text-primary)] ${
                   isActive(item.href)
-                    ? "scale-x-100"
-                    : "scale-x-0 group-hover:scale-x-100"
+                    ? "text-[var(--color-text-primary)]"
+                    : "text-[var(--color-text-muted)]"
                 }`}
-                style={{ transitionTimingFunction: "cubic-bezier(.19,1,.22,1)" }}
-              />
-            </Link>
-          ))}
+              >
+                {item.label}
+                <span
+                  className={`absolute -bottom-1 left-0 h-[2px] bg-[var(--color-accent)] transition-all duration-300 origin-left ${
+                    isActive(item.href)
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                  style={{ transitionTimingFunction: "cubic-bezier(.19,1,.22,1)" }}
+                />
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-3">

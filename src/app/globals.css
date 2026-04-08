@@ -490,3 +490,294 @@ nav a:not(:hover) span[class*="scale-x-0"] {
   #custom-cursor-dot, #custom-cursor-ring { display: none; }
   .scroll-to-top { bottom: 20px; right: 20px; }
 }
+
+/* =========================================================================
+   PRODUCTS PAGE — THE VAULT
+   The /products section is the studio's "members-only" wing.
+   Same palette as the rest of the site (purple + teal on near-black) but
+   elevated: glass surfaces, generous space, slower motion, refined detail.
+   ========================================================================= */
+
+/* The vault has a slightly deeper, more saturated background than the rest
+   of the site to create the "you've stepped into a different room" feel. */
+.vault-bg {
+  background:
+    radial-gradient(ellipse 1200px 800px at 20% -10%, rgba(124, 92, 252, 0.12), transparent 55%),
+    radial-gradient(ellipse 900px 600px at 90% 20%, rgba(94, 234, 212, 0.06), transparent 55%),
+    radial-gradient(ellipse 1000px 700px at 50% 110%, rgba(124, 92, 252, 0.08), transparent 55%),
+    #07060D;
+}
+
+/* Glass surface — premium frosted */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.07),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.5),
+    0 30px 80px -40px rgba(0, 0, 0, 0.7);
+}
+
+.glass-panel-strong {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(36px) saturate(180%);
+  -webkit-backdrop-filter: blur(36px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.09),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.55),
+    0 40px 100px -50px rgba(0, 0, 0, 0.85);
+}
+
+.glass-chip {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-chip:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(124, 92, 252, 0.45);
+  transform: translateY(-1px);
+}
+
+.glass-chip.active {
+  background: rgba(124, 92, 252, 0.18);
+  border-color: rgba(124, 92, 252, 0.6);
+  box-shadow:
+    0 0 28px -4px rgba(124, 92, 252, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+/* Tilt-ready card — receives transform from JS mouse handlers.
+   Slow, expensive easing intentional — VVVVIP section moves slower. */
+.tilt-card {
+  transform: perspective(1400px) rotateX(0) rotateY(0) translateZ(0);
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-card-inner {
+  transform: translateZ(40px);
+  transform-style: preserve-3d;
+}
+
+/* Floating orbs — animated background colour blobs.
+   Strictly purple + teal so they sit inside the brand. */
+.product-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+@keyframes orb-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(60px, -40px) scale(1.1); }
+  66%      { transform: translate(-30px, 50px) scale(0.95); }
+}
+
+@keyframes orb-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(-80px, 30px) scale(1.05); }
+  66%      { transform: translate(40px, -60px) scale(1.12); }
+}
+
+@keyframes orb-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1.05); }
+  33%      { transform: translate(45px, 60px) scale(0.98); }
+  66%      { transform: translate(-65px, -25px) scale(1.08); }
+}
+
+@keyframes orb-drift-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-50px, 70px) scale(1.15); }
+}
+
+.orb-anim-1 { animation: orb-drift-1 22s ease-in-out infinite; }
+.orb-anim-2 { animation: orb-drift-2 28s ease-in-out infinite; }
+.orb-anim-3 { animation: orb-drift-3 32s ease-in-out infinite; }
+.orb-anim-4 { animation: orb-drift-4 36s ease-in-out infinite; }
+
+/* The Vault entrance — full screen overlay that introduces the section.
+   When the page loads, this overlay is visible with a centered "MEMBERS ONLY"
+   wordmark and a slow pulsing dot, then dissolves out. */
+.vault-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(124, 92, 252, 0.22), transparent 55%),
+    rgba(7, 6, 13, 0.96);
+  backdrop-filter: blur(48px) saturate(180%);
+  -webkit-backdrop-filter: blur(48px) saturate(180%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.vault-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 25%, rgba(0, 0, 0, 0.6) 100%);
+  pointer-events: none;
+}
+
+.vault-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.015) 50%, transparent 100%);
+  background-size: 100% 4px;
+  mix-blend-mode: overlay;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.vault-mark {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.vault-mark .vault-symbol {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7C5CFC;
+  box-shadow: 0 0 32px 4px rgba(124, 92, 252, 0.6);
+}
+
+.vault-mark .vault-eyebrow {
+  font-family: var(--font-body), "Outfit", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.vault-mark .vault-title {
+  font-family: var(--font-display), "Instrument Serif", serif;
+  font-size: clamp(40px, 6vw, 88px);
+  letter-spacing: 0.04em;
+  color: #EEEDF5;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.vault-mark .vault-rule {
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(90deg, transparent, rgba(124, 92, 252, 0.6), transparent);
+}
+
+@keyframes vault-symbol-pulse {
+  0%, 100% { box-shadow: 0 0 32px 4px rgba(124, 92, 252, 0.6); transform: scale(1); }
+  50%      { box-shadow: 0 0 48px 8px rgba(124, 92, 252, 0.9); transform: scale(1.4); }
+}
+
+.vault-symbol-pulse {
+  animation: vault-symbol-pulse 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Header — special "Products" nav link, signposting the VVVVIP wing */
+.nav-link-products {
+  position: relative;
+}
+
+.nav-link-products .products-spark {
+  position: absolute;
+  top: 50%;
+  left: -16px;
+  transform: translateY(-50%) scale(0) rotate(-90deg);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 12px var(--color-accent);
+  opacity: 0;
+  transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.nav-link-products:hover .products-spark,
+.nav-link-products.active .products-spark {
+  transform: translateY(-50%) scale(1) rotate(0deg);
+  opacity: 1;
+  left: -14px;
+}
+
+.nav-link-products .products-text {
+  background: linear-gradient(120deg, currentColor 0%, currentColor 50%, var(--color-accent) 60%, var(--color-accent-secondary) 100%);
+  background-size: 220% 100%;
+  background-position: 0% 0%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 700ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.nav-link-products:hover .products-text {
+  background-position: -100% 0%;
+}
+
+.nav-link-products .products-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-secondary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.nav-link-products:hover .products-underline,
+.nav-link-products.active .products-underline {
+  transform: scaleX(1);
+}
+
+/* Subtle gold-flecked star symbol that loves with the products link.
+   Reuses the existing palette — no gold added, just a brighter accent. */
+.products-eyebrow-mark {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 12px rgba(124, 92, 252, 0.7);
+}
+
+/* Reduced motion: kill orb / vault animations */
+@media (prefers-reduced-motion: reduce) {
+  .product-orb,
+  .vault-symbol-pulse,
+  .orb-anim-1,
+  .orb-anim-2,
+  .orb-anim-3,
+  .orb-anim-4 {
+    animation: none !important;
+  }
+  .tilt-card {
+    transform: none !important;
+  }
+}
