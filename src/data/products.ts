@@ -54,6 +54,14 @@ export type Product = {
   // uses the Nimbus body font for products whose own brand is closer to
   // the Nimbus website itself.
   markStyle?: "italic" | "sans";
+  // Optional wordmark that renders as the "logo" over the product preview.
+  // When set, the mockup shows this wordmark by default and crossfades to
+  // the real screenshot on card hover. Perfect for products whose own
+  // display font IS their brand (Kōji, Sumi, etc).
+  wordmark?: {
+    label: string;
+    style: "italic" | "sans";
+  };
   // Visual treatment of the card preview. Either a real screenshot of the
   // shipped product, or an honest "in build" placeholder.
   mockup: {
@@ -94,21 +102,30 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: "koji",
-    name: "Koji",
+    name: "kōji",
     tagline:
       "A keyboard-first second brain. Local, fast, with no AI crutch in the way.",
     status: "live",
-    price: { kind: "tbd" },
+    price: { kind: "free" },
     cta: {
-      label: "Open Koji",
+      label: "Open Kōji",
       href: "https://koji-seven.vercel.app/",
       external: true,
     },
+    // Kōji's identity is monochrome editorial — paper + ink. The accent
+    // is a subtle cool off-white that reads almost-black on the card.
     accent: {
-      hex: "#F5F5F0",
-      soft: "#F5F5F014",
-      border: "#F5F5F040",
-      glow: "#F5F5F022",
+      hex: "#F3F3F5",
+      soft: "#F3F3F510",
+      border: "#F3F3F533",
+      glow: "#F3F3F51C",
+    },
+    // Kōji's "logo" IS its wordmark — the same Instrument Serif italic face
+    // used for every heading inside the app. The mockup renders the wordmark
+    // by default and crossfades to a real screenshot on card hover.
+    wordmark: {
+      label: "kōji",
+      style: "italic",
     },
     mockup: {
       type: "screenshot",
@@ -118,14 +135,14 @@ export const products: Product[] = [
     cardDescription:
       "Three views, forty shortcuts, one place to think. Built because every other tool tried to organise me.",
     longDescription:
-      "Koji is the productivity tool I built because no other one fit how my brain actually works. I think in bursts — a thought at 2am, a task mid-conversation, a half-formed idea I need to dump before it disappears. Koji is built around that. Brain Dump captures raw thoughts in a full-screen overlay. Today turns them into things to do. Board shows the bigger picture. Notes hold the longer-form thinking in markdown.\n\nEverything is keyboard-driven. Cmd+K opens the command palette. 40+ shortcuts let you live in the app without ever touching the trackpad. The visual design is intentionally monochrome — no color, no decoration, no AI assistant trying to summarise your life. Just a tool that gets out of the way.",
+      "Kōji is the productivity tool I built because no other one fit how my brain actually works. I think in bursts — a thought at 2am, a task mid-conversation, a half-formed idea I need to dump before it disappears. Kōji is built around that. Brain Dump captures raw thoughts in a full-screen overlay. Today turns them into things to do. Board shows the bigger picture. Notes hold the longer-form thinking in markdown.\n\nEverything is keyboard-driven. Cmd+K opens the command palette. 40+ shortcuts let you live in the app without ever touching the trackpad. The visual design is intentionally monochrome — no color, no decoration, no AI assistant trying to summarise your life. Just a tool that gets out of the way.\n\nKōji is local-first. Your tasks, notes, brain dumps, and focus stats live on your device — nothing is sent to a server, no account is required, no login wall. Open the tab and keep going.",
     features: [
-      "Brain Dump — full-screen capture overlay",
+      "Brain Dump — full-screen capture overlay with a gliding typing caret",
       "Three core views: Today, Board, Notes",
       "40+ keyboard shortcuts and a Cmd+K palette",
-      "Pomodoro focus timer with persisted stats",
-      "Cloud sync via Supabase with row-level security",
-      "Editorial monochrome design — dark mode by default",
+      "Pomodoro focus timer with a calm bell and persisted streak",
+      "Local-first — no account, no cloud, your data stays on your device",
+      "Editorial monochrome design with a light/dark theme swap",
     ],
     category: "Productivity",
     releaseDate: "Live now",
@@ -133,24 +150,24 @@ export const products: Product[] = [
   },
   {
     slug: "syp",
-    name: "SYP",
+    name: "Select Your Poison",
     tagline:
       "A drinking game for 4–8 friends who already know each other too well.",
     status: "in-development",
     price: { kind: "free" },
     cta: {
-      label: "Join the launch list",
-      href: "/contact?product=syp",
+      label: "Join the waitlist",
+      href: "#waitlist",
     },
-    // SYP doesn't have its own visual brand yet — it lives inside the Nimbus
-    // house style, so its card uses the Nimbus website palette + body font.
+    // Red is SYP's own color — chosen to match the bold, no-nonsense
+    // energy of the game itself. A warmer red, not fire-engine red, so it
+    // still sits cleanly in the Nimbus palette without shouting.
     accent: {
-      hex: "#7C5CFC",
-      soft: "#7C5CFC14",
-      border: "#7C5CFC40",
-      glow: "#7C5CFC2A",
+      hex: "#E63946",
+      soft: "#E6394614",
+      border: "#E6394640",
+      glow: "#E6394626",
     },
-    markStyle: "sans",
     mockup: {
       type: "concept",
       device: "phone",
@@ -158,7 +175,7 @@ export const products: Product[] = [
     cardDescription:
       "Pass the phone. Read the prompt. Find out who actually voted for who. The game gets rougher the longer the night runs.",
     longDescription:
-      "SYP is the simplest possible party game. Open it on one phone. Pass it around the circle. Each round throws up a prompt that the group has to answer about each other — the kind of question you'd never ask sober but everyone wants the answer to.\n\nNo accounts. No setup. No download. It's a web app you load in 3 seconds and start playing in 5. The vibe is closer to a pack of cards than to a typical app — small, sharp, and built to disappear back into the night the moment the game ends.",
+      "Select Your Poison is the simplest possible party game. Open it on one phone. Pass it around the circle. Each round throws up a prompt that the group has to answer about each other — the kind of question you'd never ask sober but everyone wants the answer to.\n\nNo accounts. No setup. No download. It's a web app you load in 3 seconds and start playing in 5. The vibe is closer to a pack of cards than to a typical app — small, sharp, and built to disappear back into the night the moment the game ends.",
     features: [
       "No login, no install — open in any browser",
       "Local-only game state (your group, your phone)",

@@ -17,6 +17,7 @@ import {
   formatSecondaryPrice,
 } from "../../../data/products";
 import { useCurrency } from "../../../components/products/CurrencyContext";
+import ProductWaitlist from "../../../components/products/ProductWaitlist";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -139,6 +140,14 @@ export default function ProductDetailContent({ product, next }: Props) {
   // Split long description on double newlines into paragraphs
   const paragraphs = product.longDescription.split("\n\n");
 
+  // Products that are not yet live get an inline waitlist section on the
+  // detail page instead of bouncing visitors to /contact. The hero CTA
+  // jumps down to that section for non-live products.
+  const isLive = product.status === "live";
+  const heroHref = isLive ? product.cta.href : "#waitlist";
+  const heroExternal = isLive ? product.cta.external : false;
+  const heroLabel = isLive ? product.cta.label : "Join the waitlist";
+
   return (
     <>
       <CustomCursor />
@@ -229,9 +238,9 @@ export default function ProductDetailContent({ product, next }: Props) {
 
               {/* Big CTA */}
               <a
-                href={product.cta.href}
-                target={product.cta.external ? "_blank" : undefined}
-                rel={product.cta.external ? "noopener noreferrer" : undefined}
+                href={heroHref}
+                target={heroExternal ? "_blank" : undefined}
+                rel={heroExternal ? "noopener noreferrer" : undefined}
                 className="hero-fade mt-4 group flex items-center gap-3 px-8 py-4 font-body text-[14px] font-semibold transition-all duration-300 hover:scale-[1.03]"
                 style={{
                   background: product.accent.hex,
@@ -239,8 +248,8 @@ export default function ProductDetailContent({ product, next }: Props) {
                   boxShadow: `0 12px 40px -10px ${product.accent.glow}`,
                 }}
               >
-                {product.cta.label}
-                {product.cta.external ? (
+                {heroLabel}
+                {heroExternal ? (
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 ) : (
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -344,17 +353,17 @@ export default function ProductDetailContent({ product, next }: Props) {
                     </span>
                   </div>
                   <a
-                    href={product.cta.href}
-                    target={product.cta.external ? "_blank" : undefined}
-                    rel={product.cta.external ? "noopener noreferrer" : undefined}
+                    href={heroHref}
+                    target={heroExternal ? "_blank" : undefined}
+                    rel={heroExternal ? "noopener noreferrer" : undefined}
                     className="mt-2 flex items-center justify-center gap-2 px-5 py-3 font-body text-[12px] font-semibold transition-all hover:scale-[1.02]"
                     style={{
                       background: product.accent.hex,
                       color: "#0A0A0F",
                     }}
                   >
-                    {product.cta.label}
-                    {product.cta.external ? (
+                    {heroLabel}
+                    {heroExternal ? (
                       <ArrowUpRight className="h-3.5 w-3.5" />
                     ) : (
                       <ArrowRight className="h-3.5 w-3.5" />
@@ -364,6 +373,15 @@ export default function ProductDetailContent({ product, next }: Props) {
               </aside>
             </div>
           </section>
+
+          {/* Waitlist section — only for non-live products */}
+          {!isLive && (
+            <section className="w-full px-16 pb-24 max-md:px-6 max-md:pb-16">
+              <div className="body-section mx-auto max-w-[1080px]">
+                <ProductWaitlist product={product} />
+              </div>
+            </section>
+          )}
 
           {/* Next product strip */}
           <section className="border-t border-[var(--color-border)] w-full px-16 py-20 max-md:px-6 max-md:py-12">

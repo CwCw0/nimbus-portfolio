@@ -1,46 +1,28 @@
 "use client";
 
+import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
 import SmoothScroll from "../../components/SmoothScroll";
-import { ArrowUpRight, Code, Palette, Server, Bot, HeartPulse, CheckSquare, Gamepad2 } from "lucide-react";
+import { ArrowUpRight, Code, Palette, Server, Bot } from "lucide-react";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
+import { products as catalogue, statusLabel } from "../../data/products";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const products = [
-  {
-    name: "Pulse",
-    desc: "Health & wellness dashboard aggregating wearable data from Apple Watch, Fitbit, Garmin, and Oura Ring into one calm, actionable view.",
-    href: "https://pulse-khaki-nine.vercel.app",
-    accent: "#E91E8C",
-    accentDim: "#E91E8C14",
-    icon: HeartPulse,
-    tags: ["Next.js", "Recharts", "Healthtech"],
-  },
-  {
-    name: "Kōji",
-    desc: "Keyboard-first productivity platform — Brain Dump, kanban, notes, focus timer. Built around how you actually think, not how productivity gurus say you should.",
-    href: "https://koji-seven.vercel.app",
-    accent: "#7C5CFC",
-    accentDim: "#7C5CFC14",
-    icon: CheckSquare,
-    tags: ["Next.js", "localStorage", "Productivity"],
-  },
-  {
-    name: "Voidframe",
-    desc: "Gaming community platform with real-time chat, squad management, events, and tournament tooling. Built for how gamers actually coordinate.",
-    href: "https://voidframe-three.vercel.app",
-    accent: "#7C3AED",
-    accentDim: "#7C3AED14",
-    icon: Gamepad2,
-    tags: ["Next.js", "TypeScript", "Gaming"],
-  },
-];
+// The Studio index is driven off the real product catalogue so the About
+// page never lies about what's on the bench. Sorted by the product order
+// field (falling back to catalogue order) so the most active work sits
+// at the top.
+const studioIndex = [...catalogue].sort(
+  (a, b) => (a.order ?? 99) - (b.order ?? 99)
+);
+const liveCount = studioIndex.filter((p) => p.status === "live").length;
+const buildCount = studioIndex.filter((p) => p.status === "in-development").length;
 
 const skills = [
   { icon: Code, title: "Frontend Development", desc: "HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind, Swift, Flutter. Building responsive, polished interfaces across web and mobile." },
@@ -201,17 +183,17 @@ export default function AboutPage() {
       cleanups.push(() => ctx.revert());
     }
 
-    // Products stagger
+    // Studio index stagger — each line slides in on its own row
     const productsEl = productsRef.current;
     if (productsEl && !prefersReducedMotion) {
       const ctx = gsap.context(() => {
-        const cards = productsEl.querySelectorAll(".product-card");
-        gsap.set(cards, { opacity: 0, y: 50 });
-        gsap.to(cards, {
+        const lines = productsEl.querySelectorAll(".studio-line");
+        gsap.set(lines, { opacity: 0, y: 30 });
+        gsap.to(lines, {
           opacity: 1,
           y: 0,
-          duration: 0.7,
-          stagger: 0.1,
+          duration: 0.6,
+          stagger: 0.06,
           ease: "power3.out",
           scrollTrigger: {
             trigger: productsEl,
@@ -320,36 +302,38 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Stats — large numbers */}
+              {/* Stats — large numbers. Dynamic counts pulled from the
+                  actual product catalogue so they never lie. */}
               <div className="story-reveal flex gap-4 max-md:gap-2">
                 <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 max-md:p-3">
                   <span
                     className="stat-num font-display tracking-[-1px] text-[var(--color-text-primary)]"
-                    data-target="4+"
-                    style={{ fontSize: "clamp(32px, 3vw, 48px)" }}
-                  >
-                    0+
-                  </span>
-                  <span className="font-body text-xs text-[var(--color-text-dim)]">Projects</span>
-                </div>
-                <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 max-md:p-3">
-                  <span
-                    className="stat-num font-display tracking-[-1px] text-[var(--color-accent)]"
-                    data-target="3"
+                    data-target={`${studioIndex.length}`}
                     style={{ fontSize: "clamp(32px, 3vw, 48px)" }}
                   >
                     0
                   </span>
-                  <span className="font-body text-xs text-[var(--color-text-dim)]">Products building</span>
+                  <span className="font-body text-xs text-[var(--color-text-dim)]">Products in catalogue</span>
                 </div>
                 <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 max-md:p-3">
                   <span
-                    className="font-display tracking-[-1px] text-[var(--color-text-primary)]"
+                    className="stat-num font-display tracking-[-1px] text-[var(--color-accent)]"
+                    data-target={`${buildCount}`}
                     style={{ fontSize: "clamp(32px, 3vw, 48px)" }}
                   >
-                    24/7
+                    0
                   </span>
-                  <span className="font-body text-xs text-[var(--color-text-dim)]">Building</span>
+                  <span className="font-body text-xs text-[var(--color-text-dim)]">Currently in build</span>
+                </div>
+                <div className="flex flex-1 flex-col gap-1 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 max-md:p-3">
+                  <span
+                    className="stat-num font-display tracking-[-1px] text-[var(--color-text-primary)]"
+                    data-target={`${liveCount}`}
+                    style={{ fontSize: "clamp(32px, 3vw, 48px)" }}
+                  >
+                    0
+                  </span>
+                  <span className="font-body text-xs text-[var(--color-text-dim)]">Live right now</span>
                 </div>
               </div>
             </div>
@@ -415,69 +399,170 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* The Studio */}
-        <section ref={productsRef} className="w-full px-16 py-32 max-md:px-6 max-md:py-16">
-          <div className="mx-auto max-w-[1100px]">
-            <div className="mb-16 flex flex-col items-center gap-4 text-center max-md:mb-10 max-md:items-start max-md:text-left">
-              <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
-                THE STUDIO
-              </span>
-              <h2
-                className="font-display tracking-[-1px] text-[var(--color-text-primary)]"
-                style={{ fontSize: "clamp(32px, 4vw, 56px)" }}
-              >
-                What I&apos;m building
-              </h2>
-              <p className="max-w-[600px] font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
-                Alongside client work, I build my own products — not because someone paid me to, but because I saw gaps worth solving. Not mockups, not templates. Full products, built from scratch.
-              </p>
-            </div>
-            <div className="grid grid-cols-3 gap-5 max-lg:grid-cols-1">
-              {products.map((product) => (
-                <a
-                  key={product.name}
-                  href={product.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="product-card group flex flex-col border border-[var(--color-border)] bg-[var(--color-bg-card)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)] hover:shadow-[0_0_30px_#7C5CFC10]"
+        {/* The Studio — editorial catalogue index.
+            Instead of a handful of hand-picked cards, the About page now
+            pulls the entire product catalogue and renders it as a
+            magazine-style typographic list. One line per product with
+            the full wordmark in italic display, tagline, status, and a
+            subtle accent bar on hover. Feels like a masthead, not a grid. */}
+        <section ref={productsRef} className="relative w-full overflow-hidden bg-[#0B0A14] px-16 py-32 max-md:px-6 max-md:py-20">
+          {/* Floating numeric watermark — the size of the catalogue */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute right-[-40px] top-20 select-none font-display text-[var(--color-text-primary)]"
+            style={{
+              fontSize: "clamp(220px, 28vw, 480px)",
+              opacity: 0.025,
+              letterSpacing: "-0.04em",
+              lineHeight: 0.85,
+            }}
+          >
+            {studioIndex.length.toString().padStart(2, "0")}
+          </span>
+
+          {/* Subtle grid underlay */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-[0.025]"
+            style={{
+              backgroundImage:
+                "linear-gradient(var(--color-text-primary) 1px, transparent 1px), linear-gradient(90deg, var(--color-text-primary) 1px, transparent 1px)",
+              backgroundSize: "72px 72px",
+              maskImage:
+                "radial-gradient(ellipse at 20% 20%, black, transparent 70%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse at 20% 20%, black, transparent 70%)",
+            }}
+          />
+
+          <div className="relative mx-auto max-w-[1200px]">
+            {/* Header — editorial masthead style, left-aligned */}
+            <div className="mb-20 flex items-end justify-between gap-10 max-md:mb-12 max-md:flex-col max-md:items-start">
+              <div className="max-w-[640px]">
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-10 bg-[var(--color-accent)]" />
+                  <span className="font-body text-[11px] font-medium tracking-[4px] text-[var(--color-accent)]">
+                    NIMBUS STUDIO · INDEX
+                  </span>
+                </div>
+                <h2
+                  className="mt-6 font-display tracking-[-2px] text-[var(--color-text-primary)]"
+                  style={{ fontSize: "clamp(44px, 6vw, 88px)", lineHeight: 0.95 }}
                 >
-                  <div
-                    className="relative flex h-[140px] items-center justify-center overflow-hidden"
-                    style={{ background: `radial-gradient(ellipse at 50% 80%, ${product.accentDim} 0%, transparent 70%), var(--color-bg-primary)` }}
+                  The full catalogue.
+                </h2>
+                <p className="mt-6 font-body text-[15px] leading-[1.8] text-[var(--color-text-dim)] max-md:text-[14px]">
+                  Nimbus is a one-person studio. Every product on this list is
+                  something I&apos;m building or have shipped — no mockups, no
+                  templates, no affiliate filler. Each line is a real thing at
+                  a real stage. Some are live today, some are still in the
+                  workshop.
+                </p>
+              </div>
+
+              {/* Status legend on the right */}
+              <div className="flex flex-col gap-2 font-mono text-[10px] tracking-[2px] text-[var(--color-text-muted)] uppercase">
+                <div className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+                  Live
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#F5C26B]" />
+                  In build
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-text-muted)]" />
+                  Coming soon
+                </div>
+              </div>
+            </div>
+
+            {/* The index — top border anchor */}
+            <div className="flex flex-col border-t border-[var(--color-border-light)]">
+              {studioIndex.map((product, i) => {
+                const dotColor =
+                  product.status === "live"
+                    ? "var(--color-accent)"
+                    : product.status === "in-development"
+                      ? "#F5C26B"
+                      : "var(--color-text-muted)";
+                const accent = product.accent.hex;
+                return (
+                  <Link
+                    key={product.slug}
+                    href={`/products/${product.slug}`}
+                    className="studio-line group relative flex items-baseline gap-8 border-b border-[var(--color-border-light)] py-8 transition-[padding] duration-500 ease-out hover:pl-6 max-md:flex-col max-md:items-start max-md:gap-3 max-md:py-6 max-md:hover:pl-2"
                   >
-                    <div
-                      className="absolute inset-0 opacity-[0.03]"
-                      style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)", backgroundSize: "20px 20px" }}
+                    {/* Left accent bar that grows in on hover */}
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute left-0 top-1/2 h-0 w-[3px] -translate-y-1/2 transition-all duration-500 ease-out group-hover:h-[70%]"
+                      style={{ background: accent }}
                     />
-                    <div className="relative flex flex-col items-center gap-3">
-                      <div
-                        className="flex h-12 w-12 items-center justify-center"
-                        style={{ background: product.accentDim, border: `1px solid ${product.accent}30` }}
-                      >
-                        <product.icon className="h-6 w-6" style={{ color: product.accent }} />
-                      </div>
-                      <span className="font-display text-base text-[var(--color-text-primary)]">{product.name}</span>
-                    </div>
-                    <span className="absolute top-3 right-3 border border-amber-500/25 bg-amber-500/15 px-2.5 py-1 font-body text-[10px] font-semibold tracking-[1px] text-amber-400">
-                      IN DEVELOPMENT
+
+                    {/* Index number */}
+                    <span className="font-mono text-[11px] text-[var(--color-text-muted)] min-w-[28px]">
+                      {(i + 1).toString().padStart(2, "0")}
                     </span>
-                  </div>
-                  <div className="flex flex-1 flex-col gap-4 p-5">
-                    <p className="font-body text-[13px] leading-[1.7] text-[var(--color-text-dim)]">{product.desc}</p>
-                    <div className="mt-auto flex flex-wrap gap-1.5 border-t border-[var(--color-border)] pt-4">
-                      {product.tags.map((tag) => (
-                        <span key={tag} className="bg-[var(--color-accent-subtle)] px-2 py-0.5 font-body text-[10px] font-medium text-[var(--color-accent)]">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="flex items-center gap-1.5 font-body text-xs font-medium text-[var(--color-accent)] transition-all group-hover:gap-2.5">
-                      Explore preview
-                      <ArrowUpRight className="h-3 w-3" />
+
+                    {/* Product wordmark in display italic */}
+                    <span
+                      className="font-display italic tracking-[-1.5px] text-[var(--color-text-primary)] transition-colors duration-500 max-md:text-[44px]"
+                      style={{
+                        fontSize: "clamp(36px, 5vw, 72px)",
+                        lineHeight: 0.95,
+                      }}
+                    >
+                      <span className="transition-colors duration-500 group-hover:text-[color:var(--accent-hex)]" style={{ ["--accent-hex" as string]: accent }}>
+                        {product.name}
+                      </span>
                     </span>
-                  </div>
-                </a>
-              ))}
+
+                    {/* Category chip */}
+                    <span className="hidden font-mono text-[10px] tracking-[2px] text-[var(--color-text-muted)] uppercase lg:inline">
+                      · {product.category}
+                    </span>
+
+                    {/* Spacer pushes the meta to the right on desktop */}
+                    <span className="hidden flex-1 md:block" />
+
+                    {/* Tagline — only visible md+ */}
+                    <span className="hidden max-w-[300px] font-body text-[12px] leading-[1.6] text-[var(--color-text-dim)] lg:block">
+                      {product.tagline}
+                    </span>
+
+                    {/* Status dot + label */}
+                    <span className="flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold tracking-[2px] text-[var(--color-text-muted)] uppercase">
+                      <span
+                        className="h-1.5 w-1.5 rounded-full"
+                        style={{ background: dotColor }}
+                      />
+                      {statusLabel(product.status)}
+                    </span>
+
+                    {/* Arrow icon */}
+                    <ArrowUpRight
+                      className="h-4 w-4 shrink-0 text-[var(--color-text-muted)] transition-all duration-500 group-hover:rotate-45"
+                      style={{ color: undefined }}
+                    />
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Footer row — tasteful CTA out to the wall */}
+            <div className="mt-14 flex items-end justify-between gap-10 max-md:mt-10 max-md:flex-col max-md:items-start max-md:gap-6">
+              <p className="max-w-[420px] font-body text-[13px] leading-[1.7] text-[var(--color-text-dim)]">
+                Every product above has its own detail page on the wall —
+                screenshots, progress notes, and the story behind the idea.
+              </p>
+              <Link
+                href="/products"
+                className="group flex items-center gap-3 border border-[var(--color-border-light)] bg-[var(--color-bg-card)] px-7 py-4 font-body text-[13px] font-medium tracking-[0.5px] text-[var(--color-text-primary)] transition-all duration-300 hover:border-[var(--color-accent-border)] hover:bg-[var(--color-accent-subtle)]"
+              >
+                Visit the product wall
+                <ArrowUpRight className="h-4 w-4 text-[var(--color-accent)] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
             </div>
           </div>
         </section>

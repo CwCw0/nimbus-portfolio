@@ -24,20 +24,39 @@ type Props = {
  * product detail hero (`size="hero"`).
  */
 export default function ProductMockup({ product, size = "card" }: Props) {
-  const { mockup, accent, name, status } = product;
+  const { mockup, accent, name, status, wordmark } = product;
 
   if (mockup.type === "screenshot" && mockup.image) {
+    let frame: React.ReactNode;
     if (mockup.device === "phone") {
-      return <PhoneFrame src={mockup.image} alt={name} accent={accent.hex} size={size} />;
+      frame = <PhoneFrame src={mockup.image} alt={name} accent={accent.hex} size={size} />;
+    } else if (mockup.device === "desktop") {
+      frame = <DesktopFrame src={mockup.image} alt={name} accent={accent.hex} size={size} />;
+    } else if (mockup.device === "terminal") {
+      frame = <TerminalFrame src={mockup.image} alt={name} accent={accent.hex} size={size} />;
+    } else {
+      // Default screenshot device is laptop
+      frame = <LaptopFrame src={mockup.image} alt={name} accent={accent.hex} size={size} />;
     }
-    if (mockup.device === "desktop") {
-      return <DesktopFrame src={mockup.image} alt={name} accent={accent.hex} size={size} />;
+
+    // If the product has a wordmark, overlay it on top of the real mockup
+    // and crossfade to the mockup on card hover. The card wraps this in a
+    // `group`, so `group-hover:opacity-0` on the wordmark reveals the
+    // screenshot underneath.
+    if (wordmark) {
+      return (
+        <div className="relative w-full">
+          {/* Screenshot starts slightly scaled-down + dim, then eases into
+              view as the wordmark fades out. Feels like the brand "opens". */}
+          <div className="transition-all duration-700 ease-out opacity-60 scale-[0.97] group-hover:opacity-100 group-hover:scale-100">
+            {frame}
+          </div>
+          <WordmarkOverlay wordmark={wordmark} accent={accent} size={size} />
+        </div>
+      );
     }
-    if (mockup.device === "terminal") {
-      return <TerminalFrame src={mockup.image} alt={name} accent={accent.hex} size={size} />;
-    }
-    // Default screenshot device is laptop
-    return <LaptopFrame src={mockup.image} alt={name} accent={accent.hex} size={size} />;
+
+    return frame;
   }
 
   // ---- Concept (honest "in build") ----
@@ -49,6 +68,40 @@ export default function ProductMockup({ product, size = "card" }: Props) {
         status === "in-development" ? "In build" : status === "coming-soon" ? "Coming soon" : "Concept"
       }
     />
+  );
+}
+
+// ===========================================================================
+// WORDMARK OVERLAY — large brand wordmark that fades out on card hover
+// ===========================================================================
+function WordmarkOverlay({
+  wordmark,
+  accent,
+  size,
+}: {
+  wordmark: { label: string; style: "italic" | "sans" };
+  accent: Product["accent"];
+  size: Size;
+}) {
+  const useSans = wordmark.style === "sans";
+  return (
+    <div className="pointer-events-none absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out opacity-100 group-hover:opacity-0 group-hover:scale-[0.96]">
+      <span
+        className={`relative select-none ${
+          useSans
+            ? "font-body font-bold tracking-[-0.04em]"
+            : "font-display italic tracking-[-0.04em]"
+        }`}
+        style={{
+          fontSize: size === "hero" ? "clamp(96px, 14vw, 200px)" : "clamp(68px, 8vw, 128px)",
+          color: accent.hex,
+          lineHeight: 0.9,
+          textShadow: `0 0 80px ${accent.glow}, 0 0 24px ${accent.soft}`,
+        }}
+      >
+        {wordmark.label}
+      </span>
+    </div>
   );
 }
 

@@ -5,6 +5,8 @@ import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
 import SmoothScroll from "../../components/SmoothScroll";
 import ProductMockup from "../../components/products/ProductMockup";
+import ProductWaitlistInline from "../../components/products/ProductWaitlistInline";
+import VaultWaitlistForm from "../../components/products/VaultWaitlistForm";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect, useState, useMemo } from "react";
@@ -31,7 +33,7 @@ const ALL_CATEGORY = "All";
 // Vault is sealed. Flip this flag to `false` when the catalogue is ready
 // to go live and the existing wall view will return automatically.
 // ---------------------------------------------------------------------------
-const PRODUCTS_LOCKED = true;
+const PRODUCTS_LOCKED = false;
 
 export default function ProductsContent() {
   if (PRODUCTS_LOCKED) return <ProductsLockedView />;
@@ -420,9 +422,9 @@ function FeaturedCard({ product }: { product: Product }) {
   const { currency } = useCurrency();
   const primaryPrice = formatPrice(product.price, currency);
   const secondaryPrice = formatSecondaryPrice(product.price, currency);
+  const isLive = product.status === "live";
   return (
-    <Link
-      href={`/products/${product.slug}`}
+    <article
       className="product-card tilt-card glass-panel-strong group relative block overflow-hidden"
       onMouseMove={handleTiltMove}
       onMouseLeave={(e) => {
@@ -435,6 +437,14 @@ function FeaturedCard({ product }: { product: Product }) {
         e.currentTarget.style.borderColor = product.accent.border;
       }}
     >
+      {/* Stretched overlay link — the card is clickable anywhere the
+          inline waitlist form isn't. The form sits at `z-20` to keep its
+          inputs/button interactive. */}
+      <Link
+        href={`/products/${product.slug}`}
+        aria-label={`Open ${product.name}`}
+        className="absolute inset-0 z-10"
+      />
       <div className="tilt-card-inner relative grid grid-cols-[1.2fr_1fr] gap-0 max-lg:grid-cols-1">
         {/* Mockup side */}
         <div
@@ -523,7 +533,7 @@ function FeaturedCard({ product }: { product: Product }) {
             )}
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-5">
             <div
               className="h-px w-full"
               style={{
@@ -547,18 +557,24 @@ function FeaturedCard({ product }: { product: Product }) {
                   </span>
                 )}
               </div>
-              <span
-                className="flex items-center gap-2 font-body text-sm font-semibold transition-all group-hover:gap-3"
-                style={{ color: product.accent.hex }}
-              >
-                Open the file
-                <ArrowRight className="h-3.5 w-3.5" />
-              </span>
+              {isLive && (
+                <span
+                  className="flex items-center gap-2 font-body text-sm font-semibold transition-all group-hover:gap-3"
+                  style={{ color: product.accent.hex }}
+                >
+                  Open the file
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              )}
             </div>
+
+            {/* Inline waitlist for non-live products — sits above the
+                card-wide overlay link at z-20 so clicks land on the input. */}
+            {!isLive && <ProductWaitlistInline product={product} />}
           </div>
         </div>
       </div>
-    </Link>
+    </article>
   );
 }
 
@@ -569,9 +585,9 @@ function NormalCard({ product, index }: { product: Product; index: number }) {
   const useSans = product.markStyle === "sans";
   const { currency } = useCurrency();
   const primaryPrice = formatPrice(product.price, currency, true);
+  const isLive = product.status === "live";
   return (
-    <Link
-      href={`/products/${product.slug}`}
+    <article
       className="product-card tilt-card glass-panel group relative flex h-full flex-col overflow-hidden"
       onMouseMove={handleTiltMove}
       onMouseLeave={(e) => {
@@ -584,6 +600,12 @@ function NormalCard({ product, index }: { product: Product; index: number }) {
         e.currentTarget.style.borderColor = product.accent.border;
       }}
     >
+      {/* Stretched overlay link — see FeaturedCard for the same pattern. */}
+      <Link
+        href={`/products/${product.slug}`}
+        aria-label={`Open ${product.name}`}
+        className="absolute inset-0 z-10"
+      />
       <div className="tilt-card-inner flex h-full flex-col">
         {/* Mockup */}
         <div
@@ -653,22 +675,27 @@ function NormalCard({ product, index }: { product: Product; index: number }) {
               <span className="font-body text-[12px] text-[var(--color-text-secondary)]">
                 {primaryPrice}
               </span>
-              <span
-                className="flex items-center gap-1.5 font-body text-[12px] font-semibold transition-all group-hover:gap-2.5"
-                style={{ color: product.accent.hex }}
-              >
-                {product.cta.external ? "Open" : "View"}
-                {product.cta.external ? (
-                  <ArrowUpRight className="h-3 w-3" />
-                ) : (
-                  <ArrowRight className="h-3 w-3" />
-                )}
-              </span>
+              {isLive && (
+                <span
+                  className="flex items-center gap-1.5 font-body text-[12px] font-semibold transition-all group-hover:gap-2.5"
+                  style={{ color: product.accent.hex }}
+                >
+                  {product.cta.external ? "Open" : "View"}
+                  {product.cta.external ? (
+                    <ArrowUpRight className="h-3 w-3" />
+                  ) : (
+                    <ArrowRight className="h-3 w-3" />
+                  )}
+                </span>
+              )}
             </div>
+
+            {/* Inline waitlist for non-live products */}
+            {!isLive && <ProductWaitlistInline product={product} />}
           </div>
         </div>
       </div>
-    </Link>
+    </article>
   );
 }
 
@@ -814,15 +841,9 @@ function ProductsLockedView() {
                 <ForecastCell label="ETA" value="Soon" />
               </div>
 
-              {/* CTA */}
-              <div className="lock-fade mt-6 flex flex-col items-center gap-4">
-                <Link
-                  href="/contact?product=vault"
-                  className="group flex items-center gap-2.5 rounded-full border border-white/[0.12] bg-white/[0.04] px-7 py-3.5 font-body text-[14px] font-semibold text-[var(--color-text-primary)] backdrop-blur-md transition-all hover:border-white/30 hover:bg-white/[0.08]"
-                >
-                  Tell me when the vault opens
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
+              {/* CTA — inline waitlist form, no click-through to /contact */}
+              <div className="lock-fade mt-6 flex w-full flex-col items-center gap-4">
+                <VaultWaitlistForm />
                 <span className="font-body text-[10px] tracking-[3px] text-[var(--color-text-subtle)]">
                   ONE EMAIL · NO SPAM · NO CHASING
                 </span>
