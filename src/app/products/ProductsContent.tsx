@@ -4,19 +4,41 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
 import SmoothScroll from "../../components/SmoothScroll";
+import ProductMockup from "../../components/products/ProductMockup";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect, useState, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
-import { products, statusLabel, type Product } from "../../data/products";
+import {
+  products,
+  statusLabel,
+  formatPrice,
+  formatSecondaryPrice,
+  type Product,
+} from "../../data/products";
+import { useCurrency } from "../../components/products/CurrencyContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ALL_CATEGORY = "All";
 
+// ---------------------------------------------------------------------------
+// PRODUCTS_LOCKED
+// -----------------
+// While the storefront, payments, and fulfillment are being set up, the
+// Vault is sealed. Flip this flag to `false` when the catalogue is ready
+// to go live and the existing wall view will return automatically.
+// ---------------------------------------------------------------------------
+const PRODUCTS_LOCKED = true;
+
 export default function ProductsContent() {
+  if (PRODUCTS_LOCKED) return <ProductsLockedView />;
+  return <ProductsWallView />;
+}
+
+function ProductsWallView() {
   // ---------- Refs ----------
   const vaultOverlayRef = useRef<HTMLDivElement>(null);
   const vaultMarkRef = useRef<HTMLDivElement>(null);
@@ -51,14 +73,11 @@ export default function ProductsContent() {
     const chips = chipsRef.current;
 
     if (prefersReducedMotion) {
-      // Instantly hide overlay, show everything
       if (overlay) overlay.style.display = "none";
       return;
     }
 
     const cleanups: (() => void)[] = [];
-
-    // Lock body scroll while the overlay is visible
     document.body.style.overflow = "hidden";
 
     const tl = gsap.timeline({
@@ -67,32 +86,9 @@ export default function ProductsContent() {
       },
     });
 
-    // Phase 1 — vault mark settles in
     if (mark) {
-      tl.from(
-        mark,
-        {
-          opacity: 0,
-          y: 20,
-          duration: 0.6,
-          ease: "power3.out",
-        },
-        0
-      );
-    }
-
-    // Phase 2 — vault mark fades out, overlay dissolves
-    if (mark) {
-      tl.to(
-        mark,
-        {
-          opacity: 0,
-          y: -10,
-          duration: 0.5,
-          ease: "power2.in",
-        },
-        1.2
-      );
+      tl.from(mark, { opacity: 0, y: 20, duration: 0.6, ease: "power3.out" }, 0);
+      tl.to(mark, { opacity: 0, y: -10, duration: 0.5, ease: "power2.in" }, 1.2);
     }
     if (overlay) {
       tl.to(
@@ -109,54 +105,33 @@ export default function ProductsContent() {
       );
     }
 
-    // Phase 3 — heading character split-reveal
     if (heading) {
       const split = new SplitType(heading, { types: "chars" });
       gsap.set(split.chars || [], { opacity: 0, y: 60 });
       tl.to(
         split.chars || [],
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.025,
-          ease: "power3.out",
-        },
+        { opacity: 1, y: 0, duration: 0.7, stagger: 0.025, ease: "power3.out" },
         1.6
       );
       cleanups.push(() => split.revert());
     }
 
-    // Phase 4 — hero subtext fades in
     if (hero) {
       const subs = hero.querySelectorAll(".hero-fade");
       gsap.set(subs, { opacity: 0, y: 30 });
       tl.to(
         subs,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.12,
-          ease: "power3.out",
-        },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: "power3.out" },
         1.9
       );
     }
 
-    // Phase 5 — category chips fade in from left
     if (chips) {
       const chipEls = chips.querySelectorAll(".category-chip");
       gsap.set(chipEls, { opacity: 0, x: -20 });
       tl.to(
         chipEls,
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          stagger: 0.06,
-          ease: "power3.out",
-        },
+        { opacity: 1, x: 0, duration: 0.5, stagger: 0.06, ease: "power3.out" },
         2.4
       );
     }
@@ -167,7 +142,7 @@ export default function ProductsContent() {
     };
   }, []);
 
-  // ---------- Card stagger reveal — re-runs whenever category changes ----------
+  // ---------- Card stagger reveal ----------
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -185,14 +160,13 @@ export default function ProductsContent() {
         y: 0,
         rotateX: 0,
         duration: 0.95,
-        stagger: 0.08,
+        stagger: 0.1,
         ease: "power3.out",
         delay: activeCategory === ALL_CATEGORY ? 2.6 : 0.05,
       });
     }, wallEl);
 
     return () => ctx.revert();
-    // Intentional: re-run on category change to re-stagger
   }, [activeCategory]);
 
   const featured = filteredProducts[0];
@@ -206,7 +180,7 @@ export default function ProductsContent() {
         <div ref={vaultOverlayRef} className="vault-overlay">
           <div ref={vaultMarkRef} className="vault-mark">
             <span className="vault-symbol vault-symbol-pulse" />
-            <span className="vault-eyebrow">Members only</span>
+            <span className="vault-eyebrow">From the studio</span>
             <span className="vault-title">The Vault</span>
             <span className="vault-rule" />
           </div>
@@ -221,7 +195,7 @@ export default function ProductsContent() {
           {/* ---------- HERO ---------- */}
           <section
             ref={heroRef}
-            className="relative flex min-h-screen w-full flex-col items-center justify-center px-16 pt-24 pb-20 max-md:px-6 max-md:pt-20 max-md:pb-12"
+            className="relative flex min-h-screen w-full flex-col items-center justify-center px-16 pt-24 pb-24 max-md:px-6 max-md:pt-20 max-md:pb-16"
           >
             {/* Animated orbs */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -269,10 +243,10 @@ export default function ProductsContent() {
               Vault
             </span>
 
-            <div className="relative z-10 flex flex-col items-center gap-7 text-center">
+            <div className="relative z-10 flex flex-col items-center gap-8 text-center">
               <div className="hero-fade flex items-center gap-3 font-body text-[11px] font-medium tracking-[5px] text-[var(--color-text-secondary)]">
                 <span className="products-eyebrow-mark" />
-                MEMBERS ONLY
+                FROM THE STUDIO
                 <span className="products-eyebrow-mark" />
               </div>
 
@@ -284,7 +258,7 @@ export default function ProductsContent() {
                 The Vault.
               </h1>
 
-              <p className="hero-fade max-w-[640px] font-body text-lg leading-[1.7] text-[var(--color-text-secondary)] max-md:text-base">
+              <p className="hero-fade max-w-[680px] font-body text-lg leading-[1.75] text-[var(--color-text-secondary)] max-md:text-base">
                 Everything Nimbus is shipping, in one place. Apps, tools, fonts, games — each
                 made by one person, each polished to one quality bar, each waiting for the
                 people who care.
@@ -298,7 +272,7 @@ export default function ProductsContent() {
             </div>
 
             {/* Scroll hint */}
-            <div className="hero-fade absolute bottom-10 left-1/2 -translate-x-1/2 max-md:bottom-6">
+            <div className="hero-fade absolute bottom-12 left-1/2 -translate-x-1/2 max-md:bottom-6">
               <div className="flex flex-col items-center gap-2 text-[var(--color-text-subtle)]">
                 <span className="font-body text-[9px] tracking-[3px]">SCROLL</span>
                 <div className="h-8 w-px bg-gradient-to-b from-[var(--color-text-subtle)] to-transparent" />
@@ -307,8 +281,8 @@ export default function ProductsContent() {
           </section>
 
           {/* ---------- CATEGORY CHIPS ---------- */}
-          <section className="relative w-full px-16 pb-10 max-md:px-6 max-md:pb-6">
-            <div className="mx-auto max-w-[1280px]">
+          <section className="relative w-full px-16 pb-16 max-md:px-6 max-md:pb-10">
+            <div className="mx-auto max-w-[1320px]">
               <div
                 ref={chipsRef}
                 className="flex flex-wrap items-center gap-3 max-md:gap-2"
@@ -338,7 +312,7 @@ export default function ProductsContent() {
           {/* ---------- THE WALL ---------- */}
           <section
             ref={wallRef}
-            className="relative w-full px-16 pb-32 max-md:px-6 max-md:pb-16"
+            className="relative w-full px-16 pb-40 max-md:px-6 max-md:pb-20"
             key={activeCategory}
           >
             {/* Aurora bath behind the cards */}
@@ -365,7 +339,7 @@ export default function ProductsContent() {
               />
             </div>
 
-            <div className="relative mx-auto max-w-[1280px]">
+            <div className="relative mx-auto max-w-[1320px]">
               {filteredProducts.length === 0 ? (
                 <div className="glass-panel mx-auto flex max-w-md flex-col items-center gap-3 p-12 text-center">
                   <span className="font-body text-[10px] tracking-[3px] text-[var(--color-text-subtle)]">
@@ -382,33 +356,23 @@ export default function ProductsContent() {
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-12 gap-6 max-lg:grid-cols-6 max-md:grid-cols-1 max-md:gap-5">
-                  {/* Featured card spans 8 cols on desktop, 6 on tablet */}
-                  {featured && (
-                    <div className="col-span-8 max-lg:col-span-6 max-md:col-span-1">
-                      <FeaturedCard product={featured} />
+                <div className="flex flex-col gap-10 max-md:gap-7">
+                  {/* Featured card — full width */}
+                  {featured && <FeaturedCard product={featured} />}
+
+                  {/* Rest — 2 per row on desktop, 1 per row on mobile */}
+                  {rest.length > 0 && (
+                    <div className="grid grid-cols-2 gap-10 max-md:grid-cols-1 max-md:gap-7">
+                      {rest.map((product, i) => (
+                        <NormalCard key={product.slug} product={product} index={i + 1} />
+                      ))}
                     </div>
                   )}
-                  {/* First normal card next to featured (desktop only) */}
-                  {rest[0] && (
-                    <div className="col-span-4 max-lg:col-span-6 max-md:col-span-1">
-                      <NormalCard product={rest[0]} index={1} />
-                    </div>
-                  )}
-                  {/* Remaining cards in 3-col rows */}
-                  {rest.slice(1).map((product, i) => (
-                    <div
-                      key={product.slug}
-                      className="col-span-4 max-lg:col-span-3 max-md:col-span-1"
-                    >
-                      <NormalCard product={product} index={i + 2} />
-                    </div>
-                  ))}
                 </div>
               )}
 
               {/* Footer call */}
-              <div className="mt-24 flex flex-col items-center gap-3 text-center max-md:mt-16">
+              <div className="mt-32 flex flex-col items-center gap-4 text-center max-md:mt-20">
                 <span className="font-body text-[11px] tracking-[3px] text-[var(--color-text-subtle)]">
                   WANT TO BUILD SOMETHING TOGETHER
                 </span>
@@ -438,25 +402,28 @@ function handleTiltMove(e: React.MouseEvent<HTMLElement>) {
   const rect = card.getBoundingClientRect();
   const x = (e.clientX - rect.left) / rect.width - 0.5;
   const y = (e.clientY - rect.top) / rect.height - 0.5;
-  // Strength of the tilt — keep it tasteful (~6deg)
-  const rotateY = x * 6;
-  const rotateX = -y * 6;
-  card.style.transform = `perspective(1400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(8px)`;
+  const rotateY = x * 4;
+  const rotateX = -y * 4;
+  card.style.transform = `perspective(1600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(6px)`;
 }
 
 function handleTiltLeave(e: React.MouseEvent<HTMLElement>) {
   const card = e.currentTarget;
-  card.style.transform = `perspective(1400px) rotateX(0) rotateY(0) translateZ(0)`;
+  card.style.transform = `perspective(1600px) rotateX(0) rotateY(0) translateZ(0)`;
 }
 
 // ===========================================================================
-// FEATURED CARD — large, glass, themed by product accent
+// FEATURED CARD — full width, mockup left, content right
 // ===========================================================================
 function FeaturedCard({ product }: { product: Product }) {
+  const useSans = product.markStyle === "sans";
+  const { currency } = useCurrency();
+  const primaryPrice = formatPrice(product.price, currency);
+  const secondaryPrice = formatSecondaryPrice(product.price, currency);
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="product-card tilt-card glass-panel-strong group relative block h-full overflow-hidden"
+      className="product-card tilt-card glass-panel-strong group relative block overflow-hidden"
       onMouseMove={handleTiltMove}
       onMouseLeave={(e) => {
         handleTiltLeave(e);
@@ -464,30 +431,28 @@ function FeaturedCard({ product }: { product: Product }) {
         e.currentTarget.style.borderColor = "";
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `inset 0 1px 0 0 rgba(255,255,255,0.09), inset 0 -1px 0 0 rgba(0,0,0,0.55), 0 40px 100px -40px ${product.accent.glow}, 0 0 0 1px ${product.accent.border}`;
+        e.currentTarget.style.boxShadow = `inset 0 1px 0 0 rgba(255,255,255,0.09), inset 0 -1px 0 0 rgba(0,0,0,0.55), 0 50px 120px -40px ${product.accent.glow}, 0 0 0 1px ${product.accent.border}`;
         e.currentTarget.style.borderColor = product.accent.border;
       }}
     >
-      {/* Inner content — receives translateZ so it floats above the panel surface */}
-      <div className="tilt-card-inner relative grid h-full grid-cols-[1.15fr_1fr] max-md:grid-cols-1">
-        {/* Visual side */}
+      <div className="tilt-card-inner relative grid grid-cols-[1.2fr_1fr] gap-0 max-lg:grid-cols-1">
+        {/* Mockup side */}
         <div
-          className="relative flex min-h-[460px] items-center justify-center overflow-hidden p-12 max-md:min-h-[300px] max-md:p-8"
+          className="relative flex items-center justify-center overflow-hidden py-16 max-md:py-12"
           style={{
-            background: `radial-gradient(circle at 30% 25%, ${product.accent.soft}, transparent 70%)`,
+            background: `radial-gradient(circle at 35% 30%, ${product.accent.soft}, transparent 75%)`,
           }}
         >
-          {/* Accent grid */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.035]"
+            className="pointer-events-none absolute inset-0 opacity-[0.05]"
             style={{
               backgroundImage: `linear-gradient(${product.accent.hex} 1px, transparent 1px), linear-gradient(90deg, ${product.accent.hex} 1px, transparent 1px)`,
-              backgroundSize: "36px 36px",
+              backgroundSize: "44px 44px",
             }}
           />
 
           {/* Featured pill */}
-          <div className="absolute left-6 top-6 flex items-center gap-2">
+          <div className="absolute left-7 top-7 flex items-center gap-2">
             <span
               className="h-1.5 w-1.5 rounded-full"
               style={{
@@ -504,57 +469,83 @@ function FeaturedCard({ product }: { product: Product }) {
           </div>
 
           {/* Status pill */}
-          <span className="glass-chip absolute right-6 top-6 px-3 py-1.5 font-body text-[10px] font-semibold tracking-[1.5px] text-[var(--color-text-secondary)]">
+          <span className="glass-chip absolute right-7 top-7 px-3 py-1.5 font-body text-[10px] font-semibold tracking-[1.5px] text-[var(--color-text-secondary)]">
             {statusLabel(product.status)}
           </span>
 
-          {/* Big mark */}
-          <span
-            className="relative z-10 select-none font-display italic"
-            style={{
-              fontSize: "clamp(80px, 9vw, 150px)",
-              color: product.accent.hex,
-              letterSpacing: "-0.04em",
-              lineHeight: 0.9,
-              textShadow: `0 0 60px ${product.accent.glow}`,
-            }}
-          >
-            {product.name}
-          </span>
+          <div className="relative z-10 w-full">
+            <ProductMockup product={product} size="hero" />
+          </div>
         </div>
 
-        {/* Body side */}
-        <div className="flex flex-col justify-between gap-8 p-12 max-md:p-8">
-          <div className="flex flex-col gap-5">
-            <span className="font-body text-[10px] tracking-[2px] text-[var(--color-text-subtle)]">
-              {product.category.toUpperCase()}
-            </span>
+        {/* Content side */}
+        <div className="flex flex-col justify-between gap-10 p-14 max-md:p-9">
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-3 font-body text-[10px] tracking-[2.5px] text-[var(--color-text-subtle)]">
+              <span>{product.category.toUpperCase()}</span>
+              {product.releaseDate && (
+                <>
+                  <span className="h-px w-4 bg-[var(--color-text-subtle)]" />
+                  <span>{product.releaseDate.toUpperCase()}</span>
+                </>
+              )}
+            </div>
             <h2
-              className="font-display italic tracking-[-1px] text-[var(--color-text-primary)]"
-              style={{ fontSize: "clamp(28px, 3vw, 44px)", lineHeight: 1.1 }}
+              className={
+                useSans
+                  ? "font-body font-bold tracking-[-1.5px] text-[var(--color-text-primary)]"
+                  : "font-display italic tracking-[-1px] text-[var(--color-text-primary)]"
+              }
+              style={{ fontSize: "clamp(34px, 3.4vw, 52px)", lineHeight: 1.05 }}
             >
               {product.tagline}
             </h2>
-            <p className="font-body text-[14px] leading-[1.75] text-[var(--color-text-secondary)] max-md:text-[13px]">
+            <p className="font-body text-[15px] leading-[1.85] text-[var(--color-text-secondary)] max-md:text-[14px]">
               {product.cardDescription}
             </p>
+
+            {/* Top-3 feature peek */}
+            {product.features.length > 0 && (
+              <ul className="mt-2 flex flex-col gap-2">
+                {product.features.slice(0, 3).map((feature, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-2.5 font-body text-[13px] leading-[1.55] text-[var(--color-text-secondary)]"
+                  >
+                    <span
+                      className="mt-[7px] h-1 w-1 flex-shrink-0 rounded-full"
+                      style={{ background: product.accent.hex }}
+                    />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-6">
             <div
               className="h-px w-full"
               style={{
                 background: `linear-gradient(90deg, ${product.accent.border}, transparent)`,
               }}
             />
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex flex-col gap-1">
-                <span className="font-body text-[10px] tracking-[1.5px] text-[var(--color-text-subtle)]">
+            <div className="flex items-end justify-between gap-4">
+              <div className="flex flex-col gap-1.5">
+                <span className="font-body text-[10px] tracking-[2px] text-[var(--color-text-subtle)]">
                   PRICE
                 </span>
-                <span className="font-body text-[14px] font-medium text-[var(--color-text-primary)]">
-                  {product.price}
+                <span
+                  className="font-body text-[17px] font-semibold tracking-[-0.2px]"
+                  style={{ color: product.accent.hex }}
+                >
+                  {primaryPrice}
                 </span>
+                {secondaryPrice && (
+                  <span className="font-body text-[11px] tracking-[0.2px] text-[var(--color-text-subtle)]">
+                    {secondaryPrice}
+                  </span>
+                )}
               </div>
               <span
                 className="flex items-center gap-2 font-body text-sm font-semibold transition-all group-hover:gap-3"
@@ -572,9 +563,12 @@ function FeaturedCard({ product }: { product: Product }) {
 }
 
 // ===========================================================================
-// NORMAL CARD — smaller glass card, vertical stack
+// NORMAL CARD — half width, mockup top, content bottom
 // ===========================================================================
 function NormalCard({ product, index }: { product: Product; index: number }) {
+  const useSans = product.markStyle === "sans";
+  const { currency } = useCurrency();
+  const primaryPrice = formatPrice(product.price, currency, true);
   return (
     <Link
       href={`/products/${product.slug}`}
@@ -586,75 +580,69 @@ function NormalCard({ product, index }: { product: Product; index: number }) {
         e.currentTarget.style.borderColor = "";
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `inset 0 1px 0 0 rgba(255,255,255,0.07), inset 0 -1px 0 0 rgba(0,0,0,0.5), 0 30px 70px -30px ${product.accent.glow}, 0 0 0 1px ${product.accent.border}`;
+        e.currentTarget.style.boxShadow = `inset 0 1px 0 0 rgba(255,255,255,0.07), inset 0 -1px 0 0 rgba(0,0,0,0.5), 0 40px 90px -30px ${product.accent.glow}, 0 0 0 1px ${product.accent.border}`;
         e.currentTarget.style.borderColor = product.accent.border;
       }}
     >
       <div className="tilt-card-inner flex h-full flex-col">
-        {/* Visual header */}
+        {/* Mockup */}
         <div
-          className="relative flex h-[240px] items-center justify-center overflow-hidden max-md:h-[180px]"
+          className="relative flex items-center justify-center overflow-hidden py-12 max-md:py-10"
           style={{
             background: `radial-gradient(circle at 30% 25%, ${product.accent.soft}, transparent 70%)`,
           }}
         >
-          {/* Accent grid */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.035]"
+            className="pointer-events-none absolute inset-0 opacity-[0.05]"
             style={{
               backgroundImage: `linear-gradient(${product.accent.hex} 1px, transparent 1px), linear-gradient(90deg, ${product.accent.hex} 1px, transparent 1px)`,
-              backgroundSize: "32px 32px",
+              backgroundSize: "36px 36px",
             }}
           />
 
           {/* Status pill */}
-          <span className="glass-chip absolute right-4 top-4 px-2.5 py-1 font-body text-[9px] font-semibold tracking-[1.5px] text-[var(--color-text-secondary)]">
+          <span className="glass-chip absolute right-5 top-5 px-2.5 py-1 font-body text-[9px] font-semibold tracking-[1.5px] text-[var(--color-text-secondary)]">
             {statusLabel(product.status)}
           </span>
 
-          {/* Big mark */}
+          {/* Index */}
           <span
-            className="relative z-10 select-none font-display italic"
+            className="absolute bottom-4 left-5 font-display italic"
             style={{
-              fontSize: "clamp(54px, 5vw, 92px)",
+              fontSize: "20px",
               color: product.accent.hex,
-              letterSpacing: "-0.03em",
-              lineHeight: 0.9,
-              textShadow: `0 0 50px ${product.accent.glow}`,
-            }}
-          >
-            {product.name}
-          </span>
-
-          {/* Index number */}
-          <span
-            className="absolute bottom-4 right-5 font-display italic opacity-30"
-            style={{
-              fontSize: "clamp(28px, 3vw, 44px)",
-              color: product.accent.hex,
+              opacity: 0.4,
               lineHeight: 1,
             }}
           >
             {String(index + 1).padStart(2, "0")}
           </span>
+
+          <div className="relative z-10 w-full">
+            <ProductMockup product={product} size="card" />
+          </div>
         </div>
 
         {/* Body */}
-        <div className="flex flex-1 flex-col gap-4 p-7 max-md:p-5">
-          <span className="font-body text-[10px] tracking-[1.5px] text-[var(--color-text-subtle)]">
+        <div className="flex flex-1 flex-col gap-5 p-10 max-md:p-7">
+          <span className="font-body text-[10px] tracking-[2px] text-[var(--color-text-subtle)]">
             {product.category.toUpperCase()}
           </span>
           <h3
-            className="font-display italic tracking-[-0.5px] text-[var(--color-text-primary)]"
-            style={{ fontSize: "clamp(22px, 1.8vw, 28px)", lineHeight: 1.15 }}
+            className={
+              useSans
+                ? "font-body font-bold tracking-[-0.8px] text-[var(--color-text-primary)]"
+                : "font-display italic tracking-[-0.5px] text-[var(--color-text-primary)]"
+            }
+            style={{ fontSize: "clamp(24px, 2vw, 32px)", lineHeight: 1.15 }}
           >
             {product.tagline}
           </h3>
-          <p className="font-body text-[13px] leading-[1.65] text-[var(--color-text-secondary)]">
+          <p className="font-body text-[14px] leading-[1.75] text-[var(--color-text-secondary)]">
             {product.cardDescription}
           </p>
 
-          <div className="mt-auto flex flex-col gap-3 pt-2">
+          <div className="mt-auto flex flex-col gap-4 pt-3">
             <div
               className="h-px w-full"
               style={{
@@ -663,7 +651,7 @@ function NormalCard({ product, index }: { product: Product; index: number }) {
             />
             <div className="flex items-center justify-between gap-3">
               <span className="font-body text-[12px] text-[var(--color-text-secondary)]">
-                {product.price}
+                {primaryPrice}
               </span>
               <span
                 className="flex items-center gap-1.5 font-body text-[12px] font-semibold transition-all group-hover:gap-2.5"
@@ -681,5 +669,191 @@ function NormalCard({ product, index }: { product: Product; index: number }) {
         </div>
       </div>
     </Link>
+  );
+}
+
+// ===========================================================================
+// PRODUCTS LOCKED VIEW
+// --------------------
+// Shown while PRODUCTS_LOCKED === true. The vault is being filled in the
+// background — payments, fulfillment, store, license keys. This screen tells
+// people the storm is brewing without making promises about a date and lets
+// them leave their email so they're first to know when the clouds clear.
+// ===========================================================================
+function ProductsLockedView() {
+  const lockHeroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    const hero = lockHeroRef.current;
+    if (!hero) return;
+
+    const ctx = gsap.context(() => {
+      const fades = hero.querySelectorAll(".lock-fade");
+      gsap.set(fades, { opacity: 0, y: 30 });
+      gsap.to(fades, {
+        opacity: 1,
+        y: 0,
+        duration: 0.95,
+        stagger: 0.13,
+        ease: "power3.out",
+        delay: 0.25,
+      });
+
+      const headline = hero.querySelector(".lock-headline");
+      if (headline) {
+        const split = new SplitType(headline as HTMLElement, { types: "chars" });
+        gsap.set(split.chars || [], { opacity: 0, y: 50 });
+        gsap.to(split.chars || [], {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.035,
+          ease: "power3.out",
+          delay: 0.5,
+        });
+      }
+    }, hero);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <>
+      <CustomCursor />
+      <SmoothScroll>
+        <main
+          id="main-content"
+          className="vault-bg flex min-h-screen w-full flex-col overflow-x-hidden"
+        >
+          <Header />
+
+          <section
+            ref={lockHeroRef}
+            className="relative flex min-h-[calc(100vh-80px)] w-full flex-col items-center justify-center px-16 py-24 max-md:px-6 max-md:py-16"
+          >
+            {/* Animated orbs — same vibe as the open vault */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div
+                className="product-orb orb-anim-1"
+                style={{
+                  width: 540,
+                  height: 540,
+                  left: "6%",
+                  top: "8%",
+                  background: "rgba(124, 92, 252, 0.42)",
+                }}
+              />
+              <div
+                className="product-orb orb-anim-2"
+                style={{
+                  width: 440,
+                  height: 440,
+                  right: "8%",
+                  top: "18%",
+                  background: "rgba(94, 234, 212, 0.28)",
+                }}
+              />
+              <div
+                className="product-orb orb-anim-3"
+                style={{
+                  width: 400,
+                  height: 400,
+                  left: "38%",
+                  bottom: "6%",
+                  background: "rgba(124, 92, 252, 0.32)",
+                }}
+              />
+            </div>
+
+            {/* Faded backdrop word */}
+            <span
+              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-display italic text-[var(--color-text-primary)]"
+              style={{
+                fontSize: "clamp(140px, 24vw, 380px)",
+                opacity: 0.025,
+                letterSpacing: "0.06em",
+              }}
+            >
+              Soon
+            </span>
+
+            <div className="relative z-10 flex w-full max-w-[820px] flex-col items-center gap-10 text-center max-md:gap-7">
+              {/* Eyebrow */}
+              <div className="lock-fade flex items-center gap-3 font-body text-[11px] font-medium tracking-[5px] text-[var(--color-text-secondary)]">
+                <span className="products-eyebrow-mark" />
+                THE NIMBUS VAULT
+                <span className="products-eyebrow-mark" />
+              </div>
+
+              {/* Big display headline */}
+              <h1
+                className="lock-headline font-display italic tracking-[-2px] text-[var(--color-text-primary)]"
+                style={{ fontSize: "clamp(56px, 11vw, 160px)", lineHeight: 0.95 }}
+              >
+                Still forming.
+              </h1>
+
+              {/* Pun stack — the on-brand explanation */}
+              <div className="lock-fade flex max-w-[640px] flex-col gap-2 font-body text-[16px] leading-[1.85] text-[var(--color-text-secondary)] max-md:text-[14px]">
+                <p>The clouds aren&apos;t ready yet.</p>
+                <p>
+                  We&apos;re evaporating the bugs, condensing the catalogue, and stitching
+                  the storefront together one careful seam at a time.
+                </p>
+                <p className="text-[var(--color-text-subtle)]">
+                  The vault opens when the forecast clears.
+                </p>
+              </div>
+
+              {/* Forecast trio */}
+              <div className="lock-fade mt-2 grid w-full max-w-[540px] grid-cols-3 gap-4 max-md:max-w-full">
+                <ForecastCell label="FORECAST" value="Brewing" />
+                <ForecastCell label="STATUS" value="In the lab" />
+                <ForecastCell label="ETA" value="Soon" />
+              </div>
+
+              {/* CTA */}
+              <div className="lock-fade mt-6 flex flex-col items-center gap-4">
+                <Link
+                  href="/contact?product=vault"
+                  className="group flex items-center gap-2.5 rounded-full border border-white/[0.12] bg-white/[0.04] px-7 py-3.5 font-body text-[14px] font-semibold text-[var(--color-text-primary)] backdrop-blur-md transition-all hover:border-white/30 hover:bg-white/[0.08]"
+                >
+                  Tell me when the vault opens
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <span className="font-body text-[10px] tracking-[3px] text-[var(--color-text-subtle)]">
+                  ONE EMAIL · NO SPAM · NO CHASING
+                </span>
+              </div>
+
+              {/* Tiny secondary signal */}
+              <div className="lock-fade mt-10 flex items-center gap-3 font-body text-[10px] tracking-[2.5px] text-[var(--color-text-subtle)]">
+                <span className="h-px w-8 bg-[var(--color-text-subtle)]" />
+                <span>{products.length} PROJECTS BREWING IN THE LAB</span>
+                <span className="h-px w-8 bg-[var(--color-text-subtle)]" />
+              </div>
+            </div>
+          </section>
+
+          <Footer />
+        </main>
+      </SmoothScroll>
+    </>
+  );
+}
+
+// Tiny forecast tile used by the lock screen
+function ForecastCell({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="glass-panel flex flex-col items-center justify-center gap-2 px-4 py-5 max-md:py-4">
+      <span className="font-body text-[9px] tracking-[2.5px] text-[var(--color-text-subtle)]">
+        {label}
+      </span>
+      <span className="font-display italic text-[22px] text-[var(--color-text-primary)] max-md:text-[18px]">
+        {value}
+      </span>
+    </div>
   );
 }

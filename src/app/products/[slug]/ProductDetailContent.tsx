@@ -10,7 +10,13 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
-import { type Product, statusLabel } from "../../../data/products";
+import {
+  type Product,
+  statusLabel,
+  formatPrice,
+  formatSecondaryPrice,
+} from "../../../data/products";
+import { useCurrency } from "../../../components/products/CurrencyContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,6 +29,9 @@ export default function ProductDetailContent({ product, next }: Props) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const bodyRef = useRef<HTMLElement>(null);
+  const { currency } = useCurrency();
+  const primaryPrice = product ? formatPrice(product.price, currency) : "";
+  const secondaryPrice = product ? formatSecondaryPrice(product.price, currency) : null;
 
   useEffect(() => {
     if (!product) return;
@@ -209,7 +218,7 @@ export default function ProductDetailContent({ product, next }: Props) {
                   {statusLabel(product.status)}
                 </span>
                 <span className="px-3 py-1.5 font-body text-[10px] font-semibold tracking-[1.5px] text-[var(--color-text-secondary)]" style={{ background: "var(--color-bg-card-alt)", border: "1px solid var(--color-border-light)" }}>
-                  {product.price}
+                  {primaryPrice}
                 </span>
                 {product.releaseDate && (
                   <span className="px-3 py-1.5 font-body text-[10px] font-semibold tracking-[1.5px] text-[var(--color-text-subtle)]" style={{ background: "var(--color-bg-card-alt)", border: "1px solid var(--color-border-light)" }}>
@@ -304,8 +313,13 @@ export default function ProductDetailContent({ product, next }: Props) {
                       PRICE
                     </span>
                     <span className="font-body text-[13px] text-[var(--color-text-secondary)]">
-                      {product.price}
+                      {primaryPrice}
                     </span>
+                    {secondaryPrice && (
+                      <span className="font-body text-[11px] text-[var(--color-text-subtle)]">
+                        {secondaryPrice}
+                      </span>
+                    )}
                   </div>
                   {product.releaseDate && (
                     <>

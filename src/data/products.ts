@@ -1,11 +1,41 @@
 export type ProductStatus = "live" | "in-development" | "beta" | "coming-soon";
 
+// ---------------------------------------------------------------------------
+// Pricing
+// -------
+// Every product carries a structured price. Only Sumi is currently locked in
+// (numbers come from `Build/product-launch-gameplan.md §04`). The rest are
+// either Free, Open source, or TBD until we lock the actual storefront, the
+// payments rails, and the launch offer.
+//
+// The website renders prices through `formatPrice(price, currency)` so we can
+// show MYR for visitors in Malaysia and USD everywhere else, while keeping
+// the source of truth in one place.
+// ---------------------------------------------------------------------------
+export type ProductPrice =
+  | { kind: "tbd" }
+  | { kind: "free" }
+  | { kind: "open-source" }
+  | {
+      kind: "paid";
+      // Display strings — already formatted with the right symbols.
+      // We keep parallel strings (not raw numbers) so we can express
+      // "early bird", "lifetime", "one-time", etc. naturally.
+      usd: string;
+      myr: string;
+      // Optional shorter label, used when the card is tight on space.
+      shortUsd?: string;
+      shortMyr?: string;
+    };
+
+export type Currency = "USD" | "MYR";
+
 export type Product = {
   slug: string;
   name: string;
   tagline: string;
   status: ProductStatus;
-  price: string;
+  price: ProductPrice;
   cta: {
     label: string;
     href: string;
@@ -18,6 +48,23 @@ export type Product = {
     soft: string;      // 8–12% alpha tint for backgrounds
     border: string;    // 25–35% alpha tint for borders
     glow: string;      // 12–20% alpha tint for hover shadow
+  };
+  // How the big product mark on the card is rendered. "italic" uses the
+  // Instrument Serif display face (default for editorial products), "sans"
+  // uses the Nimbus body font for products whose own brand is closer to
+  // the Nimbus website itself.
+  markStyle?: "italic" | "sans";
+  // Visual treatment of the card preview. Either a real screenshot of the
+  // shipped product, or an honest "in build" placeholder.
+  mockup: {
+    // "screenshot" — show a real PNG of the live product (must provide image)
+    // "concept"    — show an honest "in build" treatment with the accent +
+    //                product mark, no fake UI
+    type: "screenshot" | "concept";
+    // Path under /public — required when type === "screenshot"
+    image?: string;
+    // Hint to the renderer about how to frame the screenshot.
+    device?: "laptop" | "phone" | "desktop" | "terminal" | "poster";
   };
   // Short description used on the curated wall card.
   cardDescription: string;
@@ -51,7 +98,7 @@ export const products: Product[] = [
     tagline:
       "A keyboard-first second brain. Local, fast, with no AI crutch in the way.",
     status: "live",
-    price: "Free · paid tier coming",
+    price: { kind: "tbd" },
     cta: {
       label: "Open Koji",
       href: "https://koji-seven.vercel.app/",
@@ -62,6 +109,11 @@ export const products: Product[] = [
       soft: "#F5F5F014",
       border: "#F5F5F040",
       glow: "#F5F5F022",
+    },
+    mockup: {
+      type: "screenshot",
+      image: "/products/koji-screenshot.png",
+      device: "laptop",
     },
     cardDescription:
       "Three views, forty shortcuts, one place to think. Built because every other tool tried to organise me.",
@@ -85,16 +137,23 @@ export const products: Product[] = [
     tagline:
       "A drinking game for 4–8 friends who already know each other too well.",
     status: "in-development",
-    price: "Free",
+    price: { kind: "free" },
     cta: {
       label: "Join the launch list",
       href: "/contact?product=syp",
     },
+    // SYP doesn't have its own visual brand yet — it lives inside the Nimbus
+    // house style, so its card uses the Nimbus website palette + body font.
     accent: {
-      hex: "#A8FF60",
-      soft: "#A8FF6014",
-      border: "#A8FF6040",
-      glow: "#A8FF6020",
+      hex: "#7C5CFC",
+      soft: "#7C5CFC14",
+      border: "#7C5CFC40",
+      glow: "#7C5CFC2A",
+    },
+    markStyle: "sans",
+    mockup: {
+      type: "concept",
+      device: "phone",
     },
     cardDescription:
       "Pass the phone. Read the prompt. Find out who actually voted for who. The game gets rougher the longer the night runs.",
@@ -112,45 +171,22 @@ export const products: Product[] = [
     order: 2,
   },
   {
-    slug: "daftar",
-    name: "Daftar",
-    tagline:
-      "Quotes, invoices, and clients for Malaysian freelancers who hate spreadsheets.",
-    status: "in-development",
-    price: "Free tier · RM 19/mo Pro",
-    cta: {
-      label: "Join the waitlist",
-      href: "/contact?product=daftar",
-    },
-    accent: {
-      hex: "#C9986A",
-      soft: "#C9986A14",
-      border: "#C9986A40",
-      glow: "#C9986A22",
-    },
-    cardDescription:
-      "The CRM I'm building for myself first. Quote → invoice → paid → tracked, with Malaysian freelancers in mind from line one.",
-    longDescription:
-      "Daftar is the freelance toolbox I needed and couldn't find. Most freelancer CRMs are built in the US for a US tax system, US payment rails, and US clients. Malaysian solo operators end up gluing together Notion, Google Sheets, free PDF templates, and a bank app to get paid. Daftar collapses all of that into one tool.\n\nAt v1: a quote builder with reusable line items, an invoice generator that matches Malaysian formatting expectations, a client list with status (lead → quoted → in-build → paid), and a simple cashflow view. At v2: Billplz integration, MyKad-friendly invoice fields, and a public quote sharing link so you can send a quote without forcing your client to download a PDF.",
-    features: [
-      "Quote builder with reusable templates and line items",
-      "Invoice generator with Malaysian formatting (SST, ringgit, sequential numbering)",
-      "Client list with stages: lead → quoted → in-build → paid",
-      "Public quote sharing links",
-      "Billplz payment link integration (v2)",
-      "Free tier covers up to 3 active clients",
-    ],
-    category: "Freelance Tools",
-    releaseDate: "Q3 2026",
-    order: 3,
-  },
-  {
     slug: "sumi",
     name: "Sumi",
     tagline:
       "A focus and journal app shaped like an ink wash. Quiet, calm, mobile-first.",
     status: "in-development",
-    price: "RM 149 / year · RM 299 lifetime",
+    // ⚠ LOCKED — confirmed in Build/product-launch-gameplan.md §04
+    // Free tier: 1 entry/day, 1 focus theme.
+    // Plus: RM 19/month or RM 149/year (~$33/year).
+    // Lifetime: RM 299 (~$65), first 100 buyers only as launch offer.
+    price: {
+      kind: "paid",
+      usd: "$33 / year · $65 lifetime",
+      myr: "RM 149 / year · RM 299 lifetime",
+      shortUsd: "from $33/yr",
+      shortMyr: "from RM 149/yr",
+    },
     cta: {
       label: "Join the beta",
       href: "/contact?product=sumi",
@@ -160,6 +196,10 @@ export const products: Product[] = [
       soft: "#94A3B814",
       border: "#94A3B840",
       glow: "#94A3B822",
+    },
+    mockup: {
+      type: "concept",
+      device: "phone",
     },
     cardDescription:
       "Three themes, one job — make space for your own thoughts. Built in Flutter, designed to be the calmest app on your phone.",
@@ -183,7 +223,7 @@ export const products: Product[] = [
     tagline:
       "A desktop fire demon powered by Claude. Lives in the corner of your screen and judges your code.",
     status: "in-development",
-    price: "Free · RM 49 Pro lifetime",
+    price: { kind: "tbd" },
     cta: {
       label: "Join the alpha",
       href: "/contact?product=calcifer",
@@ -193,6 +233,10 @@ export const products: Product[] = [
       soft: "#FF7A1A14",
       border: "#FF7A1A40",
       glow: "#FF7A1A26",
+    },
+    mockup: {
+      type: "concept",
+      device: "desktop",
     },
     cardDescription:
       "Hotkey, ask, get answered. A small floating flame with seven moods, powered by the Claude CLI under the hood.",
@@ -215,7 +259,7 @@ export const products: Product[] = [
     tagline:
       "A display typeface for builders who want their headlines to feel made, not assembled.",
     status: "coming-soon",
-    price: "RM 45 personal · RM 225 commercial",
+    price: { kind: "tbd" },
     cta: {
       label: "Get notified at launch",
       href: "/contact?product=nimbus-display",
@@ -226,6 +270,10 @@ export const products: Product[] = [
       border: "#F5E6C840",
       glow: "#F5E6C822",
     },
+    mockup: {
+      type: "concept",
+      device: "poster",
+    },
     cardDescription:
       "One weight, full Latin set, opentype features for editorial work. The first font in the Nimbus type catalogue.",
     longDescription:
@@ -234,7 +282,7 @@ export const products: Product[] = [
       "Single weight (Regular) — wide-ranging OpenType features",
       "Full Latin character set + extended punctuation",
       "OTF + WOFF2 bundle, no subscription",
-      "Personal license: indie + freelance up to RM 100K/yr revenue",
+      "Personal license: indie + freelance — small revenue cap",
       "Commercial license: perpetual, per-company",
     ],
     category: "Typography",
@@ -247,7 +295,7 @@ export const products: Product[] = [
     tagline:
       "An AI CLI engine. Eleven themed agents that build full MVPs from a single brief.",
     status: "coming-soon",
-    price: "Open source",
+    price: { kind: "open-source" },
     cta: {
       label: "Star on GitHub",
       href: "https://github.com/CwCw0",
@@ -258,6 +306,10 @@ export const products: Product[] = [
       soft: "#5EEAD414",
       border: "#5EEAD440",
       glow: "#5EEAD422",
+    },
+    mockup: {
+      type: "concept",
+      device: "terminal",
     },
     cardDescription:
       "npx invoker → write a brief → eleven agents (Architect, Forger, Sentinel, Scribe…) build your MVP in front of you.",
@@ -279,7 +331,7 @@ export const products: Product[] = [
     name: "Aurora",
     tagline: "Coming soon. We're not telling you what it is yet.",
     status: "coming-soon",
-    price: "TBD",
+    price: { kind: "tbd" },
     cta: {
       label: "Get the reveal",
       href: "/contact?product=aurora",
@@ -289,6 +341,10 @@ export const products: Product[] = [
       soft: "#A78BFA14",
       border: "#A78BFA40",
       glow: "#A78BFA22",
+    },
+    mockup: {
+      type: "concept",
+      device: "poster",
     },
     cardDescription:
       "Something we're not ready to talk about yet. Sign up to be first when it lands.",
@@ -328,4 +384,46 @@ export function statusLabel(status: ProductStatus): string {
     case "coming-soon":
       return "COMING SOON";
   }
+}
+
+// ---------------------------------------------------------------------------
+// formatPrice
+// -----------
+// Returns the user-facing price string for a product, respecting the
+// visitor's currency. We always show the *user's* currency as the primary
+// label and never auto-convert numbers — every product carries hand-tuned
+// USD and MYR labels so launch offers stay coherent in both regions.
+//
+// `compact` returns the short form when the card is space-constrained
+// (used on small grid tiles).
+// ---------------------------------------------------------------------------
+export function formatPrice(
+  price: ProductPrice,
+  currency: Currency,
+  compact = false
+): string {
+  switch (price.kind) {
+    case "tbd":
+      return "Pricing TBD";
+    case "free":
+      return "Free";
+    case "open-source":
+      return "Open source";
+    case "paid":
+      if (currency === "MYR") {
+        return compact && price.shortMyr ? price.shortMyr : price.myr;
+      }
+      return compact && price.shortUsd ? price.shortUsd : price.usd;
+  }
+}
+
+// Returns the *secondary* (non-primary) currency string for a paid product,
+// or null if there isn't one (free, tbd, open-source). Used to show
+// "$33/yr · ~RM 149/yr" style dual labels.
+export function formatSecondaryPrice(
+  price: ProductPrice,
+  currency: Currency
+): string | null {
+  if (price.kind !== "paid") return null;
+  return currency === "MYR" ? price.usd : price.myr;
 }
