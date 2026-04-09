@@ -17,6 +17,495 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "ai-is-not-taking-your-job",
+    tag: "Trends",
+    date: "April 8, 2026",
+    readTime: "7 min read",
+    title: "AI Is Not Taking Your Job. But It Is Changing It.",
+    excerpt:
+      "Everyone's panicking about AI replacing developers. Here's what's actually happening — and why the builders who adapt will thrive.",
+    image:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+    tocItems: [
+      "The Panic Is Loud",
+      "What the Numbers Actually Say",
+      "What AI Is Really Good At",
+      "What AI Can't Do",
+      "The Developer Who Adapts",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "If you've been paying attention to tech Twitter — or LinkedIn, or Reddit, or basically anywhere people argue on the internet — you've probably seen some version of this take: AI is going to replace developers. It's over. Learn prompt engineering or start looking for a new career.",
+      },
+      {
+        type: "p",
+        text: "I need to tell you something you probably don't want to hear — and it's not that. The truth is both more nuanced and more useful than the doomer takes or the hype. AI isn't replacing developers. But it is reshaping what we do, how we do it, and which skills matter most. And if you understand that shift, you're in a better position than 90% of the people panicking right now.",
+      },
+      {
+        type: "h2",
+        text: "The Panic Is Loud",
+      },
+      {
+        type: "p",
+        text: "I get why people are worried. GitHub Copilot is now writing 46% of the average developer's code. Claude Code went from preview to general availability and saw a 5.5x revenue increase in months. Stack Overflow's 2024 Developer Survey found that 62% of developers are already using AI tools in their workflow, up from 44% the year before. That's a massive adoption curve.",
+      },
+      {
+        type: "p",
+        text: "And when you see headlines like \"AI Is Writing Half Your Code\" — yeah, that's going to make people nervous. But headlines are designed to make you feel something. The data tells a different story.",
+      },
+      {
+        type: "h2",
+        text: "What the Numbers Actually Say",
+      },
+      {
+        type: "p",
+        text: "The Future of Jobs Report 2025 lists software and AI-related roles as the fastest-growing job categories globally — with an estimated 540,000 new software engineering positions in 2025 alone. Job postings mentioning AI development skills are up 45% since 2023. Developers with AI fluency are commanding 30% higher salaries. That doesn't sound like an industry that's dying.",
+      },
+      {
+        type: "p",
+        text: "McKinsey's research on generative AI and developer productivity found that teams using AI tools saw a 20-30% improvement in efficiency — mostly in code generation and refactoring. But here's the part people skip: developers using these tools were more than twice as likely to report happiness, fulfillment, and flow at work. Not because the tools replaced them — but because they automated the grunt work that kept them from the interesting problems.",
+      },
+      {
+        type: "quote",
+        text: "AI isn't making developers obsolete. It's making the boring parts of development obsolete. That's a very different thing.",
+      },
+      {
+        type: "h2",
+        text: "What AI Is Really Good At",
+      },
+      {
+        type: "p",
+        text: "Let me be honest about this. AI coding tools are genuinely impressive at certain things. GitHub Copilot users complete tasks 55% faster in controlled experiments. It's excellent at boilerplate — scaffolding a component, writing a utility function, generating test stubs. It's good at pattern recognition — if you've written three similar functions, it'll suggest the fourth. And it's fast at the stuff that used to take you 20 minutes of Stack Overflow searches.",
+      },
+      {
+        type: "p",
+        text: "But the acceptance rate for Copilot suggestions? Only 30%. That means developers find roughly one in three suggestions worth keeping. The other two out of three get rejected, modified, or ignored. Because code isn't just about generating text that compiles — it's about making the right decisions for the right context.",
+      },
+      {
+        type: "h2",
+        text: "What AI Can't Do",
+      },
+      {
+        type: "ol",
+        text: "",
+        items: [
+          "**Understand your user** — AI doesn't know your customer's frustration, your business constraints, or why that edge case matters more than the happy path. Product thinking is still human thinking.",
+          "**Make architectural decisions** — Choosing between a monolith and microservices, deciding where to draw the boundaries of a system, planning for scale — these require judgement, experience, and context that AI doesn't have.",
+          "**Navigate ambiguity** — Real-world projects are full of unclear requirements, changing specs, and competing priorities. AI needs clear prompts. Humans navigate chaos.",
+          "**Mentor and communicate** — Code reviews, team decisions, explaining trade-offs to non-technical stakeholders — the human side of engineering is only getting more important as the technical execution gets faster.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "The Developer Who Adapts",
+      },
+      {
+        type: "p",
+        text: "The popular phrase going around is \"AI won't replace developers, but a developer using AI will.\" And I think there's truth in that — but it's incomplete. The developer who thrives isn't just the one who learns to use Copilot or Claude. It's the one who understands what to build, why it matters, and how to think about problems at a level that AI can't reach yet.",
+      },
+      {
+        type: "p",
+        text: "That means studying design, product thinking, business, and communication — not just React and TypeScript. It means being the person who can take a vague idea and turn it into something real, not just the person who can write the code faster. The tools will keep getting better at the coding part. Your job is to keep getting better at everything else.",
+      },
+      {
+        type: "p",
+        text: "So no — AI is not taking your job. But it is changing what your job looks like. And the developers who see that as an opportunity, not a threat, are the ones who will build what comes next.",
+      },
+    ],
+    relatedSlugs: [
+      "the-ai-debate-what-both-sides-get-right",
+      "the-builders-mindset",
+      "why-i-study-more-than-just-code",
+    ],
+  },
+  {
+    slug: "payment-gateways-in-malaysia",
+    tag: "Development",
+    date: "April 1, 2026",
+    readTime: "6 min read",
+    title: "A Developer's Guide to Payment Gateways in Malaysia",
+    excerpt:
+      "If you're building e-commerce in Malaysia, choosing the right payment gateway can make or break your project. Here's what I've learned.",
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
+    tocItems: [
+      "Why This Matters Locally",
+      "The Main Players",
+      "FPX Is King",
+      "Choosing the Right One",
+      "What I'd Pick",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "One of the first things I realised when I started building for real clients in Malaysia is that payments are a completely different world here. You can't just slap Stripe on everything and call it a day — not because Stripe is bad, but because the way Malaysians pay for things online is fundamentally different from the US or Europe.",
+      },
+      {
+        type: "p",
+        text: "This is the kind of local knowledge that doesn't show up in tutorials. Most coding content is written from a Western perspective — Stripe, PayPal, maybe Square. But if you're building for a Malaysian market, you need to understand FPX, DuitNow, e-wallets, and the local gateway ecosystem. So let me break it down.",
+      },
+      {
+        type: "h2",
+        text: "Why This Matters Locally",
+      },
+      {
+        type: "p",
+        text: "Malaysian consumers overwhelmingly prefer FPX — direct online bank transfers — over credit cards. It's fast, it's trusted, and almost everyone with a bank account can use it. DuitNow QR is growing fast for in-person and mobile payments. E-wallets like Touch 'n Go, GrabPay, and Boost have massive adoption. And Buy Now Pay Later is expected to grow 22% in 2025.",
+      },
+      {
+        type: "p",
+        text: "If you build a checkout that only accepts Visa and Mastercard, you're going to lose customers. That's not a design problem — it's a market understanding problem. And this is exactly why developers need to study more than just code.",
+      },
+      {
+        type: "h2",
+        text: "The Main Players",
+      },
+      {
+        type: "ol",
+        text: "",
+        items: [
+          "**Billplz** — The developer-friendly choice. No setup fees, no annual fees on the basic plan. Clean REST API, supports FPX with next-business-day settlement. Integrates with Shopify, WooCommerce, and EasyStore. If you're a solo developer or small agency building for Malaysian SMEs, this is probably where you start.",
+          "**iPay88 (now ADAPTIS)** — The established giant. Recently rebranded under NTT DATA Payment Services, consolidating iPay88 and eGHL. Broader payment options including multi-currency and BNPL. Better suited for larger businesses or those expanding regionally across Southeast Asia.",
+          "**Stripe** — The global standard. Supports 135+ currencies, world-class developer documentation, and the best API experience in the industry. Available in Malaysia, but its real strength is if you're serving international customers alongside local ones.",
+          "**Revenue Monster** — A local player with strong DuitNow QR and e-wallet support. Good for businesses that need unified online and offline payments. Their SDK is decent but less polished than Stripe or Billplz.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "FPX Is King",
+      },
+      {
+        type: "p",
+        text: "If there's one thing I want you to take away from this post, it's that FPX support is non-negotiable for any Malaysian e-commerce project. It's the equivalent of not supporting credit cards in the US. FPX connects directly to all major Malaysian banks — Maybank, CIMB, Public Bank, RHB, you name it. The customer just selects their bank, logs into their banking portal, and confirms the payment. No card numbers, no expiry dates, no CVV.",
+      },
+      {
+        type: "quote",
+        text: "Building for Malaysia without understanding FPX is like building for the US without supporting credit cards. The best code in the world won't save you if the checkout doesn't match how your users actually pay.",
+      },
+      {
+        type: "h2",
+        text: "Choosing the Right One",
+      },
+      {
+        type: "p",
+        text: "Here's my practical framework. If your client is a local SME selling to Malaysians — go with Billplz. Low cost, easy integration, FPX-first. If your client needs multi-currency, regional expansion, or BNPL — look at iPay88/ADAPTIS. If you're building a SaaS or marketplace with international customers — Stripe, and layer a local gateway for FPX on top if needed. If your client needs unified online and offline payments with e-wallet support — Revenue Monster.",
+      },
+      {
+        type: "h2",
+        text: "What I'd Pick",
+      },
+      {
+        type: "p",
+        text: "For most of the projects I work on — smaller businesses, local clients, straightforward e-commerce — I'd start with Billplz. The API is clean, the pricing is transparent, and it covers the payment methods that Malaysian customers actually use. For anything that needs to scale internationally, I'd layer Stripe on top.",
+      },
+      {
+        type: "p",
+        text: "The broader lesson here isn't really about payment gateways. It's about understanding the market you're building for. The best technical solution means nothing if it doesn't fit how your users actually behave. And that's something no framework or AI tool can tell you — you have to learn it by building in the real world.",
+      },
+    ],
+    relatedSlugs: [
+      "the-modern-developers-landscape",
+      "why-i-study-more-than-just-code",
+      "the-builders-mindset",
+    ],
+  },
+  {
+    slug: "building-in-southeast-asia",
+    tag: "Life",
+    date: "March 25, 2026",
+    readTime: "6 min read",
+    title: "What It's Like Building Tech in Southeast Asia Right Now",
+    excerpt:
+      "Malaysia's digital economy is booming. Here's what I see from the ground — and why this region is one of the most exciting places to be a developer.",
+    image:
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=1200&q=80",
+    tocItems: [
+      "The Numbers Are Real",
+      "AI Is Leading the Charge",
+      "The Local Advantage",
+      "Freelancing From Here",
+      "Why I'm Staying",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "When people think about the global tech scene, they think San Francisco, London, maybe Berlin. Southeast Asia barely gets a mention — and honestly, that's fine by me. Because while everyone's looking the other way, something massive is happening here.",
+      },
+      {
+        type: "h2",
+        text: "The Numbers Are Real",
+      },
+      {
+        type: "p",
+        text: "MDEC — Malaysia's Digital Economy Corporation — secured RM 87.4 billion in approved digital investments in 2025. That's not a typo. By mid-year, digital investments had already hit RM 42.6 billion, a 125% growth quarter-on-quarter. The digital transformation market in Malaysia was valued at USD 10.68 billion in 2025, with projections to reach nearly USD 30 billion by 2031.",
+      },
+      {
+        type: "p",
+        text: "These aren't abstract numbers. This is money flowing into the ecosystem I work in every day. New companies, new projects, new opportunities for developers who understand the local landscape.",
+      },
+      {
+        type: "h2",
+        text: "AI Is Leading the Charge",
+      },
+      {
+        type: "p",
+        text: "What's driving the investment? AI. Malaysia's positioning itself as an AI hub in ASEAN, with the ambition of becoming an \"AI Nation\" by 2030. The MDEC investments are expected to generate over 31,000 high-value jobs — more than 12,600 of those in AI alone, followed by global business services, data centres, and cloud infrastructure.",
+      },
+      {
+        type: "p",
+        text: "The major cloud providers are all here or coming — data centres are springing up across the Klang Valley and Johor. That infrastructure creates a ripple effect: more data centres mean more cloud services, which mean more SaaS products, which mean more need for developers who can build on top of that stack.",
+      },
+      {
+        type: "quote",
+        text: "The best time to build in Southeast Asia was five years ago. The second best time is right now.",
+      },
+      {
+        type: "h2",
+        text: "The Local Advantage",
+      },
+      {
+        type: "p",
+        text: "Here's something I don't see enough people talking about: if you're a developer in Malaysia who understands the local market, you have an advantage that international agencies can't easily replicate. You understand FPX payments, you know the regulatory landscape, you speak the language — literally and culturally. Local businesses need local developers who get their context.",
+      },
+      {
+        type: "p",
+        text: "And the cost of living here means you can charge competitive rates internationally while living well. A freelance developer earning in USD or GBP while based in KL is in an incredibly strong position. The Asia Pacific freelance market is growing at the fastest rate globally, driven by digitalization and the shift to remote work across the region.",
+      },
+      {
+        type: "h2",
+        text: "Freelancing From Here",
+      },
+      {
+        type: "p",
+        text: "The global freelance platforms market is projected to reach USD 24 billion by 2033, with 34% of freelancers working in web, mobile, and software development. That's a massive addressable market. And from Southeast Asia, you can serve clients across time zones — overlapping with Australia in the morning, Europe in the afternoon, and the US in the evening.",
+      },
+      {
+        type: "ol",
+        text: "",
+        items: [
+          "**Local clients, local knowledge** — Malaysian SMEs are digitising fast. They need websites, e-commerce, and internal tools. You understand their needs better than an agency in London ever could.",
+          "**International clients, competitive rates** — Your skills are globally competitive, and your cost base lets you offer better value. That's not undercutting — that's leveraging your position intelligently.",
+          "**The ecosystem is maturing** — Co-working spaces, tech communities, government grants through MDEC — the support infrastructure for builders is real and growing.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Why I'm Staying",
+      },
+      {
+        type: "p",
+        text: "I could chase the idea of moving to a \"bigger\" tech hub. A lot of developers here think about it. But I genuinely believe that Southeast Asia — and Malaysia specifically — is one of the most interesting places to be a developer right now. The growth is real, the opportunities are expanding, and there's a sense of possibility that you don't get in markets that are already saturated.",
+      },
+      {
+        type: "p",
+        text: "The developers who build here, who understand this market, who create products and services for this region — they're going to be the ones who shape what comes next. And I want to be part of that.",
+      },
+    ],
+    relatedSlugs: [
+      "payment-gateways-in-malaysia",
+      "the-modern-developers-landscape",
+      "from-music-teacher-to-developer",
+    ],
+  },
+  {
+    slug: "learn-to-think-not-just-to-code",
+    tag: "Development",
+    date: "March 18, 2026",
+    readTime: "6 min read",
+    title: "Learn to Think, Not Just to Code",
+    excerpt:
+      "The best developers I've studied aren't just great coders. They're great thinkers. Here's what Apple, Netflix, and Google taught me about building.",
+    image:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80",
+    tocItems: [
+      "Code Is the Easy Part",
+      "Start With the Customer",
+      "Freedom Requires Responsibility",
+      "The Builder's Lens",
+      "How I Practice This",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "There's a difference between someone who writes code and someone who builds products. Both can make a button work. But one of them understands why the button should exist in the first place, where it should go, and what happens when 10,000 people click it at the same time. The gap between those two isn't technical skill — it's thinking.",
+      },
+      {
+        type: "h2",
+        text: "Code Is the Easy Part",
+      },
+      {
+        type: "p",
+        text: "I know that sounds like a controversial take, especially if you're in the middle of learning and everything feels impossibly hard. But hear me out. Code is learnable. There are tutorials, documentation, Stack Overflow answers, and now AI tools that can help you write nearly anything. The mechanics of coding are a solved problem — you just need time and practice.",
+      },
+      {
+        type: "p",
+        text: "What's not easily taught is how to think about what you're building. How to make decisions under uncertainty. How to design systems that serve people, not just pass tests. How to look at a problem and see the solution that nobody else is seeing. That's the real skill — and it doesn't come from learning another framework.",
+      },
+      {
+        type: "h2",
+        text: "Start With the Customer",
+      },
+      {
+        type: "p",
+        text: "Steve Jobs said something that I think about constantly: \"You've got to start with the customer experience and work backwards to the technology. You can't start with the technology and try to figure out where you're going to sell it.\" Most developers do the exact opposite. They pick a tech stack, learn the framework, then try to find a problem to solve with it.",
+      },
+      {
+        type: "p",
+        text: "Apple's early marketing philosophy, written by Mike Markkula, had three principles. First — empathy: \"We will truly understand their needs better than any other company.\" Second — focus: \"We must eliminate all of the unimportant opportunities.\" Third — impute: people form opinions based on how something is presented. These aren't design principles. They're thinking principles. And they apply to every product you'll ever build.",
+      },
+      {
+        type: "quote",
+        text: "When you're a carpenter making a beautiful chest of drawers, you're not going to use a piece of plywood on the back, even though it faces the wall and nobody will ever see it. You'll know it's there, so you're going to use a beautiful piece of wood in the back.",
+      },
+      {
+        type: "p",
+        text: "That's Jobs again. And it's not about perfectionism — it's about caring at a level that shapes everything you make, even the parts nobody sees.",
+      },
+      {
+        type: "h2",
+        text: "Freedom Requires Responsibility",
+      },
+      {
+        type: "p",
+        text: "Netflix's engineering culture operates on a principle they call \"freedom and responsibility.\" Engineers have the freedom to choose their tools, their approach, even their methodology — there's no enforced development process. But that freedom comes with full ownership. You don't just write the code. You deploy it, monitor it, debug it when it breaks at 3 AM, and plan how it scales.",
+      },
+      {
+        type: "p",
+        text: "As Netflix puts it: \"It takes an unusually responsible person to thrive on this level of freedom — someone who's self-motivated, self-aware and self-disciplined, who doesn't wait to be told what to do.\" That's not a description of a coder. That's a description of a builder. Someone who thinks beyond the pull request.",
+      },
+      {
+        type: "h2",
+        text: "The Builder's Lens",
+      },
+      {
+        type: "p",
+        text: "Google's approach to hiring has always emphasised problem-solving ability over specific technical knowledge. They want people who can break down ambiguous problems, reason through trade-offs, and arrive at solutions that consider the full picture — users, systems, business, and scale.",
+      },
+      {
+        type: "ol",
+        text: "",
+        items: [
+          "**Think in users, not features** — Every feature is a solution to someone's problem. If you can't articulate whose problem you're solving, you're building the wrong thing.",
+          "**Think in systems, not files** — A component doesn't exist in isolation. It exists in a system with state, routing, APIs, and user flows. Understand the system before you touch the code.",
+          "**Think in outcomes, not outputs** — Shipping code is an output. Helping a user accomplish their goal is an outcome. One is measurable. The other is meaningful.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "How I Practice This",
+      },
+      {
+        type: "p",
+        text: "I study companies, not just codebases. I read about how Apple approaches product launches, how Netflix structures their engineering teams, how Stripe designs their API documentation. I study design systems, marketing psychology, business models. Not because I'm trying to become a CEO — but because all of these things make me a better builder.",
+      },
+      {
+        type: "p",
+        text: "Code is the tool. Thinking is the skill. And in a world where AI is getting better at the tool part every day, the developers who invest in the thinking part are the ones who will be impossible to replace.",
+      },
+    ],
+    relatedSlugs: [
+      "why-i-study-more-than-just-code",
+      "the-builders-mindset",
+      "ai-is-not-taking-your-job",
+    ],
+  },
+  {
+    slug: "starting-a-dev-business",
+    tag: "Process",
+    date: "March 10, 2026",
+    readTime: "7 min read",
+    title: "What I Wish I Knew Before Starting a Dev Business",
+    excerpt:
+      "Going freelance was one of the best decisions I've made. But it wasn't the decision itself that mattered — it was everything I learned after making it.",
+    image:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80",
+    tocItems: [
+      "The Leap",
+      "What Nobody Tells You",
+      "The Business Side",
+      "Finding Your First Clients",
+      "What I'd Tell Myself",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "When I decided to start freelancing as a developer, I thought the hard part would be the technical work. Build the thing, deliver the thing, get paid for the thing. Straightforward, right? It took about two weeks of actual client work to realise that the code is maybe 40% of what you actually do. The rest is communication, scope management, pricing, invoicing, and all the unglamorous business stuff that nobody teaches you in a tutorial.",
+      },
+      {
+        type: "h2",
+        text: "The Leap",
+      },
+      {
+        type: "p",
+        text: "The global freelance workforce is massive — roughly 1.57 billion people worldwide, with 34% of freelancers working in web, mobile, and software development. The market is projected to nearly quadruple to USD 24 billion by 2033. So the opportunity is real. But opportunity and execution are two very different things.",
+      },
+      {
+        type: "p",
+        text: "I didn't start with a perfectly polished portfolio or a client list. I started with skills, a willingness to figure things out, and the understanding that I'd make mistakes along the way. And I did. Plenty of them. But every mistake taught me something that made the next project better.",
+      },
+      {
+        type: "h2",
+        text: "What Nobody Tells You",
+      },
+      {
+        type: "ol",
+        text: "",
+        items: [
+          "**Pricing is emotional, not logical** — You'll undercharge at first because you're scared of losing the client. Then you'll learn that clients who pay more are usually easier to work with, more respectful of your time, and more serious about the project.",
+          "**Scope creep is the real enemy** — \"Can you just add one more thing?\" is the sentence that has cost more freelancers more money than anything else. Learn to define scope clearly upfront, and have a process for handling changes.",
+          "**Communication matters more than code** — The clients who come back aren't always the ones who got the fanciest code. They're the ones who felt heard, informed, and respected throughout the process. Weekly updates, clear timelines, and honest conversations about problems go further than any technical skill.",
+          "**You need systems, not just skills** — Invoicing, contracts, project tracking, file management — the boring infrastructure is what separates a sustainable business from a stressful side hustle.",
+        ],
+      },
+      {
+        type: "quote",
+        text: "The best freelance developers aren't the best coders. They're the best communicators who also happen to write good code.",
+      },
+      {
+        type: "h2",
+        text: "The Business Side",
+      },
+      {
+        type: "p",
+        text: "Here's what I've had to learn that has nothing to do with code: how to write a quote that's clear and professional, how to structure payment milestones so I'm not chasing invoices, how to say no to projects that aren't the right fit, and how to price my work in a way that's fair for both sides.",
+      },
+      {
+        type: "p",
+        text: "I've also had to learn when to use a contract template versus when to customise, how to handle the awkward conversation when a client wants more than what was agreed, and how to manage my time when nobody is telling me what to do next. These are business skills, not coding skills. And they matter just as much.",
+      },
+      {
+        type: "h2",
+        text: "Finding Your First Clients",
+      },
+      {
+        type: "p",
+        text: "The first client is the hardest. Not because the work is difficult — but because you have no proof yet. No portfolio of paid work, no testimonials, no track record. Here's what worked for me: building projects that demonstrated my skills, being visible in communities where potential clients hang out, and treating every interaction as a chance to show that I'm reliable, thoughtful, and easy to work with.",
+      },
+      {
+        type: "p",
+        text: "Your portfolio doesn't need ten projects. It needs two or three that are polished, well-presented, and clearly show what you can do. Quality over quantity — always. And once you land that first client and deliver well, the second one comes easier. And the third even easier than that.",
+      },
+      {
+        type: "h2",
+        text: "What I'd Tell Myself",
+      },
+      {
+        type: "p",
+        text: "If I could go back to the version of me who was just starting out, I'd say three things. First — charge what you're worth, not what you're comfortable asking for. Second — invest in the business side as much as the technical side. Third — every project teaches you something, even the ones that don't go perfectly.",
+      },
+      {
+        type: "p",
+        text: "Starting a dev business isn't just a career move. It's a crash course in everything they don't teach you in tutorials — communication, negotiation, time management, and self-belief. The technical skills got me in the door. But the business skills are what keep it open.",
+      },
+    ],
+    relatedSlugs: [
+      "building-in-southeast-asia",
+      "the-builders-mindset",
+      "why-i-study-more-than-just-code",
+    ],
+  },
+  {
     slug: "from-music-teacher-to-developer",
     tag: "Life",
     date: "February 2, 2026",

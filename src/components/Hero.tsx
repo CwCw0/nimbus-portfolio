@@ -186,8 +186,8 @@ export default function Hero() {
             letterSpacing: "-0.03em",
           }}
         >
-          For Builders,{" "}
-          <span className="text-[var(--color-accent)]">By Builders.</span>
+          Built with{" "}
+          <span className="text-[var(--color-accent)]">intention.</span>
         </h1>
 
         <p
