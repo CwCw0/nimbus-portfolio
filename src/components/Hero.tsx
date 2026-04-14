@@ -15,6 +15,7 @@ export default function Hero() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const mouseGlowRef = useRef<HTMLDivElement>(null);
+  const cornersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -71,6 +72,7 @@ export default function Hero() {
       if (subtextRef.current) gsap.set(subtextRef.current, { opacity: 0, y: 40 });
       if (ctaRef.current) gsap.set(ctaRef.current, { opacity: 0, y: 30 });
       if (scrollIndicatorRef.current) gsap.set(scrollIndicatorRef.current, { opacity: 0 });
+      if (cornersRef.current) gsap.set(cornersRef.current, { opacity: 0 });
 
       // Word-by-word reveal timeline
       const tl = gsap.timeline({ delay: 0.3 });
@@ -99,6 +101,13 @@ export default function Hero() {
         scrollIndicatorRef.current,
         { opacity: 1, duration: 0.6 },
         "-=0.2"
+      );
+
+      // Corner marks fade in last — slow and graceful
+      tl.to(
+        cornersRef.current,
+        { opacity: 1, duration: 2, ease: "power1.out" },
+        "-=0.4"
       );
 
       // Parallax on scroll — desktop only
@@ -180,7 +189,7 @@ export default function Hero() {
       />
 
       {/* Subtle corner marks */}
-      <div className="pointer-events-none absolute inset-0 max-md:hidden">
+      <div ref={cornersRef} className="pointer-events-none absolute inset-0 max-md:hidden">
         <div className="absolute left-16 top-24 h-12 w-px bg-[var(--color-accent)] opacity-[0.08]" />
         <div className="absolute left-16 top-24 h-px w-12 bg-[var(--color-accent)] opacity-[0.08]" />
         <div className="absolute right-16 top-24 h-12 w-px bg-[var(--color-accent)] opacity-[0.08]" />
@@ -261,7 +270,10 @@ export default function Hero() {
         <span className="font-body text-[10px] font-medium tracking-[3px] text-[var(--color-text-subtle)]">
           SCROLL
         </span>
-        <ChevronDown className="h-4 w-4 text-[var(--color-text-subtle)] animate-bounce" style={{ animationDuration: "2s" }} />
+        <ChevronDown
+          className="h-4 w-4 text-(--color-text-subtle)"
+          style={{ animation: "float 3s ease-in-out infinite" }}
+        />
       </div>
     </section>
   );
