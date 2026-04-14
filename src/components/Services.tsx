@@ -24,8 +24,8 @@ const services = [
   {
     num: "02",
     icon: Palette,
-    title: "Branding",
-    desc: "Visual identity systems that tell your story. Logos, color palettes, typography and brand guidelines.",
+    title: "Visual Design",
+    desc: "Colour systems, typography, and component design that give your product a look built with intent — not picked from a template.",
   },
   {
     num: "03",
