@@ -8,7 +8,9 @@ export default function PageLoader() {
   const [visible, setVisible] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const flashRef = useRef<HTMLDivElement>(null);
+  const tintRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
+  const dotFlareRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLSpanElement>(null);
   const topHalfRef = useRef<HTMLSpanElement>(null);
   const bottomHalfRef = useRef<HTMLSpanElement>(null);
@@ -26,7 +28,9 @@ export default function PageLoader() {
 
     const overlay = overlayRef.current;
     const flash = flashRef.current;
+    const tint = tintRef.current;
     const dot = dotRef.current;
+    const dotFlare = dotFlareRef.current;
     const word = wordRef.current;
     const topHalf = topHalfRef.current;
     const bottomHalf = bottomHalfRef.current;
@@ -35,7 +39,9 @@ export default function PageLoader() {
     if (
       !overlay ||
       !flash ||
+      !tint ||
       !dot ||
+      !dotFlare ||
       !word ||
       !topHalf ||
       !bottomHalf ||
@@ -57,17 +63,19 @@ export default function PageLoader() {
 
     const split = new SplitType(word, { types: "chars" });
 
-    // Responsive split distance — enough gap for FORMA STUDIO to breathe
+    // Responsive split distance
     const wordH = word.getBoundingClientRect().height;
     const splitDist = Math.max(wordH * 0.32, 24);
 
-    // ── Initial states ───────────────────────────────────────────────────
+    // ── Initial states (transform + opacity only = GPU composited) ───────
     gsap.set(dot, { scale: 0, opacity: 0 });
-    gsap.set(split.chars || [], { opacity: 0, y: 20, filter: "blur(6px)" });
+    gsap.set(split.chars || [], { opacity: 0, y: 20 });
     gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
     gsap.set(topHalf, { opacity: 0 });
     gsap.set(bottomHalf, { opacity: 0 });
     gsap.set(flash, { opacity: 0 });
+    gsap.set(tint, { opacity: 0 });
+    gsap.set(dotFlare, { opacity: 0 });
     gsap.set(sub, { opacity: 0, xPercent: -50, yPercent: -50, y: 10 });
 
     const onDone = () => {
@@ -76,9 +84,10 @@ export default function PageLoader() {
       setVisible(false);
     };
 
-    const tl = gsap.timeline();
+    // force3D ensures translate3d for GPU acceleration on every tween
+    const tl = gsap.timeline({ defaults: { force3D: true } });
 
-    // 1 ▸ Violet dot — snaps in with authority
+    // 1 ▸ Violet dot — snaps in
     tl.to(dot, {
       scale: 1,
       opacity: 1,
@@ -86,13 +95,12 @@ export default function PageLoader() {
       ease: "back.out(3.5)",
     });
 
-    // 2 ▸ NIMBUS chars — rise and sharpen, tight stagger
+    // 2 ▸ NIMBUS chars — rise with stagger (no blur — pure transform+opacity)
     tl.to(
       split.chars || [],
       {
         opacity: 1,
         y: 0,
-        filter: "blur(0px)",
         duration: 0.3,
         stagger: 0.025,
         ease: "power3.out",
@@ -103,11 +111,7 @@ export default function PageLoader() {
     // 3 ▸ Blade — draws left → right across NIMBUS center
     tl.to(
       line,
-      {
-        scaleX: 1,
-        duration: 0.25,
-        ease: "power2.inOut",
-      },
+      { scaleX: 1, duration: 0.25, ease: "power2.inOut" },
       "-=0.06"
     );
 
@@ -121,59 +125,61 @@ export default function PageLoader() {
 
     tl.addLabel("strike");
 
-    // Impact flash — violet radial burst from center
-    tl.to(
-      flash,
-      { opacity: 1, duration: 0.06, ease: "power4.in" },
-      "strike"
-    );
+    // Impact flash — radial violet burst (opacity only = GPU)
+    tl.to(flash, { opacity: 1, duration: 0.06, ease: "power4.in" }, "strike");
     tl.to(
       flash,
       { opacity: 0, duration: 0.25, ease: "power2.out" },
       "strike+=0.06"
     );
 
-    // Dot flares white-hot at impact, then fades back to violet
+    // Dot flares white (opacity overlay = GPU, no background repaint)
     tl.to(
-      dot,
-      { scale: 1.5, background: "#FFFFFF", duration: 0.06, ease: "power4.in" },
+      dotFlare,
+      { opacity: 1, duration: 0.06, ease: "power4.in" },
       "strike"
     );
     tl.to(
-      dot,
-      { scale: 1, background: "#7C5CFC", duration: 0.4, ease: "power2.out" },
+      dotFlare,
+      { opacity: 0, duration: 0.4, ease: "power2.out" },
       "strike+=0.06"
     );
 
-    // Top half slides up
+    // Dot scale pulse
+    tl.to(dot, { scale: 1.5, duration: 0.06, ease: "power4.in" }, "strike");
+    tl.to(
+      dot,
+      { scale: 1, duration: 0.4, ease: "power2.out" },
+      "strike+=0.06"
+    );
+
+    // Halves split apart (transform only = GPU)
     tl.to(
       topHalf,
       { y: -splitDist, duration: 0.32, ease: "power3.inOut" },
       "strike"
     );
-
-    // Bottom half slides down
     tl.to(
       bottomHalf,
       { y: splitDist, duration: 0.32, ease: "power3.inOut" },
       "strike"
     );
 
-    // Background shifts to violet-tinged dark — aftermath tone
+    // Background tint fades in (opacity only = GPU, no backgroundColor repaint)
     tl.to(
-      overlay,
-      { backgroundColor: "#0F0D19", duration: 0.4, ease: "power1.inOut" },
+      tint,
+      { opacity: 1, duration: 0.4, ease: "power1.inOut" },
       "strike"
     );
 
-    // Blade fades out — clears the way
+    // Blade fades out
     tl.to(
       line,
       { opacity: 0, duration: 0.2, ease: "power1.out" },
       "strike+=0.08"
     );
 
-    // NIMBUS halves dim — aftermath, FORMA STUDIO becomes focal
+    // NIMBUS halves dim — aftermath
     tl.to(
       [topHalf, bottomHalf],
       { opacity: 0.4, duration: 0.3, ease: "power2.out" },
@@ -187,9 +193,9 @@ export default function PageLoader() {
       "strike+=0.22"
     );
 
-    // ── Hold: the strike stands ──────────────────────────────────────────
+    // ── Hold ─────────────────────────────────────────────────────────────
 
-    // 6 ▸ Curtain lifts — everything exits upward together
+    // 6 ▸ Curtain lifts — everything exits upward
     tl.to(
       overlay,
       {
@@ -216,6 +222,7 @@ export default function PageLoader() {
     display: "block",
     color: "#FFFFFF",
     fontWeight: 400,
+    willChange: "transform, opacity",
   };
 
   return (
@@ -223,9 +230,9 @@ export default function PageLoader() {
       ref={overlayRef}
       aria-hidden="true"
       className="fixed inset-0 z-200 flex items-center justify-center"
-      style={{ backgroundColor: "#0A0A0F" }}
+      style={{ backgroundColor: "#0A0A0F", willChange: "transform" }}
     >
-      {/* Impact flash — radial violet burst at strike moment */}
+      {/* Impact flash — radial violet burst (GPU: opacity only) */}
       <div
         ref={flashRef}
         className="absolute inset-0 pointer-events-none"
@@ -233,6 +240,18 @@ export default function PageLoader() {
           background:
             "radial-gradient(circle at 50% 50%, rgba(124,92,252,0.25) 0%, rgba(167,139,250,0.08) 40%, transparent 70%)",
           opacity: 0,
+          willChange: "opacity",
+        }}
+      />
+
+      {/* Background tint — violet aftermath (GPU: opacity only, no backgroundColor repaint) */}
+      <div
+        ref={tintRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundColor: "#0F0D19",
+          opacity: 0,
+          willChange: "opacity",
         }}
       />
 
@@ -240,18 +259,37 @@ export default function PageLoader() {
         className="flex flex-col items-center"
         style={{ gap: "clamp(8px, 1.2vh, 14px)" }}
       >
-        {/* Violet dot — logomark */}
+        {/* Violet dot — logomark with white flare overlay */}
         <div
-          ref={dotRef}
-          className="rounded-full"
+          className="relative"
           style={{
             width: "clamp(8px, 0.65vw, 10px)",
             height: "clamp(8px, 0.65vw, 10px)",
-            background: "#7C5CFC",
-            boxShadow:
-              "0 0 14px 5px rgba(124,92,252,0.45), 0 0 32px 12px rgba(124,92,252,0.18)",
           }}
-        />
+        >
+          <div
+            ref={dotRef}
+            className="rounded-full w-full h-full"
+            style={{
+              background: "#7C5CFC",
+              boxShadow:
+                "0 0 14px 5px rgba(124,92,252,0.45), 0 0 32px 12px rgba(124,92,252,0.18)",
+              willChange: "transform, opacity",
+            }}
+          />
+          {/* White flare overlay (GPU: opacity only, no background repaint) */}
+          <div
+            ref={dotFlareRef}
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: "#FFFFFF",
+              boxShadow:
+                "0 0 20px 8px rgba(255,255,255,0.5), 0 0 40px 16px rgba(124,92,252,0.3)",
+              opacity: 0,
+              willChange: "opacity",
+            }}
+          />
+        </div>
 
         {/* NIMBUS zone — original + split clones + blade + subtitle */}
         <div className="relative">
@@ -290,7 +328,7 @@ export default function PageLoader() {
             NIMBUS
           </span>
 
-          {/* Blade line — vertical center of NIMBUS, draws then fades */}
+          {/* Blade line — vertical center of NIMBUS */}
           <div
             ref={lineRef}
             className="absolute left-0 right-0"
@@ -300,10 +338,11 @@ export default function PageLoader() {
               height: "1px",
               background:
                 "linear-gradient(90deg, transparent 0%, #7C5CFC 25%, #A78BFA 60%, transparent 100%)",
+              willChange: "transform, opacity",
             }}
           />
 
-          {/* FORMA STUDIO — positioned at NIMBUS center, rises into the split gap */}
+          {/* FORMA STUDIO — rises into the split gap */}
           <span
             ref={subRef}
             className="font-body select-none absolute left-1/2"
@@ -315,6 +354,7 @@ export default function PageLoader() {
               textTransform: "uppercase",
               color: "rgba(167,139,250,0.6)",
               whiteSpace: "nowrap",
+              willChange: "transform, opacity",
             }}
           >
             FORMA STUDIO
