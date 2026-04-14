@@ -125,11 +125,13 @@ export default function Footer() {
               right: 0,
               top: "50%",
               height: "2px",
-              background: "var(--color-text-primary)",
-              opacity: 0.15,
+              background:
+                "linear-gradient(90deg, transparent, #7C5CFC 20%, #A78BFA 50%, #7C5CFC 80%, transparent)",
+              opacity: 0.45,
               transformOrigin: "left center",
               transform: "scaleX(0)",
               pointerEvents: "none",
+              filter: "blur(0.4px)",
             }}
           />
         </div>
@@ -156,16 +158,16 @@ export default function Footer() {
 
       {/* Pull quote */}
       <div ref={quoteRef} className="flex justify-center py-6 max-md:py-4">
-        <p className="max-w-[500px] text-center font-display text-lg italic leading-[1.5] text-[var(--color-text-subtle)] max-md:text-base">
+        <p className="max-w-125 text-center font-display text-lg italic leading-normal text-(--color-text-subtle) max-md:text-base">
           &ldquo;Good design is as little design as possible.&rdquo;
-          <span className="mt-2 block font-body text-[11px] not-italic tracking-[2px] text-[var(--color-text-faint)]">
+          <span className="mt-2 block font-body text-[11px] not-italic tracking-[2px] text-(--color-text-faint)">
             — DIETER RAMS
           </span>
         </p>
       </div>
 
       {/* Divider */}
-      <div className="h-px w-full max-w-[600px] bg-[var(--color-border)] my-8" />
+      <div className="h-px w-full max-w-150 bg-(--color-border) my-8" />
 
       {/* Nav — centered row */}
       <div className="flex items-center gap-8 max-md:flex-wrap max-md:justify-center max-md:gap-5">
@@ -180,7 +182,7 @@ export default function Footer() {
           <Link
             key={link.label}
             href={link.href}
-            className="font-body text-[13px] text-[var(--color-text-dim)] transition-colors duration-200 hover:text-[var(--color-accent)]"
+            className="font-body text-[13px] text-(--color-text-dim) transition-colors duration-200 hover:text-(--color-accent)"
           >
             {link.label}
           </Link>
@@ -190,17 +192,17 @@ export default function Footer() {
       {/* Brand + copyright */}
       <div className="mt-8 flex flex-col items-center gap-3">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-          <span className="font-body text-sm font-semibold tracking-[6px] text-[var(--color-text-primary)]">
+          <div className="h-1.5 w-1.5 rounded-full bg-(--color-accent)" />
+          <span className="font-body text-sm font-semibold tracking-[6px] text-(--color-text-primary)">
             NIMBUS
           </span>
         </Link>
         <div className="flex items-center gap-4 max-md:flex-col max-md:gap-1">
-          <span className="font-body text-[11px] tracking-[0.5px] text-[var(--color-text-faint)]">
+          <span className="font-body text-[11px] tracking-[0.5px] text-(--color-text-faint)">
             &copy; 2026 Nimbus Forma Studio. All rights reserved.
           </span>
-          <span className="font-body text-[11px] tracking-[0.5px] text-[var(--color-text-faint)]">
-            Designed & built with <span className="text-[var(--color-accent)]">precision</span>
+          <span className="font-body text-[11px] tracking-[0.5px] text-(--color-text-faint)">
+            Designed & built with <span className="text-(--color-accent)">precision</span>
           </span>
         </div>
       </div>

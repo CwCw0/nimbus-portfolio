@@ -4,6 +4,7 @@ import { ArrowRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef, useCallback } from "react";
+import { gsap } from "gsap";
 
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const SCRAMBLE_FRAMES = 14;
@@ -95,6 +96,45 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const lastScrollY = useRef(0);
 
+  // Logo hover refs
+  const logoStrikeRef = useRef<HTMLSpanElement>(null);
+  const logoFormaRef = useRef<HTMLSpanElement>(null);
+
+  const handleLogoEnter = useCallback(() => {
+    if (logoStrikeRef.current)
+      gsap.to(logoStrikeRef.current, {
+        scaleX: 1,
+        duration: 0.45,
+        ease: "power2.inOut",
+        transformOrigin: "left center",
+      });
+    if (logoFormaRef.current)
+      gsap.to(logoFormaRef.current, {
+        opacity: 0.6,
+        y: 0,
+        duration: 0.3,
+        ease: "power3.out",
+        delay: 0.15,
+      });
+  }, []);
+
+  const handleLogoLeave = useCallback(() => {
+    if (logoStrikeRef.current)
+      gsap.to(logoStrikeRef.current, {
+        scaleX: 0,
+        duration: 0.35,
+        ease: "power2.inOut",
+        transformOrigin: "right center",
+      });
+    if (logoFormaRef.current)
+      gsap.to(logoFormaRef.current, {
+        opacity: 0,
+        y: -2,
+        duration: 0.2,
+        ease: "power3.in",
+      });
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
@@ -145,11 +185,63 @@ export default function Header() {
           transform: hidden && !mobileOpen ? "translateY(-100%)" : "translateY(0)",
         }}
       >
-        <Link href="/" className="flex items-center gap-2.5">
+        {/* Logo — hover reveals strikethrough + Forma Studio */}
+        <Link
+          href="/"
+          className="flex items-center gap-2.5"
+          onMouseEnter={handleLogoEnter}
+          onMouseLeave={handleLogoLeave}
+        >
           <div className="h-2 w-2 rounded-full bg-[var(--color-accent)]" />
-          <span className="font-body text-[15px] font-bold tracking-[5px] text-[var(--color-text-primary)]">
-            NIMBUS
-          </span>
+          <div className="relative">
+            <span className="font-body text-[15px] font-bold tracking-[5px] text-[var(--color-text-primary)]">
+              NIMBUS
+            </span>
+
+            {/* Strikethrough */}
+            <span
+              ref={logoStrikeRef}
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: "50%",
+                marginTop: "-1px",
+                height: "1.5px",
+                background:
+                  "linear-gradient(90deg, #7C5CFC 0%, #A78BFA 50%, #7C5CFC 100%)",
+                opacity: 0.65,
+                transformOrigin: "left center",
+                transform: "scaleX(0)",
+                pointerEvents: "none",
+              }}
+            />
+
+            {/* Forma Studio — appears below on hover */}
+            <span
+              ref={logoFormaRef}
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                top: "100%",
+                left: 0,
+                whiteSpace: "nowrap",
+                fontFamily: "var(--font-body), Outfit, sans-serif",
+                fontSize: "7px",
+                fontWeight: 600,
+                letterSpacing: "2.5px",
+                textTransform: "uppercase",
+                color: "#A78BFA",
+                opacity: 0,
+                marginTop: "4px",
+                pointerEvents: "none",
+                transform: "translateY(-2px)",
+              }}
+            >
+              Forma Studio
+            </span>
+          </div>
         </Link>
 
         <nav className="flex items-center gap-10 max-md:hidden">
