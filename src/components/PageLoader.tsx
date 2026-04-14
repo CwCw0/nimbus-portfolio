@@ -17,7 +17,7 @@ export default function PageLoader() {
   const formaRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!sessionStorage.getItem("nfs-intro-v2")) {
+    if (!sessionStorage.getItem("nfs-intro-v3")) {
       setVisible(true);
     }
   }, []);
@@ -37,7 +37,7 @@ export default function PageLoader() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
     if (prefersReducedMotion) {
-      sessionStorage.setItem("nfs-intro-v2", "1");
+      sessionStorage.setItem("nfs-intro-v3", "1");
       setVisible(false);
       return;
     }
@@ -55,7 +55,7 @@ export default function PageLoader() {
 
     const onDone = () => {
       document.body.style.overflow = "";
-      sessionStorage.setItem("nfs-intro-v2", "1");
+      sessionStorage.setItem("nfs-intro-v3", "1");
       setVisible(false);
     };
 
