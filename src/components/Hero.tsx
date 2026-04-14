@@ -14,15 +14,39 @@ export default function Hero() {
   const subtextRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const mouseGlowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const heading = headingRef.current;
+    const mouseGlow = mouseGlowRef.current;
     if (!section || !heading) return;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+
+    const cleanups: (() => void)[] = [];
+
+    // Mouse-reactive ambient glow
+    if (mouseGlow && !prefersReducedMotion) {
+      const onMove = (e: MouseEvent) => {
+        const rect = section.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        mouseGlow.style.opacity = "1";
+        mouseGlow.style.background = `radial-gradient(600px circle at ${x}% ${y}%, rgba(124,92,252,0.08) 0%, transparent 70%)`;
+      };
+      const onLeave = () => {
+        mouseGlow.style.opacity = "0";
+      };
+      section.addEventListener("mousemove", onMove);
+      section.addEventListener("mouseleave", onLeave);
+      cleanups.push(() => {
+        section.removeEventListener("mousemove", onMove);
+        section.removeEventListener("mouseleave", onLeave);
+      });
+    }
 
     const split = new SplitType(heading, { types: "words" });
 
@@ -123,10 +147,12 @@ export default function Hero() {
       });
     }, section);
 
-    return () => {
+    cleanups.push(() => {
       split.revert();
       ctx.revert();
-    };
+    });
+
+    return () => cleanups.forEach((fn) => fn());
   }, []);
 
   return (
@@ -135,6 +161,14 @@ export default function Hero() {
       id="hero"
       className="relative flex h-[100vh] w-full items-center justify-center overflow-hidden bg-[var(--color-bg-primary)]"
     >
+      {/* Mouse-reactive ambient glow */}
+      <div
+        ref={mouseGlowRef}
+        className="pointer-events-none absolute inset-0"
+        aria-hidden="true"
+        style={{ opacity: 0, transition: "opacity 0.4s ease" }}
+      />
+
       {/* Grain texture overlay */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03] grain-shift"

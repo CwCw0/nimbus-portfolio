@@ -11,15 +11,25 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Footer() {
   const quoteRef = useRef<HTMLDivElement>(null);
   const wordmarkRef = useRef<HTMLSpanElement>(null);
+  const strikethroughRef = useRef<HTMLSpanElement>(null);
+  const formaStudioRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const quote = quoteRef.current;
     const wordmark = wordmarkRef.current;
+    const strikethrough = strikethroughRef.current;
+    const formaStudio = formaStudioRef.current;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (prefersReducedMotion) return;
+
+    // Reduced motion: skip to final state immediately
+    if (prefersReducedMotion) {
+      if (strikethrough) gsap.set(strikethrough, { scaleX: 1 });
+      if (formaStudio) gsap.set(formaStudio, { opacity: 0.3, y: 0 });
+      return;
+    }
 
     const cleanups: (() => void)[] = [];
 
@@ -41,23 +51,44 @@ export default function Footer() {
       cleanups.push(() => ctx.revert());
     }
 
-    // Wordmark character stagger
-    if (wordmark) {
+    // Wordmark → strikethrough → Forma Studio sequence
+    if (wordmark && strikethrough && formaStudio) {
       const split = new SplitType(wordmark, { types: "chars" });
       gsap.set(split.chars || [], { opacity: 0, y: 20 });
+      gsap.set(strikethrough, { scaleX: 0 });
+      gsap.set(formaStudio, { opacity: 0, y: 8 });
 
-      gsap.to(split.chars || [], {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        stagger: 0.05,
-        ease: "power3.out",
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wordmark,
           start: "top 90%",
           once: true,
         },
       });
+
+      // 1. Characters stagger in
+      tl.to(split.chars || [], {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        stagger: 0.05,
+        ease: "power3.out",
+      });
+
+      // 2. Strikethrough line draws left → right
+      tl.to(strikethrough, {
+        scaleX: 1,
+        duration: 0.6,
+        ease: "power2.inOut",
+      }, "+=0.25");
+
+      // 3. Forma Studio fades in below
+      tl.to(formaStudio, {
+        opacity: 0.3,
+        y: 0,
+        duration: 0.5,
+        ease: "power3.out",
+      }, "-=0.25");
 
       cleanups.push(() => split.revert());
     }
@@ -67,19 +98,61 @@ export default function Footer() {
 
   return (
     <footer className="flex w-full flex-col items-center bg-[var(--color-bg-footer)] px-16 py-16 max-md:px-6 max-md:py-10">
-      {/* Large wordmark */}
-      <span
-        ref={wordmarkRef}
-        className="font-display text-[var(--color-text-primary)] mb-8"
-        style={{
-          fontSize: "clamp(48px, 8vw, 140px)",
-          letterSpacing: "0.15em",
-          opacity: 0.06,
-          lineHeight: 1,
-        }}
-      >
-        NIMBUS
-      </span>
+
+      {/* Large wordmark with strikethrough reveal */}
+      <div className="relative flex flex-col items-center mb-8">
+        <div className="relative">
+          <span
+            ref={wordmarkRef}
+            className="font-display text-(--color-text-primary)"
+            style={{
+              fontSize: "clamp(48px, 8vw, 140px)",
+              letterSpacing: "0.15em",
+              opacity: 0.06,
+              lineHeight: 1,
+              display: "block",
+            }}
+          >
+            NIMBUS
+          </span>
+          {/* Strikethrough line */}
+          <span
+            ref={strikethroughRef}
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: "50%",
+              height: "2px",
+              background: "var(--color-text-primary)",
+              opacity: 0.15,
+              transformOrigin: "left center",
+              transform: "scaleX(0)",
+              pointerEvents: "none",
+            }}
+          />
+        </div>
+
+        {/* Forma Studio — fades in after strikethrough */}
+        <span
+          ref={formaStudioRef}
+          aria-hidden="true"
+          className="font-body"
+          style={{
+            fontSize: "clamp(9px, 1vw, 16px)",
+            letterSpacing: "0.4em",
+            opacity: 0,
+            color: "var(--color-text-primary)",
+            fontWeight: 600,
+            marginTop: "6px",
+            display: "block",
+            textTransform: "uppercase",
+          }}
+        >
+          Forma Studio
+        </span>
+      </div>
 
       {/* Pull quote */}
       <div ref={quoteRef} className="flex justify-center py-6 max-md:py-4">
@@ -124,7 +197,7 @@ export default function Footer() {
         </Link>
         <div className="flex items-center gap-4 max-md:flex-col max-md:gap-1">
           <span className="font-body text-[11px] tracking-[0.5px] text-[var(--color-text-faint)]">
-            &copy; 2026 Nimbus. All rights reserved.
+            &copy; 2026 Nimbus Forma Studio. All rights reserved.
           </span>
           <span className="font-body text-[11px] tracking-[0.5px] text-[var(--color-text-faint)]">
             Designed & built with <span className="text-[var(--color-accent)]">precision</span>

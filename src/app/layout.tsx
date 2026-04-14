@@ -16,18 +16,18 @@ const outfit = Outfit({
   weight: ["200", "300", "400", "500", "600", "700"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbus-studio-1.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbusformastudio.com";
 
 export const metadata: Metadata = {
   title: {
-    default: "Nimbus — Creative Studio | Websites, Branding & AI Tools",
-    template: "%s | Nimbus",
+    default: "Nimbus Forma Studio — Websites, Branding & AI Tools",
+    template: "%s | Nimbus Forma Studio",
   },
   description:
-    "Nimbus is a creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses.",
+    "Nimbus Forma Studio is a creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
   keywords: ["web development", "branding", "UI/UX design", "SEO", "AI tools", "creative studio", "freelance developer", "Next.js developer", "React developer", "web designer"],
-  authors: [{ name: "Nimbus" }],
-  creator: "Nimbus",
+  authors: [{ name: "Nimbus Forma Studio" }],
+  creator: "Nimbus Forma Studio",
   metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
@@ -36,24 +36,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "Nimbus",
-    title: "Nimbus — Creative Studio | Websites, Branding & AI Tools",
+    siteName: "Nimbus Forma Studio",
+    title: "Nimbus Forma Studio — Websites, Branding & AI Tools",
     description:
-      "Nimbus is a creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses.",
+      "Nimbus Forma Studio is a creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
     images: [
       {
         url: `${siteUrl}/opengraph-image`,
         width: 1200,
         height: 630,
-        alt: "Nimbus — Creative Studio",
+        alt: "Nimbus Forma Studio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nimbus — Creative Studio",
+    title: "Nimbus Forma Studio",
     description:
-      "Websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses.",
+      "Websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
     images: [`${siteUrl}/opengraph-image`],
   },
   robots: {
@@ -87,26 +87,26 @@ export default function RootLayout({
                 {
                   "@type": "Person",
                   "@id": `${siteUrl}/#person`,
-                  name: "Nimbus",
+                  name: "Nimbus Forma Studio",
                   url: siteUrl,
                   email: "heyitsnimbus@gmail.com",
                   sameAs: ["https://github.com/CwCw0"],
-                  jobTitle: "Freelance Web Developer & Creative Studio Founder",
+                  jobTitle: "Founder, Nimbus Forma Studio",
                   knowsAbout: ["Web Development", "UI/UX Design", "Brand Identity", "AI Tools", "Next.js", "React", "TypeScript", "Tailwind CSS"],
                 },
                 {
                   "@type": "WebSite",
                   "@id": `${siteUrl}/#website`,
                   url: siteUrl,
-                  name: "Nimbus",
-                  description: "Creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools",
+                  name: "Nimbus Forma Studio",
+                  description: "Creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools. Built with intention.",
                   publisher: { "@id": `${siteUrl}/#person` },
                 },
                 {
                   "@type": "ProfessionalService",
                   "@id": `${siteUrl}/#business`,
-                  name: "Nimbus",
-                  description: "Creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses.",
+                  name: "Nimbus Forma Studio",
+                  description: "Creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
                   url: siteUrl,
                   email: "heyitsnimbus@gmail.com",
                   priceRange: "$$",
