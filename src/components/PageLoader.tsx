@@ -7,6 +7,7 @@ import SplitType from "split-type";
 export default function PageLoader() {
   const [visible, setVisible] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const flashRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLSpanElement>(null);
   const topHalfRef = useRef<HTMLSpanElement>(null);
@@ -24,13 +25,23 @@ export default function PageLoader() {
     if (!visible) return;
 
     const overlay = overlayRef.current;
+    const flash = flashRef.current;
     const dot = dotRef.current;
     const word = wordRef.current;
     const topHalf = topHalfRef.current;
     const bottomHalf = bottomHalfRef.current;
     const line = lineRef.current;
     const sub = subRef.current;
-    if (!overlay || !dot || !word || !topHalf || !bottomHalf || !line || !sub)
+    if (
+      !overlay ||
+      !flash ||
+      !dot ||
+      !word ||
+      !topHalf ||
+      !bottomHalf ||
+      !line ||
+      !sub
+    )
       return;
 
     const prefersReducedMotion = window.matchMedia(
@@ -56,6 +67,7 @@ export default function PageLoader() {
     gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
     gsap.set(topHalf, { opacity: 0 });
     gsap.set(bottomHalf, { opacity: 0 });
+    gsap.set(flash, { opacity: 0 });
     gsap.set(sub, { opacity: 0, xPercent: -50, yPercent: -50, y: 10 });
 
     const onDone = () => {
@@ -99,51 +111,80 @@ export default function PageLoader() {
       "-=0.06"
     );
 
-    // 4 ▸ THE STRIKE — swap original for clones, split apart
+    // ── 4 ▸ THE STRIKE — impact frame + split ───────────────────────────
+
+    // Swap original for clones (instant)
     tl.call(() => {
       gsap.set(word, { visibility: "hidden" });
       gsap.set([topHalf, bottomHalf], { opacity: 1 });
     });
 
-    // Top half slides up
-    tl.to(topHalf, {
-      y: -splitDist,
-      duration: 0.32,
-      ease: "power3.inOut",
-    });
+    tl.addLabel("strike");
 
-    // Bottom half slides down (simultaneous)
+    // Impact flash — violet radial burst from center
     tl.to(
-      bottomHalf,
-      {
-        y: splitDist,
-        duration: 0.32,
-        ease: "power3.inOut",
-      },
-      "<"
+      flash,
+      { opacity: 1, duration: 0.06, ease: "power4.in" },
+      "strike"
+    );
+    tl.to(
+      flash,
+      { opacity: 0, duration: 0.25, ease: "power2.out" },
+      "strike+=0.06"
     );
 
-    // Blade fades out as gap opens — clears the way for FORMA STUDIO
+    // Dot flares white-hot at impact, then fades back to violet
+    tl.to(
+      dot,
+      { scale: 1.5, background: "#FFFFFF", duration: 0.06, ease: "power4.in" },
+      "strike"
+    );
+    tl.to(
+      dot,
+      { scale: 1, background: "#7C5CFC", duration: 0.4, ease: "power2.out" },
+      "strike+=0.06"
+    );
+
+    // Top half slides up
+    tl.to(
+      topHalf,
+      { y: -splitDist, duration: 0.32, ease: "power3.inOut" },
+      "strike"
+    );
+
+    // Bottom half slides down
+    tl.to(
+      bottomHalf,
+      { y: splitDist, duration: 0.32, ease: "power3.inOut" },
+      "strike"
+    );
+
+    // Background shifts to violet-tinged dark — aftermath tone
+    tl.to(
+      overlay,
+      { backgroundColor: "#0F0D19", duration: 0.4, ease: "power1.inOut" },
+      "strike"
+    );
+
+    // Blade fades out — clears the way
     tl.to(
       line,
-      {
-        opacity: 0,
-        duration: 0.2,
-        ease: "power1.out",
-      },
-      "<+=0.08"
+      { opacity: 0, duration: 0.2, ease: "power1.out" },
+      "strike+=0.08"
+    );
+
+    // NIMBUS halves dim — aftermath, FORMA STUDIO becomes focal
+    tl.to(
+      [topHalf, bottomHalf],
+      { opacity: 0.4, duration: 0.3, ease: "power2.out" },
+      "strike+=0.15"
     );
 
     // 5 ▸ FORMA STUDIO — rises into the gap
     tl.to(
       sub,
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.25,
-        ease: "power2.out",
-      },
-      "-=0.12"
+      { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" },
+      "strike+=0.22"
     );
 
     // ── Hold: the strike stands ──────────────────────────────────────────
@@ -182,8 +223,19 @@ export default function PageLoader() {
       ref={overlayRef}
       aria-hidden="true"
       className="fixed inset-0 z-200 flex items-center justify-center"
-      style={{ background: "#0A0A0F" }}
+      style={{ backgroundColor: "#0A0A0F" }}
     >
+      {/* Impact flash — radial violet burst at strike moment */}
+      <div
+        ref={flashRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 50%, rgba(124,92,252,0.25) 0%, rgba(167,139,250,0.08) 40%, transparent 70%)",
+          opacity: 0,
+        }}
+      />
+
       <div
         className="flex flex-col items-center"
         style={{ gap: "clamp(8px, 1.2vh, 14px)" }}
@@ -238,7 +290,7 @@ export default function PageLoader() {
             NIMBUS
           </span>
 
-          {/* Blade line — vertical center of NIMBUS, draws then stays */}
+          {/* Blade line — vertical center of NIMBUS, draws then fades */}
           <div
             ref={lineRef}
             className="absolute left-0 right-0"
