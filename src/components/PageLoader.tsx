@@ -257,9 +257,9 @@ export default function PageLoader() {
             className="font-body select-none absolute left-1/2"
             style={{
               top: "50%",
-              fontSize: "clamp(7px, 0.78vw, 10px)",
+              fontSize: "clamp(10px, 1.1vw, 14px)",
               fontWeight: 600,
-              letterSpacing: "4.5px",
+              letterSpacing: "5.5px",
               textTransform: "uppercase",
               color: "rgba(167,139,250,0.6)",
               whiteSpace: "nowrap",
