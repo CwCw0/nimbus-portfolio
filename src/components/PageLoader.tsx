@@ -4,15 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import SplitType from "split-type";
 
+// Height the strike bar expands to — must be enough to comfortably contain FORMA STUDIO text
+const BAR_HEIGHT = 52;
+
 export default function PageLoader() {
   const [visible, setVisible] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLSpanElement>(null);
-  const lineRef = useRef<HTMLSpanElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
   const formaRef = useRef<HTMLSpanElement>(null);
 
-  // Gate: only show once per session
   useEffect(() => {
     if (!sessionStorage.getItem("nfs-intro-seen")) {
       setVisible(true);
@@ -25,9 +27,9 @@ export default function PageLoader() {
     const overlay = overlayRef.current;
     const dot = dotRef.current;
     const word = wordRef.current;
-    const line = lineRef.current;
+    const bar = barRef.current;
     const forma = formaRef.current;
-    if (!overlay || !dot || !word || !line || !forma) return;
+    if (!overlay || !dot || !word || !bar || !forma) return;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -41,46 +43,69 @@ export default function PageLoader() {
     document.body.style.overflow = "hidden";
 
     const split = new SplitType(word, { types: "chars" });
+
+    // Initial states
     gsap.set(dot, { scale: 0, opacity: 0 });
     gsap.set(split.chars || [], { opacity: 0, y: 28 });
-    gsap.set(line, { scaleX: 0 });
-    gsap.set(forma, { opacity: 0, y: 10 });
+    // Bar: starts as invisible 2px line (scaleX: 0 so it draws left→right)
+    // FORMA STUDIO is already opacity:1 inside — overflow:hidden clips it until bar expands
+    gsap.set(bar, { scaleX: 0, height: 2, marginTop: -1 });
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        // Hold, then curtain lifts upward revealing the page
-        gsap.to(overlay, {
-          yPercent: -100,
-          duration: 0.9,
-          ease: "power3.inOut",
-          delay: 0.5,
-          onComplete: () => {
-            document.body.style.overflow = "";
-            sessionStorage.setItem("nfs-intro-seen", "1");
-            setVisible(false);
-          },
-        });
-      },
-    });
+    const onDone = () => {
+      document.body.style.overflow = "";
+      sessionStorage.setItem("nfs-intro-seen", "1");
+      setVisible(false);
+    };
+
+    const tl = gsap.timeline();
 
     // 1. Violet dot pulses in
-    tl.to(dot, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.5)" });
+    tl.to(dot, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.5)" });
 
     // 2. NIMBUS chars stagger up
     tl.to(
       split.chars || [],
-      { opacity: 1, y: 0, duration: 0.55, stagger: 0.045, ease: "power3.out" },
-      "+=0.08"
+      { opacity: 1, y: 0, duration: 0.5, stagger: 0.04, ease: "power3.out" },
+      "+=0.06"
     );
 
-    // 3. Strikethrough draws left → right
-    tl.to(line, { scaleX: 1, duration: 0.65, ease: "power2.inOut" }, "+=0.2");
-
-    // 4. Forma Studio rises in (overlaps line draw end)
+    // 3. Strike line draws left → right across NIMBUS (bar at 2px, scaleX 0→1)
     tl.to(
-      forma,
-      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
-      "-=0.3"
+      bar,
+      { scaleX: 1, duration: 0.55, ease: "power2.inOut", transformOrigin: "left center" },
+      "+=0.2"
+    );
+
+    // 4. Strike expands vertically — the line grows into a bar
+    //    overflow:hidden reveals FORMA STUDIO naturally as height grows
+    tl.to(
+      bar,
+      {
+        height: BAR_HEIGHT,
+        marginTop: -(BAR_HEIGHT / 2),
+        duration: 0.5,
+        ease: "power3.out",
+      },
+      "+=0.03"
+    );
+
+    // 5. Colour exchange: NIMBUS fades out (struck through, replaced), dot fades
+    tl.to(
+      split.chars || [],
+      { opacity: 0, duration: 0.38, ease: "power2.in" },
+      "+=0.12"
+    );
+    tl.to(dot, { opacity: 0, duration: 0.28 }, "<0.06");
+
+    // 6. FORMA STUDIO stands alone in the bar — brief hold
+    // (implicit hold, nothing added here)
+
+    // 7. Fade out: bar fades → overlay fades → page reveals
+    tl.to(bar, { opacity: 0, duration: 0.5, ease: "power2.in" }, "+=0.42");
+    tl.to(
+      overlay,
+      { opacity: 0, duration: 0.55, ease: "power1.inOut", onComplete: onDone },
+      "-=0.12"
     );
 
     return () => {
@@ -95,7 +120,7 @@ export default function PageLoader() {
     <div
       ref={overlayRef}
       aria-hidden="true"
-      className="fixed inset-0 z-[200] flex items-center justify-center"
+      className="fixed inset-0 z-200 flex items-center justify-center"
       style={{ background: "#0A0A0F" }}
     >
       <div className="flex flex-col items-center" style={{ gap: "clamp(10px, 1.8vh, 18px)" }}>
@@ -111,7 +136,7 @@ export default function PageLoader() {
           }}
         />
 
-        {/* NIMBUS wordmark */}
+        {/* Wordmark container — bar is absolutely positioned inside */}
         <div className="relative">
           <span
             ref={wordRef}
@@ -127,43 +152,47 @@ export default function PageLoader() {
             NIMBUS
           </span>
 
-          {/* Strikethrough — violet gradient */}
-          <span
-            ref={lineRef}
-            aria-hidden="true"
+          {/*
+            The bar: starts as a 2px violet strikethrough line.
+            scaleX draws it left→right, then height expands to reveal FORMA STUDIO.
+            overflow:hidden clips the text — it emerges naturally as the bar grows.
+          */}
+          <div
+            ref={barRef}
             style={{
               position: "absolute",
               left: 0,
               right: 0,
               top: "50%",
-              marginTop: "-1px",
-              height: "2px",
+              height: 2,
+              marginTop: -1,
               background:
-                "linear-gradient(90deg, #7C5CFC 0%, #A78BFA 50%, #7C5CFC 100%)",
-              opacity: 0.65,
+                "linear-gradient(90deg, #5A3FD4 0%, #7C5CFC 35%, #A78BFA 50%, #7C5CFC 65%, #5A3FD4 100%)",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               transformOrigin: "left center",
-              transform: "scaleX(0)",
-              pointerEvents: "none",
-              filter: "blur(0.4px)",
             }}
-          />
+          >
+            {/* FORMA STUDIO — always opaque, revealed by the bar's overflow clip */}
+            <span
+              ref={formaRef}
+              className="font-body"
+              style={{
+                whiteSpace: "nowrap",
+                fontSize: "clamp(9px, 1vw, 13px)",
+                fontWeight: 700,
+                letterSpacing: "5px",
+                textTransform: "uppercase",
+                color: "#EEEDF5",
+                userSelect: "none",
+              }}
+            >
+              FORMA STUDIO
+            </span>
+          </div>
         </div>
-
-        {/* Forma Studio */}
-        <span
-          ref={formaRef}
-          className="font-body"
-          style={{
-            fontSize: "clamp(9px, 1vw, 14px)",
-            letterSpacing: "0.45em",
-            fontWeight: 600,
-            textTransform: "uppercase",
-            color: "#EEEDF5",
-            opacity: 0,
-          }}
-        >
-          Forma Studio
-        </span>
       </div>
     </div>
   );
