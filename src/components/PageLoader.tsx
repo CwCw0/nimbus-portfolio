@@ -48,7 +48,7 @@ export default function PageLoader() {
 
     // Responsive split distance — enough gap for FORMA STUDIO to breathe
     const wordH = word.getBoundingClientRect().height;
-    const splitDist = Math.max(wordH * 0.22, 18);
+    const splitDist = Math.max(wordH * 0.32, 24);
 
     // ── Initial states ───────────────────────────────────────────────────
     gsap.set(dot, { scale: 0, opacity: 0 });
@@ -121,6 +121,17 @@ export default function PageLoader() {
         ease: "power3.inOut",
       },
       "<"
+    );
+
+    // Blade fades out as gap opens — clears the way for FORMA STUDIO
+    tl.to(
+      line,
+      {
+        opacity: 0,
+        duration: 0.2,
+        ease: "power1.out",
+      },
+      "<+=0.08"
     );
 
     // 5 ▸ FORMA STUDIO — rises into the gap
@@ -250,7 +261,7 @@ export default function PageLoader() {
               fontWeight: 600,
               letterSpacing: "4.5px",
               textTransform: "uppercase",
-              color: "rgba(167,139,250,0.45)",
+              color: "rgba(167,139,250,0.6)",
               whiteSpace: "nowrap",
             }}
           >
