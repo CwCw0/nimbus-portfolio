@@ -203,7 +203,7 @@ export default function CaseStudyContent({
           <Header />
 
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 px-16 pt-8 max-md:px-6">
+          <div className="flex items-center gap-2 px-16 pt-28 max-md:px-6 max-md:pt-24">
             <Link
               href="/work"
               className="flex items-center gap-2 font-body text-sm text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text-primary)]"

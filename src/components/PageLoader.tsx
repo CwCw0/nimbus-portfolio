@@ -17,7 +17,7 @@ export default function PageLoader() {
   const formaRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!sessionStorage.getItem("nfs-intro-v3")) {
+    if (!sessionStorage.getItem("nfs-intro-v4")) {
       setVisible(true);
     }
   }, []);
@@ -37,7 +37,7 @@ export default function PageLoader() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
     if (prefersReducedMotion) {
-      sessionStorage.setItem("nfs-intro-v3", "1");
+      sessionStorage.setItem("nfs-intro-v4", "1");
       setVisible(false);
       return;
     }
@@ -55,7 +55,7 @@ export default function PageLoader() {
 
     const onDone = () => {
       document.body.style.overflow = "";
-      sessionStorage.setItem("nfs-intro-v3", "1");
+      sessionStorage.setItem("nfs-intro-v4", "1");
       setVisible(false);
     };
 
@@ -114,7 +114,7 @@ export default function PageLoader() {
         height: BAR_HEIGHT,
         marginTop: -(BAR_HEIGHT / 2),
         boxShadow:
-          "0 0 60px 14px rgba(124,92,252,0.22), 0 0 120px 40px rgba(124,92,252,0.08)",
+          "0 0 40px 8px rgba(124,92,252,0.12), 0 0 80px 24px rgba(124,92,252,0.05)",
         duration: 0.52,
         ease: "power3.out",
       },
@@ -155,7 +155,7 @@ export default function PageLoader() {
       {
         height: 2,
         marginTop: -1,
-        boxShadow: "0 0 0px 0px rgba(124,92,252,0)",
+        boxShadow: "none",
         duration: 0.45,
         ease: "power3.in",
       },
@@ -227,7 +227,7 @@ export default function PageLoader() {
               height: "clamp(8px, 0.8vw, 11px)",
               background: "#7C5CFC",
               boxShadow:
-                "0 0 18px 5px rgba(124,92,252,0.55), 0 0 40px 12px rgba(124,92,252,0.2)",
+                "0 0 12px 4px rgba(124,92,252,0.35), 0 0 28px 10px rgba(124,92,252,0.12)",
             }}
           />
         </div>
@@ -263,7 +263,7 @@ export default function PageLoader() {
               height: 2,
               marginTop: -1,
               background:
-                "linear-gradient(90deg, rgba(74,50,180,0.95) 0%, rgba(124,92,252,1) 25%, rgba(167,139,250,1) 50%, rgba(124,92,252,1) 75%, rgba(74,50,180,0.95) 100%)",
+                "linear-gradient(90deg, transparent 0%, rgba(124,92,252,0.65) 20%, rgba(167,139,250,0.8) 50%, rgba(124,92,252,0.65) 80%, transparent 100%)",
               overflow: "hidden",
               display: "flex",
               alignItems: "center",

@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
 import SmoothScroll from "../../components/SmoothScroll";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
@@ -104,148 +104,195 @@ export default function BlogPage() {
     <>
       <CustomCursor />
       <SmoothScroll>
-      <div className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
-        <Header />
+        <div className="flex w-full flex-col overflow-x-hidden bg-(--color-bg-primary)">
+          <Header />
 
-        {/* Hero — Full viewport */}
-        <section
-          ref={heroRef}
-          className="relative flex min-h-screen w-full flex-col items-center justify-center px-16 pt-24 pb-20 max-md:px-6 max-md:pt-20 max-md:pb-12"
-        >
-          <span
-            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-display text-[var(--color-text-primary)]"
-            style={{ fontSize: "clamp(100px, 18vw, 300px)", opacity: 0.02, letterSpacing: "0.1em" }}
+          {/* Hero — Full viewport */}
+          <section
+            ref={heroRef}
+            className="relative flex min-h-screen w-full flex-col items-center justify-center px-16 pt-24 pb-20 max-md:px-6 max-md:pt-20 max-md:pb-12"
           >
-            BLOG
-          </span>
-
-          <div className="relative z-10 flex flex-col items-center gap-8 text-center">
-            <span className="hero-fade font-body text-[11px] font-medium tracking-[4px] text-[var(--color-accent)]">
+            {/* Ghost watermark */}
+            <span
+              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-display text-(--color-text-primary)"
+              style={{ fontSize: "clamp(100px, 18vw, 300px)", opacity: 0.02, letterSpacing: "0.1em" }}
+            >
               BLOG
             </span>
-            <h1
-              ref={headingRef}
-              className="max-w-[800px] font-display tracking-[-2px] text-[var(--color-text-primary)]"
-              style={{ fontSize: "clamp(32px, 5vw, 72px)", lineHeight: 1.1 }}
-            >
-              Thoughts on building.
-            </h1>
-          </div>
-        </section>
 
-        {/* Category Filters */}
-        <section className="hero-fade w-full px-16 pb-10 max-md:px-6 max-md:overflow-x-auto">
-          <div className="mx-auto flex max-w-[1200px] gap-3 max-md:w-max">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2.5 font-body text-[13px] font-medium transition-all duration-200 ${
-                  activeCategory === cat
-                    ? "bg-[var(--color-accent)] text-white"
-                    : "border border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-accent-border)] hover:text-[var(--color-text-primary)]"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </section>
-
-        {/* Featured Post */}
-        <section className="w-full px-16 pb-16 max-md:px-6 max-md:pb-10">
-          <Link
-            href={`/blog/${featuredPost.slug}`}
-            className="group mx-auto flex max-w-[1200px] gap-0 border border-[var(--color-border)] bg-[var(--color-bg-card)] transition-all duration-300 hover:border-[var(--color-accent-border)] max-md:flex-col"
-          >
-            <div className="relative w-[55%] overflow-hidden max-md:w-full" style={{ height: "clamp(260px, 35vh, 400px)" }}>
-              <Image
-                src={featuredPost.image}
-                alt={featuredPost.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <div className="flex flex-1 flex-col justify-center gap-5 p-10 max-md:p-6">
-              <div className="w-fit bg-[#7C5CFC18] px-3 py-1">
-                <span className="font-body text-[10px] font-medium tracking-[2px] text-[var(--color-accent)]">
-                  FEATURED
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="bg-[var(--color-accent-subtle)] px-2.5 py-1 font-body text-[11px] font-medium text-[var(--color-accent)]">
-                  {featuredPost.tag}
-                </span>
-                <span className="font-body text-xs text-[var(--color-text-subtle)]">
-                  {featuredPost.date}
-                </span>
-              </div>
-              <h2
-                className="font-display tracking-[-1px] text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors"
-                style={{ fontSize: "clamp(22px, 2.5vw, 32px)" }}
-              >
-                {featuredPost.title}
-              </h2>
-              <p className="font-body text-sm leading-[1.7] text-[var(--color-text-dim)]">
-                {featuredPost.excerpt}
-              </p>
-              <span className="flex items-center gap-2 font-body text-sm font-medium text-[var(--color-accent)] transition-all group-hover:gap-3">
-                Read article
-                <ArrowRight className="h-4 w-4" />
+            <div className="relative z-10 flex flex-col items-center gap-8 text-center">
+              <span className="hero-fade font-body text-[11px] font-medium tracking-[4px] text-(--color-accent)">
+                PERSPECTIVES
               </span>
-            </div>
-          </Link>
-        </section>
 
-        {/* All Articles */}
-        <section ref={gridRef} className="w-full px-16 pb-32 max-md:px-6 max-md:pb-16">
-          <div className="mx-auto max-w-[1200px]">
-            <span className="mb-10 block font-body text-[11px] font-medium tracking-[3px] text-[var(--color-text-muted)]">
-              ALL ARTICLES
-            </span>
-            <div className="grid grid-cols-3 gap-7 max-lg:grid-cols-2 max-md:grid-cols-1">
-              {filteredPosts.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="blog-card group flex flex-col border border-[var(--color-border)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent-border)]"
+              <h1
+                ref={headingRef}
+                className="max-w-[820px] font-display tracking-[-2px] text-(--color-text-primary)"
+                style={{ fontSize: "clamp(36px, 5.5vw, 76px)", lineHeight: 1.05 }}
+              >
+                Thoughts on building.
+              </h1>
+
+              <p className="hero-fade max-w-[540px] font-body text-[15px] leading-[1.75] text-(--color-text-dim)">
+                Design craft, developer experience, and the honest lessons from
+                building things people actually use. No filler — just perspective.
+              </p>
+
+              {/* Scroll hint */}
+              <div className="hero-fade mt-4 flex flex-col items-center gap-2">
+                <span className="font-body text-[10px] tracking-[3px] text-(--color-text-muted)">SCROLL</span>
+                <div className="h-8 w-px bg-linear-to-b from-(--color-accent) to-transparent opacity-40" />
+              </div>
+            </div>
+          </section>
+
+          {/* Featured Post — Editorial */}
+          <section className="w-full px-16 pb-0 max-md:px-6">
+            <div className="mx-auto max-w-[1200px]">
+              <div className="mb-6 flex items-center gap-4">
+                <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-text-muted)">FEATURED</span>
+                <div className="h-px flex-1 bg-(--color-border)" />
+              </div>
+            </div>
+
+            <Link
+              href={`/blog/${featuredPost.slug}`}
+              className="group mx-auto flex max-w-[1200px] border border-(--color-border) bg-(--color-bg-card) transition-all duration-500 hover:border-(--color-accent-border) max-lg:flex-col"
+            >
+              {/* Image — tall editorial */}
+              <div className="relative w-[52%] overflow-hidden max-lg:w-full" style={{ minHeight: "clamp(300px, 45vh, 520px)" }}>
+                <Image
+                  src={featuredPost.image}
+                  alt={featuredPost.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+                {/* Image overlay gradient */}
+                <div className="absolute inset-0 bg-linear-to-r from-transparent to-black/20 max-lg:bg-linear-to-b max-lg:from-transparent max-lg:to-black/30" />
+              </div>
+
+              {/* Content */}
+              <div className="flex flex-1 flex-col justify-between gap-0 p-12 max-md:p-7">
+                {/* Top meta */}
+                <div className="flex items-center gap-3">
+                  <span className="bg-(--color-accent-subtle) px-3 py-1 font-body text-[10px] font-medium tracking-[2px] text-(--color-accent)">
+                    {featuredPost.tag.toUpperCase()}
+                  </span>
+                  <span className="font-body text-xs text-(--color-text-subtle)">{featuredPost.date}</span>
+                  <span className="flex items-center gap-1.5 font-body text-xs text-(--color-text-muted)">
+                    <Clock className="h-3 w-3" />
+                    {featuredPost.readTime}
+                  </span>
+                </div>
+
+                {/* Title — large display */}
+                <div className="my-auto py-8">
+                  <h2
+                    className="font-display italic text-(--color-text-primary) transition-colors duration-300 group-hover:text-(--color-accent)"
+                    style={{ fontSize: "clamp(26px, 3vw, 42px)", lineHeight: 1.1, letterSpacing: "-0.5px" }}
+                  >
+                    {featuredPost.title}
+                  </h2>
+                  <p className="mt-5 font-body text-[14px] leading-[1.75] text-(--color-text-dim)">
+                    {featuredPost.excerpt}
+                  </p>
+                </div>
+
+                {/* CTA */}
+                <div className="flex items-center justify-between border-t border-(--color-border) pt-6">
+                  <span className="flex items-center gap-2 font-body text-sm font-medium text-(--color-accent) transition-all group-hover:gap-3">
+                    Read article
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
+                  <div className="h-px w-12 bg-(--color-accent) opacity-30 transition-all duration-300 group-hover:w-20 group-hover:opacity-60" />
+                </div>
+              </div>
+            </Link>
+          </section>
+
+          {/* Category Filters */}
+          <section className="w-full px-16 py-12 max-md:px-6 max-md:overflow-x-auto">
+            <div className="mx-auto flex max-w-[1200px] items-center gap-3 max-md:w-max">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-5 py-2.5 font-body text-[12px] font-medium tracking-[1px] transition-all duration-200 ${
+                    activeCategory === cat
+                      ? "bg-(--color-accent) text-white"
+                      : "border border-(--color-border) text-(--color-text-muted) hover:border-(--color-accent-border) hover:text-(--color-text-primary)"
+                  }`}
                 >
-                  <div className="relative overflow-hidden" style={{ height: "clamp(160px, 20vh, 220px)" }}>
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-3 p-6">
-                    <div className="flex items-center gap-3">
-                      <span className="bg-[var(--color-accent-subtle)] px-2.5 py-1 font-body text-[10px] font-medium text-[var(--color-accent)]">
-                        {post.tag}
-                      </span>
-                      <span className="font-body text-[11px] text-[var(--color-text-subtle)]">
-                        {post.date}
-                      </span>
-                    </div>
-                    <h3 className="font-body text-lg font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="font-body text-[13px] leading-[1.6] text-[var(--color-text-dim)]">
-                      {post.excerpt}
-                    </p>
-                    <span className="flex items-center gap-2 font-body text-sm font-medium text-[var(--color-accent)] transition-all group-hover:gap-3">
-                      Read more
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                  </div>
-                </Link>
+                  {cat}
+                </button>
               ))}
             </div>
-          </div>
-        </section>
+          </section>
 
-        <Footer />
-      </div>
+          {/* All Articles */}
+          <section ref={gridRef} className="w-full px-16 pb-32 max-md:px-6 max-md:pb-16">
+            <div className="mx-auto max-w-[1200px]">
+              <div className="mb-10 flex items-center gap-4">
+                <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-text-muted)">ALL ARTICLES</span>
+                <div className="h-px flex-1 bg-(--color-border)" />
+              </div>
+
+              <div className="grid grid-cols-3 gap-7 max-lg:grid-cols-2 max-md:grid-cols-1">
+                {filteredPosts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="blog-card group flex flex-col border border-(--color-border) bg-(--color-bg-card) transition-all duration-300 hover:-translate-y-1 hover:border-(--color-accent-border)"
+                  >
+                    {/* Thumbnail */}
+                    <div className="relative overflow-hidden" style={{ height: "clamp(180px, 22vh, 240px)" }}>
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      {/* Read time chip — overlaid on image */}
+                      <div className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-black/60 px-2.5 py-1 backdrop-blur-sm">
+                        <Clock className="h-3 w-3 text-white/70" />
+                        <span className="font-body text-[10px] text-white/80">{post.readTime}</span>
+                      </div>
+                    </div>
+
+                    {/* Card body */}
+                    <div className="flex flex-1 flex-col gap-3 p-6">
+                      <div className="flex items-center gap-2.5">
+                        <span className="bg-(--color-accent-subtle) px-2.5 py-0.5 font-body text-[10px] font-medium tracking-[1.5px] text-(--color-accent)">
+                          {post.tag.toUpperCase()}
+                        </span>
+                        <span className="font-body text-[11px] text-(--color-text-subtle)">{post.date}</span>
+                      </div>
+
+                      <h3
+                        className="font-display italic text-(--color-text-primary) transition-colors group-hover:text-(--color-accent)"
+                        style={{ fontSize: "clamp(17px, 1.5vw, 21px)", lineHeight: 1.2, letterSpacing: "-0.3px" }}
+                      >
+                        {post.title}
+                      </h3>
+
+                      <p className="font-body text-[13px] leading-[1.65] text-(--color-text-dim)">
+                        {post.excerpt}
+                      </p>
+
+                      <span className="mt-auto flex items-center gap-2 pt-2 font-body text-sm font-medium text-(--color-accent) transition-all group-hover:gap-3">
+                        Read more
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <Footer />
+        </div>
       </SmoothScroll>
     </>
   );
