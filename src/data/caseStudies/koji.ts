@@ -5,7 +5,7 @@ export const koji: CaseStudy = {
   status: "live",
   category: "SaaS",
   tags: ["Next.js", "TypeScript", "Local-first", "Productivity", "Editorial Design"],
-  title: "Kōji — A Keyboard-First Second Brain",
+  title: "Kōji — Keyboard-First Second Brain",
   shortTitle: "Kōji",
   desc: "A productivity platform built around how I actually think — fast capture, three views, 40+ shortcuts, and zero cloud dependency. Actively evolving.",
   heroDesc:
