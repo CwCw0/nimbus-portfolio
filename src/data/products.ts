@@ -129,7 +129,7 @@ export const products: Product[] = [
     },
     mockup: {
       type: "screenshot",
-      image: "/products/koji-screenshot.png",
+      image: "/images/koji/today-full.png",
       device: "laptop",
     },
     cardDescription:
@@ -274,8 +274,8 @@ export const products: Product[] = [
     slug: "nimbus-display",
     name: "Nimbus Display",
     tagline:
-      "A display typeface for builders who want their headlines to feel made, not assembled.",
-    status: "coming-soon",
+      "A high-contrast Didone display serif. Built for headlines that command the room.",
+    status: "in-development",
     price: { kind: "tbd" },
     cta: {
       label: "Get notified at launch",
@@ -292,19 +292,55 @@ export const products: Product[] = [
       device: "poster",
     },
     cardDescription:
-      "One weight, full Latin set, opentype features for editorial work. The first font in the Nimbus type catalogue.",
+      "High-contrast Didone serif with bold vertical stems and delicate hairlines. The first typeface from the Nimbus type catalogue.",
     longDescription:
-      "Nimbus Display is the first typeface released under the Nimbus name. It's a single-weight display serif made for headlines, hero sections, and editorial layouts. The aim is the opposite of the geometric grotesks everyone reaches for first — Nimbus Display has personality, slightly varied stroke widths, and a few opentype quirks that reward people who go looking for them.\n\nReleased as a single OTF + WOFF2 bundle with both personal and commercial licensing. The personal license covers freelance and indie projects up to a small revenue cap. The commercial license is per-company, perpetual, no subscription.",
+      "Nimbus Display is a high-contrast Didone display serif designed from scratch — every bezier curve drawn by hand in code. Bold vertical stems, delicate horizontal hairlines, and bracketed serifs that blend smoothly into the stroke. Made for hero sections, editorial headlines, and any typographic moment that needs to feel crafted rather than selected from a dropdown.\n\nCurrently in active development with uppercase, lowercase, numerals, and core punctuation complete. Extended Latin characters and OpenType features are in progress. Will ship as an OTF + WOFF2 bundle with personal and commercial licensing.",
     features: [
-      "Single weight (Regular) — wide-ranging OpenType features",
-      "Full Latin character set + extended punctuation",
+      "High-contrast Didone style — bold stems, delicate hairlines",
+      "Bracketed serifs with smooth stem transitions",
+      "Full Latin character set in progress",
       "OTF + WOFF2 bundle, no subscription",
-      "Personal license: indie + freelance — small revenue cap",
-      "Commercial license: perpetual, per-company",
+      "Personal + commercial licensing",
     ],
     category: "Typography",
-    releaseDate: "Q2 2026",
+    releaseDate: "Q3 2026",
     order: 6,
+  },
+  {
+    slug: "forma",
+    name: "Forma",
+    tagline:
+      "A thin, refined serif with cupped serifs. The quiet typeface people reach for when they want elegance without weight.",
+    status: "in-development",
+    price: { kind: "tbd" },
+    cta: {
+      label: "Get notified at launch",
+      href: "/contact?product=forma",
+    },
+    accent: {
+      hex: "#C4B5A0",
+      soft: "#C4B5A014",
+      border: "#C4B5A040",
+      glow: "#C4B5A022",
+    },
+    mockup: {
+      type: "concept",
+      device: "poster",
+    },
+    cardDescription:
+      "Light-weight serif with a signature: cupped serifs that dip like a valley. Designed for the aesthetic minimalist who cares about every detail.",
+    longDescription:
+      "Forma is a thin, refined serif typeface with one signature detail that makes it unmistakable — cupped serifs. Every serif surface has a subtle concave curve, a tiny valley where flat fonts have a flat line. It's the kind of detail you feel before you see it, and once you see it, you can't unsee it.\n\nDesigned alongside Nimbus Display as its quieter counterpart. Where Nimbus Display commands attention with bold contrast, Forma earns it with restraint. Moderate stroke contrast, generous apertures, and a high x-height make it readable at every scale while keeping the lightness that makes thin serifs beautiful.\n\nCurrently in active development with uppercase, lowercase, numerals, and core punctuation complete. Will ship as an OTF + WOFF2 bundle.",
+    features: [
+      "Signature cupped serifs — concave surfaces unique to Forma",
+      "Light weight with moderate stroke contrast",
+      "Generous apertures and high x-height for readability",
+      "Full Latin character set in progress",
+      "OTF + WOFF2 bundle, personal + commercial licensing",
+    ],
+    category: "Typography",
+    releaseDate: "Q3 2026",
+    order: 7,
   },
   {
     slug: "invoker",
@@ -341,7 +377,7 @@ export const products: Product[] = [
     ],
     category: "Developer Tools",
     releaseDate: "Q4 2026",
-    order: 7,
+    order: 8,
   },
   {
     slug: "aurora",
@@ -372,7 +408,7 @@ export const products: Product[] = [
     ],
     category: "Unannounced",
     releaseDate: "When it's ready",
-    order: 8,
+    order: 9,
   },
 ];
 

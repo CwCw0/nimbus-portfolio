@@ -11,11 +11,14 @@ export const koji: CaseStudy = {
   heroDesc:
     "Kōji started because nothing else worked the way my brain does. I think in bursts — a random idea at 2am, a task mid-conversation, a note that connects to something from three days ago. Every tool either forced me into someone else's workflow or was so bloated that organising took longer than doing. So I built my own.",
 
-  heroImage: "/images/koji/homepage.png",
+  heroImage: "/images/koji/today-full.png",
   gallery: [
-    "/images/koji/homepage.png",
-    "/images/koji/board.png",
-    "/images/koji/notes.png",
+    "/images/koji/today-full.png",
+    "/images/koji/board-full.png",
+    "/images/koji/notes-full.png",
+    "/images/koji/braindump.png",
+    "/images/koji/command-palette.png",
+    "/images/koji/today-dark.png",
   ],
 
   challenge:

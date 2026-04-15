@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kōji — Mockup Generator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0A0A0F;
+    color: #F0EFF5;
+    font-family: -apple-system, system-ui, sans-serif;
+    padding: 40px;
+  }
+
+  h2 {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6B6880;
+    margin: 60px 0 24px;
+  }
+
+  .note {
+    font-size: 12px;
+    color: #6B6880;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  /* ── MOCKUP 1: MacBook Pro Perspective ───────────────────── */
+  .mockup-laptop {
+    width: 900px;
+    margin: 0 auto 80px;
+    perspective: 1200px;
+  }
+
+  .laptop-body {
+    position: relative;
+    transform: rotateX(2deg) rotateY(-3deg);
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+  }
+
+  .laptop-screen {
+    background: #1a1a1a;
+    border-radius: 12px 12px 0 0;
+    padding: 12px 12px 0;
+    box-shadow: 0 -2px 30px rgba(0,0,0,0.6);
+    position: relative;
+  }
+
+  .laptop-screen::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #333;
+    border-radius: 50%;
+  }
+
+  .laptop-screen img {
+    width: 100%;
+    display: block;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .laptop-base {
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    height: 18px;
+    border-radius: 0 0 8px 8px;
+    position: relative;
+  }
+
+  .laptop-base::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+  }
+
+  .laptop-shadow {
+    width: 92%;
+    height: 20px;
+    margin: 0 auto;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.5) 0%, transparent 70%);
+    filter: blur(8px);
+  }
+
+  /* ── MOCKUP 2: Floating Multi-Screen ───────────────────── */
+  .mockup-multi {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 80px;
+    padding: 40px 0;
+  }
+
+  .float-screen {
+    background: #111;
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+    transition: transform 0.3s ease;
+  }
+
+  .float-screen:nth-child(1) { transform: rotate(-3deg) translateY(20px); }
+  .float-screen:nth-child(2) { transform: scale(1.08); z-index: 2; }
+  .float-screen:nth-child(3) { transform: rotate(3deg) translateY(20px); }
+
+  .float-screen img {
+    width: 280px;
+    display: block;
+    border-radius: 4px;
+  }
+
+  .float-screen.main img {
+    width: 380px;
+  }
+
+  .float-label {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #6B6880;
+    margin-top: 10px;
+    padding-bottom: 4px;
+  }
+
+  /* ── MOCKUP 3: Browser Window Frame ───────────────────── */
+  .mockup-browser {
+    max-width: 960px;
+    margin: 0 auto 80px;
+  }
+
+  .browser-chrome {
+    background: #1E1E24;
+    border-radius: 10px 10px 0 0;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .browser-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .browser-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #333;
+  }
+
+  .browser-dots span:nth-child(1) { background: #FF5F57; }
+  .browser-dots span:nth-child(2) { background: #FFBD2E; }
+  .browser-dots span:nth-child(3) { background: #28CA41; }
+
+  .browser-url {
+    flex: 1;
+    background: #111;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: #6B6880;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  .browser-content {
+    border: 1px solid #2a2a2a;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+  }
+
+  .browser-content img {
+    width: 100%;
+    display: block;
+  }
+
+  /* ── MOCKUP 4: Feature Grid ───────────────────── */
+  .mockup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto 80px;
+  }
+
+  .grid-card {
+    background: #111118;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .grid-card img {
+    width: 100%;
+    border-radius: 6px;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .grid-card h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .grid-card p {
+    font-size: 12px;
+    color: #6B6880;
+    line-height: 1.5;
+  }
+
+  /* ── MOCKUP 5: Hero banner style ───────────────────── */
+  .mockup-hero {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto 80px;
+    padding: 60px;
+    text-align: center;
+    background: linear-gradient(180deg, #12111A 0%, #0A0A0F 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.04);
+    overflow: hidden;
+  }
+
+  .mockup-hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201,160,99,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-wordmark {
+    font-family: 'Cormorant Garamond', 'Instrument Serif', serif;
+    font-size: 64px;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+    color: #F3F3F5;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: #6B6880;
+    letter-spacing: 0.06em;
+    margin-bottom: 40px;
+  }
+
+  .hero-img {
+    width: 85%;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    display: block;
+  }
+
+  .separator {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #2a2a2a 30%, #2a2a2a 70%, transparent);
+    margin: 40px 0;
+  }
+</style>
+</head>
+<body>
+
+<h2>Mockup 1 — MacBook Pro Perspective</h2>
+<p class="note">Right-click → Save Image or take a screenshot of this section. Use as hero image.</p>
+<div class="mockup-laptop">
+  <div class="laptop-body">
+    <div class="laptop-screen">
+      <img src="/images/koji/homepage.png" alt="Kōji Today view">
+    </div>
+    <div class="laptop-base"></div>
+  </div>
+  <div class="laptop-shadow"></div>
+</div>
+
+<div class="separator"></div>
+
+<h2>Mockup 2 — Multi-Screen Float (3 Views)</h2>
+<p class="note">Shows all three core views side by side in a floating composition.</p>
+<div class="mockup-multi">
+  <div class="float-screen">
+    <img src="/images/koji/board.png" alt="Board view">
+    <div class="float-label">Board</div>
+  </div>
+  <div class="float-screen main">
+    <img src="/images/koji/homepage.png" alt="Today view">
+    <div class="float-label">Today</div>
+  </div>
+  <div class="float-screen">
+    <img src="/images/koji/notes.png" alt="Notes view">
+    <div class="float-label">Notes</div>
+  </div>
+</div>
+
+<div class="separator"></div>
+
+<h2>Mockup 3 — Browser Window</h2>
+<p class="note">Clean browser frame showing Kōji in action.</p>
+<div class="mockup-browser">
+  <div class="browser-chrome">
+    <div class="browser-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="browser-url">koji-seven.vercel.app</div>
+  </div>
+  <div class="browser-content">
+    <img src="/images/koji/homepage.png" alt="Kōji in browser">
+  </div>
+</div>
+
+<div class="separator"></div>
+
+<h2>Mockup 4 — Feature Breakdown Grid</h2>
+<p class="note">Each card highlights a specific view. Great for case study pages.</p>
+<div class="mockup-grid">
+  <div class="grid-card">
+    <img src="/images/koji/homepage.png" alt="Today view">
+    <h3>Today</h3>
+    <p>Your focused task list. Drag to reorder, inline editing, priority markers. See only what matters right now.</p>
+  </div>
+  <div class="grid-card">
+    <img src="/images/koji/board.png" alt="Board view">
+    <h3>Board</h3>
+    <p>The bigger picture. Draggable lanes, batch actions, and a kanban-style overview of everything in flight.</p>
+  </div>
+  <div class="grid-card">
+    <img src="/images/koji/notes.png" alt="Notes view">
+    <h3>Notes</h3>
+    <p>Long-form markdown editing with pinning, search, and day-by-day grouping. Where deeper thinking lives.</p>
+  </div>
+  <div class="grid-card">
+    <img src="/products/koji-screenshot.png" alt="Pomodoro timer">
+    <h3>Focus Timer</h3>
+    <p>Built-in Pomodoro with a calm bell and persisted streak counter. No gamification, just time.</p>
+  </div>
+</div>
+
+<div class="separator"></div>
+
+<h2>Mockup 5 — Hero Banner</h2>
+<p class="note">Branded hero with wordmark + screenshot. Great for product pages and social media.</p>
+<div class="mockup-hero">
+  <div class="hero-wordmark">kōji</div>
+  <div class="hero-sub">A KEYBOARD-FIRST SECOND BRAIN</div>
+  <img class="hero-img" src="/images/koji/homepage.png" alt="Kōji hero">
+</div>
+
+<div class="separator"></div>
+
+<h2 style="margin-top: 80px; color: #B8B5C8;">📋 Screenshots Still Needed</h2>
+<p class="note" style="max-width: 600px;">
+  To complete the mockup set, capture these additional views from the live app at
+  <a href="https://koji-seven.vercel.app" style="color: #C9A063;" target="_blank">koji-seven.vercel.app</a>:<br><br>
+
+  1. <strong>Brain Dump mode</strong> — press D for full-screen capture overlay<br>
+  2. <strong>Command Palette</strong> — press Cmd+K to show the palette<br>
+  3. <strong>Dark theme</strong> — toggle to dark mode and screenshot each view<br>
+  4. <strong>Light theme</strong> — if available, capture a contrasting light mode<br>
+  5. <strong>Empty state</strong> — fresh start before any tasks are added<br>
+  6. <strong>Mobile responsive</strong> — resize browser narrow for mobile layout<br><br>
+
+  Save each as PNG at 2x resolution (retina) into <code>/public/images/koji/</code>
+</p>
+
+</body>
+</html>
