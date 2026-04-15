@@ -15,7 +15,7 @@ const instrumentSerif = Instrument_Serif({
 const outfit = Outfit({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbusformastudio.com";

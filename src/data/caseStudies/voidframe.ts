@@ -11,13 +11,13 @@ export const voidframe: CaseStudy = {
   heroDesc:
     "Gaming has been part of my life for as long as I can remember. But the tools we use to organise around it are a mess — Discord for chat, Google Sheets for events, a random bracket site for tournaments. Voidframe is the platform I wish existed: one place where your community lives, events are organised, squads are ready, and the experience feels native to gaming culture.",
 
-  heroImage: "/images/voidframe/hero.png",
+  heroImage: "/images/voidframe/hero.jpg",
   gallery: [
-    "/images/voidframe/community.png",
-    "/images/voidframe/events.png",
-    "/images/voidframe/squads.png",
-    "/images/voidframe/members.png",
-    "/images/voidframe/chat.png",
+    "/images/voidframe/community.jpg",
+    "/images/voidframe/events.jpg",
+    "/images/voidframe/squads.jpg",
+    "/images/voidframe/members.jpg",
+    "/images/voidframe/chat.jpg",
   ],
 
   challenge:

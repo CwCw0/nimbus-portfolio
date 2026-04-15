@@ -11,12 +11,12 @@ export const omnifood: CaseStudy = {
   heroDesc:
     "Omnifood holds a special place in everything I've built since. It was the first time I closed the tutorials, opened a blank editor, and made every decision myself. No hand-holding, no step-by-step guide — just a brief and a blank screen.",
 
-  heroImage: "/images/omnifood/hero.png",
+  heroImage: "/images/omnifood/hero.jpg",
   gallery: [
     "/images/omnifood/meals.png",
     "/images/omnifood/how-it-works.png",
-    "/images/omnifood/testimonials.png",
-    "/images/omnifood/pricing.png",
+    "/images/omnifood/testimonials.jpg",
+    "/images/omnifood/pricing.jpg",
     "/images/omnifood/cta.png",
   ],
 
