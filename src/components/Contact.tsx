@@ -143,11 +143,12 @@ export default function Contact() {
             <div className="float-field flex-1">
               <select id="ct-project" name="subject" className="appearance-none" defaultValue="">
                 <option value="" disabled>Select type...</option>
-                <option>Website</option>
-                <option>Branding</option>
-                <option>UI/UX</option>
-                <option>SEO</option>
-                <option>AI / LLM Agents</option>
+                <option>Website Design & Development</option>
+                <option>Visual Design</option>
+                <option>UI/UX Design</option>
+                <option>SEO & Growth</option>
+                <option>AI, LLMs & Agents</option>
+                <option>Other</option>
               </select>
               <label htmlFor="ct-project">Project Type</label>
             </div>
@@ -176,7 +177,7 @@ export default function Contact() {
                 ? "bg-emerald-500 text-white"
                 : submitState === "error"
                 ? "bg-red-500 text-white"
-                : "bg-gradient-to-b from-[var(--color-accent)] to-[#5B3FCC] text-white hover:scale-[1.01] hover:shadow-[0_0_24px_#7C5CFC20]"
+                : "bg-(--color-accent-warm) text-[#1a1400] hover:scale-[1.01] hover:shadow-[0_0_24px_rgba(245,194,107,0.25)]"
             } disabled:cursor-not-allowed`}
           >
             {submitState === "idle" && (

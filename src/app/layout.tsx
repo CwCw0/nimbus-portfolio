@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Outfit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import PageLoader from "../components/PageLoader";
+import ScrollProgress from "../components/ScrollProgress";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -127,6 +128,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <PageLoader />
+        <ScrollProgress />
         {children}
         <Analytics />
       </body>

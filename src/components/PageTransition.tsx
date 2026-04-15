@@ -11,17 +11,17 @@ interface PageTransitionProps {
 export default function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
   const prevPathname = useRef(pathname);
-  const overlayRef = useRef<HTMLDivElement>(null);
+  const flashRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [showOverlay, setShowOverlay] = useState(false);
+  const [showFlash, setShowFlash] = useState(false);
 
   useEffect(() => {
     if (prevPathname.current === pathname) return;
     prevPathname.current = pathname;
 
-    const overlay = overlayRef.current;
+    const flash = flashRef.current;
     const content = contentRef.current;
-    if (!overlay || !content) return;
+    if (!flash || !content) return;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -29,89 +29,67 @@ export default function PageTransition({ children }: PageTransitionProps) {
 
     if (prefersReducedMotion) return;
 
-    setShowOverlay(true);
+    setShowFlash(true);
 
     const tl = gsap.timeline({
-      onComplete: () => setShowOverlay(false),
+      onComplete: () => setShowFlash(false),
     });
 
-    // Exit: content fades slightly
+    // Content fades out quickly
     tl.to(content, {
-      opacity: 0.3,
-      scale: 0.98,
-      duration: 0.3,
+      opacity: 0,
+      duration: 0.15,
       ease: "power2.in",
     });
 
-    // Overlay: circle expands from center
+    // Flash wipe — accent color sweeps across
     tl.fromTo(
-      overlay,
-      { clipPath: "circle(0% at 50% 50%)" },
+      flash,
+      { xPercent: -100 },
       {
-        clipPath: "circle(150% at 50% 50%)",
-        duration: 0.8,
-        ease: "power4.inOut",
+        xPercent: 0,
+        duration: 0.3,
+        ease: "power3.inOut",
       },
-      "-=0.1"
+      "-=0.05"
     );
 
-    // Enter: content fades back in
+    // Flash exits the other side
+    tl.to(flash, {
+      xPercent: 100,
+      duration: 0.3,
+      ease: "power3.inOut",
+    }, "+=0.06");
+
+    // Content fades back in
     tl.to(
       content,
       {
         opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power3.out",
+        duration: 0.35,
+        ease: "power2.out",
       },
-      "-=0.3"
+      "-=0.2"
     );
-
-    // Hide overlay at the end
-    tl.set(overlay, { clipPath: "circle(0% at 50% 50%)" });
   }, [pathname]);
 
   return (
     <>
-      {/* Circular clip-path overlay */}
-      {showOverlay && (
+      {showFlash && (
         <div
-          ref={overlayRef}
+          ref={flashRef}
           style={{
             position: "fixed",
             inset: 0,
             zIndex: 9998,
-            backgroundColor: "#0A0A0F",
-            clipPath: "circle(0% at 50% 50%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            background:
+              "linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-light) 50%, var(--color-accent) 100%)",
+            transform: "translateX(-100%)",
+            willChange: "transform",
+            pointerEvents: "none",
           }}
-        >
-          <div className="flex items-center gap-2">
-            <div
-              className="rounded-full"
-              style={{
-                width: 10,
-                height: 10,
-                backgroundColor: "#7C5CFC",
-              }}
-            />
-            <span
-              className="font-body text-[var(--color-text-primary)]"
-              style={{
-                fontSize: 18,
-                letterSpacing: 6,
-              }}
-            >
-              NIMBUS
-            </span>
-          </div>
-        </div>
+        />
       )}
-
-      {/* Page content wrapper */}
       <div ref={contentRef}>{children}</div>
     </>
   );

@@ -41,21 +41,38 @@ export default function CaseStudies() {
         const img = card.querySelector(".cs-img") as HTMLElement;
         const content = card.querySelector(".cs-content") as HTMLElement;
 
-        if (img && !isMobile) {
-          gsap.fromTo(
-            img,
-            { yPercent: 8 },
-            {
-              yPercent: -8,
-              ease: "none",
-              scrollTrigger: {
-                trigger: card,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            }
-          );
+        if (img) {
+          // Clip-path reveal — image wipes in from bottom
+          const clipFrom = isMobile ? "inset(30% 0 0 0)" : "inset(100% 0 0 0)";
+          gsap.set(img, { clipPath: clipFrom });
+          gsap.to(img, {
+            clipPath: "inset(0% 0 0 0)",
+            ease: "none",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              end: "top 40%",
+              scrub: true,
+            },
+          });
+
+          // Parallax — desktop only
+          if (!isMobile) {
+            gsap.fromTo(
+              img,
+              { yPercent: 8 },
+              {
+                yPercent: -8,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true,
+                },
+              }
+            );
+          }
         }
 
         gsap.fromTo(

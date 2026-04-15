@@ -197,7 +197,7 @@ export default function ContactPage() {
                   <select id="contact-subject" name="subject" className="h-12 w-full appearance-none border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-body text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none transition-all">
                     <option>Select a subject...</option>
                     <option>Website Design & Development</option>
-                    <option>Brand Identity</option>
+                    <option>Visual Design</option>
                     <option>AI, LLMs & Agents</option>
                     <option>SEO & Growth</option>
                     <option>Other</option>

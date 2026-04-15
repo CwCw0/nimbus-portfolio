@@ -20,23 +20,26 @@ export function useScrollReveal(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
+    // Mobile: ~30% faster animations
+    const isMobile = window.innerWidth < 769;
+    const ds = isMobile ? 0.7 : 1;
+
     const ctx = gsap.context(() => {
       const items = section.querySelectorAll(selector);
       if (!items.length) return;
 
       if (prefersReducedMotion) {
-        // Instant reveal for reduced motion
         gsap.set(items, { opacity: 1, y: 0 });
         return;
       }
 
-      gsap.set(items, { opacity: 0, y: 40 });
+      gsap.set(items, { opacity: 0, y: isMobile ? 25 : 40 });
 
       gsap.to(items, {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: staggerMs / 1000,
+        duration: 0.8 * ds,
+        stagger: (staggerMs / 1000) * ds,
         ease: "power3.out",
         scrollTrigger: {
           trigger: section,

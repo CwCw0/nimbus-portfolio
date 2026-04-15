@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
@@ -9,6 +10,7 @@ import SplitType from "split-type";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
+  const ctaHeadingRef = useRef<HTMLHeadingElement>(null);
   const quoteRef = useRef<HTMLDivElement>(null);
   const wordmarkRef = useRef<HTMLSpanElement>(null);
   const strikethroughRef = useRef<HTMLSpanElement>(null);
@@ -32,6 +34,25 @@ export default function Footer() {
     }
 
     const cleanups: (() => void)[] = [];
+
+    // CTA heading word reveal
+    if (ctaHeadingRef.current) {
+      const ctaSplit = new SplitType(ctaHeadingRef.current, { types: "words" });
+      gsap.set(ctaSplit.words || [], { opacity: 0, y: 20 });
+      gsap.to(ctaSplit.words || [], {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.05,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ctaHeadingRef.current,
+          start: "top 85%",
+          once: true,
+        },
+      });
+      cleanups.push(() => ctaSplit.revert());
+    }
 
     // Quote fade-in
     if (quote) {
@@ -97,7 +118,35 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="flex w-full flex-col items-center bg-[var(--color-bg-footer)] px-16 py-16 max-md:px-6 max-md:py-10">
+    <footer className="flex w-full flex-col items-center bg-[var(--color-bg-footer)] px-16 pt-0 pb-16 max-md:px-6 max-md:pb-10">
+
+      {/* CTA moment — catches visitors at peak conviction */}
+      <div className="flex w-full flex-col items-center py-24 max-md:py-16">
+        <h3
+          ref={ctaHeadingRef}
+          className="mb-6 text-center font-display italic leading-[1.1] text-(--color-text-primary)"
+          style={{ fontSize: "clamp(32px, 5vw, 72px)" }}
+        >
+          Have a project in mind?
+        </h3>
+        <p className="mb-10 max-w-md text-center font-body text-base text-(--color-text-muted)">
+          Let&apos;s make something remarkable.
+        </p>
+        <Link
+          href="/contact"
+          data-magnetic
+          className="flex items-center gap-3 bg-(--color-accent-warm) px-10 py-4 font-body text-[15px] font-semibold text-[#1a1400] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_rgba(245,194,107,0.25)]"
+        >
+          Start a Conversation
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+
+      {/* Gradient divider */}
+      <div
+        className="mb-12 h-px w-full max-w-150"
+        style={{ background: "linear-gradient(90deg, transparent, var(--color-accent) 30%, var(--color-accent-secondary) 70%, transparent)" }}
+      />
 
       {/* Large wordmark with strikethrough reveal */}
       <div className="relative flex flex-col items-center mb-8">
@@ -182,7 +231,7 @@ export default function Footer() {
           <Link
             key={link.label}
             href={link.href}
-            className="font-body text-[13px] text-(--color-text-dim) transition-colors duration-200 hover:text-(--color-accent)"
+            className="font-body text-[13px] text-(--color-text-dim) transition-colors duration-200 hover:text-(--color-accent-secondary)"
           >
             {link.label}
           </Link>

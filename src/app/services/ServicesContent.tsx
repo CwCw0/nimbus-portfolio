@@ -27,14 +27,14 @@ const services = [
   },
   {
     num: "02",
-    title: "Brand Identity & Strategy",
-    desc: "A cohesive visual identity system that tells your brand story. From logo design to full brand guidelines, everything you need to stand out.",
+    title: "Visual Design",
+    desc: "Colour systems, typography, and component design that give your product a look built with intent — not picked from a template.",
     features: [
-      "Logo design + variations",
-      "Color palette & typography system",
-      "Brand guidelines document",
-      "Social media templates",
-      "Business card & stationery design",
+      "Design language & colour system",
+      "Typography scale & component library",
+      "Responsive UI across all breakpoints",
+      "Motion & micro-interaction design",
+      "Figma handoff-ready files",
     ],
   },
   {
@@ -181,8 +181,8 @@ export default function ServicesPage() {
               One developer.
             </h1>
             <p className="hero-fade max-w-[600px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:text-base">
-              End-to-end digital solutions — from design to development to deployment.
-              No agency overhead, no communication gaps. Just focused expertise.
+              No agency overhead, no handoff delays, no communication gaps.
+              One person who owns the work from first pixel to final deploy.
             </p>
           </div>
         </section>
@@ -249,10 +249,10 @@ export default function ServicesPage() {
               className="font-display tracking-[-2px] text-[var(--color-text-primary)] text-center"
               style={{ fontSize: "clamp(28px, 4vw, 56px)" }}
             >
-              Not sure which service you need?
+              Not sure where to start?
             </h2>
             <p className="max-w-[500px] text-center font-body text-lg text-[var(--color-text-dim)] max-md:text-base">
-              Book a free discovery call. We&apos;ll figure out the best approach together.
+              Book a free discovery call and we&apos;ll figure out exactly what you need — no pitch, no pressure.
             </p>
             <div className="flex items-center gap-4 max-md:flex-col">
               <a href="https://calendly.com/heyitsnimbus/30min" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-[18px] font-body text-base font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20]">

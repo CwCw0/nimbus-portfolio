@@ -268,10 +268,10 @@ export default function AboutPage() {
                 Not just code.
               </h1>
               <p className="hero-fade max-w-145 font-body text-lg leading-[1.75] text-(--color-text-dim) max-md:text-base">
-                Founder of Nimbus. I build websites, branding, and AI tools for
-                clients — and ship my own products when I spot gaps worth
-                solving. Code, design, systems, business. I study and build all
-                of it.
+                Founder of Nimbus Forma Studio. I build websites, visual design,
+                and AI tools for clients — and ship my own products when I spot
+                gaps worth solving. Code, design, systems, business. I study and
+                build all of it.
               </p>
             </div>
           </section>
@@ -356,7 +356,7 @@ export default function AboutPage() {
                         Dee
                       </span>
                       <span className="block font-body text-[11px] text-(--color-text-dim)">
-                        Founder, Nimbus
+                        Founder, Nimbus Forma Studio
                       </span>
                     </div>
                   </div>
@@ -518,7 +518,7 @@ export default function AboutPage() {
                   <div className="flex items-center gap-3">
                     <span className="h-px w-10 bg-(--color-accent)" />
                     <span className="font-body text-[11px] font-medium tracking-[4px] text-(--color-accent)">
-                      NIMBUS STUDIO · INDEX
+                      NIMBUS FORMA STUDIO · INDEX
                     </span>
                   </div>
                   <h2
@@ -528,10 +528,10 @@ export default function AboutPage() {
                     The full catalogue.
                   </h2>
                   <p className="mt-6 font-body text-[15px] leading-[1.8] text-(--color-text-dim) max-md:text-[14px]">
-                    Nimbus is a one-person studio. Every product on this list is
-                    something I&apos;m building or have shipped — no mockups, no
-                    templates, no affiliate filler. Each line is a real thing at
-                    a real stage.
+                    Nimbus Forma Studio is a one-person studio. Every product on
+                    this list is something I&apos;m building or have shipped — no
+                    mockups, no templates, no affiliate filler. Each line is a
+                    real thing at a real stage.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 font-mono text-[10px] tracking-[2px] text-(--color-text-muted) uppercase">

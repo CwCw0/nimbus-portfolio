@@ -106,7 +106,26 @@ export default function Services() {
       currentIndexRef.current = index;
       isAnimatingRef.current = true;
 
-      if (counterRef.current) counterRef.current.textContent = service.num;
+      // Counter roll animation
+      if (counterRef.current) {
+        const direction = index > activeServiceIndex ? 1 : -1;
+        gsap.to(counterRef.current, {
+          y: direction * -20,
+          opacity: 0,
+          duration: 0.15,
+          ease: "power3.in",
+          onComplete: () => {
+            if (counterRef.current) {
+              counterRef.current.textContent = service.num;
+              gsap.fromTo(
+                counterRef.current,
+                { y: direction * 20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.25, ease: "power3.out" }
+              );
+            }
+          },
+        });
+      }
       if (numWatermarkRef.current) numWatermarkRef.current.textContent = service.num;
 
       if (titleRef.current) gsap.killTweensOf(titleRef.current);
@@ -192,19 +211,28 @@ export default function Services() {
         <div className="relative flex h-full w-full max-md:hidden">
           {/* Left side — counter + progress bar */}
           <div className="flex w-[120px] flex-col items-center justify-center gap-8 border-r border-[var(--color-border)]">
-            <div className="relative h-[200px] w-px bg-[var(--color-border)]">
+            <div className="relative h-[200px] w-[3px] rounded-full bg-[var(--color-border)]">
               <div
                 ref={progressRef}
-                className="absolute top-0 left-0 w-full bg-[var(--color-accent)]"
+                className="absolute top-0 left-0 w-full rounded-full bg-[var(--color-accent)]"
                 style={{ height: "0%", willChange: "height" }}
-              />
+              >
+                {/* Glowing head dot */}
+                <div
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 h-[6px] w-[6px] rounded-full bg-[var(--color-accent)]"
+                  style={{ boxShadow: "0 0 8px 2px rgba(124,92,252,0.5)" }}
+                />
+              </div>
             </div>
-            <span
-              ref={counterRef}
-              className="font-body text-sm font-semibold tracking-[2px] text-[var(--color-accent)]"
-            >
-              {firstService.num}
-            </span>
+            <div className="h-5 overflow-hidden">
+              <span
+                ref={counterRef}
+                className="block font-body text-sm font-semibold tracking-[2px] text-[var(--color-accent)]"
+                style={{ willChange: "transform" }}
+              >
+                {firstService.num}
+              </span>
+            </div>
           </div>
 
           {/* Center content */}

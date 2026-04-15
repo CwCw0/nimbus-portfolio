@@ -16,6 +16,7 @@ export default function Hero() {
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const mouseGlowRef = useRef<HTMLDivElement>(null);
   const cornersRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -139,6 +140,21 @@ export default function Hero() {
             });
           }
 
+          // Hero content fades + scales down on scroll exit
+          if (contentRef.current) {
+            gsap.to(contentRef.current, {
+              opacity: 0,
+              scale: 0.96,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+          }
+
           // Scroll indicator fades out
           if (scrollIndicatorRef.current) {
             gsap.to(scrollIndicatorRef.current, {
@@ -219,7 +235,7 @@ export default function Hero() {
       </div>
 
       {/* Centered content */}
-      <div className="relative z-10 flex flex-col items-center gap-10 px-6 text-center max-md:gap-8">
+      <div ref={contentRef} className="relative z-10 flex flex-col items-center gap-10 px-6 text-center max-md:gap-8" style={{ willChange: "transform, opacity" }}>
         <h1
           ref={headingRef}
           className="font-display text-[var(--color-text-primary)] max-md:max-w-[90vw]"
@@ -247,7 +263,7 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             data-magnetic
-            className="flex items-center gap-3 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-light)] px-9 py-4 font-body text-[15px] font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_#7C5CFC25] max-md:w-full max-md:justify-center"
+            className="flex items-center gap-3 bg-(--color-accent-warm) px-9 py-4 font-body text-[15px] font-semibold text-[#1a1400] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(245,194,107,0.25)] max-md:w-full max-md:justify-center"
           >
             Start a Project
             <ArrowUpRight className="h-4 w-4" />

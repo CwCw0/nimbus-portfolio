@@ -102,7 +102,7 @@ export default function About() {
           </h2>
 
           <p className="about-reveal mt-8 font-body text-lg leading-[1.8] text-[var(--color-text-dim)] max-md:text-base">
-            Developer, designer, and founder of Nimbus. I don&apos;t just
+            Developer, designer, and founder of Nimbus Forma Studio. I don&apos;t just
             write code — I study the systems, the design, the business, and the
             user.
           </p>
@@ -112,7 +112,7 @@ export default function About() {
               href="#contact"
               className="inline-flex items-center gap-2 border border-[var(--color-border-light)] bg-[var(--color-grid)] px-7 py-3.5 font-body text-sm font-semibold text-[var(--color-text-primary)] transition-all duration-300 hover:border-[var(--color-accent-border)] hover:shadow-[0_0_24px_#7C5CFC20]"
             >
-              Hire Me
+              Work With Me
               <ArrowUpRight className="h-3.5 w-3.5 text-[var(--color-accent)]" />
             </a>
           </div>
@@ -149,14 +149,14 @@ export default function About() {
           </p>
 
           <p className="about-reveal font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
-            Available{" "}
+            Fast to respond, focused when it counts. Every project gets{" "}
             <span
               className="inline font-display text-[var(--color-text-primary)] align-baseline"
               style={{ fontSize: "clamp(36px, 5vw, 80px)", lineHeight: 0.9, letterSpacing: "-0.02em" }}
             >
-              24/7
+              full
             </span>{" "}
-            — always building, always shipping.
+            attention — not split between ten clients at once.
           </p>
 
           {/* Tech pills */}
@@ -168,7 +168,7 @@ export default function About() {
               (tool) => (
                 <span
                   key={tool}
-                  className="border border-[var(--color-border)] px-3 py-1.5 font-body text-[12px] text-[var(--color-text-muted)] transition-all hover:border-[var(--color-accent-border)] hover:text-[var(--color-text-secondary)] hover:shadow-[0_0_12px_#7C5CFC10]"
+                  className="border border-[var(--color-border)] px-3 py-1.5 font-body text-[12px] text-[var(--color-text-muted)] transition-all hover:border-(--color-accent-secondary) hover:text-(--color-accent-secondary) hover:shadow-[0_0_12px_rgba(94,234,212,0.08)]"
                 >
                   {tool}
                 </span>

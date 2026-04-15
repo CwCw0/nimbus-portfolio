@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 :root {
+  /* Backgrounds — distinct separation between sections */
   --color-bg-primary: #0A0A0F;
-  --color-bg-secondary: #0F0E16;
+  --color-bg-elevated: #110F1C;
   --color-bg-footer: #08080D;
-  --color-bg-card: #12111A;
-  --color-bg-card-alt: #1A1825;
-  --color-border: #1E1C2A;
-  --color-border-light: #2A2838;
+  --color-bg-card: #14122A;
+  --color-bg-card-alt: #1C1935;
+  --color-border: #221F38;
+  --color-border-light: #2E2B45;
   --color-grid: #1A1826;
 
+  /* Accent hierarchy — purple primary, teal secondary, warm CTA */
   --color-accent: #7C5CFC;
   --color-accent-light: #A78BFA;
   --color-accent-glow: #7C5CFC20;
@@ -17,13 +19,18 @@
   --color-accent-border: #7C5CFC40;
   --color-accent-secondary: #5EEAD4;
   --color-accent-secondary-subtle: #5EEAD418;
+  --color-accent-warm: #F5C26B;
 
-  --color-text-primary: #EEEDF5;
-  --color-text-secondary: #B5B2C4;
+  /* Text — cleaner hierarchy */
+  --color-text-primary: #F0EFF5;
+  --color-text-secondary: #B8B5C8;
   --color-text-muted: #6B6880;
   --color-text-dim: #5A5770;
   --color-text-subtle: #3A384A;
   --color-text-faint: #2A283A;
+
+  /* Legacy alias — prevents breakage in files still using the old name */
+  --color-bg-secondary: var(--color-bg-elevated);
 }
 
 @layer base {
@@ -52,8 +59,8 @@ body.cursor-ready *::before, body.cursor-ready *::after {
 
 /* Custom select styling */
 select option {
-  background: #12111A;
-  color: #B5B2C4;
+  background: var(--color-bg-card);
+  color: var(--color-text-secondary);
   padding: 8px;
 }
 
@@ -269,7 +276,7 @@ html.lenis, html.lenis body {
 .float-field input:focus,
 .float-field textarea:focus,
 .float-field select:focus {
-  border-bottom-color: var(--color-accent);
+  border-bottom-color: var(--color-accent-secondary);
 }
 
 .float-field label {
@@ -289,7 +296,7 @@ html.lenis, html.lenis body {
 .float-field select ~ label {
   top: 0;
   font-size: 11px;
-  color: var(--color-accent);
+  color: var(--color-accent-secondary);
   letter-spacing: 1px;
 }
 
@@ -465,6 +472,42 @@ nav a span[class*="scale-x"] {
 
 nav a:not(:hover) span[class*="scale-x-0"] {
   transform-origin: right;
+}
+
+/* Mobile touch feedback */
+@media (max-width: 768px) {
+  button, a[role="button"], [data-magnetic] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:active, a[role="button"]:active {
+    transform: scale(0.97) !important;
+    transition: transform 100ms ease !important;
+  }
+
+  button[type="submit"]:active,
+  a[class*="bg-gradient"]:active,
+  a[class*="accent-warm"]:active {
+    transform: scale(0.95) !important;
+  }
+}
+
+/* Ambient orbs — homepage atmosphere */
+@keyframes ambient-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(80px, -60px) scale(1.08); }
+  66%      { transform: translate(-40px, 40px) scale(0.95); }
+}
+
+@keyframes ambient-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(-70px, 50px) scale(1.05); }
+  66%      { transform: translate(50px, -70px) scale(1.1); }
+}
+
+@keyframes ambient-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1.02); }
+  50%      { transform: translate(-60px, 80px) scale(0.96); }
 }
 
 /* Reduced motion */

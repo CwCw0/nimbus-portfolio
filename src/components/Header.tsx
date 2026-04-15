@@ -274,7 +274,7 @@ export default function Header() {
           <Link
             href="/contact"
             data-magnetic
-            className="flex items-center gap-2 bg-[var(--color-accent)] px-6 py-2.5 font-body text-[13px] font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#7C5CFC20] max-md:px-4 max-md:py-2 max-md:text-xs"
+            className="flex items-center gap-2 bg-(--color-accent-warm) px-6 py-2.5 font-body text-[13px] font-semibold text-[#1a1400] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_rgba(245,194,107,0.25)] max-md:px-4 max-md:py-2 max-md:text-xs"
           >
             Let&apos;s Talk
             <ArrowRight className="h-3.5 w-3.5" />
@@ -317,7 +317,7 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-4 flex items-center gap-2 bg-[var(--color-accent)] px-8 py-3 font-body text-[15px] font-semibold text-white"
+              className="mt-4 flex items-center gap-2 bg-(--color-accent-warm) px-8 py-3 font-body text-[15px] font-semibold text-[#1a1400]"
             >
               Let&apos;s Talk
               <ArrowRight className="h-4 w-4" />
