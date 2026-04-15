@@ -93,6 +93,23 @@ export default function ContactPage() {
     const data = new FormData(form);
     if (data.get("_gotcha")) return;
 
+    // Validate email format
+    const email = String(data.get("email") || "").trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setSubmitState("error");
+      setTimeout(() => setSubmitState("idle"), 4000);
+      return;
+    }
+
+    // Validate required fields aren't empty or excessively long
+    const name = String(data.get("name") || "").trim();
+    const message = String(data.get("message") || "").trim();
+    if (!name || name.length > 200 || !message || message.length > 5000) {
+      setSubmitState("error");
+      setTimeout(() => setSubmitState("idle"), 4000);
+      return;
+    }
+
     setSubmitState("sending");
     try {
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
