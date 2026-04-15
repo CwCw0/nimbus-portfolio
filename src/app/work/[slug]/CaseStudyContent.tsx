@@ -218,7 +218,7 @@ export default function CaseStudyContent({
             ref={heroRef}
             className="relative flex w-full flex-col items-center justify-center px-16 pt-14 pb-10 max-md:px-6 max-md:pt-10"
           >
-            <div className="flex flex-col items-center gap-5 text-center max-w-[860px]">
+            <div className="flex flex-col items-center gap-5 text-center max-w-[960px]">
               <div className="hero-fade flex gap-2 flex-wrap items-center justify-center">
                 {caseStudy?.status === "in-development" && (
                   <span className="bg-amber-500/15 border border-amber-500/25 px-3 py-1 font-body text-[11px] font-semibold tracking-[1px] text-amber-400">
