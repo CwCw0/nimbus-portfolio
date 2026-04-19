@@ -22,27 +22,18 @@ export default function MarqueeStrip() {
     const tracks = el.querySelectorAll<HTMLElement>(".marquee-skew-track");
 
     const ctx = gsap.context(() => {
-      // Scroll-velocity skew — faster scroll = more lean
+      // Scroll-velocity skew only — NO animationDuration mutation (causes layout thrash)
       ScrollTrigger.create({
         trigger: el,
         start: "top bottom",
         end: "bottom top",
         onUpdate: (self) => {
-          const velocity = self.getVelocity();
-          const skew = gsap.utils.clamp(-8, 8, velocity / 250);
-          // Also scale speed slightly with scroll velocity
-          const speedMult = 1 + Math.abs(velocity) / 5000;
-
+          const skew = gsap.utils.clamp(-6, 6, self.getVelocity() / 300);
           gsap.to(tracks, {
             skewX: skew,
             duration: 0.3,
             ease: "power2.out",
             overwrite: "auto",
-          });
-
-          // Adjust CSS animation speed
-          tracks.forEach((track) => {
-            track.style.animationDuration = `${30 / speedMult}s`;
           });
         },
       });
@@ -64,13 +55,7 @@ export default function MarqueeStrip() {
       );
     }, el);
 
-    return () => {
-      ctx.revert();
-      // Reset animation duration
-      tracks.forEach((track) => {
-        track.style.animationDuration = "";
-      });
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -105,7 +90,7 @@ export default function MarqueeStrip() {
         ))}
       </div>
 
-      {/* Bottom row — outlined/stroke text, scrolls right */}
+      {/* Bottom row — outlined text, scrolls right */}
       <div className="marquee-track-reverse marquee-skew-track flex items-center gap-16 whitespace-nowrap max-md:gap-8">
         {[...words, ...words, ...words, ...words].map((word, i) => (
           <div

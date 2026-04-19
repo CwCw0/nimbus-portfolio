@@ -49,52 +49,66 @@ export default function Hero() {
       });
     }
 
-    // Watermark reacts to cursor — SVG displacement filter creates real water distortion
+    // Watermark — pool floor refraction. Text shifts like looking through water.
     const watermark = watermarkRef.current;
-    const displacementScale = section.querySelector("#water-disp-scale") as SVGAnimateElement | null;
-    const turbFreq = section.querySelector("#water-turb") as SVGFETurbulenceElement | null;
-
-    if (watermark && displacementScale && turbFreq && !prefersReducedMotion) {
-      let prevX = 0;
-      let prevY = 0;
-      let disturbance = 0;
+    if (watermark && !prefersReducedMotion) {
+      let mouseX = 0.5; // normalized 0-1
+      let mouseY = 0.5;
+      let velX = 0;
+      let velY = 0;
+      let prevMX = 0.5;
+      let prevMY = 0.5;
+      // Current refraction offset (smoothed)
+      let offsetX = 0;
+      let offsetY = 0;
       let time = 0;
 
-      const onWatermarkMove = (e: MouseEvent) => {
-        const dx = e.clientX - prevX;
-        const dy = e.clientY - prevY;
-        const speed = Math.sqrt(dx * dx + dy * dy);
-        prevX = e.clientX;
-        prevY = e.clientY;
-        disturbance = Math.min(1, disturbance + speed * 0.012);
+      const onMove = (e: MouseEvent) => {
+        const rect = section.getBoundingClientRect();
+        mouseX = (e.clientX - rect.left) / rect.width;
+        mouseY = (e.clientY - rect.top) / rect.height;
       };
 
-      section.addEventListener("mousemove", onWatermarkMove);
-      cleanups.push(() => section.removeEventListener("mousemove", onWatermarkMove));
+      section.addEventListener("mousemove", onMove);
+      cleanups.push(() => section.removeEventListener("mousemove", onMove));
 
-      const decay = () => {
-        disturbance *= 0.965;
-        if (disturbance < 0.001) disturbance = 0;
+      const animate = () => {
         time += 0.016;
 
-        // Displacement scale — how much the letters warp (0 = none, 40 = heavy)
-        const dispScale = disturbance * 40;
-        displacementScale.setAttribute("scale", String(dispScale));
+        // Velocity of cursor (how fast the "water" is being disturbed)
+        velX += (mouseX - prevMX) * 8;
+        velY += (mouseY - prevMY) * 8;
+        prevMX = mouseX;
+        prevMY = mouseY;
 
-        // Animate turbulence frequency — creates moving wave pattern
-        const baseFreq = 0.015 + disturbance * 0.025;
-        const freqShift = Math.sin(time * 2) * 0.005 * disturbance;
-        turbFreq.setAttribute("baseFrequency", `${(baseFreq + freqShift).toFixed(4)} ${(baseFreq * 0.8).toFixed(4)}`);
+        // Dampen velocity
+        velX *= 0.92;
+        velY *= 0.92;
 
-        // Also shift opacity slightly — text fades a bit when heavily distorted
-        const opacity = 0.07 * (1 - disturbance * 0.5);
-        watermark.style.opacity = String(opacity);
+        // Add gentle sine oscillation (water is never perfectly still)
+        const ambientX = Math.sin(time * 1.2) * 0.3;
+        const ambientY = Math.cos(time * 0.9) * 0.2;
 
-        decayFrame = requestAnimationFrame(decay);
+        // Smoothly approach target offset
+        const targetX = velX * 15 + ambientX;
+        const targetY = velY * 12 + ambientY;
+        offsetX += (targetX - offsetX) * 0.08;
+        offsetY += (targetY - offsetY) * 0.08;
+
+        // Apply as transform — like light refracting through water surface
+        const disturbance = Math.sqrt(velX * velX + velY * velY);
+        const blur = Math.min(3, disturbance * 4);
+        const scaleShift = 1 + Math.sin(time * 1.5) * 0.003 * (1 + disturbance * 2);
+
+        watermark.style.transform =
+          `translate(${offsetX}px, ${offsetY}px) scale(${scaleShift})`;
+        watermark.style.filter = blur > 0.1 ? `blur(${blur}px)` : "none";
+
+        frame = requestAnimationFrame(animate);
       };
 
-      let decayFrame = requestAnimationFrame(decay);
-      cleanups.push(() => cancelAnimationFrame(decayFrame));
+      let frame = requestAnimationFrame(animate);
+      cleanups.push(() => cancelAnimationFrame(frame));
     }
 
     const ctx = gsap.context(() => {
@@ -256,29 +270,7 @@ export default function Hero() {
         }}
       />
 
-      {/* SVG displacement filter for water ripple on text */}
-      <svg className="absolute h-0 w-0" aria-hidden="true">
-        <filter id="water-ripple-filter" x="-10%" y="-10%" width="120%" height="120%">
-          <feTurbulence
-            id="water-turb"
-            type="turbulence"
-            baseFrequency="0.015 0.012"
-            numOctaves="3"
-            seed="2"
-            result="turbulence"
-          />
-          <feDisplacementMap
-            id="water-disp-scale"
-            in="SourceGraphic"
-            in2="turbulence"
-            scale="0"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
-      </svg>
-
-      {/* Ghost watermark — large NIMBUS with water displacement filter */}
+      {/* Ghost watermark — pool floor refraction via cursor-driven transforms */}
       <div
         className="pointer-events-none absolute inset-0 flex items-center justify-center select-none max-md:hidden"
         aria-hidden="true"
@@ -288,11 +280,10 @@ export default function Hero() {
           className="font-display text-(--color-text-primary)"
           style={{
             fontSize: "clamp(120px, 20vw, 320px)",
-            opacity: 0.07,
+            opacity: 0.06,
             letterSpacing: "0.1em",
             lineHeight: 1,
-            filter: "url(#water-ripple-filter)",
-            willChange: "opacity, filter",
+            willChange: "transform, filter",
           }}
         >
           NIMBUS

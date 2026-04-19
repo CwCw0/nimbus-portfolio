@@ -119,11 +119,17 @@ export default function WaterRipple() {
     document.addEventListener("mousemove", onMouseMove, { passive: true });
     document.addEventListener("mouseleave", onMouseLeave);
 
-    // ---- animation loop ----
+    // ---- animation loop (throttled to ~30fps for performance) ----
     let animId: number;
     let frame = 0;
+    let lastTime = 0;
+    const FRAME_INTERVAL = 1000 / 30; // 30fps
 
-    const animate = () => {
+    const animate = (now: number) => {
+      animId = requestAnimationFrame(animate);
+
+      if (now - lastTime < FRAME_INTERVAL) return;
+      lastTime = now;
       // --- Cursor trail: interpolate between prev and current mouse pos ---
       if (isOnPage && mouseX >= 0 && prevMX >= 0) {
         const dx = mouseX - prevMX;
@@ -158,10 +164,9 @@ export default function WaterRipple() {
       render();
 
       frame++;
-      animId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animId = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animId);
