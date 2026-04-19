@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
 import SmoothScroll from "../../components/SmoothScroll";
+import WaterRipple from "../../components/WaterRipple";
 import { ArrowUpRight, Code, Palette, Server, Bot } from "lucide-react";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
@@ -237,6 +238,7 @@ export default function AboutPage() {
   return (
     <>
       <CustomCursor />
+      <WaterRipple />
       <SmoothScroll>
         <main
           id="main-content"

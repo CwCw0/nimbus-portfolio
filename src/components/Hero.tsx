@@ -1,28 +1,27 @@
 "use client";
 
-import { ArrowUpRight, ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SplitType from "split-type";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
+  const line1Ref = useRef<HTMLSpanElement>(null);
+  const line2Ref = useRef<HTMLSpanElement>(null);
   const subtextRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const scrollLineRef = useRef<HTMLDivElement>(null);
   const mouseGlowRef = useRef<HTMLDivElement>(null);
-  const cornersRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const accentLineRef = useRef<HTMLDivElement>(null);
+  const watermarkRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const heading = headingRef.current;
     const mouseGlow = mouseGlowRef.current;
-    if (!section || !heading) return;
+    if (!section) return;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -50,73 +49,128 @@ export default function Hero() {
       });
     }
 
-    const split = new SplitType(heading, { types: "words" });
+    // Watermark reacts to cursor — SVG displacement filter creates real water distortion
+    const watermark = watermarkRef.current;
+    const displacementScale = section.querySelector("#water-disp-scale") as SVGAnimateElement | null;
+    const turbFreq = section.querySelector("#water-turb") as SVGFETurbulenceElement | null;
+
+    if (watermark && displacementScale && turbFreq && !prefersReducedMotion) {
+      let prevX = 0;
+      let prevY = 0;
+      let disturbance = 0;
+      let time = 0;
+
+      const onWatermarkMove = (e: MouseEvent) => {
+        const dx = e.clientX - prevX;
+        const dy = e.clientY - prevY;
+        const speed = Math.sqrt(dx * dx + dy * dy);
+        prevX = e.clientX;
+        prevY = e.clientY;
+        disturbance = Math.min(1, disturbance + speed * 0.012);
+      };
+
+      section.addEventListener("mousemove", onWatermarkMove);
+      cleanups.push(() => section.removeEventListener("mousemove", onWatermarkMove));
+
+      const decay = () => {
+        disturbance *= 0.965;
+        if (disturbance < 0.001) disturbance = 0;
+        time += 0.016;
+
+        // Displacement scale — how much the letters warp (0 = none, 40 = heavy)
+        const dispScale = disturbance * 40;
+        displacementScale.setAttribute("scale", String(dispScale));
+
+        // Animate turbulence frequency — creates moving wave pattern
+        const baseFreq = 0.015 + disturbance * 0.025;
+        const freqShift = Math.sin(time * 2) * 0.005 * disturbance;
+        turbFreq.setAttribute("baseFrequency", `${(baseFreq + freqShift).toFixed(4)} ${(baseFreq * 0.8).toFixed(4)}`);
+
+        // Also shift opacity slightly — text fades a bit when heavily distorted
+        const opacity = 0.07 * (1 - disturbance * 0.5);
+        watermark.style.opacity = String(opacity);
+
+        decayFrame = requestAnimationFrame(decay);
+      };
+
+      let decayFrame = requestAnimationFrame(decay);
+      cleanups.push(() => cancelAnimationFrame(decayFrame));
+    }
 
     const ctx = gsap.context(() => {
       if (prefersReducedMotion) {
-        gsap.set(split.words || [], { y: 0, opacity: 1 });
+        gsap.set([line1Ref.current, line2Ref.current], { y: 0, autoAlpha: 1 });
+        gsap.set([subtextRef.current, ctaRef.current, scrollLineRef.current], {
+          autoAlpha: 1,
+          y: 0,
+        });
         return;
       }
 
-      // Wrap each word in overflow-hidden
-      split.words?.forEach((word) => {
-        const wrapper = document.createElement("span");
-        wrapper.style.display = "inline-block";
-        wrapper.style.overflow = "hidden";
-        wrapper.style.verticalAlign = "top";
-        word.parentNode?.insertBefore(wrapper, word);
-        wrapper.appendChild(word);
-      });
+      // Initial states — hide everything
+      gsap.set(line1Ref.current, { y: 60, autoAlpha: 0 });
+      gsap.set(line2Ref.current, { y: 80, autoAlpha: 0, scale: 0.95 });
+      gsap.set(subtextRef.current, { autoAlpha: 0, y: 40 });
+      gsap.set(ctaRef.current, { autoAlpha: 0, y: 30 });
+      gsap.set(scrollLineRef.current, { autoAlpha: 0 });
+      if (accentLineRef.current) gsap.set(accentLineRef.current, { scaleX: 0 });
 
-      // Set initial states
-      gsap.set(split.words || [], { y: "100%", opacity: 0 });
-      if (subtextRef.current) gsap.set(subtextRef.current, { opacity: 0, y: 40 });
-      if (ctaRef.current) gsap.set(ctaRef.current, { opacity: 0, y: 30 });
-      if (scrollIndicatorRef.current) gsap.set(scrollIndicatorRef.current, { opacity: 0 });
-      if (cornersRef.current) gsap.set(cornersRef.current, { opacity: 0 });
-
-      // Word-by-word reveal timeline
+      // Entrance timeline
       const tl = gsap.timeline({ delay: 0.3 });
 
-      tl.to(split.words || [], {
-        y: "0%",
-        opacity: 1,
-        duration: 0.9,
-        stagger: 0.06,
+      // Line 1 — "Built with" slides up
+      tl.to(line1Ref.current, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 1,
         ease: "power3.out",
       });
 
+      // Line 2 — "intention." scales in with emphasis
+      tl.to(
+        line2Ref.current,
+        {
+          y: 0,
+          autoAlpha: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: "power3.out",
+        },
+        "-=0.6"
+      );
+
+      // Accent line draws under heading
+      if (accentLineRef.current) {
+        tl.to(
+          accentLineRef.current,
+          { scaleX: 1, duration: 0.8, ease: "power2.inOut" },
+          "-=0.5"
+        );
+      }
+
+      // Subtext + CTA
       tl.to(
         subtextRef.current,
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" },
         "-=0.4"
       );
 
       tl.to(
         ctaRef.current,
-        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+        { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" },
         "-=0.4"
       );
 
-      tl.to(
-        scrollIndicatorRef.current,
-        { opacity: 1, duration: 0.6 },
-        "-=0.2"
-      );
+      // Scroll line
+      tl.to(scrollLineRef.current, { autoAlpha: 1, duration: 0.6 }, "-=0.2");
 
-      // Corner marks fade in last — slow and graceful
-      tl.to(
-        cornersRef.current,
-        { opacity: 1, duration: 2, ease: "power1.out" },
-        "-=0.4"
-      );
-
-      // Parallax on scroll — desktop only
+      // --- Scroll-driven parallax: lines drift apart, content parallaxes ---
       ScrollTrigger.matchMedia({
         "(min-width: 769px)": () => {
-          if (headingRef.current) {
-            gsap.to(headingRef.current, {
-              yPercent: -20,
+          // Line 1 — drifts up with parallax (stays visible)
+          if (line1Ref.current) {
+            gsap.to(line1Ref.current, {
+              yPercent: -30,
               ease: "none",
               scrollTrigger: {
                 trigger: section,
@@ -127,24 +181,24 @@ export default function Hero() {
             });
           }
 
+          // Line 2 — drifts slower, creating spread
+          if (line2Ref.current) {
+            gsap.to(line2Ref.current, {
+              yPercent: -10,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+          }
+
+          // Subtext drifts down relatively
           if (subtextRef.current) {
             gsap.to(subtextRef.current, {
-              yPercent: -35,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-              },
-            });
-          }
-
-          // Hero content fades + scales down on scroll exit
-          if (contentRef.current) {
-            gsap.to(contentRef.current, {
-              opacity: 0,
-              scale: 0.96,
+              yPercent: 20,
               ease: "none",
               scrollTrigger: {
                 trigger: section,
@@ -156,9 +210,9 @@ export default function Hero() {
           }
 
           // Scroll indicator fades out
-          if (scrollIndicatorRef.current) {
-            gsap.to(scrollIndicatorRef.current, {
-              opacity: 0,
+          if (scrollLineRef.current) {
+            gsap.to(scrollLineRef.current, {
+              autoAlpha: 0,
               ease: "none",
               scrollTrigger: {
                 trigger: section,
@@ -172,10 +226,7 @@ export default function Hero() {
       });
     }, section);
 
-    cleanups.push(() => {
-      split.revert();
-      ctx.revert();
-    });
+    cleanups.push(() => ctx.revert());
 
     return () => cleanups.forEach((fn) => fn());
   }, []);
@@ -184,7 +235,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative flex h-[100vh] w-full items-center justify-center overflow-hidden bg-[var(--color-bg-primary)]"
+      className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-(--color-bg-primary)"
     >
       {/* Mouse-reactive ambient glow */}
       <div
@@ -194,9 +245,10 @@ export default function Hero() {
         style={{ opacity: 0, transition: "opacity 0.4s ease" }}
       />
 
-      {/* Grain texture overlay */}
+      {/* Grain texture */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03] grain-shift"
+        aria-hidden="true"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat",
@@ -204,60 +256,114 @@ export default function Hero() {
         }}
       />
 
-      {/* Subtle corner marks */}
-      <div ref={cornersRef} className="pointer-events-none absolute inset-0 max-md:hidden">
-        <div className="absolute left-16 top-24 h-12 w-px bg-[var(--color-accent)] opacity-[0.08]" />
-        <div className="absolute left-16 top-24 h-px w-12 bg-[var(--color-accent)] opacity-[0.08]" />
-        <div className="absolute right-16 top-24 h-12 w-px bg-[var(--color-accent)] opacity-[0.08]" />
-        <div className="absolute right-16 top-24 h-px w-12 bg-[var(--color-accent)] opacity-[0.08]" style={{ transform: "translateX(-100%)" }} />
-        <div className="absolute left-16 bottom-24 h-12 w-px bg-[var(--color-accent)] opacity-[0.08]" style={{ transform: "translateY(-100%)" }} />
-        <div className="absolute left-16 bottom-24 h-px w-12 bg-[var(--color-accent)] opacity-[0.08]" />
-        <div className="absolute right-16 bottom-24 h-12 w-px bg-[var(--color-accent)] opacity-[0.08]" style={{ transform: "translateY(-100%)" }} />
-        <div className="absolute right-16 bottom-24 h-px w-12 bg-[var(--color-accent)] opacity-[0.08]" style={{ transform: "translateX(-100%)" }} />
-      </div>
+      {/* SVG displacement filter for water ripple on text */}
+      <svg className="absolute h-0 w-0" aria-hidden="true">
+        <filter id="water-ripple-filter" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence
+            id="water-turb"
+            type="turbulence"
+            baseFrequency="0.015 0.012"
+            numOctaves="3"
+            seed="2"
+            result="turbulence"
+          />
+          <feDisplacementMap
+            id="water-disp-scale"
+            in="SourceGraphic"
+            in2="turbulence"
+            scale="0"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </svg>
 
-      {/* Ghost watermark behind */}
+      {/* Ghost watermark — large NIMBUS with water displacement filter */}
       <div
         className="pointer-events-none absolute inset-0 flex items-center justify-center select-none max-md:hidden"
         aria-hidden="true"
       >
         <span
-          className="font-display text-[var(--color-text-primary)]"
+          ref={watermarkRef}
+          className="font-display text-(--color-text-primary)"
           style={{
             fontSize: "clamp(120px, 20vw, 320px)",
-            opacity: 0.02,
+            opacity: 0.07,
             letterSpacing: "0.1em",
             lineHeight: 1,
+            filter: "url(#water-ripple-filter)",
+            willChange: "opacity, filter",
           }}
         >
           NIMBUS
         </span>
       </div>
 
+      {/* Corner marks */}
+      <div className="pointer-events-none absolute inset-0 max-md:hidden" aria-hidden="true">
+        <div className="absolute left-16 top-24 h-12 w-px bg-(--color-accent) opacity-[0.08]" />
+        <div className="absolute left-16 top-24 h-px w-12 bg-(--color-accent) opacity-[0.08]" />
+        <div className="absolute right-16 top-24 h-12 w-px bg-(--color-accent) opacity-[0.08]" />
+        <div className="absolute right-16 top-24 h-px w-12 bg-(--color-accent) opacity-[0.08]" style={{ transform: "translateX(-100%)" }} />
+        <div className="absolute left-16 bottom-24 h-12 w-px bg-(--color-accent) opacity-[0.08]" style={{ transform: "translateY(-100%)" }} />
+        <div className="absolute left-16 bottom-24 h-px w-12 bg-(--color-accent) opacity-[0.08]" />
+        <div className="absolute right-16 bottom-24 h-12 w-px bg-(--color-accent) opacity-[0.08]" style={{ transform: "translateY(-100%)" }} />
+        <div className="absolute right-16 bottom-24 h-px w-12 bg-(--color-accent) opacity-[0.08]" style={{ transform: "translateX(-100%)" }} />
+      </div>
+
       {/* Centered content */}
-      <div ref={contentRef} className="relative z-10 flex flex-col items-center gap-10 px-6 text-center max-md:gap-8" style={{ willChange: "transform, opacity" }}>
-        <h1
-          ref={headingRef}
-          className="font-display text-[var(--color-text-primary)] max-md:max-w-[90vw]"
-          style={{
-            fontSize: "clamp(42px, 10vw, 160px)",
-            lineHeight: 1.05,
-            letterSpacing: "-0.03em",
-          }}
-        >
-          Built with{" "}
-          <span className="text-[var(--color-accent)]">intention.</span>
+      <div className="relative z-10 flex flex-col items-center gap-8 px-6 text-center max-md:gap-6">
+        {/* Heading — two lines for independent scroll parallax */}
+        <h1 className="flex flex-col items-center gap-2 font-display text-(--color-text-primary) max-md:max-w-[90vw]">
+          <span
+            ref={line1Ref}
+            className="block"
+            style={{
+              fontSize: "clamp(42px, 10vw, 140px)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.03em",
+              willChange: "transform, opacity",
+            }}
+          >
+            Built with
+          </span>
+          <span
+            ref={line2Ref}
+            className="block text-(--color-accent)"
+            style={{
+              fontSize: "clamp(48px, 12vw, 180px)",
+              lineHeight: 1,
+              letterSpacing: "-0.04em",
+              fontStyle: "italic",
+              willChange: "transform, opacity",
+            }}
+          >
+            intention.
+          </span>
         </h1>
+
+        {/* Accent line */}
+        <div
+          ref={accentLineRef}
+          className="h-px bg-(--color-accent) opacity-30"
+          style={{
+            width: "clamp(120px, 20vw, 300px)",
+            transformOrigin: "center",
+          }}
+        />
 
         <p
           ref={subtextRef}
-          className="max-w-[560px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)] max-md:text-base max-md:max-w-[400px]"
+          className="max-w-130 font-body text-lg leading-[1.7] text-(--color-text-dim) max-md:text-base max-md:max-w-100"
         >
           A creative studio for businesses that want more than a template.
           Design, development, and AI — built with precision.
         </p>
 
-        <div ref={ctaRef} className="flex items-center gap-6 max-md:flex-col max-md:gap-4 max-md:w-full">
+        <div
+          ref={ctaRef}
+          className="flex items-center gap-6 max-md:flex-col max-md:gap-4 max-md:w-full"
+        >
           <a
             href="https://calendly.com/heyitsnimbus/30min"
             target="_blank"
@@ -270,7 +376,7 @@ export default function Hero() {
           </a>
           <a
             href="#work"
-            className="group flex items-center gap-2 font-body text-[15px] text-[var(--color-text-muted)] transition-all duration-300 hover:text-[var(--color-text-primary)]"
+            className="group flex items-center gap-2 font-body text-[15px] text-(--color-text-muted) transition-all duration-300 hover:text-(--color-text-primary)"
           >
             View Work
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -278,16 +384,13 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — minimal vertical line */}
       <div
-        ref={scrollIndicatorRef}
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
+        ref={scrollLineRef}
+        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3"
       >
-        <span className="font-body text-[10px] font-medium tracking-[3px] text-[var(--color-text-subtle)]">
-          SCROLL
-        </span>
-        <ChevronDown
-          className="h-4 w-4 text-(--color-text-subtle)"
+        <div
+          className="h-12 w-px bg-linear-to-b from-(--color-accent) to-transparent opacity-40"
           style={{ animation: "float 3s ease-in-out infinite" }}
         />
       </div>

@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
 import SmoothScroll from "../../components/SmoothScroll";
+import WaterRipple from "../../components/WaterRipple";
 import { Mail, MapPin, Clock, ArrowRight, Send, Github, ChevronDown } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
@@ -134,6 +135,7 @@ export default function ContactPage() {
   return (
     <>
       <CustomCursor />
+      <WaterRipple />
       <SmoothScroll>
       <main id="main-content" className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]">
         <Header />

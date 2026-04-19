@@ -16,9 +16,13 @@ export default function PageLoader() {
   const bottomHalfRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const subRef = useRef<HTMLSpanElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
+  const curtain1Ref = useRef<HTMLDivElement>(null);
+  const curtain2Ref = useRef<HTMLDivElement>(null);
+  const taglineRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!sessionStorage.getItem("nfs-intro-v6")) {
+    if (!sessionStorage.getItem("nfs-intro-v7")) {
       setVisible(true);
     }
   }, []);
@@ -36,25 +40,21 @@ export default function PageLoader() {
     const bottomHalf = bottomHalfRef.current;
     const line = lineRef.current;
     const sub = subRef.current;
+    const counter = counterRef.current;
+    const curtain1 = curtain1Ref.current;
+    const curtain2 = curtain2Ref.current;
+    const tagline = taglineRef.current;
     if (
-      !overlay ||
-      !flash ||
-      !tint ||
-      !dot ||
-      !dotFlare ||
-      !word ||
-      !topHalf ||
-      !bottomHalf ||
-      !line ||
-      !sub
-    )
-      return;
+      !overlay || !flash || !tint || !dot || !dotFlare ||
+      !word || !topHalf || !bottomHalf || !line || !sub ||
+      !counter || !curtain1 || !curtain2 || !tagline
+    ) return;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
     if (prefersReducedMotion) {
-      sessionStorage.setItem("nfs-intro-v6", "1");
+      sessionStorage.setItem("nfs-intro-v7", "1");
       setVisible(false);
       return;
     }
@@ -62,12 +62,10 @@ export default function PageLoader() {
     document.body.style.overflow = "hidden";
 
     const split = new SplitType(word, { types: "chars" });
-
-    // Responsive split distance
     const wordH = word.getBoundingClientRect().height;
     const splitDist = Math.max(wordH * 0.32, 24);
 
-    // ── Initial states (transform + opacity only = GPU composited) ───────
+    // Initial states
     gsap.set(dot, { scale: 0, opacity: 0 });
     gsap.set(split.chars || [], { opacity: 0, y: 20 });
     gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
@@ -77,15 +75,32 @@ export default function PageLoader() {
     gsap.set(tint, { opacity: 0 });
     gsap.set(dotFlare, { opacity: 0 });
     gsap.set(sub, { opacity: 0, xPercent: -50, yPercent: -50, y: 10 });
+    gsap.set(counter, { opacity: 0 });
+    gsap.set(tagline, { opacity: 0, y: 10 });
+    gsap.set(curtain1, { yPercent: 0 });
+    gsap.set(curtain2, { yPercent: 0 });
 
     const onDone = () => {
       document.body.style.overflow = "";
-      sessionStorage.setItem("nfs-intro-v6", "1");
+      sessionStorage.setItem("nfs-intro-v7", "1");
       setVisible(false);
     };
 
-    // force3D ensures translate3d for GPU acceleration on every tween
     const tl = gsap.timeline({ defaults: { force3D: true } });
+
+    // 0 ▸ Counter fades in and starts counting
+    tl.to(counter, { opacity: 0.4, duration: 0.3 });
+
+    // Counter counts from 00 to 100 while the rest plays
+    const counterObj = { val: 0 };
+    tl.to(counterObj, {
+      val: 100,
+      duration: 2.2,
+      ease: "power2.in",
+      onUpdate: () => {
+        counter.textContent = String(Math.floor(counterObj.val)).padStart(2, "0");
+      },
+    }, "<");
 
     // 1 ▸ Violet dot — snaps in
     tl.to(dot, {
@@ -93,31 +108,38 @@ export default function PageLoader() {
       opacity: 1,
       duration: 0.18,
       ease: "back.out(3.5)",
-    });
+    }, 0.15);
 
-    // 2 ▸ NIMBUS chars — rise with stagger (no blur — pure transform+opacity)
+    // 2 ▸ NIMBUS chars — rise with stagger
     tl.to(
       split.chars || [],
       {
         opacity: 1,
         y: 0,
-        duration: 0.3,
-        stagger: 0.025,
+        duration: 0.35,
+        stagger: 0.03,
         ease: "power3.out",
       },
       "-=0.05"
     );
 
+    // Tagline — "Built with intention." appears below
+    tl.to(tagline, {
+      opacity: 0.3,
+      y: 0,
+      duration: 0.4,
+      ease: "power3.out",
+    }, "-=0.15");
+
     // 3 ▸ Blade — draws left → right across NIMBUS center
     tl.to(
       line,
-      { scaleX: 1, duration: 0.25, ease: "power2.inOut" },
-      "-=0.06"
+      { scaleX: 1, duration: 0.3, ease: "power2.inOut" },
+      "-=0.1"
     );
 
-    // ── 4 ▸ THE STRIKE — impact frame + split ───────────────────────────
+    // ── 4 ▸ THE STRIKE — impact frame + split ──────────────────
 
-    // Swap original for clones (instant)
     tl.call(() => {
       gsap.set(word, { visibility: "hidden" });
       gsap.set([topHalf, bottomHalf], { opacity: 1 });
@@ -125,87 +147,56 @@ export default function PageLoader() {
 
     tl.addLabel("strike");
 
-    // Impact flash — radial violet burst (opacity only = GPU)
+    // Impact flash
     tl.to(flash, { opacity: 1, duration: 0.06, ease: "power4.in" }, "strike");
-    tl.to(
-      flash,
-      { opacity: 0, duration: 0.25, ease: "power2.out" },
-      "strike+=0.06"
-    );
+    tl.to(flash, { opacity: 0, duration: 0.3, ease: "power2.out" }, "strike+=0.06");
 
-    // Dot flares white (opacity overlay = GPU, no background repaint)
-    tl.to(
-      dotFlare,
-      { opacity: 1, duration: 0.06, ease: "power4.in" },
-      "strike"
-    );
-    tl.to(
-      dotFlare,
-      { opacity: 0, duration: 0.4, ease: "power2.out" },
-      "strike+=0.06"
-    );
+    // Dot flare
+    tl.to(dotFlare, { opacity: 1, duration: 0.06, ease: "power4.in" }, "strike");
+    tl.to(dotFlare, { opacity: 0, duration: 0.4, ease: "power2.out" }, "strike+=0.06");
 
-    // Dot scale pulse
-    tl.to(dot, { scale: 1.5, duration: 0.06, ease: "power4.in" }, "strike");
-    tl.to(
-      dot,
-      { scale: 1, duration: 0.4, ease: "power2.out" },
-      "strike+=0.06"
-    );
+    // Dot pulse
+    tl.to(dot, { scale: 1.6, duration: 0.06, ease: "power4.in" }, "strike");
+    tl.to(dot, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.4)" }, "strike+=0.06");
 
-    // Halves split apart (transform only = GPU)
-    tl.to(
-      topHalf,
-      { y: -splitDist, duration: 0.32, ease: "power3.inOut" },
-      "strike"
-    );
-    tl.to(
-      bottomHalf,
-      { y: splitDist, duration: 0.32, ease: "power3.inOut" },
-      "strike"
-    );
+    // Halves split
+    tl.to(topHalf, { y: -splitDist, duration: 0.35, ease: "power3.inOut" }, "strike");
+    tl.to(bottomHalf, { y: splitDist, duration: 0.35, ease: "power3.inOut" }, "strike");
 
-    // Background tint fades in (opacity only = GPU, no backgroundColor repaint)
-    tl.to(
-      tint,
-      { opacity: 1, duration: 0.4, ease: "power1.inOut" },
-      "strike"
-    );
+    // Background tint
+    tl.to(tint, { opacity: 1, duration: 0.4, ease: "power1.inOut" }, "strike");
 
-    // Blade fades out
-    tl.to(
-      line,
-      { opacity: 0, duration: 0.2, ease: "power1.out" },
-      "strike+=0.08"
-    );
+    // Blade fades
+    tl.to(line, { opacity: 0, duration: 0.2, ease: "power1.out" }, "strike+=0.08");
 
-    // NIMBUS halves dim — aftermath
-    tl.to(
-      [topHalf, bottomHalf],
-      { opacity: 0.4, duration: 0.3, ease: "power2.out" },
-      "strike+=0.15"
-    );
+    // Halves dim
+    tl.to([topHalf, bottomHalf], { opacity: 0.35, duration: 0.3, ease: "power2.out" }, "strike+=0.15");
+
+    // Counter fades out at strike
+    tl.to(counter, { opacity: 0, duration: 0.2 }, "strike+=0.1");
+
+    // Tagline fades at strike
+    tl.to(tagline, { opacity: 0, duration: 0.2 }, "strike+=0.05");
 
     // 5 ▸ FORMA STUDIO — rises into the gap
-    tl.to(
-      sub,
-      { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" },
-      "strike+=0.22"
-    );
+    tl.to(sub, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, "strike+=0.22");
 
-    // ── Hold ─────────────────────────────────────────────────────────────
+    // ── 6 ▸ Multi-layer curtain exit ───────────────────────────
 
-    // 6 ▸ Curtain lifts — everything exits upward
-    tl.to(
-      overlay,
-      {
-        yPercent: -100,
-        duration: 0.7,
-        ease: "expo.inOut",
-        onComplete: onDone,
-      },
-      "+=0.38"
-    );
+    // Curtain 1 (accent) lifts first
+    tl.to(curtain1, {
+      yPercent: -100,
+      duration: 0.6,
+      ease: "power3.inOut",
+    }, "+=0.4");
+
+    // Curtain 2 (base/overlay) lifts slightly behind
+    tl.to(overlay, {
+      yPercent: -100,
+      duration: 0.7,
+      ease: "expo.inOut",
+      onComplete: onDone,
+    }, "-=0.45");
 
     return () => {
       split.revert();
@@ -226,141 +217,169 @@ export default function PageLoader() {
   };
 
   return (
-    <div
-      ref={overlayRef}
-      aria-hidden="true"
-      className="fixed inset-0 z-200 flex items-center justify-center"
-      style={{ backgroundColor: "#0A0A0F", willChange: "transform" }}
-    >
-      {/* Impact flash — radial violet burst (GPU: opacity only) */}
+    <>
+      {/* Accent curtain — lifts first to reveal content */}
       <div
-        ref={flashRef}
-        className="absolute inset-0 pointer-events-none"
+        ref={curtain1Ref}
+        aria-hidden="true"
+        className="fixed inset-0 z-[199] pointer-events-none"
         style={{
-          background:
-            "radial-gradient(circle at 50% 50%, rgba(124,92,252,0.25) 0%, rgba(167,139,250,0.08) 40%, transparent 70%)",
-          opacity: 0,
-          willChange: "opacity",
+          background: "linear-gradient(180deg, var(--color-accent) 0%, #5B3FD4 100%)",
+          willChange: "transform",
         }}
       />
 
-      {/* Background tint — violet aftermath (GPU: opacity only, no backgroundColor repaint) */}
+      {/* Main overlay */}
       <div
-        ref={tintRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundColor: "#0F0D19",
-          opacity: 0,
-          willChange: "opacity",
-        }}
-      />
-
-      <div
-        className="flex flex-col items-center"
-        style={{ gap: "clamp(8px, 1.2vh, 14px)" }}
+        ref={overlayRef}
+        aria-hidden="true"
+        className="fixed inset-0 z-200 flex items-center justify-center"
+        style={{ backgroundColor: "#0A0A0F", willChange: "transform" }}
       >
-        {/* Violet dot — logomark with white flare overlay */}
+        {/* Impact flash */}
         <div
-          className="relative"
+          ref={flashRef}
+          className="absolute inset-0 pointer-events-none"
           style={{
-            width: "clamp(8px, 0.65vw, 10px)",
-            height: "clamp(8px, 0.65vw, 10px)",
+            background:
+              "radial-gradient(circle at 50% 50%, rgba(124,92,252,0.3) 0%, rgba(167,139,250,0.1) 40%, transparent 70%)",
+            opacity: 0,
+            willChange: "opacity",
           }}
+        />
+
+        {/* Background tint */}
+        <div
+          ref={tintRef}
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundColor: "#0F0D19",
+            opacity: 0,
+            willChange: "opacity",
+          }}
+        />
+
+        {/* Counter — top right */}
+        <span
+          ref={counterRef}
+          className="absolute top-8 right-12 font-body text-[13px] tracking-[3px] text-(--color-text-primary) max-md:right-6 max-md:top-6"
+          style={{ opacity: 0, fontVariantNumeric: "tabular-nums" }}
         >
+          00
+        </span>
+
+        <div
+          className="flex flex-col items-center"
+          style={{ gap: "clamp(8px, 1.2vh, 14px)" }}
+        >
+          {/* Violet dot */}
           <div
-            ref={dotRef}
-            className="rounded-full w-full h-full"
+            className="relative"
             style={{
-              background: "#7C5CFC",
-              boxShadow:
-                "0 0 14px 5px rgba(124,92,252,0.45), 0 0 32px 12px rgba(124,92,252,0.18)",
-              willChange: "transform, opacity",
-            }}
-          />
-          {/* White flare overlay (GPU: opacity only, no background repaint) */}
-          <div
-            ref={dotFlareRef}
-            className="absolute inset-0 rounded-full"
-            style={{
-              background: "#FFFFFF",
-              boxShadow:
-                "0 0 20px 8px rgba(255,255,255,0.5), 0 0 40px 16px rgba(124,92,252,0.3)",
-              opacity: 0,
-              willChange: "opacity",
-            }}
-          />
-        </div>
-
-        {/* NIMBUS zone — original + split clones + blade + subtitle */}
-        <div className="relative">
-          {/* Original wordmark — SplitType target, hidden after the strike */}
-          <span
-            ref={wordRef}
-            className="font-display select-none"
-            style={wordmarkStyle}
-          >
-            NIMBUS
-          </span>
-
-          {/* Top half clone — clips to upper half, slides up */}
-          <span
-            ref={topHalfRef}
-            className="font-display select-none absolute inset-0"
-            style={{
-              ...wordmarkStyle,
-              clipPath: "inset(0 0 50% 0)",
-              opacity: 0,
+              width: "clamp(8px, 0.65vw, 10px)",
+              height: "clamp(8px, 0.65vw, 10px)",
             }}
           >
-            NIMBUS
-          </span>
+            <div
+              ref={dotRef}
+              className="rounded-full w-full h-full"
+              style={{
+                background: "#7C5CFC",
+                boxShadow:
+                  "0 0 14px 5px rgba(124,92,252,0.45), 0 0 32px 12px rgba(124,92,252,0.18)",
+                willChange: "transform, opacity",
+              }}
+            />
+            <div
+              ref={dotFlareRef}
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: "#FFFFFF",
+                boxShadow:
+                  "0 0 20px 8px rgba(255,255,255,0.5), 0 0 40px 16px rgba(124,92,252,0.3)",
+                opacity: 0,
+                willChange: "opacity",
+              }}
+            />
+          </div>
 
-          {/* Bottom half clone — clips to lower half, slides down */}
+          {/* NIMBUS zone */}
+          <div className="relative">
+            <span
+              ref={wordRef}
+              className="font-display select-none"
+              style={wordmarkStyle}
+            >
+              NIMBUS
+            </span>
+
+            <span
+              ref={topHalfRef}
+              className="font-display select-none absolute inset-0"
+              style={{
+                ...wordmarkStyle,
+                clipPath: "inset(0 0 50% 0)",
+                opacity: 0,
+              }}
+            >
+              NIMBUS
+            </span>
+
+            <span
+              ref={bottomHalfRef}
+              className="font-display select-none absolute inset-0"
+              style={{
+                ...wordmarkStyle,
+                clipPath: "inset(50% 0 0 0)",
+                opacity: 0,
+              }}
+            >
+              NIMBUS
+            </span>
+
+            {/* Blade line */}
+            <div
+              ref={lineRef}
+              className="absolute left-0 right-0"
+              style={{
+                top: "50%",
+                transform: "translateY(-50%)",
+                height: "1px",
+                background:
+                  "linear-gradient(90deg, transparent 0%, #7C5CFC 25%, #A78BFA 60%, transparent 100%)",
+                willChange: "transform, opacity",
+              }}
+            />
+
+            {/* FORMA STUDIO */}
+            <span
+              ref={subRef}
+              className="font-body select-none absolute left-1/2"
+              style={{
+                top: "50%",
+                fontSize: "clamp(10px, 1.1vw, 14px)",
+                fontWeight: 600,
+                letterSpacing: "5.5px",
+                textTransform: "uppercase",
+                color: "rgba(167,139,250,0.6)",
+                whiteSpace: "nowrap",
+                willChange: "transform, opacity",
+              }}
+            >
+              FORMA STUDIO
+            </span>
+          </div>
+
+          {/* Tagline — appears briefly before the strike */}
           <span
-            ref={bottomHalfRef}
-            className="font-display select-none absolute inset-0"
-            style={{
-              ...wordmarkStyle,
-              clipPath: "inset(50% 0 0 0)",
-              opacity: 0,
-            }}
+            ref={taglineRef}
+            className="font-body text-[12px] tracking-[4px] text-(--color-text-muted) select-none"
+            style={{ opacity: 0, willChange: "transform, opacity" }}
           >
-            NIMBUS
-          </span>
-
-          {/* Blade line — vertical center of NIMBUS */}
-          <div
-            ref={lineRef}
-            className="absolute left-0 right-0"
-            style={{
-              top: "50%",
-              transform: "translateY(-50%)",
-              height: "1px",
-              background:
-                "linear-gradient(90deg, transparent 0%, #7C5CFC 25%, #A78BFA 60%, transparent 100%)",
-              willChange: "transform, opacity",
-            }}
-          />
-
-          {/* FORMA STUDIO — rises into the split gap */}
-          <span
-            ref={subRef}
-            className="font-body select-none absolute left-1/2"
-            style={{
-              top: "50%",
-              fontSize: "clamp(10px, 1.1vw, 14px)",
-              fontWeight: 600,
-              letterSpacing: "5.5px",
-              textTransform: "uppercase",
-              color: "rgba(167,139,250,0.6)",
-              whiteSpace: "nowrap",
-              willChange: "transform, opacity",
-            }}
-          >
-            FORMA STUDIO
+            BUILT WITH INTENTION
           </span>
         </div>
       </div>
-    </div>
+    </>
   );
 }

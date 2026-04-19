@@ -4,176 +4,313 @@ import { ArrowUpRight } from "lucide-react";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitType from "split-type";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   const ref = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
+    const heading = headingRef.current;
     if (!el) return;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    const ctx = gsap.context(() => {
-      const items = el.querySelectorAll(".about-reveal");
+    const cleanups: (() => void)[] = [];
 
-      if (prefersReducedMotion) {
-        gsap.set(items, { opacity: 1, y: 0 });
-        return;
+    const ctx = gsap.context(() => {
+      if (prefersReducedMotion) return;
+
+      // Heading — character stagger reveal
+      if (heading) {
+        const split = new SplitType(heading, { types: "chars,words" });
+        gsap.set(split.chars || [], { autoAlpha: 0, y: 40 });
+
+        gsap.to(split.chars || [], {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.015,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 80%",
+            once: true,
+          },
+        });
+
+        cleanups.push(() => split.revert());
       }
 
-      gsap.set(items, { opacity: 0, y: 40 });
+      // Label entrance — slide from left
+      const label = el.querySelector(".about-label");
+      if (label) {
+        gsap.fromTo(
+          label,
+          { autoAlpha: 0, x: -30 },
+          {
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            scrollTrigger: { trigger: label, start: "top 85%", once: true },
+          }
+        );
+      }
 
-      gsap.to(items, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 75%",
-          once: true,
-        },
+      // Body paragraphs — staggered reveal with varied animation
+      const paras = el.querySelectorAll(".about-para");
+      paras.forEach((p, i) => {
+        gsap.fromTo(
+          p,
+          { autoAlpha: 0, y: 30 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: p,
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
       });
+
+      // Stats — scale in with stagger
+      if (statsRef.current) {
+        const statItems = statsRef.current.querySelectorAll(".stat-item");
+        gsap.fromTo(
+          statItems,
+          { autoAlpha: 0, scale: 0.8 },
+          {
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.6,
+            stagger: 0.12,
+            ease: "back.out(1.4)",
+            scrollTrigger: {
+              trigger: statsRef.current,
+              start: "top 80%",
+              once: true,
+            },
+          }
+        );
+      }
+
+      // CTA entrance
+      const cta = el.querySelector(".about-cta");
+      if (cta) {
+        gsap.fromTo(
+          cta,
+          { autoAlpha: 0, y: 20 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            scrollTrigger: { trigger: cta, start: "top 85%", once: true },
+          }
+        );
+      }
+
+      // Vertical accent line draw
+      const vLine = el.querySelector(".about-vline");
+      if (vLine) {
+        gsap.fromTo(
+          vLine,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            duration: 1.2,
+            ease: "power2.inOut",
+            scrollTrigger: {
+              trigger: vLine,
+              start: "top 75%",
+              once: true,
+            },
+          }
+        );
+      }
+
+      // Tech pills — staggered entrance
+      const pills = el.querySelectorAll(".tech-pill");
+      gsap.fromTo(
+        pills,
+        { autoAlpha: 0, y: 10 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.04,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el.querySelector(".tech-pills"),
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
     }, el);
 
-    return () => ctx.revert();
+    cleanups.push(() => ctx.revert());
+
+    return () => cleanups.forEach((fn) => fn());
   }, []);
 
   return (
     <section
       ref={ref}
       id="about"
-      className="relative flex min-h-[100vh] w-full items-center overflow-hidden px-16 py-24 max-md:flex-col max-md:items-start max-md:min-h-0 max-md:px-6 max-md:py-16"
+      className="relative w-full overflow-hidden px-16 py-32 max-md:px-6 max-md:py-20"
       style={{ background: "#0D0C14" }}
     >
-      {/* Massive "ABOUT" watermark */}
-      <div
-        className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 select-none max-md:hidden"
-        aria-hidden="true"
-      >
-        <span
-          className="font-display text-[var(--color-text-primary)] block"
-          style={{
-            fontSize: "clamp(100px, 14vw, 240px)",
-            opacity: 0.025,
-            letterSpacing: "0.08em",
-            lineHeight: 1,
-            writingMode: "vertical-rl",
-            transform: "rotate(180deg)",
-            marginLeft: "40px",
-          }}
-        >
-          ABOUT
-        </span>
-      </div>
+      {/* Asymmetric layout — offset grid */}
+      <div className="relative mx-auto max-w-350">
+        {/* Top row — label + massive heading */}
+        <div className="mb-20 max-md:mb-12">
+          <span className="about-label block font-body text-[11px] font-medium tracking-[3px] text-(--color-accent) mb-6">
+            ABOUT
+          </span>
 
-      {/* Mobile watermark */}
-      <div className="hidden max-md:block about-reveal mb-6">
-        <span
-          className="font-display text-[var(--color-text-primary)]"
-          style={{ fontSize: "64px", opacity: 0.03, letterSpacing: "0.1em", lineHeight: 1 }}
-        >
-          ABOUT
-        </span>
-      </div>
-
-      {/* Main two-column layout */}
-      <div className="relative z-10 flex w-full gap-0 max-md:flex-col max-md:gap-12">
-        {/* Left — intro + CTA */}
-        <div className="flex w-1/2 flex-col justify-center pr-16 max-md:w-full max-md:pr-0">
-          <div className="about-reveal">
-            <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
-              02 / ABOUT
-            </span>
-          </div>
-
-          <h2 className="about-reveal mt-6 font-display leading-[1.1] tracking-[-2px] text-[var(--color-text-primary)] max-md:text-[32px]" style={{ fontSize: "clamp(32px, 4vw, 56px)" }}>
-            Not just a dev.
-            <br />
-            A builder from
-            <br />
-            end to end.
+          <h2
+            ref={headingRef}
+            className="font-display leading-[1.05] tracking-[-2px] text-(--color-text-primary) max-w-[900px]"
+            style={{ fontSize: "clamp(36px, 5vw, 72px)" }}
+          >
+            Not just a dev. A builder from end to end.
           </h2>
-
-          <p className="about-reveal mt-8 font-body text-lg leading-[1.8] text-[var(--color-text-dim)] max-md:text-base">
-            Developer, designer, and founder of Nimbus Forma Studio. I don&apos;t just
-            write code — I study the systems, the design, the business, and the
-            user.
-          </p>
-
-          <div className="about-reveal mt-10">
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 border border-[var(--color-border-light)] bg-[var(--color-grid)] px-7 py-3.5 font-body text-sm font-semibold text-[var(--color-text-primary)] transition-all duration-300 hover:border-[var(--color-accent-border)] hover:shadow-[0_0_24px_#7C5CFC20]"
-            >
-              Work With Me
-              <ArrowUpRight className="h-3.5 w-3.5 text-[var(--color-accent)]" />
-            </a>
-          </div>
         </div>
 
-        {/* Vertical divider */}
-        <div className="about-reveal w-px self-stretch bg-[var(--color-accent)] opacity-10 max-md:hidden" />
+        {/* Main content — asymmetric columns */}
+        <div className="flex gap-20 max-md:flex-col max-md:gap-12">
+          {/* Left column — narrower, stats + CTA (35%) */}
+          <div className="flex w-[35%] flex-col gap-12 max-md:w-full">
+            {/* Stats — big numbers */}
+            <div ref={statsRef} className="flex flex-col gap-8">
+              <div className="stat-item">
+                <span
+                  className="block font-display text-(--color-accent)"
+                  style={{
+                    fontSize: "clamp(56px, 7vw, 96px)",
+                    lineHeight: 0.9,
+                    letterSpacing: "-0.03em",
+                  }}
+                >
+                  4+
+                </span>
+                <span className="mt-2 block font-body text-sm text-(--color-text-muted)">
+                  Active projects
+                </span>
+              </div>
 
-        {/* Right — body text with inline stats */}
-        <div className="flex w-1/2 flex-col justify-center gap-8 pl-16 max-md:w-full max-md:pl-0">
-          <p className="about-reveal font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
-            With{" "}
-            <span
-              className="inline font-display text-[var(--color-accent)] align-baseline"
-              style={{ fontSize: "clamp(36px, 5vw, 80px)", lineHeight: 0.9, letterSpacing: "-0.02em" }}
-            >
-              4+
-            </span>{" "}
-            projects currently in the works and{" "}
-            <span
-              className="inline font-display text-[var(--color-text-primary)] align-baseline"
-              style={{ fontSize: "clamp(36px, 5vw, 80px)", lineHeight: 0.9, letterSpacing: "-0.02em" }}
-            >
-              3
-            </span>{" "}
-            products actively building, I focus on shipping real work — not just
-            portfolios.
-          </p>
+              <div className="stat-item">
+                <span
+                  className="block font-display text-(--color-text-primary)"
+                  style={{
+                    fontSize: "clamp(56px, 7vw, 96px)",
+                    lineHeight: 0.9,
+                    letterSpacing: "-0.03em",
+                  }}
+                >
+                  3
+                </span>
+                <span className="mt-2 block font-body text-sm text-(--color-text-muted)">
+                  Products building
+                </span>
+              </div>
 
-          <p className="about-reveal font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
-            Every project gets the same obsessive attention to detail: performance
-            tuning, pixel-perfect design, and code that&apos;s built to last. I work
-            directly with founders and small teams who want a partner, not a vendor.
-          </p>
+              <div className="stat-item">
+                <span
+                  className="block font-display text-(--color-accent-secondary)"
+                  style={{
+                    fontSize: "clamp(56px, 7vw, 96px)",
+                    lineHeight: 0.9,
+                    letterSpacing: "-0.03em",
+                  }}
+                >
+                  100%
+                </span>
+                <span className="mt-2 block font-body text-sm text-(--color-text-muted)">
+                  Attention per project
+                </span>
+              </div>
+            </div>
 
-          <p className="about-reveal font-body text-base leading-[1.8] text-[var(--color-text-dim)]">
-            Fast to respond, focused when it counts. Every project gets{" "}
-            <span
-              className="inline font-display text-[var(--color-text-primary)] align-baseline"
-              style={{ fontSize: "clamp(36px, 5vw, 80px)", lineHeight: 0.9, letterSpacing: "-0.02em" }}
-            >
-              full
-            </span>{" "}
-            attention — not split between ten clients at once.
-          </p>
+            {/* CTA */}
+            <div className="about-cta">
+              <a
+                href="#contact"
+                data-magnetic
+                className="inline-flex items-center gap-2 border border-(--color-border-light) bg-(--color-grid) px-7 py-3.5 font-body text-sm font-semibold text-(--color-text-primary) transition-all duration-300 hover:border-(--color-accent-border) hover:shadow-[0_0_24px_#7C5CFC20]"
+              >
+                Work With Me
+                <ArrowUpRight className="h-3.5 w-3.5 text-(--color-accent)" />
+              </a>
+            </div>
+          </div>
 
-          {/* Tech pills */}
-          <div className="about-reveal mt-4 flex flex-wrap items-center gap-3">
-            <span className="mr-2 font-body text-[10px] font-medium tracking-[2px] text-[var(--color-text-subtle)]">
-              TOOLS
-            </span>
-            {["Next.js", "React", "Python", "Node.js", "Swift", "Flutter", ".NET", "TypeScript", "Tailwind", "LLMs", "AI Agents", "Figma", "Vercel"].map(
-              (tool) => (
+          {/* Vertical accent line */}
+          <div
+            className="about-vline w-px self-stretch bg-(--color-accent) opacity-10 max-md:hidden"
+            style={{ transformOrigin: "top" }}
+          />
+
+          {/* Right column — wider, body text (60%) */}
+          <div className="flex flex-1 flex-col gap-8">
+            <p className="about-para font-body text-lg leading-[1.8] text-(--color-text-dim)">
+              Developer, designer, and founder of Nimbus Forma Studio. I
+              don&apos;t just write code — I study the systems, the design, the
+              business, and the user.
+            </p>
+
+            <p className="about-para font-body text-base leading-[1.8] text-(--color-text-dim)">
+              Every project gets the same obsessive attention to detail:
+              performance tuning, pixel-perfect design, and code that&apos;s
+              built to last. I work directly with founders and small teams who
+              want a partner, not a vendor.
+            </p>
+
+            <p className="about-para font-body text-base leading-[1.8] text-(--color-text-dim)">
+              Fast to respond, focused when it counts. Every project gets full
+              attention — not split between ten clients at once.
+            </p>
+
+            {/* Tech pills */}
+            <div className="tech-pills mt-4 flex flex-wrap items-center gap-3">
+              <span className="mr-2 font-body text-[10px] font-medium tracking-[2px] text-(--color-text-subtle)">
+                TOOLS
+              </span>
+              {[
+                "Next.js",
+                "React",
+                "Python",
+                "Node.js",
+                "Swift",
+                "Flutter",
+                ".NET",
+                "TypeScript",
+                "Tailwind",
+                "LLMs",
+                "AI Agents",
+                "Figma",
+                "Vercel",
+              ].map((tool) => (
                 <span
                   key={tool}
-                  className="border border-[var(--color-border)] px-3 py-1.5 font-body text-[12px] text-[var(--color-text-muted)] transition-all hover:border-(--color-accent-secondary) hover:text-(--color-accent-secondary) hover:shadow-[0_0_12px_rgba(94,234,212,0.08)]"
+                  className="tech-pill border border-(--color-border) px-3 py-1.5 font-body text-[12px] text-(--color-text-muted) transition-all duration-300 hover:border-(--color-accent-secondary) hover:text-(--color-accent-secondary) hover:shadow-[0_0_12px_rgba(94,234,212,0.08)]"
                 >
                   {tool}
                 </span>
-              )
-            )}
+              ))}
+            </div>
           </div>
         </div>
       </div>

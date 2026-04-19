@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
 import SmoothScroll from "../../components/SmoothScroll";
+import WaterRipple from "../../components/WaterRipple";
 import ProductMockup from "../../components/products/ProductMockup";
 import ProductWaitlistInline from "../../components/products/ProductWaitlistInline";
 import VaultWaitlistForm from "../../components/products/VaultWaitlistForm";
@@ -177,6 +178,7 @@ function ProductsWallView() {
   return (
     <>
       <CustomCursor />
+      <WaterRipple />
       <SmoothScroll>
         {/* ---------- THE VAULT — entrance overlay ---------- */}
         <div ref={vaultOverlayRef} className="vault-overlay">
