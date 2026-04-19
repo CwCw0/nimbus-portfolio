@@ -14,6 +14,7 @@ import ScrollToTop from "../components/ScrollToTop";
 import SmoothScroll from "../components/SmoothScroll";
 import AmbientOrbs from "../components/AmbientOrbs";
 import WaterRipple from "../components/WaterRipple";
+import ScrollRevealText from "../components/ScrollRevealText";
 
 export default function Home() {
   return (
@@ -28,8 +29,10 @@ export default function Home() {
           <Hero />
           <MarqueeStrip />
           <Services />
+          <ScrollRevealText text="We study the problem. We design the system. We build the solution. We measure the result. Every pixel earns its place." />
           <CaseStudies />
           <About />
+          <ScrollRevealText text="Fast to respond. Focused when it counts. One developer. Full attention. No compromises." />
           <Process />
           <Contact />
           <Footer />

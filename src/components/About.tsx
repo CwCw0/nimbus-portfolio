@@ -158,6 +158,26 @@ export default function About() {
           },
         }
       );
+      // Staggered exit — elements fade out as section scrolls away
+      const exitElements = el.querySelectorAll(
+        ".about-cta, .tech-pills, .about-para, .stat-item, .about-label"
+      );
+      if (exitElements.length > 0) {
+        // Convert to array and reverse for bottom-up exit
+        const reversed = Array.from(exitElements).reverse();
+        gsap.to(reversed, {
+          autoAlpha: 0,
+          y: -20,
+          stagger: 0.04,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "bottom 60%",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
     }, el);
 
     cleanups.push(() => ctx.revert());

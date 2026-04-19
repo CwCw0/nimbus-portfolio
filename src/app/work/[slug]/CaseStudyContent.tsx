@@ -41,6 +41,7 @@ export default function CaseStudyContent({
   const study = caseStudy || defaultStudy;
   const headingRef = useRef<HTMLHeadingElement>(null);
   const heroRef = useRef<HTMLElement>(null);
+  const heroImgRef = useRef<HTMLDivElement>(null);
   const overviewRef = useRef<HTMLElement>(null);
   const resultsRef = useRef<HTMLElement>(null);
   const galleryRef = useRef<HTMLElement>(null);
@@ -85,6 +86,25 @@ export default function CaseStudyContent({
         ease: "power3.out",
         delay: 0.5,
       });
+    }
+
+    // Hero image — scale down on scroll entrance for cinematic feel
+    const heroImg = heroImgRef.current;
+    if (heroImg && !prefersReducedMotion) {
+      gsap.fromTo(
+        heroImg,
+        { scale: 1.08 },
+        {
+          scale: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroImg,
+            start: "top 80%",
+            end: "bottom 30%",
+            scrub: true,
+          },
+        }
+      );
     }
 
     // Overview reveal
@@ -264,6 +284,7 @@ export default function CaseStudyContent({
             <div className="mx-auto max-w-[1200px] relative w-full overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-card)]">
               {caseStudy?.heroImage ? (
                 <div
+                  ref={heroImgRef}
                   className="relative"
                   style={{ height: "clamp(260px, 48vh, 540px)" }}
                 >

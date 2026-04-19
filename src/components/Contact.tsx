@@ -143,7 +143,8 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative flex min-h-screen w-full flex-col items-center justify-center bg-(--color-bg-primary) px-16 py-32 max-md:min-h-0 max-md:justify-start max-md:px-6 max-md:py-20"
+      className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center bg-(--color-bg-primary) px-16 py-32 max-md:min-h-0 max-md:justify-start max-md:px-6 max-md:py-20"
+      style={{ boxShadow: "0 40px 80px -20px rgba(0,0,0,0.5)" }}
     >
       {/* Massive heading — viewport-aware */}
       <h2

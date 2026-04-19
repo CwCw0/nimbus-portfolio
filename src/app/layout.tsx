@@ -3,6 +3,7 @@ import { Instrument_Serif, Outfit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import PageLoader from "../components/PageLoader";
 import ScrollProgress from "../components/ScrollProgress";
+import GrainOverlay from "../components/GrainOverlay";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -129,6 +130,7 @@ export default function RootLayout({
         </a>
         <PageLoader />
         <ScrollProgress />
+        <GrainOverlay />
         {children}
         <Analytics />
       </body>

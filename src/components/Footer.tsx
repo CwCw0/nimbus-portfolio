@@ -118,7 +118,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="flex w-full flex-col items-center bg-[var(--color-bg-footer)] px-16 pt-0 pb-16 max-md:px-6 max-md:pb-10">
+    <footer className="sticky bottom-0 z-0 flex w-full flex-col items-center bg-[var(--color-bg-footer)] px-16 pt-0 pb-16 max-md:px-6 max-md:pb-10">
 
       {/* CTA moment — catches visitors at peak conviction */}
       <div className="flex w-full flex-col items-center py-24 max-md:py-16">

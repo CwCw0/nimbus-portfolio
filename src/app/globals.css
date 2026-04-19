@@ -52,6 +52,30 @@ body {
   color: var(--color-text-primary);
 }
 
+/* Custom scrollbar — thin, accent-colored */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7C5CFC30;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7C5CFC60;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #7C5CFC30 var(--color-bg-primary);
+}
+
 body.cursor-ready, body.cursor-ready *,
 body.cursor-ready *::before, body.cursor-ready *::after {
   cursor: none;

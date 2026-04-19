@@ -42,7 +42,26 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     gsap.ticker.add(rafCallback);
     gsap.ticker.lagSmoothing(0);
 
+    // Intercept anchor link clicks → smooth scroll via Lenis
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest("a[href^='#']") as HTMLAnchorElement | null;
+      if (!anchor) return;
+
+      const hash = anchor.getAttribute("href");
+      if (!hash || hash === "#") return;
+
+      const el = document.querySelector(hash);
+      if (el) {
+        e.preventDefault();
+        lenis.scrollTo(el as HTMLElement, { offset: -80, duration: 1.4 });
+      }
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+
     return () => {
+      document.removeEventListener("click", handleAnchorClick);
       gsap.ticker.remove(rafCallback);
       lenis.destroy();
       lenisRef.current = null;
