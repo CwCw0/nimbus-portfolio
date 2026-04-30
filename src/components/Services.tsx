@@ -236,17 +236,17 @@ export default function Services() {
           </div>
 
           {/* Center content */}
-          <div className="relative flex flex-1 flex-col items-start justify-center px-20">
+          <div className="relative flex flex-1 flex-col items-center justify-center text-center">
             <span className="mb-6 font-body text-[11px] font-medium tracking-[3px] text-[var(--color-accent)]">
               SERVICES
             </span>
 
             <span
               ref={numWatermarkRef}
-              className="pointer-events-none absolute right-16 top-1/2 -translate-y-1/2 select-none font-display text-[var(--color-text-primary)]"
+              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-display text-(--color-text-primary)"
               style={{
-                fontSize: "clamp(100px, 12vw, 200px)",
-                opacity: 0.03,
+                fontSize: "clamp(140px, 18vw, 300px)",
+                opacity: 0.025,
                 lineHeight: 1,
               }}
             >
@@ -277,7 +277,7 @@ export default function Services() {
 
             <p
               ref={descRef}
-              className="mt-6 max-w-[500px] font-body text-lg leading-[1.7] text-[var(--color-text-dim)]"
+              className="mx-auto mt-6 max-w-130 font-body text-lg leading-[1.7] text-(--color-text-dim)"
               style={{ willChange: "transform, opacity" }}
             >
               {firstService.desc}
