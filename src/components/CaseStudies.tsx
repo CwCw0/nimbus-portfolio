@@ -56,34 +56,8 @@ export default function CaseStudies() {
         );
       }
 
-      const rows = section.querySelectorAll(".cs-row");
-      rows.forEach((row) => {
-        const line = row.querySelector(".cs-line");
-        const content = row.querySelector(".cs-row-inner");
-
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: row, start: "top 90%", once: true },
-        });
-
-        if (line) {
-          tl.fromTo(
-            line,
-            { scaleX: 0 },
-            { scaleX: 1, duration: 0.8, ease: "power3.inOut" }
-          );
-        }
-
-        if (content) {
-          tl.fromTo(
-            content,
-            { autoAlpha: 0, y: 20 },
-            { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" },
-            "-=0.4"
-          );
-        }
-      });
-
       if (isMobile) {
+        // Mobile — card reveals
         const cards = section.querySelectorAll(".cs-mobile-card");
         cards.forEach((card) => {
           gsap.fromTo(
@@ -97,6 +71,34 @@ export default function CaseStudies() {
               scrollTrigger: { trigger: card, start: "top 85%", once: true },
             }
           );
+        });
+      } else {
+        // Desktop — row line-draw + content reveal
+        const rows = section.querySelectorAll(".cs-row");
+        rows.forEach((row) => {
+          const line = row.querySelector(".cs-line");
+          const content = row.querySelector(".cs-row-inner");
+
+          const tl = gsap.timeline({
+            scrollTrigger: { trigger: row, start: "top 90%", once: true },
+          });
+
+          if (line) {
+            tl.fromTo(
+              line,
+              { scaleX: 0 },
+              { scaleX: 1, duration: 0.8, ease: "power3.inOut" }
+            );
+          }
+
+          if (content) {
+            tl.fromTo(
+              content,
+              { autoAlpha: 0, y: 20 },
+              { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" },
+              "-=0.4"
+            );
+          }
         });
       }
     }, section);
