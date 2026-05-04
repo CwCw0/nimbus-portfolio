@@ -187,7 +187,7 @@ export default function WorkContent() {
           <section className="w-full px-16 pb-10 max-md:px-6">
             <div className="mx-auto flex max-w-300 items-center gap-0">
               <button
-                onClick={() => setView("cases")}
+                onClick={() => { setView("cases"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 className={`flex-1 border-b-2 py-4 font-body text-sm font-medium tracking-[1px] transition-all duration-300 ${
                   view === "cases"
                     ? "border-(--color-accent) text-(--color-text-primary)"
@@ -197,7 +197,7 @@ export default function WorkContent() {
                 Case Studies
               </button>
               <button
-                onClick={() => setView("lab")}
+                onClick={() => { setView("lab"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 className={`flex-1 flex items-center justify-center gap-2 border-b-2 py-4 font-body text-sm font-medium tracking-[1px] transition-all duration-300 ${
                   view === "lab"
                     ? "border-(--color-accent) text-(--color-text-primary)"
