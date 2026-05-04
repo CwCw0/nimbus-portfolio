@@ -70,6 +70,60 @@ export const labDesigns: LabDesign[] = [
     route: "/work/designs/pop-store",
     gumroadUrl: "",
   },
+  {
+    slug: "vitalis",
+    title: "Vitalis",
+    subtitle: "Healthcare & wellness clinic template",
+    category: "Template",
+    tags: ["Healthcare", "Wellness", "Rounded", "Warm"],
+    description:
+      "A warm, calming healthcare website template that breaks free from clinical sterility. Soft greens, rounded elements, Playfair Display serif, booking CTAs, trust indicators, and testimonials. Built for physio clinics, wellness centres, and medical practices.",
+    price: null,
+    previewImage:
+      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80",
+    year: "2026",
+    stack: ["Next.js", "GSAP", "Tailwind"],
+    references: ["parsleyhealth.com", "hims.com", "hevahealth.com"],
+    status: "live",
+    route: "/work/designs/vitalis",
+    gumroadUrl: "",
+  },
+  {
+    slug: "roast",
+    title: "Roast",
+    subtitle: "Specialty coffee & cafe template",
+    category: "Template",
+    tags: ["Coffee", "Artisan", "Editorial", "Warm"],
+    description:
+      "An artisan, editorial coffee shop template with earthy tones, Cormorant Garamond serif, parallax hero, origin-focused product cards, and full-bleed photography. For specialty coffee roasters, cafes, and artisan food brands.",
+    price: null,
+    previewImage:
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80",
+    year: "2026",
+    stack: ["Next.js", "GSAP", "Tailwind"],
+    references: ["ceremonycoffee.com", "coffeecollective.dk", "seycoffee.com"],
+    status: "live",
+    route: "/work/designs/roast",
+    gumroadUrl: "",
+  },
+  {
+    slug: "mono",
+    title: "Mono",
+    subtitle: "Ultra-minimal portfolio template",
+    category: "Template",
+    tags: ["Minimal", "Portfolio", "Type-only", "B&W"],
+    description:
+      "Extreme minimalism. One font (Syne), zero decoration, black on white. Project titles ARE the navigation — hover reveals accent colour. For designers, developers, and creatives who let their work speak.",
+    price: null,
+    previewImage:
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
+    year: "2026",
+    stack: ["Next.js", "GSAP", "Tailwind"],
+    references: ["stevenmengin.com", "olhalazarieva.com", "minimalwim.com"],
+    status: "live",
+    route: "/work/designs/mono",
+    gumroadUrl: "",
+  },
 ];
 
 export const labCategories = ["All", "Website Design", "UI Concept", "Template"];
