@@ -84,7 +84,8 @@ function ScrambleLink({
 const navItems = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
-  { label: "Products", href: "/products" },
+  { label: "Vault", href: "/vault" },
+  { label: "Lab", href: "/lab" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
 ];
@@ -313,7 +314,7 @@ export default function Header() {
 
         <nav className="flex items-center gap-10 max-md:hidden">
           {navItems.map((item) => {
-            if (item.label === "Products") {
+            if (item.label === "Vault") {
               return (
                 <Link
                   key={item.label}

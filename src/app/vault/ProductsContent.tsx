@@ -5,9 +5,9 @@ import Footer from "../../components/Footer";
 import CustomCursor from "../../components/CustomCursor";
 import SmoothScroll from "../../components/SmoothScroll";
 import WaterRipple from "../../components/WaterRipple";
-import ProductMockup from "../../components/products/ProductMockup";
-import ProductWaitlistInline from "../../components/products/ProductWaitlistInline";
-import VaultWaitlistForm from "../../components/products/VaultWaitlistForm";
+import ProductMockup from "../../components/vault/ProductMockup";
+import ProductWaitlistInline from "../../components/vault/ProductWaitlistInline";
+import VaultWaitlistForm from "../../components/vault/VaultWaitlistForm";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect, useState, useMemo } from "react";
@@ -21,7 +21,7 @@ import {
   formatSecondaryPrice,
   type Product,
 } from "../../data/products";
-import { useCurrency } from "../../components/products/CurrencyContext";
+import { useCurrency } from "../../components/vault/CurrencyContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -443,7 +443,7 @@ function FeaturedCard({ product }: { product: Product }) {
           inline waitlist form isn't. The form sits at `z-20` to keep its
           inputs/button interactive. */}
       <Link
-        href={`/products/${product.slug}`}
+        href={`/vault/${product.slug}`}
         aria-label={`Open ${product.name}`}
         className="absolute inset-0 z-10"
       />
@@ -604,7 +604,7 @@ function NormalCard({ product, index }: { product: Product; index: number }) {
     >
       {/* Stretched overlay link — see FeaturedCard for the same pattern. */}
       <Link
-        href={`/products/${product.slug}`}
+        href={`/vault/${product.slug}`}
         aria-label={`Open ${product.name}`}
         className="absolute inset-0 z-10"
       />

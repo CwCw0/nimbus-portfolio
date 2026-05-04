@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { CurrencyProvider } from "../../components/products/CurrencyContext";
+import { CurrencyProvider } from "../../components/vault/CurrencyContext";
 
 /**
  * Wraps the entire /products subtree in the CurrencyProvider so that

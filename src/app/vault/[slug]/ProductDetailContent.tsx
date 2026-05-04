@@ -16,8 +16,8 @@ import {
   formatPrice,
   formatSecondaryPrice,
 } from "../../../data/products";
-import { useCurrency } from "../../../components/products/CurrencyContext";
-import ProductWaitlist from "../../../components/products/ProductWaitlist";
+import { useCurrency } from "../../../components/vault/CurrencyContext";
+import ProductWaitlist from "../../../components/vault/ProductWaitlist";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -124,7 +124,7 @@ export default function ProductDetailContent({ product, next }: Props) {
               Head back to the shelf.
             </p>
             <Link
-              href="/products"
+              href="/vault"
               className="mt-8 flex items-center gap-2 bg-[var(--color-accent)] px-6 py-3 font-body text-[13px] font-semibold text-white"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
@@ -178,7 +178,7 @@ export default function ProductDetailContent({ product, next }: Props) {
             <div className="relative z-10 flex flex-col items-center gap-8 text-center">
               {/* Back to wall */}
               <Link
-                href="/products"
+                href="/vault"
                 className="hero-fade group flex items-center gap-2 font-body text-[11px] tracking-[2px] text-[var(--color-text-subtle)] transition-colors hover:text-[var(--color-text-primary)]"
               >
                 <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-1" />
@@ -390,7 +390,7 @@ export default function ProductDetailContent({ product, next }: Props) {
                 NEXT ON THE SHELF
               </span>
               <Link
-                href={`/products/${next.slug}`}
+                href={`/vault/${next.slug}`}
                 className="group flex items-center gap-3 font-display text-[var(--color-text-primary)] transition-colors hover:text-[var(--color-accent)]"
                 style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 1 }}
               >

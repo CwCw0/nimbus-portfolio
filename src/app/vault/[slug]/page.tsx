@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   if (PRODUCT_DETAILS_LOCKED) {
-    redirect("/products");
+    redirect("/vault");
   }
   const { slug } = await params;
   const product = getProductBySlug(slug);

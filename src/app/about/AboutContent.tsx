@@ -555,7 +555,7 @@ export default function AboutPage() {
                   return (
                     <Link
                       key={product.slug}
-                      href={`/products/${product.slug}`}
+                      href={`/vault/${product.slug}`}
                       className="studio-line group relative flex items-baseline gap-8 border-b border-(--color-border-light) py-8 transition-[padding] duration-500 ease-out hover:pl-6 max-md:flex-col max-md:items-start max-md:gap-3 max-md:py-6 max-md:hover:pl-2"
                     >
                       <span
@@ -600,10 +600,10 @@ export default function AboutPage() {
                   screenshots, progress notes, and the story behind the idea.
                 </p>
                 <Link
-                  href="/products"
+                  href="/vault"
                   className="group flex items-center gap-3 border border-(--color-border-light) bg-(--color-bg-card) px-7 py-4 font-body text-[13px] font-medium tracking-[0.5px] text-(--color-text-primary) transition-all duration-300 hover:border-(--color-accent-border) hover:bg-(--color-accent-subtle)"
                 >
-                  Visit the product wall
+                  Visit the vault
                   <ArrowUpRight className="h-4 w-4 text-(--color-accent) transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>
               </div>

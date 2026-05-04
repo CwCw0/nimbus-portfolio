@@ -1,0 +1,67 @@
+export type LabDesign = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  category: "Website Design" | "UI Concept" | "Template";
+  tags: string[];
+  description: string;
+  price: string | null; // null = showcase only, string = purchasable (e.g., "RM 299")
+  previewImage: string;
+  year: string;
+  stack: string[];
+  references: string[];
+  status: "live" | "coming-soon";
+};
+
+export const labDesigns: LabDesign[] = [
+  {
+    slug: "studio-noir",
+    title: "Studio Noir",
+    subtitle: "Dark creative studio template",
+    category: "Template",
+    tags: ["Creative Studio", "Dark", "GSAP", "Editorial"],
+    description:
+      "A cinematic, animation-heavy website template for creative studios and design agencies. Pitch-black canvas with a single violet accent, oversized editorial serif typography, GSAP scroll-triggered reveals, magnetic cursor, and parallax case study sections. Inspired by Unseen Studio, Locomotive, and Obys Agency.",
+    price: null,
+    previewImage:
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80",
+    year: "2026",
+    stack: ["Next.js", "GSAP", "Tailwind", "Lenis"],
+    references: ["unseen.co", "locomotive.ca", "obys.agency"],
+    status: "coming-soon",
+  },
+  {
+    slug: "elevate",
+    title: "Elevate",
+    subtitle: "Clean corporate & SaaS template",
+    category: "Template",
+    tags: ["Corporate", "SaaS", "Light", "Professional"],
+    description:
+      "A premium, light-mode corporate website template for SaaS companies, startups, and professional services. Structured 12-column grid, systematic spacing, monochrome palette with one saturated accent, bento feature cards, trust bars, and subtle scroll-triggered fades. Inspired by Linear, Stripe, and Vercel.",
+    price: null,
+    previewImage:
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80",
+    year: "2026",
+    stack: ["Next.js", "Tailwind", "Framer Motion"],
+    references: ["linear.app", "stripe.com", "vercel.com"],
+    status: "coming-soon",
+  },
+  {
+    slug: "pop-store",
+    title: "Pop Store",
+    subtitle: "Vibrant e-commerce template",
+    category: "Template",
+    tags: ["E-commerce", "Playful", "Bold", "Product-first"],
+    description:
+      "A loud, personality-driven e-commerce template for brands that refuse to be boring. Per-product color theming, neo-brutalist elements with chunky borders, scroll-triggered product animations, illustration-meets-photography hybrid layouts, and microcopy that drips with attitude. Inspired by Tony's Chocolonely, Simply Chocolate, and Liquid Death.",
+    price: null,
+    previewImage:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
+    year: "2026",
+    stack: ["Next.js", "GSAP", "Tailwind"],
+    references: ["tonyschocolonely.com", "simplychocolate.com", "liquiddeath.com"],
+    status: "coming-soon",
+  },
+];
+
+export const labCategories = ["All", "Website Design", "UI Concept", "Template"];
