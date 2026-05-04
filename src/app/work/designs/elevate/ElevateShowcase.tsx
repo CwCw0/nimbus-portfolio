@@ -106,12 +106,12 @@ export default function ElevateShowcase() {
                 ) : (
                   <span className="flex items-center gap-2 bg-(--color-accent)/20 border border-(--color-accent)/30 px-8 py-4 font-body text-sm font-medium text-(--color-accent)">Coming Soon</span>
                 )}
-                <a href="#preview" className="flex items-center gap-2 border border-(--color-border) px-8 py-4 font-body text-sm font-medium text-(--color-text-secondary) transition-all hover:border-(--color-accent-border)">Live Preview ↓</a>
+                <Link href="/work/designs/elevate/preview" className="flex items-center gap-2 border border-(--color-border) px-8 py-4 font-body text-sm font-medium text-(--color-text-secondary) transition-all hover:border-(--color-accent-border)">Live Preview →</Link>
               </div>
             </div>
           </section>
 
-          <div className="mx-auto h-px w-full max-w-250 bg-(--color-border) mx-16 max-md:mx-6" />
+          <div className="h-px w-full max-w-250 mx-auto bg-(--color-border)" />
 
           <section className="w-full px-16 py-24 max-md:px-6 max-md:py-16">
             <div className="mx-auto max-w-250">
@@ -220,93 +220,9 @@ export default function ElevateShowcase() {
             </div>
           </section>
 
-          <section id="preview" className="w-full">
-            <div className="mx-auto max-w-250 px-16 py-12 max-md:px-6">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-accent)">LIVE PREVIEW</span>
-                <div className="h-px flex-1 bg-(--color-border)" />
-              </div>
-            </div>
-            <div className="border-t border-(--color-border)">
-              <ElevateTemplate />
-            </div>
-          </section>
-
           <Footer />
         </div>
       </SmoothScroll>
     </>
-  );
-}
-
-/* ═══ EMBEDDED TEMPLATE ═══ */
-const ep = { bg: "#FFFFFF", bgSoft: "#F8FAFC", bgDark: "#0F172A", text: "#0F172A", textMuted: "#64748B", textDim: "#94A3B8", accent: "#3B82F6", accentLight: "#DBEAFE", border: "#E2E8F0" };
-
-const features = [
-  { title: "Lightning Fast", desc: "Sub-100ms response times. No loading spinners.", icon: "⚡" },
-  { title: "Enterprise Security", desc: "SOC 2 Type II. End-to-end encryption.", icon: "🔒" },
-  { title: "Team Collaboration", desc: "Real-time multiplayer. See cursors live.", icon: "👥" },
-  { title: "API-First", desc: "REST and GraphQL for everything.", icon: "⚙️" },
-  { title: "Analytics Built In", desc: "Usage patterns and data-driven decisions.", icon: "📊" },
-  { title: "24/7 Support", desc: "Humans, not chatbots. Under 4 min response.", icon: "💬" },
-];
-
-function ElevateTemplate() {
-  return (
-    <div style={{ background: ep.bg, color: ep.text }}>
-      <section style={{ minHeight: "80vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "80px 64px", position: "relative" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `radial-gradient(${ep.border} 1px, transparent 1px)`, backgroundSize: "32px 32px", opacity: 0.5 }} />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 16px", background: ep.accentLight, borderRadius: 20, marginBottom: 32 }}>
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: ep.accent }} />
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 500, color: ep.accent }}>Now in public beta</span>
-          </div>
-          <h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", maxWidth: 800 }}>The platform your team actually wants to use.</h2>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 18, color: ep.textMuted, marginTop: 24, maxWidth: 560, lineHeight: 1.7, marginLeft: "auto", marginRight: "auto" }}>Elevate brings your entire workflow into one place. Plan, build, ship, and measure.</p>
-          <div style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 40 }}>
-            <span style={{ padding: "14px 32px", background: ep.accent, color: "#fff", fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 600, borderRadius: 8 }}>Start for Free</span>
-            <span style={{ padding: "14px 32px", border: `1px solid ${ep.border}`, fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, borderRadius: 8 }}>Watch Demo</span>
-          </div>
-        </div>
-      </section>
-
-      <div style={{ padding: "48px 64px", borderTop: `1px solid ${ep.border}`, borderBottom: `1px solid ${ep.border}`, textAlign: "center" }}>
-        <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: ep.textDim, marginBottom: 32 }}>Trusted by 10,000+ teams worldwide</p>
-        <div style={{ display: "flex", justifyContent: "center", gap: 64, flexWrap: "wrap" }}>
-          {["Acme Corp", "TechFlow", "Pinnacle", "Meridian", "CloudBase"].map((l) => (
-            <span key={l} style={{ fontFamily: "Inter, sans-serif", fontSize: 18, fontWeight: 600, color: ep.textDim, opacity: 0.5 }}>{l}</span>
-          ))}
-        </div>
-      </div>
-
-      <section style={{ padding: "100px 64px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 64 }}>
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: ep.accent, letterSpacing: 1, textTransform: "uppercase" }}>Features</span>
-            <h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, marginTop: 16, letterSpacing: "-0.02em" }}>Everything you need. Nothing you don&apos;t.</h2>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-            {features.map((f) => (
-              <div key={f.title} style={{ padding: 32, background: ep.bgSoft, border: `1px solid ${ep.border}`, borderRadius: 12 }}>
-                <span style={{ fontSize: 28, display: "block", marginBottom: 16 }}>{f.icon}</span>
-                <h3 style={{ fontFamily: "Inter, sans-serif", fontSize: 18, fontWeight: 600, marginBottom: 8 }}>{f.title}</h3>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, color: ep.textMuted, lineHeight: 1.65 }}>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section style={{ padding: "80px 64px", background: ep.bgDark }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-around", textAlign: "center" }}>
-          {[{ v: "99.99%", l: "Uptime" }, { v: "< 100ms", l: "Response" }, { v: "10,000+", l: "Teams" }, { v: "4.9/5", l: "Rating" }].map((m) => (
-            <div key={m.l}>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, color: "#fff" }}>{m.v}</span>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 14, color: "rgba(255,255,255,0.5)", display: "block", marginTop: 8 }}>{m.l}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
   );
 }

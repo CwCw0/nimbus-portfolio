@@ -150,15 +150,15 @@ export default function StudioNoirShowcase() {
                     Coming Soon
                   </span>
                 )}
-                <a href="#preview" className="flex items-center gap-2 border border-(--color-border) px-8 py-4 font-body text-sm font-medium text-(--color-text-secondary) transition-all hover:border-(--color-accent-border)">
-                  Live Preview ↓
-                </a>
+                <Link href="/work/designs/studio-noir/preview" className="flex items-center gap-2 border border-(--color-border) px-8 py-4 font-body text-sm font-medium text-(--color-text-secondary) transition-all hover:border-(--color-accent-border)">
+                  Live Preview →
+                </Link>
               </div>
             </div>
           </section>
 
           {/* Divider */}
-          <div className="mx-auto h-px w-full max-w-250 bg-(--color-border) mx-16 max-md:mx-6" />
+          <div className="h-px w-full max-w-250 mx-auto bg-(--color-border)" />
 
           {/* Design Choices */}
           <section className="w-full px-16 py-24 max-md:px-6 max-md:py-16">
@@ -291,122 +291,9 @@ export default function StudioNoirShowcase() {
             </div>
           </section>
 
-          {/* Live Preview */}
-          <section id="preview" className="w-full">
-            <div className="mx-auto max-w-250 px-16 py-12 max-md:px-6">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-accent)">LIVE PREVIEW</span>
-                <div className="h-px flex-1 bg-(--color-border)" />
-              </div>
-            </div>
-
-            {/* Embedded preview — full width, isolated */}
-            <div className="border-t border-(--color-border)">
-              <StudioNoirTemplate />
-            </div>
-          </section>
-
           <Footer />
         </div>
       </SmoothScroll>
     </>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════════
-   EMBEDDED TEMPLATE — Studio Noir
-   The actual design, rendered inline as a live preview.
-   ═══════════════════════════════════════════════════════════════════════════════ */
-
-const p = {
-  bg: "#050505", bgCard: "#0C0C0C", text: "#F0EDE8",
-  textMuted: "rgba(240,237,232,0.45)", textDim: "rgba(240,237,232,0.65)",
-  accent: "#7C5CFC", border: "rgba(240,237,232,0.08)",
-};
-
-const projects = [
-  { num: "01", title: "Meridian", category: "Brand Identity", year: "2026" },
-  { num: "02", title: "Voidframe", category: "Web Application", year: "2025" },
-  { num: "03", title: "Obsidian", category: "E-Commerce", year: "2026" },
-  { num: "04", title: "Parallax", category: "Landing Page", year: "2025" },
-];
-
-function StudioNoirTemplate() {
-  return (
-    <div style={{ background: p.bg, color: p.text }}>
-      {/* Hero */}
-      <section style={{ minHeight: "80vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "80px 64px", position: "relative", overflow: "hidden" }}>
-        <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontFamily: "var(--font-display, serif)", fontSize: "clamp(200px, 30vw, 500px)", color: p.text, opacity: 0.015, userSelect: "none", pointerEvents: "none" }}>N</span>
-        <span style={{ fontFamily: "var(--font-body, sans-serif)", fontSize: 11, letterSpacing: 4, color: p.accent, marginBottom: 32, fontWeight: 500 }}>CREATIVE STUDIO</span>
-        <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(48px, 8vw, 120px)", color: p.text, lineHeight: 1.0, letterSpacing: "-0.03em", maxWidth: 900, fontWeight: 400 }}>
-          We craft digital <em style={{ fontStyle: "italic", color: p.accent }}>experiences</em>
-        </h2>
-        <p style={{ fontFamily: "var(--font-body, sans-serif)", fontSize: 16, color: p.textDim, marginTop: 32, maxWidth: 480, lineHeight: 1.75 }}>
-          Award-winning creative studio specializing in brand identity, web design, and digital experiences that move.
-        </p>
-      </section>
-
-      {/* Marquee */}
-      <div style={{ padding: "32px 0", borderTop: `1px solid ${p.border}`, borderBottom: `1px solid ${p.border}`, overflow: "hidden" }}>
-        <div style={{ display: "flex", gap: 60, whiteSpace: "nowrap", fontFamily: "var(--font-display, serif)", fontSize: "clamp(24px, 4vw, 48px)", color: p.textMuted }}>
-          {["DESIGN", "DEVELOP", "BRAND", "ANIMATE", "LAUNCH", "DESIGN", "DEVELOP", "BRAND", "ANIMATE", "LAUNCH"].map((w, i) => (
-            <span key={i} style={{ display: "flex", alignItems: "center", gap: 60 }}>{w}<span style={{ color: p.accent, fontSize: 14 }}>&#9670;</span></span>
-          ))}
-        </div>
-      </div>
-
-      {/* Work */}
-      <section style={{ padding: "100px 64px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 60 }}>
-            <span style={{ fontFamily: "var(--font-body, sans-serif)", fontSize: 11, letterSpacing: 4, color: p.accent, fontWeight: 500 }}>SELECTED WORK</span>
-            <div style={{ flex: 1, height: 1, background: p.border }} />
-          </div>
-          {projects.map((project, i) => (
-            <div key={project.num} style={{ borderTop: i === 0 ? `1px solid ${p.border}` : "none", borderBottom: `1px solid ${p.border}`, padding: "36px 0", display: "flex", alignItems: "center", gap: 32 }}>
-              <span style={{ fontFamily: "var(--font-body, sans-serif)", fontSize: 14, color: p.textMuted, width: 40, letterSpacing: 2 }}>{project.num}</span>
-              <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 56px)", color: p.text, flex: 1, letterSpacing: "-0.02em", lineHeight: 1.1 }}>{project.title}</h3>
-              <span style={{ fontFamily: "var(--font-body, sans-serif)", fontSize: 13, color: p.textMuted }}>{project.category}</span>
-              <span style={{ fontSize: 18, color: p.textMuted }}>&#8599;</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* About */}
-      <section style={{ padding: "100px 64px", background: "#0A0A0A" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", gap: 80 }}>
-          <div style={{ flex: 1 }}>
-            <span style={{ fontFamily: "var(--font-body, sans-serif)", fontSize: 11, letterSpacing: 4, color: p.accent, fontWeight: 500 }}>ABOUT</span>
-            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(36px, 5vw, 72px)", color: p.text, lineHeight: 1.05, marginTop: 24 }}>
-              We believe in the power of <em style={{ fontStyle: "italic" }}>restraint.</em>
-            </h2>
-          </div>
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 24 }}>
-            <p style={{ fontFamily: "var(--font-body, sans-serif)", fontSize: 16, color: p.textDim, lineHeight: 1.8 }}>
-              Good design isn&apos;t about adding more — it&apos;s about knowing what to remove. We craft digital experiences with intention.
-            </p>
-            <div style={{ display: "flex", gap: 48, marginTop: 16 }}>
-              {[{ num: "47+", label: "Projects" }, { num: "12", label: "Awards" }, { num: "100%", label: "Independent" }].map((s) => (
-                <div key={s.label}>
-                  <span style={{ fontFamily: "var(--font-display, serif)", fontSize: 40, color: p.text }}>{s.num}</span>
-                  <span style={{ fontFamily: "var(--font-body, sans-serif)", fontSize: 12, color: p.textMuted, display: "block", letterSpacing: 1 }}>{s.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section style={{ padding: "120px 64px", textAlign: "center" }}>
-        <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(40px, 7vw, 100px)", color: p.text, lineHeight: 1.05 }}>
-          Let&apos;s create something <em style={{ fontStyle: "italic", color: p.accent }}>extraordinary.</em>
-        </h2>
-        <div style={{ marginTop: 48, display: "inline-flex", padding: "18px 40px", border: `1px solid ${p.border}`, fontFamily: "var(--font-body, sans-serif)", fontSize: 14, fontWeight: 600, color: p.text }}>
-          Start a Project &#8599;
-        </div>
-      </section>
-    </div>
   );
 }

@@ -107,12 +107,12 @@ export default function PopStoreShowcase() {
                 ) : (
                   <span className="flex items-center gap-2 bg-(--color-accent)/20 border border-(--color-accent)/30 px-8 py-4 font-body text-sm font-medium text-(--color-accent)">Coming Soon</span>
                 )}
-                <a href="#preview" className="flex items-center gap-2 border border-(--color-border) px-8 py-4 font-body text-sm font-medium text-(--color-text-secondary) transition-all hover:border-(--color-accent-border)">Live Preview ↓</a>
+                <Link href="/work/designs/pop-store/preview" className="flex items-center gap-2 border border-(--color-border) px-8 py-4 font-body text-sm font-medium text-(--color-text-secondary) transition-all hover:border-(--color-accent-border)">Live Preview →</Link>
               </div>
             </div>
           </section>
 
-          <div className="mx-auto h-px w-full max-w-250 bg-(--color-border) mx-16 max-md:mx-6" />
+          <div className="h-px w-full max-w-250 mx-auto bg-(--color-border)" />
 
           <section className="w-full px-16 py-24 max-md:px-6 max-md:py-16">
             <div className="mx-auto max-w-250">
@@ -221,84 +221,9 @@ export default function PopStoreShowcase() {
             </div>
           </section>
 
-          <section id="preview" className="w-full">
-            <div className="mx-auto max-w-250 px-16 py-12 max-md:px-6">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-accent)">LIVE PREVIEW</span>
-                <div className="h-px flex-1 bg-(--color-border)" />
-              </div>
-            </div>
-            <div className="border-t border-(--color-border)">
-              <PopStoreTemplate />
-            </div>
-          </section>
-
           <Footer />
         </div>
       </SmoothScroll>
     </>
-  );
-}
-
-/* ═══ EMBEDDED TEMPLATE ═══ */
-const pp = { bg: "#FFF8F0", text: "#1A1A1A", textLight: "#FFF8F0", textMuted: "#6B6B6B", coral: "#FF6B35", purple: "#8B5CF6", green: "#22C55E", yellow: "#FBBF24", border: "3px solid #1A1A1A" };
-
-const products = [
-  { name: "The Original", price: "$24", tag: "BESTSELLER", color: pp.coral, emoji: "🔥" },
-  { name: "Berry Blast", price: "$28", tag: "NEW DROP", color: pp.purple, emoji: "🫐" },
-  { name: "Green Machine", price: "$26", tag: "FAN FAVORITE", color: pp.green, emoji: "🥑" },
-  { name: "Golden Hour", price: "$30", tag: "LIMITED", color: pp.yellow, emoji: "✨" },
-];
-
-function PopStoreTemplate() {
-  return (
-    <div style={{ background: pp.bg, color: pp.text }}>
-      <section style={{ minHeight: "80vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "80px 48px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "15%", left: "8%", fontSize: 80, opacity: 0.1, transform: "rotate(-15deg)" }}>🍋</div>
-        <div style={{ position: "absolute", bottom: "20%", right: "10%", fontSize: 80, opacity: 0.1, transform: "rotate(20deg)" }}>🧃</div>
-        <div style={{ display: "inline-block", padding: "8px 20px", background: pp.coral, color: pp.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 13, fontWeight: 700, letterSpacing: 2, marginBottom: 32, transform: "rotate(-2deg)", border: pp.border, boxShadow: "3px 3px 0 #1A1A1A" }}>NOT YOUR AVERAGE BRAND</div>
-        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(48px, 9vw, 120px)", fontWeight: 700, lineHeight: 0.95, letterSpacing: "-0.03em" }}>GOOD STUFF.<br /><span style={{ color: pp.coral, fontStyle: "italic" }}>NO FLUFF.</span></h2>
-        <p style={{ fontFamily: "Inter, sans-serif", fontSize: 18, color: pp.textMuted, marginTop: 24, maxWidth: 480, lineHeight: 1.7 }}>We make things you actually want to buy. Real ingredients, real personality, real good.</p>
-        <div style={{ display: "flex", gap: 16, marginTop: 40 }}>
-          <span style={{ padding: "16px 40px", background: pp.text, color: pp.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, fontWeight: 700, border: pp.border, boxShadow: "5px 5px 0 #1A1A1A" }}>SHOP NOW →</span>
-        </div>
-      </section>
-
-      <div style={{ padding: "16px 0", background: pp.text, overflow: "hidden", borderTop: pp.border, borderBottom: pp.border }}>
-        <div style={{ display: "flex", gap: 48, whiteSpace: "nowrap" }}>
-          {["FREE SHIPPING OVER $50", "100% NATURAL", "NO WEIRD STUFF", "ACTUALLY TASTES GOOD", "FREE SHIPPING OVER $50", "100% NATURAL", "NO WEIRD STUFF", "ACTUALLY TASTES GOOD"].map((item, i) => (
-            <span key={i} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, color: pp.textLight, letterSpacing: 2, display: "flex", alignItems: "center", gap: 48 }}>{item}<span style={{ color: pp.coral }}>★</span></span>
-          ))}
-        </div>
-      </div>
-
-      <section style={{ padding: "80px 48px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, color: pp.coral, letterSpacing: 2 }}>WHAT WE MAKE</span>
-          <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 700, marginTop: 8, letterSpacing: "-0.02em" }}>The Good Stuff.</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24, marginTop: 40 }}>
-            {products.map((prod) => (
-              <div key={prod.name} style={{ background: prod.color + "15", border: pp.border, position: "relative" }}>
-                <div style={{ position: "absolute", top: 12, right: 12, padding: "4px 12px", background: prod.color, fontFamily: "'Space Grotesk', sans-serif", fontSize: 10, fontWeight: 700, color: pp.textLight, letterSpacing: 1.5, border: `2px solid ${pp.text}` }}>{prod.tag}</div>
-                <div style={{ height: 220, display: "flex", alignItems: "center", justifyContent: "center", background: prod.color + "20", borderBottom: pp.border }}><span style={{ fontSize: 80 }}>{prod.emoji}</span></div>
-                <div style={{ padding: 20 }}>
-                  <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 20, fontWeight: 700 }}>{prod.name}</h3>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 12 }}>
-                    <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 24, fontWeight: 700 }}>{prod.price}</span>
-                    <span style={{ padding: "10px 20px", background: pp.text, color: pp.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1 }}>ADD TO CART</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section style={{ padding: "80px 48px", background: pp.coral, textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: -20, left: "10%", fontSize: 120, opacity: 0.15, transform: "rotate(-10deg)" }}>🎉</div>
-        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 700, color: pp.textLight, lineHeight: 1.0, position: "relative", zIndex: 1 }}>STOP SCROLLING.<br />START SHOPPING.</h2>
-        <span style={{ display: "inline-block", marginTop: 32, padding: "18px 48px", background: pp.text, color: pp.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, fontWeight: 700, border: `3px solid ${pp.textLight}`, position: "relative", zIndex: 1 }}>SHOP THE DROP →</span>
-      </section>
-    </div>
   );
 }
