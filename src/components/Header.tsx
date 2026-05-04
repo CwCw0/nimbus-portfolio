@@ -13,10 +13,12 @@ function ScrambleLink({
   label,
   href,
   isActive,
+  desc,
 }: {
   label: string;
   href: string;
   isActive: boolean;
+  desc?: string;
 }) {
   const textRef = useRef<HTMLSpanElement>(null);
   const frameRef = useRef<number | null>(null);
@@ -77,17 +79,22 @@ function ScrambleLink({
         }`}
         style={{ transitionTimingFunction: "cubic-bezier(.19,1,.22,1)" }}
       />
+      {desc && (
+        <span className="pointer-events-none absolute left-1/2 top-full mt-3 -translate-x-1/2 whitespace-nowrap rounded-sm bg-(--color-bg-card) px-3 py-1.5 font-body text-[10px] tracking-[0.5px] text-(--color-text-muted) opacity-0 transition-all duration-300 group-hover:mt-2 group-hover:opacity-100 border border-(--color-border)">
+          {desc}
+        </span>
+      )}
     </Link>
   );
 }
 
 const navItems = [
-  { label: "Services", href: "/services" },
-  { label: "Work", href: "/work" },
-  { label: "Vault", href: "/vault" },
-  { label: "Lab", href: "/lab" },
-  { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
+  { label: "Services", href: "/services", desc: "What we build" },
+  { label: "Work", href: "/work", desc: "Real projects, real clients" },
+  { label: "Vault", href: "/vault", desc: "Products we're building" },
+  { label: "Lab", href: "/lab", desc: "Design experiments" },
+  { label: "About", href: "/about", desc: "The builder behind Nimbus" },
+  { label: "Blog", href: "/blog", desc: "Thoughts on building" },
 ];
 
 export default function Header() {
@@ -333,6 +340,7 @@ export default function Header() {
                 label={item.label}
                 href={item.href}
                 isActive={isActive(item.href)}
+                desc={item.desc}
               />
             );
           })}
