@@ -15,6 +15,7 @@ import SmoothScroll from "../components/SmoothScroll";
 import AmbientOrbs from "../components/AmbientOrbs";
 import WaterRipple from "../components/WaterRipple";
 import ScrollRevealText from "../components/ScrollRevealText";
+import LatestBlog from "../components/LatestBlog";
 
 export default function Home() {
   return (
@@ -34,6 +35,7 @@ export default function Home() {
           <About />
           <ScrollRevealText text="Fast to respond. Focused when it counts. One developer. Full attention. No compromises." />
           <Process />
+          <LatestBlog />
           <Contact />
           <Footer />
         </main>
