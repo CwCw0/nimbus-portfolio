@@ -241,7 +241,7 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: "the-22-year-old-who-registered-a-company",
+    slug: "the-26-year-old-who-registered-a-company",
     tag: "Life",
     date: "April 28, 2026",
     readTime: "6 min read",
@@ -276,7 +276,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "So I did it. Nimbus Forma Studio. A name that sounds way more established than a 22-year-old working from his room. But that's kind of the point — build the thing you want to grow into, not the thing that matches where you are right now.",
+        text: "So I did it. Nimbus Forma Studio. A name that sounds way more established than a 26-year-old working from his room. But that's kind of the point — build the thing you want to grow into, not the thing that matches where you are right now.",
       },
       {
         type: "h2",
