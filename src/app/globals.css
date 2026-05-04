@@ -81,6 +81,14 @@ body.cursor-ready *::before, body.cursor-ready *::after {
   cursor: none;
 }
 
+/* Restore native cursor for interactive elements where custom cursor can't follow */
+body.cursor-ready select,
+body.cursor-ready select *,
+body.cursor-ready option,
+body.cursor-ready select:focus {
+  cursor: pointer;
+}
+
 /* Custom select styling */
 select option {
   background: var(--color-bg-card);
