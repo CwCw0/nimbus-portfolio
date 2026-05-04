@@ -17,6 +17,350 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "you-dont-need-thousands-to-build-with-ai",
+    tag: "Development",
+    date: "May 3, 2026",
+    readTime: "8 min read",
+    title: "You Don't Need Thousands to Build with AI.",
+    excerpt:
+      "Everyone thinks AI development requires massive budgets and enterprise contracts. It doesn't. Here's how to build real AI products for literally zero dollars.",
+    image:
+      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80",
+    tocItems: [
+      "The Myth of the AI Price Tag",
+      "The Free Tier Revolution",
+      "What You Can Build Right Now",
+      "The Real Cost Is Learning",
+      "Stop Waiting for Permission",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "I'm going to tell you something that the AI industry doesn't want you to hear: you can build real, production-grade AI products for zero dollars. Not a toy. Not a demo. An actual product that people use.",
+      },
+      {
+        type: "p",
+        text: "I know this because I'm doing it. Right now. I built an AI chatbot for my portfolio site using Google's Gemini API — free tier. I'm building an operations hub with AI-powered document generation — free tier. No credit card. No enterprise plan. No VC funding. Just a developer who reads the documentation.",
+      },
+      {
+        type: "h2",
+        text: "The Myth of the AI Price Tag",
+      },
+      {
+        type: "p",
+        text: "The AI hype machine wants you to believe that building anything with AI requires a $200/month API subscription, a team of ML engineers, and a GPU cluster in a server room somewhere. That narrative benefits exactly two types of people: companies selling expensive AI tools, and consultants charging $500/hour to tell you which expensive AI tools to buy.",
+      },
+      {
+        type: "p",
+        text: "The truth? The best AI models in the world are either free or nearly free for individual developers. And the gap between the free tier and the paid tier is smaller than anyone wants to admit.",
+      },
+      {
+        type: "h2",
+        text: "The Free Tier Revolution",
+      },
+      {
+        type: "p",
+        text: "Here's what's actually available right now, for free, no strings attached:",
+      },
+      {
+        type: "ol",
+        text: "",
+        items: [
+          "Google Gemini Flash — 15 requests per minute, 1 million tokens per day. That's enough to run a chatbot that handles 50+ conversations daily without paying a cent.",
+          "Kimi K2.6 — A 1 trillion parameter open-weight model that beats GPT-5.4 on coding benchmarks. Open source. Run it yourself or use it through OpenRouter.",
+          "Groq — Llama 3.3 running at insane speed on their free tier. Fast enough for real-time applications.",
+          "Cloudflare Workers AI — Free inference on open-source models, deployed at the edge. Your AI runs in 300+ cities worldwide.",
+          "Hugging Face — Thousands of models, free inference API, free Spaces for hosting demos.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Read that list again. These aren't limited previews or 14-day trials. These are production-ready APIs with generous limits that most solo developers will never exceed. Google is giving you a million tokens a day. Do you know how much conversation that is? More than you'll ever need for a portfolio chatbot, a client-facing assistant, or an internal tool.",
+      },
+      {
+        type: "h2",
+        text: "What You Can Build Right Now",
+      },
+      {
+        type: "p",
+        text: "I'm not talking theory. Here are real products you can build this weekend with zero budget:",
+      },
+      {
+        type: "ol",
+        text: "",
+        items: [
+          "A customer support chatbot for your website that actually understands context — not a menu tree, not a keyword matcher, a real conversational AI that handles enquiries while you sleep.",
+          "An AI-powered document generator — feed it a client brief, it generates proposals, invoices, scope documents. I'm building this into my own business hub.",
+          "A content assistant for your blog — not to write for you, but to help structure, edit, and research. The AI does the grunt work, you do the thinking.",
+          "A code review bot that runs in your CI pipeline — catches bugs, suggests improvements, flags security issues. Using Gemini's free tier.",
+          "An AI receptionist on WhatsApp — handles appointment booking, collects patient info, sends confirmations. This is a real product I'm building for a client.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Every single one of these runs on free APIs. Every single one of these is something a business would pay real money for. The gap between 'I can build AI stuff' and 'I'm selling AI products' is not money — it's action.",
+      },
+      {
+        type: "h2",
+        text: "The Real Cost Is Learning",
+      },
+      {
+        type: "p",
+        text: "The honest answer about what AI development costs is this: time. Not money. Time to learn how LLMs work. Time to understand prompt engineering. Time to figure out tool calling, streaming, and context management. Time to build something bad, realise why it's bad, and build it again better.",
+      },
+      {
+        type: "p",
+        text: "That's the real barrier. Not $200/month for an API key. It's the willingness to sit down, read the docs, and build something. Most people won't do that. They'll watch YouTube videos about AI, share hot takes on Twitter, and wait for someone to build a no-code tool that does it for them.",
+      },
+      {
+        type: "quote",
+        text: "The best time to start building with AI was two years ago. The second best time is right now — and it's never been cheaper.",
+      },
+      {
+        type: "h2",
+        text: "Stop Waiting for Permission",
+      },
+      {
+        type: "p",
+        text: "Here's what I want you to take from this: you have everything you need. Right now. A laptop, an internet connection, and a free API key. That's it. That's the entire startup cost of becoming an AI developer in 2026.",
+      },
+      {
+        type: "p",
+        text: "You don't need a computer science degree. You don't need a $10,000 GPU. You don't need to be employed at a FAANG company. You need to open Google AI Studio, grab your free Gemini key, and build something. Anything. A chatbot. A tool. A stupid experiment that makes you laugh. Just build it.",
+      },
+      {
+        type: "p",
+        text: "The people who will win in the AI era aren't the ones with the biggest budgets. They're the ones who started building while everyone else was still debating whether to start. Be that person.",
+      },
+    ],
+    relatedSlugs: [
+      "ai-is-not-taking-your-job",
+      "the-tools-that-changed-how-i-build",
+      "stop-consuming-start-creating",
+    ],
+  },
+  {
+    slug: "just-build-it",
+    tag: "Life",
+    date: "May 2, 2026",
+    readTime: "5 min read",
+    title: "Just Build It. The World Doesn't Need Another Plan.",
+    excerpt:
+      "You've been planning, researching, and 'getting ready' for months. Here's your sign to stop preparing and start shipping.",
+    image:
+      "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80",
+    tocItems: [
+      "The Preparation Trap",
+      "Nobody Cares About Your Plan",
+      "The First Version Will Be Terrible",
+      "What Happens When You Ship",
+      "Your Move",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "I want to talk to the person reading this who has an idea for something. A website. An app. A business. A game. Whatever. You've been thinking about it for weeks, maybe months. You've bookmarked 47 tutorials. You've made a Notion board with colour-coded categories. You've watched three YouTube videos about the 'best tech stack for 2026.'",
+      },
+      {
+        type: "p",
+        text: "You haven't built anything yet.",
+      },
+      {
+        type: "p",
+        text: "I know because I was you. For longer than I want to admit.",
+      },
+      {
+        type: "h2",
+        text: "The Preparation Trap",
+      },
+      {
+        type: "p",
+        text: "Preparation feels productive. You're learning. You're researching. You're making informed decisions. You're being responsible. And all of that is true — for about the first two days. After that, you're not preparing. You're hiding.",
+      },
+      {
+        type: "p",
+        text: "You're hiding from the terrifying moment when you actually have to make something and put it in front of people. When the code doesn't work. When the design looks nothing like what you imagined. When someone tells you it's not good enough. That moment is uncomfortable, and your brain will do anything to avoid it — including convincing you that you need just one more tutorial before you're ready.",
+      },
+      {
+        type: "quote",
+        text: "You will never feel ready. That's not a bug — it's the default state of building anything worth building.",
+      },
+      {
+        type: "h2",
+        text: "Nobody Cares About Your Plan",
+      },
+      {
+        type: "p",
+        text: "I don't mean that to be harsh. I mean it literally. Nobody in the world cares about your perfectly structured project plan. They care about the thing. The website they can visit. The app they can use. The product they can buy. Plans are invisible. Products are real.",
+      },
+      {
+        type: "p",
+        text: "I registered my company — Nimbus Forma Studio — in April 2026. You know what I had at that point? A portfolio website and one client. Not a business plan. Not a pitch deck. Not a five-year projection. A website and a client. That was enough to start. Everything else, I figured out after I started building.",
+      },
+      {
+        type: "h2",
+        text: "The First Version Will Be Terrible",
+      },
+      {
+        type: "p",
+        text: "Accept this now and it will set you free: version one of anything you build will embarrass you in six months. My first website was terrible. My first client proposal was a mess. My first attempt at animation looked like a PowerPoint transition from 2003.",
+      },
+      {
+        type: "p",
+        text: "But here's the thing nobody tells you — version one existing is infinitely more valuable than version ten in your head. A shipped mess teaches you more in a week than a perfect plan teaches you in a year. Because the mess shows you what's actually hard, what actually matters, and what you actually don't know. The plan just shows you what you think you know.",
+      },
+      {
+        type: "h2",
+        text: "What Happens When You Ship",
+      },
+      {
+        type: "p",
+        text: "Something weird happens when you actually put something out into the world. People respond. Not always positively. Sometimes they ignore it completely. But the act of shipping changes something in your brain. You stop being someone who 'wants to build things' and you become someone who 'builds things.' That identity shift is everything.",
+      },
+      {
+        type: "p",
+        text: "Once you've shipped once, the second time is easier. The third time is automatic. You become a builder. Not because of some course you took or some book you read — because you built something and survived.",
+      },
+      {
+        type: "h2",
+        text: "Your Move",
+      },
+      {
+        type: "p",
+        text: "Close the tutorial. Close the Notion board. Close this blog post after you finish reading it. Open your code editor. Write one line. Then another. Make it ugly. Make it broken. Make it wrong. Then make it less wrong. Then make it less ugly. Then ship it.",
+      },
+      {
+        type: "p",
+        text: "The world has enough planners. Be a builder.",
+      },
+    ],
+    relatedSlugs: [
+      "the-builders-mindset",
+      "stop-consuming-start-creating",
+      "starting-a-dev-business",
+    ],
+  },
+  {
+    slug: "the-22-year-old-who-registered-a-company",
+    tag: "Life",
+    date: "April 28, 2026",
+    readTime: "6 min read",
+    title: "I'm 22 and I Just Registered a Company. Here's What Nobody Prepared Me For.",
+    excerpt:
+      "I registered Nimbus Forma Studio at 22 with one client and a lot of audacity. Here's what the first month actually looked like.",
+    image:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80",
+    tocItems: [
+      "The Decision",
+      "What I Actually Had",
+      "The Things Nobody Tells You",
+      "What I'd Tell My Past Self",
+      "Where I'm Going",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "On April 2026, I walked into SSM, filled out some forms, paid a fee, and became the founder of Nimbus Forma Studio. I was 22. I had one paying client. And I had absolutely no idea what I was doing.",
+      },
+      {
+        type: "p",
+        text: "This isn't a success story. Not yet. It's too early for that. This is a 'here's what it actually looks like when you decide to stop being an employee in your head and start being a builder' story.",
+      },
+      {
+        type: "h2",
+        text: "The Decision",
+      },
+      {
+        type: "p",
+        text: "I didn't have a grand plan. I didn't wait until I had enough savings or enough clients or enough confidence. I waited until the discomfort of NOT doing it was worse than the fear of doing it. That's the real tipping point — not some motivational moment, just a quiet Tuesday where I thought 'if I don't do this now, I'll be making excuses next year too.'",
+      },
+      {
+        type: "p",
+        text: "So I did it. Nimbus Forma Studio. A name that sounds way more established than a 22-year-old working from his room. But that's kind of the point — build the thing you want to grow into, not the thing that matches where you are right now.",
+      },
+      {
+        type: "h2",
+        text: "What I Actually Had",
+      },
+      {
+        type: "p",
+        text: "Let me be completely transparent about what my 'company' looked like on day one:",
+      },
+      {
+        type: "ol",
+        text: "",
+        items: [
+          "One client — a badminton equipment shop that needed a website. My cousin connected us.",
+          "A portfolio website I built myself — dark theme, GSAP animations, editorial design. This was my proof of work.",
+          "A laptop, VS Code, Claude Code, and an internet connection.",
+          "Zero savings earmarked for the business.",
+          "Zero employees. Zero office. Zero business plan.",
+        ],
+      },
+      {
+        type: "p",
+        text: "That's it. That's the whole company. A registered name, a portfolio, and one person willing to pay me to build something. In the movies, founders have pitch decks and investor meetings. In real life, it starts with someone saying 'yeah, I need a website, can you do it?' and you saying 'yes' before you figure out how.",
+      },
+      {
+        type: "h2",
+        text: "The Things Nobody Tells You",
+      },
+      {
+        type: "p",
+        text: "Registering is the easy part. After that, everything hits you at once. Invoicing. Quoting. Figuring out what to charge. Negotiating scope. Managing expectations. Tracking payments. Following up professionally. Dealing with the anxiety of 'what if they hate it?' None of this is in any coding tutorial.",
+      },
+      {
+        type: "p",
+        text: "The hardest part? Pricing. When you've never sold anything, every number feels wrong. Too high and you'll lose the client. Too low and you'll resent the work. I spent more time agonising over my first quote than I spent building the actual proposal. And then the client said yes immediately, which told me I probably should have charged more.",
+      },
+      {
+        type: "quote",
+        text: "The first invoice you send is the most terrifying email of your life. The second one is just an email.",
+      },
+      {
+        type: "p",
+        text: "Another thing nobody mentions: the loneliness. When you're a solo founder, there's no team Slack to complain in. No manager to ask for direction. No colleague to sanity-check your code. It's just you and the cursor. And the imposter syndrome that whispers 'who are you to charge money for this?' at 2am.",
+      },
+      {
+        type: "h2",
+        text: "What I'd Tell My Past Self",
+      },
+      {
+        type: "p",
+        text: "If I could go back to the version of me who was scared to register, I'd say this: you're not waiting until you're ready. You're waiting until you can't be rejected. And that day never comes. So do it scared. Do it unprepared. Do it with one client and no plan.",
+      },
+      {
+        type: "p",
+        text: "I'd also say: your portfolio website is your most important asset. Not your resume. Not your LinkedIn. Your website. Build it obsessively. Make it so good that when someone lands on it, they don't need to ask if you're any good. They already know.",
+      },
+      {
+        type: "p",
+        text: "And finally: charge more. You are always, always, always worth more than you think. The RM 4,500 WordPress guys are your baseline, not your benchmark. Build with Next.js and GSAP and AI integration and charge accordingly. The clients who get it will pay. The ones who don't were never your clients.",
+      },
+      {
+        type: "h2",
+        text: "Where I'm Going",
+      },
+      {
+        type: "p",
+        text: "One month in, Nimbus Forma Studio is still a one-person operation. But the pipeline is real. I'm building a website for a badminton shop. I'm pitching a health-tech company on a full system — website, operations hub, AI chatbot. I'm building my own products on the side. I'm building an internal operating system called Forge that manages my entire business through AI.",
+      },
+      {
+        type: "p",
+        text: "Am I overwhelmed? Constantly. Am I making it up as I go? Obviously. Am I glad I registered instead of waiting another year? Every single day.",
+      },
+      {
+        type: "p",
+        text: "If you're sitting where I was — thinking about it, researching it, 'almost ready' — hear me out: the company doesn't care if you're ready. The SSM form doesn't ask 'are you sure about this?' It just asks for a name and a fee. Give it one.",
+      },
+    ],
+    relatedSlugs: [
+      "just-build-it",
+      "starting-a-dev-business",
+      "the-builders-mindset",
+    ],
+  },
+  {
     slug: "ai-is-not-taking-your-job",
     tag: "Trends",
     date: "April 8, 2026",
