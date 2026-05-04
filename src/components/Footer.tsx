@@ -224,7 +224,6 @@ export default function Footer() {
           { label: "Services", href: "/services" },
           { label: "Work", href: "/work" },
           { label: "Vault", href: "/vault" },
-          { label: "Lab", href: "/lab" },
           { label: "About", href: "/about" },
           { label: "Blog", href: "/blog" },
           { label: "Contact", href: "#contact" },

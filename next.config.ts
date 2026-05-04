@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   redirects: async () => [
     { source: "/products", destination: "/vault", permanent: true },
     { source: "/products/:slug", destination: "/vault/:slug", permanent: true },
+    { source: "/lab", destination: "/work", permanent: false },
   ],
   images: {
     formats: ["image/avif", "image/webp"],

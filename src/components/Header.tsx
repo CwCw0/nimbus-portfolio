@@ -90,9 +90,8 @@ function ScrambleLink({
 
 const navItems = [
   { label: "Services", href: "/services", desc: "What we build" },
-  { label: "Work", href: "/work", desc: "Real projects, real clients" },
+  { label: "Work", href: "/work", desc: "Projects & design lab" },
   { label: "Vault", href: "/vault", desc: "Products we're building" },
-  { label: "Lab", href: "/lab", desc: "Design experiments" },
   { label: "About", href: "/about", desc: "The builder behind Nimbus" },
   { label: "Blog", href: "/blog", desc: "Thoughts on building" },
 ];
@@ -321,19 +320,6 @@ export default function Header() {
 
         <nav className="flex items-center gap-10 max-md:hidden">
           {navItems.map((item) => {
-            if (item.label === "Vault") {
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`nav-link-products ${isActive(item.href) ? "active" : ""}`}
-                >
-                  <span className="products-spark" aria-hidden="true" />
-                  <span className="products-text">{item.label}</span>
-                  <span className="products-underline" aria-hidden="true" />
-                </Link>
-              );
-            }
             return (
               <ScrambleLink
                 key={item.label}
