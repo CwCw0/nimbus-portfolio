@@ -323,8 +323,9 @@ export default function WorkContent() {
 
                   <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1">
                     {filteredDesigns.map((design) => (
-                      <div
+                      <Link
                         key={design.slug}
+                        href={design.route}
                         className="lab-card group relative flex flex-col border border-(--color-border) bg-(--color-bg-card) transition-all duration-500 hover:border-(--color-accent-border) hover:-translate-y-1 hover:shadow-[0_0_40px_#7C5CFC10]"
                       >
                         {/* Preview image */}
@@ -413,7 +414,7 @@ export default function WorkContent() {
                             ))}
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>

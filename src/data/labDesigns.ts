@@ -11,6 +11,8 @@ export type LabDesign = {
   stack: string[];
   references: string[];
   status: "live" | "coming-soon";
+  route: string;
+  gumroadUrl: string;
 };
 
 export const labDesigns: LabDesign[] = [
@@ -28,7 +30,9 @@ export const labDesigns: LabDesign[] = [
     year: "2026",
     stack: ["Next.js", "GSAP", "Tailwind", "Lenis"],
     references: ["unseen.co", "locomotive.ca", "obys.agency"],
-    status: "coming-soon",
+    status: "live",
+    route: "/work/designs/studio-noir",
+    gumroadUrl: "",
   },
   {
     slug: "elevate",
@@ -44,7 +48,9 @@ export const labDesigns: LabDesign[] = [
     year: "2026",
     stack: ["Next.js", "Tailwind", "Framer Motion"],
     references: ["linear.app", "stripe.com", "vercel.com"],
-    status: "coming-soon",
+    status: "live",
+    route: "/work/designs/elevate",
+    gumroadUrl: "",
   },
   {
     slug: "pop-store",
@@ -60,7 +66,9 @@ export const labDesigns: LabDesign[] = [
     year: "2026",
     stack: ["Next.js", "GSAP", "Tailwind"],
     references: ["tonyschocolonely.com", "simplychocolate.com", "liquiddeath.com"],
-    status: "coming-soon",
+    status: "live",
+    route: "/work/designs/pop-store",
+    gumroadUrl: "",
   },
 ];
 
