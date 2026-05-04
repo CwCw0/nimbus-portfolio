@@ -245,7 +245,7 @@ export const blogPosts: BlogPost[] = [
     tag: "Life",
     date: "April 28, 2026",
     readTime: "6 min read",
-    title: "I'm 22 and I Just Registered a Company. Here's What Nobody Prepared Me For.",
+    title: "I'm 26 and I Just Registered a Company. Here's What Nobody Prepared Me For.",
     excerpt:
       "I registered Nimbus Forma Studio at 22 with one client and a lot of audacity. Here's what the first month actually looked like.",
     image:
@@ -260,7 +260,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "On April 2026, I walked into SSM, filled out some forms, paid a fee, and became the founder of Nimbus Forma Studio. I was 22. I had one paying client. And I had absolutely no idea what I was doing.",
+        text: "On April 2026, I walked into SSM, filled out some forms, paid a fee, and became the founder of Nimbus Forma Studio. I was 26. I had one paying client. And I had absolutely no idea what I was doing.",
       },
       {
         type: "p",
