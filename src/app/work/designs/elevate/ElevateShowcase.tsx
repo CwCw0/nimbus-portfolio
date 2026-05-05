@@ -2,6 +2,7 @@
 
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
+import PackageSection from "../PackageSection";
 import CustomCursor from "../../../../components/CustomCursor";
 import SmoothScroll from "../../../../components/SmoothScroll";
 import { ArrowLeft, ArrowUpRight, Check, X } from "lucide-react";
@@ -219,6 +220,8 @@ export default function ElevateShowcase() {
               <p className="font-body text-[12px] text-(--color-text-muted)">Or <Link href="/contact" className="text-(--color-accent) underline">hire me to customise it</Link> for your brand.</p>
             </div>
           </section>
+
+          <PackageSection price={PRICE} priceUsd={PRICE_USD} />
 
           <Footer />
         </div>

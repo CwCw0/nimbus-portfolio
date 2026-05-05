@@ -153,11 +153,14 @@ export default function PopStorePreview() {
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 40px", background: P.bg, borderBottom: P.border }}>
         <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 26, fontWeight: 700 }}>POP<span style={{ color: P.coral }}>.</span></span>
         <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
-          {["Shop", "About", "FAQ"].map((item) => (
-            <a key={item} href="#" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 15, fontWeight: 600, color: P.text, textDecoration: "none", transition: "color 0.2s" }}
+          {[
+            { label: "Shop", href: "/work/designs/pop-store/preview/shop" },
+            { label: "About", href: "/work/designs/pop-store/preview/about" },
+          ].map((item) => (
+            <Link key={item.label} href={item.href} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 15, fontWeight: 600, color: P.text, textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = P.coral)}
               onMouseLeave={(e) => (e.currentTarget.style.color = P.text)}
-            >{item}</a>
+            >{item.label}</Link>
           ))}
           <span style={{ padding: "10px 24px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, border: P.border, boxShadow: "4px 4px 0 #1A1A1A", cursor: "pointer", transition: "all 0.12s", position: "relative" }}
             onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-2px, -2px)"; e.currentTarget.style.boxShadow = "6px 6px 0 #1A1A1A"; }}
@@ -190,14 +193,14 @@ export default function PopStorePreview() {
         </p>
 
         <div className="ps-hero-anim" style={{ display: "flex", gap: 14, marginTop: 40 }}>
-          <span style={{ padding: "16px 44px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, fontWeight: 700, border: P.border, boxShadow: "5px 5px 0 #1A1A1A", cursor: "pointer", transition: "all 0.12s" }}
+          <Link href="/work/designs/pop-store/preview/shop" style={{ padding: "16px 44px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, fontWeight: 700, border: P.border, boxShadow: "5px 5px 0 #1A1A1A", cursor: "pointer", transition: "all 0.12s", textDecoration: "none" }}
             onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-3px, -3px)"; e.currentTarget.style.boxShadow = "8px 8px 0 #1A1A1A"; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "5px 5px 0 #1A1A1A"; }}
-          >SHOP NOW →</span>
-          <span style={{ padding: "16px 36px", background: "transparent", color: P.text, fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, fontWeight: 700, border: P.border, cursor: "pointer", transition: "all 0.15s" }}
+          >SHOP NOW →</Link>
+          <Link href="/work/designs/pop-store/preview/about" style={{ padding: "16px 36px", background: "transparent", color: P.text, fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, fontWeight: 700, border: P.border, cursor: "pointer", transition: "all 0.15s", textDecoration: "none" }}
             onMouseEnter={(e) => { e.currentTarget.style.background = P.text; e.currentTarget.style.color = P.textLight; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = P.text; }}
-          >OUR STORY</span>
+          >OUR STORY</Link>
         </div>
       </section>
 
@@ -220,7 +223,7 @@ export default function PopStorePreview() {
               <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, color: P.coral, letterSpacing: 2 }}>WHAT WE MAKE</span>
               <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(40px, 6vw, 60px)", fontWeight: 700, marginTop: 6, letterSpacing: "-0.02em" }}>The Good Stuff.</h2>
             </div>
-            <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, borderBottom: `2px solid ${P.text}`, paddingBottom: 2, cursor: "pointer" }}>VIEW ALL →</span>
+            <Link href="/work/designs/pop-store/preview/shop" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, borderBottom: `2px solid ${P.text}`, paddingBottom: 2, cursor: "pointer", textDecoration: "none", color: P.text }}>VIEW ALL →</Link>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 20 }}>
             {products.map((prod) => (
@@ -299,10 +302,10 @@ export default function PopStorePreview() {
           STOP SCROLLING.<br />START SHOPPING.
         </h2>
         <p style={{ fontFamily: "Inter, sans-serif", fontSize: 17, color: "rgba(255,255,255,0.8)", marginTop: 20, maxWidth: 400, marginLeft: "auto", marginRight: "auto", lineHeight: 1.7, position: "relative", zIndex: 1 }}>Free shipping over $50. No minimum. No subscriptions.</p>
-        <span style={{ display: "inline-block", marginTop: 32, padding: "18px 48px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, fontWeight: 700, border: `3px solid ${P.textLight}`, cursor: "pointer", position: "relative", zIndex: 1, transition: "all 0.12s" }}
+        <Link href="/work/designs/pop-store/preview/shop" style={{ display: "inline-block", marginTop: 32, padding: "18px 48px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, fontWeight: 700, border: `3px solid ${P.textLight}`, cursor: "pointer", position: "relative", zIndex: 1, transition: "all 0.12s", textDecoration: "none" }}
           onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-3px, -3px)"; e.currentTarget.style.boxShadow = `6px 6px 0 ${P.textLight}`; }}
           onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "none"; }}
-        >SHOP THE DROP →</span>
+        >SHOP THE DROP →</Link>
       </section>
 
       {/* Footer */}

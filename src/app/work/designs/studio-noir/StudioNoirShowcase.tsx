@@ -2,6 +2,7 @@
 
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
+import PackageSection from "../PackageSection";
 import CustomCursor from "../../../../components/CustomCursor";
 import SmoothScroll from "../../../../components/SmoothScroll";
 import { ArrowLeft, ArrowUpRight, Check, X } from "lucide-react";
@@ -290,6 +291,8 @@ export default function StudioNoirShowcase() {
               </p>
             </div>
           </section>
+
+          <PackageSection price={PRICE} priceUsd={PRICE_USD} />
 
           <Footer />
         </div>

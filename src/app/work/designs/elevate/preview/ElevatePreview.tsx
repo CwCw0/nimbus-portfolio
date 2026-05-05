@@ -175,17 +175,22 @@ export default function ElevatePreview() {
           <span style={{ fontFamily: "Inter, sans-serif", fontSize: 17, fontWeight: 700 }}>Elevate</span>
         </div>
         <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
-          {["Product", "Pricing", "Docs", "Blog"].map((item) => (
-            <a key={item} href="#" style={{ fontFamily: "Inter, sans-serif", fontSize: 14, color: E.textMuted, textDecoration: "none", transition: "color 0.2s" }}
+          {[
+            { label: "Features", href: "/work/designs/elevate/preview/features" },
+            { label: "Pricing", href: "/work/designs/elevate/preview/pricing" },
+            { label: "About", href: "/work/designs/elevate/preview/about" },
+            { label: "Contact", href: "/work/designs/elevate/preview/contact" },
+          ].map((item) => (
+            <Link key={item.label} href={item.href} style={{ fontFamily: "Inter, sans-serif", fontSize: 14, color: E.textMuted, textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = E.text)}
               onMouseLeave={(e) => (e.currentTarget.style.color = E.textMuted)}
-            >{item}</a>
+            >{item.label}</Link>
           ))}
         </div>
-        <span style={{ padding: "8px 20px", background: E.text, color: "#fff", fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, borderRadius: 6, cursor: "pointer", transition: "transform 0.2s" }}
+        <Link href="/work/designs/elevate/preview/contact" style={{ padding: "8px 20px", background: E.text, color: "#fff", fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, borderRadius: 6, cursor: "pointer", transition: "transform 0.2s", textDecoration: "none" }}
           onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
           onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
-        >Get Started</span>
+        >Get Started</Link>
       </nav>
 
       {/* HERO — with animated gradient blob */}
@@ -331,11 +336,16 @@ export default function ElevatePreview() {
           <span style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700 }}>Elevate</span>
         </div>
         <div style={{ display: "flex", gap: 28 }}>
-          {["Privacy", "Terms", "Status", "Blog", "Twitter"].map((s) => (
-            <a key={s} href="#" style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: E.textDim, textDecoration: "none", transition: "color 0.2s" }}
+          {[
+            { label: "Features", href: "/work/designs/elevate/preview/features" },
+            { label: "Pricing", href: "/work/designs/elevate/preview/pricing" },
+            { label: "About", href: "/work/designs/elevate/preview/about" },
+            { label: "Contact", href: "/work/designs/elevate/preview/contact" },
+          ].map((s) => (
+            <Link key={s.label} href={s.href} style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: E.textDim, textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = E.accent)}
               onMouseLeave={(e) => (e.currentTarget.style.color = E.textDim)}
-            >{s}</a>
+            >{s.label}</Link>
           ))}
         </div>
       </footer>

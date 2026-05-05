@@ -152,16 +152,20 @@ export default function VitalisPreview() {
           </div>
           <span style={{ fontFamily: FH, fontSize: 20, fontWeight: 400, fontStyle: "italic" }}>Vitalis</span>
         </div>
-        {!isMobile && ["Services", "About", "Contact"].map((item) => (
-          <a key={item} href="#" style={{ fontFamily: FB, fontSize: 13, color: V.muted, textDecoration: "none", fontWeight: 500, transition: "color 0.2s" }}
+        {!isMobile && [
+          { label: "Services", href: "/work/designs/vitalis/preview/services" },
+          { label: "About", href: "/work/designs/vitalis/preview/about" },
+          { label: "Contact", href: "/work/designs/vitalis/preview/contact" },
+        ].map((item) => (
+          <Link key={item.label} href={item.href} style={{ fontFamily: FB, fontSize: 13, color: V.muted, textDecoration: "none", fontWeight: 500, transition: "color 0.2s" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = V.accent)}
             onMouseLeave={(e) => (e.currentTarget.style.color = V.muted)}
-          >{item}</a>
+          >{item.label}</Link>
         ))}
-        <span style={{ padding: "8px 24px", background: V.accent, color: V.white, fontFamily: FB, fontSize: 13, fontWeight: 600, borderRadius: 100, cursor: "pointer", transition: "transform 0.2s" }}
+        <Link href="/work/designs/vitalis/preview/contact" style={{ padding: "8px 24px", background: V.accent, color: V.white, fontFamily: FB, fontSize: 13, fontWeight: 600, borderRadius: 100, cursor: "pointer", transition: "transform 0.2s", textDecoration: "none" }}
           onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
           onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-        >Book Now</span>
+        >Book Now</Link>
       </nav>
 
       {/* HERO — split, warm, with floating badge */}
@@ -176,14 +180,14 @@ export default function VitalisPreview() {
             Evidence-based physiotherapy and wellness. We treat the root cause — not just the symptoms.
           </p>
           <div className="vt-anim" style={{ display: "flex", gap: 14, marginTop: 32 }}>
-            <span style={{ padding: "14px 36px", background: V.accent, color: V.white, fontFamily: FB, fontSize: 15, fontWeight: 600, borderRadius: 100, cursor: "pointer", transition: "all 0.2s" }}
+            <Link href="/work/designs/vitalis/preview/contact" style={{ padding: "14px 36px", background: V.accent, color: V.white, fontFamily: FB, fontSize: 15, fontWeight: 600, borderRadius: 100, cursor: "pointer", transition: "all 0.2s", textDecoration: "none" }}
               onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(61,139,112,0.25)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
-            >Book Appointment</span>
-            <span style={{ padding: "14px 32px", border: `1px solid ${V.border}`, fontFamily: FB, fontSize: 15, fontWeight: 500, borderRadius: 100, cursor: "pointer", transition: "border-color 0.2s" }}
+            >Book Appointment</Link>
+            <Link href="/work/designs/vitalis/preview/services" style={{ padding: "14px 32px", border: `1px solid ${V.border}`, fontFamily: FB, fontSize: 15, fontWeight: 500, borderRadius: 100, cursor: "pointer", transition: "border-color 0.2s", textDecoration: "none", color: V.text }}
               onMouseEnter={(e) => (e.currentTarget.style.borderColor = V.accent)}
               onMouseLeave={(e) => (e.currentTarget.style.borderColor = V.border)}
-            >Our Services</span>
+            >Our Services</Link>
           </div>
           <div className="vt-anim" style={{ display: "flex", gap: 32, marginTop: 40 }}>
             {[{ num: "5,000+", label: "Patients" }, { num: "15+", label: "Years" }, { num: "4.9★", label: "Rating" }].map((s) => (

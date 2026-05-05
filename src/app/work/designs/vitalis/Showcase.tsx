@@ -1,7 +1,7 @@
 "use client";
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
-import CustomCursor from "../../../../components/CustomCursor";
+import PackageSection from "../PackageSection";import CustomCursor from "../../../../components/CustomCursor";
 import SmoothScroll from "../../../../components/SmoothScroll";
 import { ArrowLeft, ArrowUpRight, Check, X } from "lucide-react";
 import Link from "next/link";
@@ -95,6 +95,8 @@ export default function Showcase() {
               <p className="font-body text-[12px] text-(--color-text-muted)">Or <Link href="/contact" className="text-(--color-accent) underline">hire me to customise it</Link> for your clinic.</p>
             </div>
           </section>
+
+          <PackageSection price={PRICE} priceUsd={PRICE_USD} />
 
           <Footer />
         </div>

@@ -259,33 +259,25 @@ export default function StudioNoirPreview() {
       {/* Animated grain overlay */}
       <div className="sn-grain" style={{ position: "fixed", inset: 0, zIndex: 100, pointerEvents: "none", opacity: 0.03, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`, backgroundRepeat: "repeat", backgroundSize: "128px" }} />
 
-      {/* NAVIGATION — side-mounted on desktop, top bar on mobile */}
-      {!isMobile ? (
-        <nav style={{ position: "fixed", right: 0, top: 0, bottom: 0, width: 80, zIndex: 200, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 32, borderLeft: `1px solid ${C.border}`, background: "rgba(13,11,8,0.5)", backdropFilter: "blur(12px)" }}>
-          {["Work", "Info", "Services", "Say Hi"].map((item) => (
-            <a key={item} href={`#sn-${item.toLowerCase().replace(" ", "")}`} style={{ fontFamily: F_BODY, fontSize: 10, color: C.muted, textDecoration: "none", letterSpacing: 3, writingMode: "vertical-rl", transform: "rotate(180deg)", transition: "all 0.3s", cursor: "none" }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = C.accent; e.currentTarget.style.letterSpacing = "5px"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = C.muted; e.currentTarget.style.letterSpacing = "3px"; }}
-            >{item.toUpperCase()}</a>
-          ))}
-        </nav>
-      ) : (
-        <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 200, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", background: "rgba(13,11,8,0.9)", backdropFilter: "blur(12px)" }}>
-          <span style={{ fontFamily: F_HEAD, fontSize: 16, color: C.text, letterSpacing: "0.12em" }}>STUDIO<span style={{ color: C.accent }}>.</span>NOIR</span>
-          <div style={{ display: "flex", gap: 16 }}>
-            {["Work", "Info"].map((item) => (
-              <a key={item} href={`#sn-${item.toLowerCase()}`} style={{ fontFamily: F_BODY, fontSize: 11, color: C.muted, textDecoration: "none", letterSpacing: 2 }}>{item.toUpperCase()}</a>
-            ))}
-          </div>
-        </nav>
-      )}
-
-      {/* Logo — top left, fixed */}
-      <div style={{ position: "fixed", top: 24, left: 48, zIndex: 200 }}>
-        <span style={{ fontFamily: F_HEAD, fontSize: 20, color: C.text, letterSpacing: "0.15em" }}>
+      {/* NAVIGATION — top bar with page links */}
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 200, display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "16px 20px" : "20px 48px", background: "rgba(13,11,8,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${C.border}` }}>
+        <span style={{ fontFamily: F_HEAD, fontSize: isMobile ? 16 : 20, color: C.text, letterSpacing: "0.12em" }}>
           STUDIO<span style={{ color: C.accent }}>.</span>NOIR
         </span>
-      </div>
+        <div style={{ display: "flex", gap: isMobile ? 16 : 32, alignItems: "center" }}>
+          {[
+            { label: "Home", href: "#" },
+            { label: "Work", href: "/work/designs/studio-noir/preview/work" },
+            { label: "About", href: "/work/designs/studio-noir/preview/about" },
+            { label: "Contact", href: "/work/designs/studio-noir/preview/contact" },
+          ].map((item) => (
+            <a key={item.label} href={item.href} style={{ fontFamily: F_BODY, fontSize: isMobile ? 11 : 12, color: item.label === "Home" ? C.accent : C.muted, textDecoration: "none", letterSpacing: 3, transition: "color 0.3s", cursor: "none" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = C.accent)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = item.label === "Home" ? C.accent : C.muted)}
+            >{item.label.toUpperCase()}</a>
+          ))}
+        </div>
+      </nav>
 
       {/* HERO — full viewport, left-aligned, with moving accent line */}
       <section style={{ height: "100vh", display: "flex", alignItems: "center", padding: "0 48px", paddingRight: isMobile ? 20 : 128, position: "relative" }}>

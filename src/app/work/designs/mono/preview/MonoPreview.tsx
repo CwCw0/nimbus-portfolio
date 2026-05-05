@@ -21,23 +21,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
 import Link from "next/link";
+import { FONT as F, PALETTE as M, BASE_PATH, projects } from "./shared";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const F = "'Syne', 'Helvetica Neue', sans-serif";
-
-const M = {
-  bg: "#FAFAFA", text: "#111111", muted: "#999999", dim: "#CCCCCC",
-  accent: "#FF3D00", border: "#EEEEEE",
-};
-
-const projects = [
-  { title: "Meridian", cat: "Brand Identity", year: "2026", shape: "◆" },
-  { title: "Atlas", cat: "Web Platform", year: "2025", shape: "○" },
-  { title: "Onyx", cat: "Mobile App", year: "2026", shape: "□" },
-  { title: "Prism", cat: "Editorial", year: "2025", shape: "△" },
-  { title: "Echo", cat: "E-Commerce", year: "2024", shape: "◇" },
-];
 
 export default function MonoPreview() {
   const mainRef = useRef<HTMLDivElement>(null);
@@ -132,13 +118,17 @@ export default function MonoPreview() {
 
       {/* NAV — barely there */}
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "24px 48px", background: "rgba(250,250,250,0.85)", backdropFilter: "blur(8px)" }}>
-        <span style={{ fontFamily: F, fontSize: 15, fontWeight: 800, letterSpacing: 8 }}>MONO</span>
+        <Link href={BASE_PATH} style={{ fontFamily: F, fontSize: 15, fontWeight: 800, letterSpacing: 8, color: M.text, textDecoration: "none" }}>MONO</Link>
         <div style={{ display: "flex", gap: 28 }}>
-          {["Work", "About", "Contact"].map((item) => (
-            <a key={item} href={`#mn-${item.toLowerCase()}`} style={{ fontFamily: F, fontSize: 13, color: M.muted, textDecoration: "none", fontWeight: 500, transition: "color 0.2s" }}
+          {[
+            { label: "Work", href: BASE_PATH },
+            { label: "About", href: `${BASE_PATH}/about` },
+            { label: "Contact", href: `${BASE_PATH}/contact` },
+          ].map((item) => (
+            <Link key={item.label} href={item.href} style={{ fontFamily: F, fontSize: 13, color: M.muted, textDecoration: "none", fontWeight: 500, transition: "color 0.2s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = M.text)}
               onMouseLeave={(e) => (e.currentTarget.style.color = M.muted)}
-            >{item}</a>
+            >{item.label}</Link>
           ))}
         </div>
       </nav>
@@ -162,24 +152,26 @@ export default function MonoPreview() {
           <span style={{ fontFamily: F, fontSize: 12, fontWeight: 700, letterSpacing: 5, color: M.muted, display: "block", marginBottom: 56 }}>SELECTED WORK</span>
 
           {projects.map((proj, i) => (
-            <div key={proj.title} className="mn-row"
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="mn-line" style={{ height: 1, background: M.border }} />
-              <div className="mn-content" style={{ display: "flex", alignItems: "center", padding: "44px 0", transition: "padding-left 0.4s", paddingLeft: hovered === i ? 16 : 0 }}>
-                <span style={{ fontFamily: F, fontSize: 16, color: hovered === i ? M.accent : M.dim, width: 44, transition: "color 0.3s" }}>{proj.shape}</span>
-                <h3 style={{ fontFamily: F, fontSize: "clamp(40px, 6vw, 88px)", fontWeight: 800, flex: 1, letterSpacing: "-0.03em", lineHeight: 0.95, transition: "color 0.3s", color: hovered === i ? M.accent : M.text }}>
-                  {proj.title}
-                </h3>
-                <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
-                  <span style={{ fontFamily: F, fontSize: 13, color: M.muted, fontWeight: 400 }}>{proj.cat}</span>
-                  <span style={{ fontFamily: F, fontSize: 13, color: M.dim }}>{proj.year}</span>
-                  <span style={{ fontSize: 20, color: hovered === i ? M.accent : M.muted, transition: "all 0.3s", transform: hovered === i ? "translate(4px, -4px)" : "translate(0, 0)" }}>↗</span>
+            <Link key={proj.title} href={`${BASE_PATH}/project?slug=${proj.slug}`} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+              <div className="mn-row"
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="mn-line" style={{ height: 1, background: M.border }} />
+                <div className="mn-content" style={{ display: "flex", alignItems: "center", padding: "44px 0", transition: "padding-left 0.4s", paddingLeft: hovered === i ? 16 : 0 }}>
+                  <span style={{ fontFamily: F, fontSize: 16, color: hovered === i ? M.accent : M.dim, width: 44, transition: "color 0.3s" }}>{proj.shape}</span>
+                  <h3 style={{ fontFamily: F, fontSize: "clamp(40px, 6vw, 88px)", fontWeight: 800, flex: 1, letterSpacing: "-0.03em", lineHeight: 0.95, transition: "color 0.3s", color: hovered === i ? M.accent : M.text }}>
+                    {proj.title}
+                  </h3>
+                  <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
+                    <span style={{ fontFamily: F, fontSize: 13, color: M.muted, fontWeight: 400 }}>{proj.cat}</span>
+                    <span style={{ fontFamily: F, fontSize: 13, color: M.dim }}>{proj.year}</span>
+                    <span style={{ fontSize: 20, color: hovered === i ? M.accent : M.muted, transition: "all 0.3s", transform: hovered === i ? "translate(4px, -4px)" : "translate(0, 0)" }}>↗</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
           <div style={{ height: 1, background: M.border }} />
         </div>
