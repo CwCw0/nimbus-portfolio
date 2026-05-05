@@ -3,6 +3,7 @@
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
 import PackageSection from "../PackageSection";
+import TemplateNav from "../TemplateNav";
 import CustomCursor from "../../../../components/CustomCursor";
 import SmoothScroll from "../../../../components/SmoothScroll";
 import { ArrowLeft, ArrowUpRight, Check, X } from "lucide-react";
@@ -107,10 +108,12 @@ export default function StudioNoirShowcase() {
 
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 px-16 pt-28 max-md:px-6 max-md:pt-24">
-            <Link href="/work" className="flex items-center gap-2 font-body text-sm text-(--color-text-muted) transition-colors hover:text-(--color-text-primary)">
+            <Link href="/work?view=lab" className="flex items-center gap-2 font-body text-sm text-(--color-text-muted) transition-colors hover:text-(--color-text-primary)">
               <ArrowLeft className="h-4 w-4" />
-              Back to Work
+              Design Lab
             </Link>
+            <span className="font-body text-xs text-(--color-text-muted)">/</span>
+            <span className="font-body text-xs text-(--color-text-dim)">Studio Noir</span>
           </div>
 
           {/* Hero */}
@@ -293,6 +296,8 @@ export default function StudioNoirShowcase() {
           </section>
 
           <PackageSection price={PRICE} priceUsd={PRICE_USD} />
+
+          <TemplateNav current="studio-noir" />
 
           <Footer />
         </div>

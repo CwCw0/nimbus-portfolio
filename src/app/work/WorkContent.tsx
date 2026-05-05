@@ -8,6 +8,7 @@ import WaterRipple from "../../components/WaterRipple";
 import { ArrowRight, ArrowUpRight, Sparkles, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -17,7 +18,9 @@ import { labDesigns, labCategories } from "../../data/labDesigns";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkContent() {
-  const [view, setView] = useState<"cases" | "lab">("cases");
+  const searchParams = useSearchParams();
+  const initialView = searchParams.get("view") === "lab" ? "lab" : "cases";
+  const [view, setView] = useState<"cases" | "lab">(initialView);
   const heroRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLElement>(null);
   const labGridRef = useRef<HTMLElement>(null);

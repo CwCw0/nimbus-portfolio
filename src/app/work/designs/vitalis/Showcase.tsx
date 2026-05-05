@@ -1,7 +1,9 @@
 "use client";
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
-import PackageSection from "../PackageSection";import CustomCursor from "../../../../components/CustomCursor";
+import PackageSection from "../PackageSection";
+import TemplateNav from "../TemplateNav";
+import CustomCursor from "../../../../components/CustomCursor";
 import SmoothScroll from "../../../../components/SmoothScroll";
 import { ArrowLeft, ArrowUpRight, Check, X } from "lucide-react";
 import Link from "next/link";
@@ -18,7 +20,9 @@ export default function Showcase() {
         <div className="flex w-full flex-col overflow-x-hidden bg-(--color-bg-primary)">
           <Header />
           <div className="flex items-center gap-2 px-16 pt-28 max-md:px-6 max-md:pt-24">
-            <Link href="/work" className="flex items-center gap-2 font-body text-sm text-(--color-text-muted) transition-colors hover:text-(--color-text-primary)"><ArrowLeft className="h-4 w-4" /> Back to Work</Link>
+            <Link href="/work?view=lab" className="flex items-center gap-2 font-body text-sm text-(--color-text-muted) transition-colors hover:text-(--color-text-primary)"><ArrowLeft className="h-4 w-4" /> Design Lab</Link>
+            <span className="font-body text-xs text-(--color-text-muted)">/</span>
+            <span className="font-body text-xs text-(--color-text-dim)">Vitalis</span>
           </div>
 
           <section className="w-full px-16 pt-12 pb-16 max-md:px-6">
@@ -97,6 +101,8 @@ export default function Showcase() {
           </section>
 
           <PackageSection price={PRICE} priceUsd={PRICE_USD} />
+
+          <TemplateNav current="vitalis" />
 
           <Footer />
         </div>
