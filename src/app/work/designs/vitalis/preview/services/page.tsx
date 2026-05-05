@@ -67,47 +67,47 @@ export default function VitalisServicesPage() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      // Header fade
+      // Header: bloom/blur entrance
       el.querySelectorAll(".vt-hero-anim").forEach((item, i) => {
         gsap.fromTo(
           item,
-          { y: 25, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.15 + i * 0.1 }
+          { opacity: 0, filter: "blur(10px)", scale: 0.95 },
+          { opacity: 1, filter: "blur(0px)", scale: 1, duration: 1.1, ease: "power2.out", delay: 0.2 + i * 0.12 }
         );
       });
 
-      // Service cards stagger
+      // Service cards: circle clip-path reveal (expands from icon position)
       el.querySelectorAll(".vt-svc-card").forEach((card, i) => {
         gsap.fromTo(
           card,
-          { y: 40, opacity: 0, scale: 0.97 },
+          { clipPath: "circle(0% at 10% 20%)", opacity: 0 },
           {
-            y: 0,
+            clipPath: "circle(100% at 50% 50%)",
             opacity: 1,
-            scale: 1,
-            duration: 0.7,
+            duration: 1.2,
             ease: "power2.out",
-            delay: i * 0.08,
-            scrollTrigger: { trigger: card, start: "top 88%", once: true },
+            delay: i * 0.1,
+            scrollTrigger: { trigger: card, start: "top 85%", once: true },
           }
         );
       });
 
-      // Bottom CTA
-      const cta = el.querySelector(".vt-cta-reveal");
-      if (cta) {
+      // Bottom CTA: blur bloom
+      el.querySelectorAll(".vt-cta-reveal").forEach((item, i) => {
         gsap.fromTo(
-          cta,
-          { y: 30, opacity: 0 },
+          item,
+          { opacity: 0, filter: "blur(8px)", y: 15 },
           {
-            y: 0,
             opacity: 1,
-            duration: 0.8,
+            filter: "blur(0px)",
+            y: 0,
+            duration: 0.9,
             ease: "power2.out",
-            scrollTrigger: { trigger: cta, start: "top 85%", once: true },
+            delay: i * 0.1,
+            scrollTrigger: { trigger: item, start: "top 85%", once: true },
           }
         );
-      }
+      });
     }, el);
 
     return () => ctx.revert();

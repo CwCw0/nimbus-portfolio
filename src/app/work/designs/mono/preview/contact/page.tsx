@@ -3,8 +3,10 @@
 /**
  * MONO — Contact Page
  *
- * Email address as massive heading.
- * Minimal underline-input form below.
+ * Email address as the ENTIRE hero (massive type, char-by-char reveal).
+ * Minimal underline-input form with focus = accent color.
+ * No labels, just placeholders. Single "SEND" button with border only.
+ * Maximum whitespace.
  */
 
 import { useRef, useEffect, useState } from "react";
@@ -28,44 +30,49 @@ export default function ContactPage() {
   const isMobile = useIsMobile();
   const [emailHovered, setEmailHovered] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [btnHovered, setBtnHovered] = useState(false);
 
   useLineDraw(containerRef);
 
-  /* Email char reveal */
+  /* Email char-by-char reveal */
   useEffect(() => {
     const el = emailRef.current;
     if (!el) return;
 
     const split = new SplitType(el, { types: "chars" });
-    gsap.set(split.chars || [], { y: "100%", opacity: 0 });
+    gsap.set(split.chars || [], { y: "110%", opacity: 0 });
     gsap.to(split.chars || [], {
       y: "0%",
       opacity: 1,
-      duration: 1,
-      stagger: 0.025,
+      duration: 1.2,
+      stagger: 0.035,
       ease: "power3.out",
-      delay: 0.2,
+      delay: 0.3,
     });
 
     return () => split.revert();
   }, []);
 
-  /* Staggered fade-ups */
+  /* Form fields stagger reveal */
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      el.querySelectorAll(".mn-contact-fade").forEach((item, i) => {
+      el.querySelectorAll(".mn-contact-field").forEach((field, i) => {
         gsap.fromTo(
-          item,
-          { y: 25, opacity: 0 },
+          field,
+          { y: 40, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.7,
+            duration: 0.8,
             ease: "power2.out",
-            delay: 0.8 + i * 0.1,
+            scrollTrigger: {
+              trigger: field,
+              start: "top 90%",
+              once: true,
+            },
           }
         );
       });
@@ -76,43 +83,41 @@ export default function ContactPage() {
 
   const inputStyle = (field: string): React.CSSProperties => ({
     fontFamily: FONT,
-    fontSize: 16,
+    fontSize: isMobile ? 16 : 18,
     fontWeight: 400,
-    color: PALETTE.text,
+    color: focusedField === field ? PALETTE.accent : PALETTE.text,
     background: "transparent",
     border: "none",
-    borderBottom: `1px solid ${focusedField === field ? PALETTE.text : PALETTE.border}`,
+    borderBottom: `1px solid ${
+      focusedField === field ? PALETTE.accent : PALETTE.border
+    }`,
     outline: "none",
     width: "100%",
-    padding: "16px 0",
-    transition: "border-color 0.3s",
+    padding: "20px 0",
+    transition: "color 0.3s, border-color 0.3s",
+    letterSpacing: "-0.01em",
   });
 
   return (
     <MonoLayout>
       <div ref={containerRef}>
-        {/* Email as hero */}
+        {/* Email as ENTIRE hero — fills the viewport */}
         <section
           style={{
-            padding: isMobile ? "100px 24px 60px" : "160px 48px 80px",
-            textAlign: "center",
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: isMobile ? "0 24px" : "0 48px",
           }}
         >
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <span
-              className="mn-contact-fade"
-              style={{
-                fontFamily: FONT,
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: 5,
-                color: PALETTE.muted,
-                display: "block",
-                marginBottom: 32,
-              }}
-            >
-              GET IN TOUCH
-            </span>
+          <div
+            style={{
+              textAlign: "center",
+              width: "100%",
+              maxWidth: 1400,
+            }}
+          >
             <div style={{ overflow: "hidden" }}>
               <h1
                 ref={emailRef}
@@ -121,147 +126,95 @@ export default function ContactPage() {
                 style={{
                   fontFamily: FONT,
                   fontSize: isMobile
-                    ? "clamp(28px, 8vw, 48px)"
-                    : "clamp(48px, 7vw, 110px)",
+                    ? "clamp(24px, 7.5vw, 44px)"
+                    : "clamp(56px, 7.5vw, 130px)",
                   fontWeight: 800,
-                  letterSpacing: "-0.03em",
+                  letterSpacing: "-0.04em",
                   lineHeight: 1,
                   margin: 0,
                   cursor: "pointer",
                   color: emailHovered ? PALETTE.accent : PALETTE.text,
-                  transition: "color 0.3s",
+                  transition: "color 0.4s",
+                  wordBreak: "break-all",
                 }}
               >
                 hello@mono.studio
               </h1>
             </div>
-            <p
-              className="mn-contact-fade"
-              style={{
-                fontFamily: FONT,
-                fontSize: 15,
-                color: PALETTE.muted,
-                marginTop: 24,
-                fontWeight: 400,
-              }}
-            >
-              or just say hi &mdash; I respond to everything.
-            </p>
           </div>
         </section>
 
-        {/* Form */}
+        {/* Form section — maximum whitespace above */}
         <section
           style={{
-            padding: isMobile ? "60px 24px 120px" : "80px 48px 160px",
+            padding: isMobile ? "0 24px 160px" : "0 48px 240px",
           }}
         >
-          <div style={{ maxWidth: 600, margin: "0 auto" }}>
-            <Divider style={{ marginBottom: isMobile ? 48 : 64 }} />
+          <div style={{ maxWidth: 560, margin: "0 auto" }}>
+            <div
+              className="mn-line-draw"
+              style={{ height: 1, background: PALETTE.border, marginBottom: isMobile ? 64 : 100 }}
+            />
 
             <form
               onSubmit={(e) => e.preventDefault()}
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: 36,
+                gap: isMobile ? 48 : 56,
               }}
             >
-              <div className="mn-contact-fade">
-                <label
-                  style={{
-                    fontFamily: FONT,
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: 4,
-                    color: PALETTE.muted,
-                    display: "block",
-                    marginBottom: 4,
-                  }}
-                >
-                  NAME
-                </label>
+              <div className="mn-contact-field">
                 <input
                   type="text"
-                  placeholder="Your name"
+                  placeholder="Name"
                   style={inputStyle("name")}
                   onFocus={() => setFocusedField("name")}
                   onBlur={() => setFocusedField(null)}
                 />
               </div>
 
-              <div className="mn-contact-fade">
-                <label
-                  style={{
-                    fontFamily: FONT,
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: 4,
-                    color: PALETTE.muted,
-                    display: "block",
-                    marginBottom: 4,
-                  }}
-                >
-                  EMAIL
-                </label>
+              <div className="mn-contact-field">
                 <input
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder="Email"
                   style={inputStyle("email")}
                   onFocus={() => setFocusedField("email")}
                   onBlur={() => setFocusedField(null)}
                 />
               </div>
 
-              <div className="mn-contact-fade">
-                <label
-                  style={{
-                    fontFamily: FONT,
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: 4,
-                    color: PALETTE.muted,
-                    display: "block",
-                    marginBottom: 4,
-                  }}
-                >
-                  MESSAGE
-                </label>
+              <div className="mn-contact-field">
                 <textarea
-                  placeholder="Tell me about your project"
-                  rows={4}
+                  placeholder="Message"
+                  rows={1}
                   style={{
                     ...inputStyle("message"),
                     resize: "none",
                     lineHeight: 1.7,
+                    minHeight: 56,
                   }}
                   onFocus={() => setFocusedField("message")}
                   onBlur={() => setFocusedField(null)}
                 />
               </div>
 
-              <div className="mn-contact-fade">
+              <div className="mn-contact-field" style={{ marginTop: isMobile ? 16 : 32 }}>
                 <button
                   type="submit"
+                  onMouseEnter={() => setBtnHovered(true)}
+                  onMouseLeave={() => setBtnHovered(false)}
                   style={{
                     fontFamily: FONT,
                     fontSize: 13,
                     fontWeight: 700,
-                    letterSpacing: 3,
-                    color: PALETTE.text,
-                    background: "transparent",
+                    letterSpacing: 4,
+                    color: btnHovered ? PALETTE.bg : PALETTE.text,
+                    background: btnHovered ? PALETTE.text : "transparent",
                     border: `1px solid ${PALETTE.text}`,
-                    padding: "16px 48px",
+                    padding: "18px 56px",
                     cursor: "pointer",
                     transition: "all 0.3s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = PALETTE.text;
-                    e.currentTarget.style.color = PALETTE.bg;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.color = PALETTE.text;
                   }}
                 >
                   SEND

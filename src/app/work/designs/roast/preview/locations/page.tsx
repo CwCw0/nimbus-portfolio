@@ -2,7 +2,8 @@
 
 /**
  * Roast — Locations page
- * 3 cafe locations with details, map placeholder, Visit Us CTA
+ * Full-height panels with curtain wipe on scroll,
+ * parallax interior photos, editorial typography.
  */
 
 import { useRef, useEffect } from "react";
@@ -15,30 +16,36 @@ gsap.registerPlugin(ScrollTrigger);
 const locations = [
   {
     name: "Downtown Flagship",
+    tagline: "Where it all started.",
     address: "42 Roast Lane, Downtown District",
     city: "Portland, OR 97201",
     hours: { weekday: "Mon — Fri: 7:00am – 6:00pm", weekend: "Sat — Sun: 8:00am – 5:00pm" },
     phone: "(503) 555-0142",
-    description: "Our original location and roastery. Floor-to-ceiling windows, a 25-seat bar facing the Loring roaster, and a brew bar serving all six single-origins as pour-over. This is where it all started — and where we still develop every roast profile.",
+    description: "Our original location and roastery. Floor-to-ceiling windows, a 25-seat bar facing the Loring roaster, and a brew bar serving all six single-origins as pour-over.",
     features: ["Roastery on-site", "Brew bar", "Retail wall", "Wi-Fi"],
+    vibe: "Industrial warmth. Concrete floors, brass fixtures, the hum of the Loring in the background. Come for the coffee, stay for the theatre of roasting.",
   },
   {
     name: "Uptown Studio",
+    tagline: "The quiet room.",
     address: "118 Bean Street, Uptown Quarter",
     city: "Portland, OR 97209",
     hours: { weekday: "Mon — Fri: 7:00am – 5:00pm", weekend: "Sat — Sun: 8:00am – 4:00pm" },
     phone: "(503) 555-0118",
-    description: "A quieter, more intimate space designed for focused work and long conversations. Exposed brick, communal tables, and a curated menu of espresso drinks and batch brew. The neighborhood&apos;s unofficial living room.",
+    description: "A quieter, more intimate space designed for focused work and long conversations. Exposed brick, communal tables, and a curated menu of espresso drinks and batch brew.",
     features: ["Quiet workspace", "Communal tables", "Pastry menu", "Wi-Fi"],
+    vibe: "Soft jazz, exposed brick, morning light through arched windows. The neighbourhood&apos;s unofficial living room since 2022.",
   },
   {
     name: "Harbour Kiosk",
+    tagline: "Coffee on the waterfront.",
     address: "7 Wharf Road, Harbour Front",
     city: "Portland, OR 97209",
     hours: { weekday: "Mon — Fri: 7:00am – 4:00pm", weekend: "Sat — Sun: 8:00am – 3:00pm" },
     phone: "(503) 555-0107",
-    description: "A compact waterfront kiosk built for speed without sacrificing quality. Two-group espresso, cold brew on tap, and a rotating single-origin drip. Grab your coffee and walk the harbour trail.",
+    description: "A compact waterfront kiosk built for speed without sacrificing quality. Two-group espresso, cold brew on tap, and a rotating single-origin drip.",
     features: ["Takeaway focus", "Cold brew tap", "Outdoor seating", "Dog friendly"],
+    vibe: "Salt air, harbour bells, a flat white in hand. Grab your coffee and walk the trail — or linger on the bench and watch the boats.",
   },
 ];
 
@@ -51,35 +58,64 @@ export default function RoastLocations() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      // Hero text
-      const heroEls = el.querySelectorAll(".rs-hero");
-      gsap.set(heroEls, { y: 40, opacity: 0 });
-      gsap.to(heroEls, { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power2.out", delay: 0.3 });
+      // Hero text wipe
+      const heroTitle = el.querySelector(".rs-loc-hero-title");
+      if (heroTitle) {
+        gsap.fromTo(heroTitle, { clipPath: "inset(0 100% 0 0)" }, {
+          clipPath: "inset(0 0% 0 0)", duration: 1.4, ease: "power3.inOut", delay: 0.3,
+        });
+      }
+      const heroSub = el.querySelector(".rs-loc-hero-sub");
+      if (heroSub) {
+        gsap.fromTo(heroSub, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: "power2.out", delay: 1.2 });
+      }
 
-      // Parallax on image placeholders
-      el.querySelectorAll(".rs-parallax").forEach((img) => {
+      // Location panels — curtain wipe reveal
+      el.querySelectorAll(".rs-loc-panel").forEach((panel, i) => {
+        // Alternating wipe direction
+        const fromClip = i % 2 === 0 ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)";
+        const toClip = "inset(0 0 0 0)";
+
+        gsap.fromTo(panel, { clipPath: fromClip }, {
+          clipPath: toClip, duration: 1.4, ease: "power3.inOut",
+          scrollTrigger: { trigger: panel, start: "top 75%", once: true },
+        });
+      });
+
+      // Parallax interior image placeholders
+      el.querySelectorAll(".rs-loc-parallax").forEach((img) => {
         gsap.to(img, {
-          y: -50,
+          y: -70,
           ease: "none",
           scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: 1.5 },
         });
       });
 
-      // Location cards
-      el.querySelectorAll(".rs-loc-card").forEach((card, i) => {
-        gsap.fromTo(card, { y: 60, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: i * 0.15,
-          scrollTrigger: { trigger: card, start: "top 88%", once: true },
+      // Location text reveals with stagger
+      el.querySelectorAll(".rs-loc-text").forEach((text) => {
+        gsap.fromTo(text, { y: 40, opacity: 0 }, {
+          y: 0, opacity: 1, duration: 0.9, ease: "power2.out",
+          scrollTrigger: { trigger: text, start: "top 85%", once: true },
         });
       });
 
-      // Reveals
-      el.querySelectorAll(".rs-rev").forEach((item) => {
-        gsap.fromTo(item, { y: 35, opacity: 0 }, {
-          y: 0, opacity: 1, duration: 0.9, ease: "power2.out",
-          scrollTrigger: { trigger: item, start: "top 85%", once: true },
+      // Feature tags cascade
+      el.querySelectorAll(".rs-feature-row").forEach((row) => {
+        const tags = row.querySelectorAll(".rs-tag");
+        gsap.fromTo(tags, { x: 20, opacity: 0 }, {
+          x: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: "power2.out",
+          scrollTrigger: { trigger: row, start: "top 88%", once: true },
         });
       });
+
+      // CTA curtain from bottom
+      const ctaSection = el.querySelector(".rs-loc-cta");
+      if (ctaSection) {
+        gsap.fromTo(ctaSection, { clipPath: "inset(100% 0 0 0)" }, {
+          clipPath: "inset(0 0 0 0)", duration: 1.2, ease: "power3.inOut",
+          scrollTrigger: { trigger: ctaSection, start: "top 80%", once: true },
+        });
+      }
     }, el);
 
     return () => ctx.revert();
@@ -88,212 +124,185 @@ export default function RoastLocations() {
   return (
     <RoastLayout current="Locations">
       <div ref={mainRef}>
-        {/* Hero */}
+        {/* ═══ Hero ═══ */}
         <section
           style={{
-            minHeight: "60vh",
+            height: "80vh",
             position: "relative",
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            padding: isMobile ? "120px 20px 60px" : "160px 48px 80px",
+            alignItems: "flex-end",
+            padding: isMobile ? "0 20px 80px" : "0 64px 100px",
             background: R.bgDark,
             overflow: "hidden",
           }}
         >
-          <GrainOverlay />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(28,24,20,0.95), rgba(28,24,20,0.5))" }} />
-          <div style={{ position: "absolute", top: "45%", left: "50%", transform: "translate(-50%, -50%)" }}>
-            <span style={{ fontSize: 260, opacity: 0.03, fontFamily: FH, fontStyle: "italic", color: R.cream }}>Visit</span>
+          <GrainOverlay opacity={0.05} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(28,24,20,1) 0%, rgba(28,24,20,0.3) 100%)" }} />
+
+          {/* Ghosted watermark */}
+          <div style={{ position: "absolute", top: "20%", left: "50%", transform: "translateX(-50%)", whiteSpace: "nowrap" }}>
+            <span style={{ fontFamily: FH, fontSize: "clamp(180px, 22vw, 360px)", fontStyle: "italic", color: R.cream, opacity: 0.02 }}>Visit</span>
           </div>
 
-          <div style={{ position: "relative", zIndex: 1, maxWidth: 680 }}>
-            <span className="rs-hero" style={{ fontFamily: FB, fontSize: 12, letterSpacing: 5, color: R.accentLight, fontWeight: 500, display: "block", marginBottom: 20 }}>OUR LOCATIONS</span>
-            <h1 className="rs-hero" style={{ fontFamily: FH, fontSize: "clamp(48px, 7vw, 88px)", fontWeight: 400, lineHeight: 1.05, color: R.cream }}>
-              Three locations. <em style={{ fontStyle: "italic", color: R.accentLight }}>One standard.</em>
-            </h1>
-            <p className="rs-hero" style={{ fontFamily: FB, fontSize: 17, color: "rgba(250,246,238,0.55)", marginTop: 20, maxWidth: 480, lineHeight: 1.8 }}>
-              Each space is different, but the coffee is identical — roasted at our central roastery and delivered fresh daily.
-            </p>
-          </div>
-        </section>
-
-        {/* Location Cards */}
-        <section style={{ padding: isMobile ? "80px 20px" : "120px 48px" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexDirection: "column", gap: isMobile ? 48 : 64 }}>
-            {locations.map((loc, idx) => (
-              <div
-                key={loc.name}
-                className="rs-loc-card"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: isMobile ? "1fr" : idx % 2 === 0 ? "1fr 1fr" : "1fr 1fr",
-                  gap: isMobile ? 24 : 48,
-                  alignItems: "center",
-                }}
-              >
-                {/* Image placeholder — alternating left/right on desktop */}
-                <div
-                  style={{
-                    height: isMobile ? 260 : 420,
-                    background: R.bgCard,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    position: "relative",
-                    overflow: "hidden",
-                    order: isMobile ? 0 : idx % 2 === 1 ? 2 : 0,
-                    border: `1px solid ${R.border}`,
-                  }}
-                >
-                  <div className="rs-parallax" style={{ position: "absolute", inset: -30, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <span style={{ fontFamily: FH, fontSize: 140, opacity: 0.05, fontStyle: "italic", color: R.accent }}>{String(idx + 1).padStart(2, "0")}</span>
-                  </div>
-                  <span style={{ position: "absolute", bottom: 16, left: 16, padding: "6px 14px", background: R.accent, fontFamily: FB, fontSize: 11, color: R.cream, fontWeight: 700, letterSpacing: 1 }}>
-                    {loc.features[0].toUpperCase()}
-                  </span>
-                </div>
-
-                {/* Info */}
-                <div style={{ padding: isMobile ? 0 : "0 16px" }}>
-                  <h2 style={{ fontFamily: FH, fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 600, lineHeight: 1.15, marginBottom: 12 }}>{loc.name}</h2>
-
-                  <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 20 }}>
-                    <span style={{ fontFamily: FB, fontSize: 14, color: R.text }}>{loc.address}</span>
-                    <span style={{ fontFamily: FB, fontSize: 14, color: R.dim }}>{loc.city}</span>
-                    <span style={{ fontFamily: FB, fontSize: 14, color: R.accent, fontWeight: 500 }}>{loc.phone}</span>
-                  </div>
-
-                  <p style={{ fontFamily: FB, fontSize: 15, color: R.muted, lineHeight: 1.8, marginBottom: 20 }}>{loc.description}</p>
-
-                  {/* Hours */}
-                  <div style={{ padding: 20, background: R.cream, border: `1px solid ${R.border}`, marginBottom: 16 }}>
-                    <span style={{ fontFamily: FB, fontSize: 11, letterSpacing: 3, color: R.dim, display: "block", marginBottom: 10, fontWeight: 500 }}>HOURS</span>
-                    <p style={{ fontFamily: FB, fontSize: 14, color: R.text, lineHeight: 1.7 }}>
-                      {loc.hours.weekday}<br />{loc.hours.weekend}
-                    </p>
-                  </div>
-
-                  {/* Features */}
-                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                    {loc.features.map((f) => (
-                      <span key={f} style={{ padding: "5px 14px", background: R.bgCard, fontFamily: FB, fontSize: 12, color: R.muted, fontWeight: 500 }}>{f}</span>
-                    ))}
-                  </div>
-
-                  <span
-                    style={{
-                      display: "inline-block",
-                      marginTop: 24,
-                      padding: "12px 28px",
-                      background: R.accent,
-                      color: R.cream,
-                      fontFamily: FB,
-                      fontSize: 13,
-                      fontWeight: 700,
-                      cursor: "pointer",
-                      transition: "all 0.2s",
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(139,69,19,0.25)"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
-                  >
-                    Get Directions →
-                  </span>
-                </div>
+          {/* Three dots representing locations */}
+          <div style={{ position: "absolute", top: "40%", left: "50%", transform: "translateX(-50%)", display: "flex", gap: 48 }}>
+            {[1, 2, 3].map((n) => (
+              <div key={n} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+                <div style={{ width: 12, height: 12, borderRadius: "50%", background: R.accentLight, opacity: 0.3, boxShadow: `0 0 20px ${R.accentLight}40` }} />
+                <span style={{ fontFamily: FB, fontSize: 10, color: "rgba(250,246,238,0.2)", letterSpacing: 2 }}>{String(n).padStart(2, "0")}</span>
               </div>
             ))}
           </div>
-        </section>
 
-        {/* Map Placeholder */}
-        <section style={{ position: "relative" }}>
-          <div
-            style={{
-              height: isMobile ? 300 : 450,
-              background: R.bgCard,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 16,
-              borderTop: `1px solid ${R.border}`,
-              borderBottom: `1px solid ${R.border}`,
-            }}
-          >
-            <span style={{ fontSize: 48, opacity: 0.15 }}>📍</span>
-            <span style={{ fontFamily: FB, fontSize: 12, letterSpacing: 4, color: R.dim, fontWeight: 500 }}>INTERACTIVE MAP</span>
-            <p style={{ fontFamily: FB, fontSize: 14, color: R.muted, maxWidth: 300, textAlign: "center", lineHeight: 1.6 }}>
-              Map integration placeholder — Google Maps or Mapbox embed would render here.
+          <div style={{ position: "relative", zIndex: 2, maxWidth: 700 }}>
+            <span style={{ fontFamily: FB, fontSize: 11, letterSpacing: 6, color: R.accentLight, fontWeight: 500, display: "block", marginBottom: 24 }}>OUR LOCATIONS</span>
+            <h1 className="rs-loc-hero-title" style={{ fontFamily: FH, fontSize: "clamp(48px, 7vw, 96px)", fontWeight: 400, lineHeight: 1.0, color: R.cream }}>
+              Three spaces.<br /><em style={{ fontStyle: "italic", color: R.accentLight }}>One standard.</em>
+            </h1>
+            <p className="rs-loc-hero-sub" style={{ fontFamily: FB, fontSize: 17, color: "rgba(250,246,238,0.5)", marginTop: 28, maxWidth: 460, lineHeight: 1.85 }}>
+              Each location has its own character, but the coffee is identical — roasted centrally and delivered fresh every morning.
             </p>
           </div>
-
-          {/* Location pins on "map" */}
-          {!isMobile && (
-            <>
-              {[
-                { label: "Downtown", left: "30%", top: "35%" },
-                { label: "Uptown", left: "55%", top: "25%" },
-                { label: "Harbour", left: "72%", top: "55%" },
-              ].map((pin) => (
-                <div
-                  key={pin.label}
-                  style={{
-                    position: "absolute",
-                    left: pin.left,
-                    top: pin.top,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: 4,
-                  }}
-                >
-                  <div style={{ width: 12, height: 12, borderRadius: "50%", background: R.accent, boxShadow: `0 0 0 4px ${R.accentLight}` }} />
-                  <span style={{ fontFamily: FB, fontSize: 11, fontWeight: 700, color: R.accent, background: R.cream, padding: "2px 8px", whiteSpace: "nowrap" }}>{pin.label}</span>
-                </div>
-              ))}
-            </>
-          )}
         </section>
 
-        {/* Visit Us CTA */}
-        <section style={{ padding: isMobile ? "80px 20px" : "120px 48px", background: R.bgDark, position: "relative", overflow: "hidden", textAlign: "center" }}>
-          <GrainOverlay />
+        {/* ═══ Location Panels — full-height curtain reveals ═══ */}
+        {locations.map((loc, idx) => (
+          <section
+            key={loc.name}
+            className="rs-loc-panel"
+            style={{
+              minHeight: isMobile ? "auto" : "100vh",
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : idx % 2 === 0 ? "1.2fr 1fr" : "1fr 1.2fr",
+              background: idx % 2 === 0 ? R.bg : R.cream,
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            {/* Image panel */}
+            <div
+              style={{
+                position: "relative",
+                height: isMobile ? 320 : "100%",
+                minHeight: isMobile ? 320 : 600,
+                background: R.bgDark,
+                overflow: "hidden",
+                order: isMobile ? 0 : idx % 2 === 1 ? 2 : 0,
+              }}
+            >
+              <GrainOverlay opacity={0.06} />
+              <div className="rs-loc-parallax" style={{ position: "absolute", inset: -80, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ fontFamily: FH, fontSize: "clamp(120px, 18vw, 240px)", fontStyle: "italic", color: R.accentLight, opacity: 0.05 }}>{String(idx + 1).padStart(2, "0")}</span>
+              </div>
+              {/* Vibe quote overlay */}
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: isMobile ? "24px 20px" : "40px 48px", background: "linear-gradient(to top, rgba(28,24,20,0.9), transparent)" }}>
+                <p style={{ fontFamily: FH, fontSize: isMobile ? 18 : 22, fontStyle: "italic", color: "rgba(250,246,238,0.7)", lineHeight: 1.5, maxWidth: 400 }}>
+                  &ldquo;{loc.vibe}&rdquo;
+                </p>
+              </div>
+            </div>
+
+            {/* Info panel */}
+            <div style={{ padding: isMobile ? "48px 20px" : "80px 64px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <div className="rs-loc-text">
+                <span style={{ fontFamily: FB, fontSize: 11, letterSpacing: 5, color: R.accent, fontWeight: 700, display: "block", marginBottom: 12 }}>LOCATION {String(idx + 1).padStart(2, "0")}</span>
+                <h2 style={{ fontFamily: FH, fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 400, lineHeight: 1.1, marginBottom: 8 }}>{loc.name}</h2>
+                <p style={{ fontFamily: FH, fontSize: 20, fontStyle: "italic", color: R.accent, marginBottom: 28 }}>{loc.tagline}</p>
+              </div>
+
+              <div className="rs-loc-text">
+                <p style={{ fontFamily: FB, fontSize: 15, color: R.muted, lineHeight: 1.85, marginBottom: 28 }}>{loc.description}</p>
+              </div>
+
+              {/* Address block */}
+              <div className="rs-loc-text" style={{ padding: "24px 0", borderTop: `1px solid ${R.border}`, borderBottom: `1px solid ${R.border}`, marginBottom: 28 }}>
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
+                  <div>
+                    <span style={{ fontFamily: FB, fontSize: 10, letterSpacing: 3, color: R.dim, display: "block", marginBottom: 6 }}>ADDRESS</span>
+                    <span style={{ fontFamily: FB, fontSize: 15, color: R.text, display: "block" }}>{loc.address}</span>
+                    <span style={{ fontFamily: FB, fontSize: 14, color: R.dim }}>{loc.city}</span>
+                  </div>
+                  <div>
+                    <span style={{ fontFamily: FB, fontSize: 10, letterSpacing: 3, color: R.dim, display: "block", marginBottom: 6 }}>HOURS</span>
+                    <span style={{ fontFamily: FB, fontSize: 14, color: R.text, display: "block", lineHeight: 1.7 }}>{loc.hours.weekday}</span>
+                    <span style={{ fontFamily: FB, fontSize: 14, color: R.text, lineHeight: 1.7 }}>{loc.hours.weekend}</span>
+                  </div>
+                </div>
+                <div style={{ marginTop: 16 }}>
+                  <span style={{ fontFamily: FB, fontSize: 10, letterSpacing: 3, color: R.dim, display: "block", marginBottom: 6 }}>PHONE</span>
+                  <span style={{ fontFamily: FB, fontSize: 15, color: R.accent, fontWeight: 500 }}>{loc.phone}</span>
+                </div>
+              </div>
+
+              {/* Features */}
+              <div className="rs-feature-row" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 32 }}>
+                {loc.features.map((f) => (
+                  <span key={f} className="rs-tag" style={{ padding: "6px 16px", background: `${R.accent}08`, border: `1px solid ${R.accent}20`, fontFamily: FB, fontSize: 12, color: R.accent, fontWeight: 500 }}>{f}</span>
+                ))}
+              </div>
+
+              <span
+                className="rs-loc-text"
+                style={{
+                  display: "inline-block",
+                  padding: "14px 32px",
+                  background: R.accent,
+                  color: R.cream,
+                  fontFamily: FB,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  transition: "all 0.3s",
+                  alignSelf: "flex-start",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(139,69,19,0.25)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+              >
+                Get Directions →
+              </span>
+            </div>
+          </section>
+        ))}
+
+        {/* ═══ CTA Section ═══ */}
+        <section className="rs-loc-cta" style={{ padding: isMobile ? "80px 20px" : "120px 64px", background: R.bgDark, position: "relative", overflow: "hidden", textAlign: "center" }}>
+          <GrainOverlay opacity={0.05} />
           <div style={{ position: "relative", zIndex: 1 }}>
-            <span className="rs-rev" style={{ fontFamily: FB, fontSize: 12, letterSpacing: 5, color: R.accentLight, fontWeight: 700 }}>VISIT US</span>
-            <h2 className="rs-rev" style={{ fontFamily: FH, fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 400, color: R.cream, lineHeight: 1.08, marginTop: 16 }}>
-              Your next great cup is <em style={{ fontStyle: "italic", color: R.accentLight }}>around the corner.</em>
+            <span style={{ fontFamily: FB, fontSize: 11, letterSpacing: 6, color: R.accentLight, fontWeight: 500 }}>FIND US</span>
+            <h2 style={{ fontFamily: FH, fontSize: "clamp(40px, 6vw, 76px)", fontWeight: 400, color: R.cream, lineHeight: 1.05, marginTop: 16 }}>
+              Your next great cup is<br /><em style={{ fontStyle: "italic", color: R.accentLight }}>around the corner.</em>
             </h2>
-            <p className="rs-rev" style={{ fontFamily: FB, fontSize: 16, color: "rgba(250,246,238,0.55)", marginTop: 20, maxWidth: 440, margin: "20px auto 0", lineHeight: 1.8 }}>
+            <p style={{ fontFamily: FB, fontSize: 16, color: "rgba(250,246,238,0.5)", marginTop: 20, maxWidth: 440, margin: "20px auto 0", lineHeight: 1.8 }}>
               Walk in. No reservation needed, no pretension at the door. Just well-made coffee, served by people who care.
             </p>
 
-            <div className="rs-rev" style={{ display: "flex", gap: 14, justifyContent: "center", marginTop: 36, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 40, flexWrap: "wrap" }}>
               <span
                 style={{
-                  padding: "14px 36px",
+                  padding: "16px 40px",
                   background: R.accentLight,
                   color: R.bgDark,
                   fontFamily: FB,
                   fontSize: 14,
                   fontWeight: 700,
                   cursor: "pointer",
-                  transition: "all 0.2s",
+                  transition: "all 0.3s",
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(212,165,116,0.3)"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(212,165,116,0.3)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 Order Ahead
               </span>
               <span
                 style={{
-                  padding: "14px 32px",
+                  padding: "16px 36px",
                   border: "1px solid rgba(250,246,238,0.2)",
                   color: R.cream,
                   fontFamily: FB,
                   fontSize: 14,
                   fontWeight: 500,
                   cursor: "pointer",
-                  transition: "border-color 0.3s",
+                  transition: "all 0.3s",
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.borderColor = R.accentLight)}
                 onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(250,246,238,0.2)")}

@@ -1,5 +1,19 @@
 "use client";
 
+/**
+ * VITALIS — About Page
+ *
+ * Design language: Organic, wellness, rounded. Pill-shaped containers.
+ * Soft bloom/blur reveals. Breathing animations (scale pulse). Clip-path circles.
+ * Warm + green tones. Flowing, unhurried pace.
+ *
+ * Layout: Asymmetric hero with organic blob shape → Breathing values pills →
+ * Horizontal team scroll with circular clip reveal → Certification ribbon →
+ * Full-width mission statement with blur-in
+ *
+ * NOT: grid cards. NOT: sharp corners. NOT: fast/aggressive animations.
+ */
+
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -7,63 +21,25 @@ import { VitalisLayout, V, FH, FB, useIsMobile } from "../shared";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const team = [
-  {
-    name: "Dr. Sarah Lim",
-    role: "Founder & Lead Physiotherapist",
-    credentials: "DPT, MSc Sports Medicine",
-    bio: "15 years of clinical experience in musculoskeletal and sports physiotherapy. Former physio for national athletics.",
-  },
-  {
-    name: "Dr. James Tan",
-    role: "Sports Rehabilitation Specialist",
-    credentials: "DPT, CSCS, CES",
-    bio: "Specialises in ACL recovery, rotator cuff rehab, and return-to-play protocols for competitive athletes.",
-  },
-  {
-    name: "Maya Chen",
-    role: "Massage & Myofascial Therapist",
-    credentials: "RMT, Cert. Myofascial Release",
-    bio: "Expert in deep tissue and trigger point therapy. Trained in both Western remedial and traditional Eastern techniques.",
-  },
-  {
-    name: "Dr. Aisha Rahman",
-    role: "Acupuncture & TCM Practitioner",
-    credentials: "MATCM, Licensed Acupuncturist",
-    bio: "Certified in both traditional Chinese medicine and Western dry-needling. Integrates holistic approaches with clinical evidence.",
-  },
-];
-
 const values = [
-  {
-    num: "01",
-    title: "Listen First",
-    body: "Every treatment starts with understanding. We spend time learning your history, goals, and concerns before prescribing anything.",
-  },
-  {
-    num: "02",
-    title: "Treat the Root Cause",
-    body: "We look beyond symptoms. Our approach addresses the underlying dysfunction so results last, not just temporary relief.",
-  },
-  {
-    num: "03",
-    title: "Evidence-Based Care",
-    body: "Every technique we use is backed by clinical research. We stay current with the latest rehabilitation science and best practices.",
-  },
-  {
-    num: "04",
-    title: "Empower Independence",
-    body: "Our goal is to give you the tools to manage your own health. We teach, not just treat, so you stay well beyond the clinic.",
-  },
+  { num: "01", title: "Listen First", body: "Every treatment starts with understanding. We spend time learning your history, goals, and concerns.", icon: "👂" },
+  { num: "02", title: "Treat the Root Cause", body: "We look beyond symptoms. Our approach addresses underlying dysfunction for lasting results.", icon: "🌱" },
+  { num: "03", title: "Evidence-Based", body: "Every technique is backed by clinical research. We stay current with the latest rehabilitation science.", icon: "📋" },
+  { num: "04", title: "Empower Independence", body: "Our goal is to give you tools to manage your own health. We teach, not just treat.", icon: "💪" },
 ];
 
-const certifications = [
-  "Ministry of Health (MOH) Registered",
-  "Malaysian Physiotherapy Association",
-  "World Confederation for Physical Therapy",
-  "NSCA Certified Strength & Conditioning",
-  "ISO 9001:2015 Certified Clinic",
-  "Allied Health Professions Act Compliant",
+const team = [
+  { name: "Dr. Sarah Lim", role: "Founder & Lead Physiotherapist", credentials: "DPT, MSc Sports Medicine", years: "15 years", specialty: "Musculoskeletal & Sports" },
+  { name: "Dr. James Tan", role: "Sports Rehabilitation", credentials: "DPT, CSCS, CES", years: "12 years", specialty: "ACL Recovery & Return-to-Play" },
+  { name: "Maya Chen", role: "Massage & Myofascial", credentials: "RMT, Cert. Myofascial Release", years: "8 years", specialty: "Deep Tissue & Trigger Point" },
+  { name: "Dr. Aisha Rahman", role: "Acupuncture & TCM", credentials: "MATCM, Licensed Acupuncturist", years: "10 years", specialty: "Holistic & Dry Needling" },
+];
+
+const stats = [
+  { value: "2018", label: "Established" },
+  { value: "15+", label: "Years Combined Experience" },
+  { value: "4,200+", label: "Patients Treated" },
+  { value: "98%", label: "Patient Satisfaction" },
 ];
 
 export default function VitalisAboutPage() {
@@ -75,73 +51,78 @@ export default function VitalisAboutPage() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      // Hero
-      el.querySelectorAll(".vt-h-anim").forEach((item, i) => {
-        gsap.fromTo(
-          item,
-          { y: 25, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.15 + i * 0.1 }
+      // Hero: soft blur-in with scale
+      el.querySelectorAll(".vt-bloom").forEach((item, i) => {
+        gsap.fromTo(item,
+          { opacity: 0, filter: "blur(12px)", scale: 0.95 },
+          { opacity: 1, filter: "blur(0px)", scale: 1, duration: 1.2, ease: "power2.out", delay: 0.2 + i * 0.15 }
         );
       });
 
-      // Values
-      el.querySelectorAll(".vt-val").forEach((item, i) => {
-        gsap.fromTo(
-          item,
-          { y: 30, opacity: 0 },
+      // Organic blob: gentle breathing pulse
+      const blob = el.querySelector(".vt-blob");
+      if (blob) {
+        gsap.to(blob, {
+          scale: 1.05, duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut",
+        });
+      }
+
+      // Values: stagger with rounded clip reveal (circle expanding)
+      el.querySelectorAll(".vt-value-pill").forEach((pill, i) => {
+        gsap.fromTo(pill,
+          { clipPath: "circle(0% at 50% 50%)", opacity: 0 },
           {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            ease: "power2.out",
-            delay: i * 0.1,
-            scrollTrigger: { trigger: item, start: "top 88%", once: true },
+            clipPath: "circle(75% at 50% 50%)", opacity: 1,
+            duration: 1, ease: "power2.out", delay: i * 0.15,
+            scrollTrigger: { trigger: pill, start: "top 85%", once: true },
           }
         );
       });
 
-      // Team
-      el.querySelectorAll(".vt-team").forEach((card, i) => {
-        gsap.fromTo(
-          card,
-          { y: 40, opacity: 0, scale: 0.97 },
+      // Team cards: slide up with soft bounce
+      el.querySelectorAll(".vt-team-card").forEach((card, i) => {
+        gsap.fromTo(card,
+          { y: 50, opacity: 0, scale: 0.9 },
           {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.7,
-            ease: "power2.out",
-            delay: i * 0.1,
+            y: 0, opacity: 1, scale: 1,
+            duration: 0.9, ease: "power2.out", delay: i * 0.12,
             scrollTrigger: { trigger: card, start: "top 88%", once: true },
           }
         );
       });
 
-      // General reveals
-      el.querySelectorAll(".vt-rev").forEach((item) => {
-        gsap.fromTo(
-          item,
-          { y: 30, opacity: 0 },
+      // Stats: counter with blur-in
+      el.querySelectorAll(".vt-stat").forEach((stat, i) => {
+        gsap.fromTo(stat,
+          { opacity: 0, filter: "blur(8px)", y: 20 },
           {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: { trigger: item, start: "top 85%", once: true },
+            opacity: 1, filter: "blur(0px)", y: 0,
+            duration: 0.8, ease: "power2.out", delay: i * 0.1,
+            scrollTrigger: { trigger: stat, start: "top 88%", once: true },
           }
         );
       });
 
-      // Clinic photo clip
-      el.querySelectorAll(".vt-clip").forEach((img) => {
-        gsap.fromTo(
-          img,
-          { clipPath: "inset(100% 0 0 0)" },
+      // Mission text: word-by-word blur in
+      const missionWords = el.querySelectorAll(".vt-mission-word");
+      if (missionWords.length) {
+        gsap.fromTo(missionWords,
+          { opacity: 0, filter: "blur(6px)" },
           {
-            clipPath: "inset(0% 0 0 0)",
-            duration: 1.2,
-            ease: "power3.inOut",
-            scrollTrigger: { trigger: img, start: "top 80%", once: true },
+            opacity: 1, filter: "blur(0px)",
+            duration: 0.6, stagger: 0.08, ease: "power2.out",
+            scrollTrigger: { trigger: missionWords[0], start: "top 80%", once: true },
+          }
+        );
+      }
+
+      // Certifications: slide from right with stagger
+      el.querySelectorAll(".vt-cert").forEach((cert, i) => {
+        gsap.fromTo(cert,
+          { x: 40, opacity: 0 },
+          {
+            x: 0, opacity: 1, duration: 0.6, ease: "power2.out", delay: i * 0.08,
+            scrollTrigger: { trigger: cert, start: "top 90%", once: true },
           }
         );
       });
@@ -150,212 +131,208 @@ export default function VitalisAboutPage() {
     return () => ctx.revert();
   }, []);
 
+  const missionText = "To restore movement, relieve pain, and empower every patient to live without limits.";
+  const missionWords = missionText.split(" ");
+
   return (
     <VitalisLayout>
       <div ref={mainRef}>
-        {/* Hero — Story */}
-        <section
-          style={{
-            padding: isMobile ? "40px 20px 48px" : "60px 48px 80px",
-            maxWidth: 1100,
-            margin: "0 auto",
-          }}
-        >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-              gap: isMobile ? 32 : 64,
-              alignItems: "center",
-            }}
-          >
-            {/* Text */}
-            <div>
-              <span
-                className="vt-h-anim"
-                style={{
-                  fontFamily: FB,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: V.accent,
-                  letterSpacing: 2,
-                  textTransform: "uppercase",
-                  display: "block",
-                  marginBottom: 14,
-                }}
-              >
-                OUR STORY
-              </span>
-              <h1
-                className="vt-h-anim"
-                style={{
-                  fontFamily: FH,
-                  fontSize: "clamp(36px, 5vw, 56px)",
-                  fontWeight: 400,
-                  lineHeight: 1.15,
-                  margin: 0,
-                }}
-              >
-                Built on care, <em style={{ fontStyle: "italic", color: V.accent }}>not volume.</em>
-              </h1>
-              <p
-                className="vt-h-anim"
-                style={{
-                  fontFamily: FB,
-                  fontSize: 16,
-                  color: V.muted,
-                  marginTop: 22,
-                  lineHeight: 1.8,
-                }}
-              >
-                Vitalis was founded in 2018 with a simple belief: healthcare should be personal. We
-                saw too many clinics rushing patients through — 10-minute appointments, generic
-                exercises, no follow-up. We built something different.
-              </p>
-              <p
-                className="vt-h-anim"
-                style={{
-                  fontFamily: FB,
-                  fontSize: 16,
-                  color: V.muted,
-                  marginTop: 14,
-                  lineHeight: 1.8,
-                }}
-              >
-                Today, Vitalis is a team of dedicated practitioners who believe in treating people,
-                not conditions. Every session is unhurried. Every plan is tailored. Every patient
-                matters.
-              </p>
-            </div>
+        {/* ═══ HERO — Asymmetric with organic blob ═══ */}
+        <section style={{
+          padding: isMobile ? "40px 20px 60px" : "60px 48px 100px",
+          maxWidth: 1200, margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: isMobile ? "1fr" : "1.2fr 1fr",
+          gap: isMobile ? 40 : 64,
+          alignItems: "center",
+        }}>
+          <div>
+            <span className="vt-bloom" style={{
+              fontFamily: FB, fontSize: 13, fontWeight: 600,
+              color: V.accent, letterSpacing: 2, display: "block", marginBottom: 16,
+            }}>OUR STORY</span>
 
-            {/* Clinic photo placeholder */}
-            <div
-              className="vt-clip"
-              style={{
-                height: isMobile ? 280 : 400,
-                background: V.bgSoft,
-                borderRadius: 24,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "hidden",
-              }}
-            >
-              <div style={{ textAlign: "center" }}>
-                <span style={{ fontSize: 72, opacity: 0.15, display: "block" }}>🏥</span>
-                <span
-                  style={{
-                    fontFamily: FB,
-                    fontSize: 13,
-                    color: V.dim,
-                    display: "block",
-                    marginTop: 8,
-                  }}
-                >
-                  Clinic Interior
-                </span>
+            <h1 className="vt-bloom" style={{
+              fontFamily: FH, fontSize: "clamp(36px, 5vw, 60px)",
+              fontWeight: 400, lineHeight: 1.15, margin: 0,
+            }}>
+              Built on care,{" "}
+              <em style={{ fontStyle: "italic", color: V.accent }}>not volume.</em>
+            </h1>
+
+            <p className="vt-bloom" style={{
+              fontFamily: FB, fontSize: 16, color: V.muted,
+              marginTop: 24, lineHeight: 1.85, maxWidth: 480,
+            }}>
+              Vitalis was founded in 2018 with a simple belief: healthcare should be personal. We saw too many clinics rushing patients through — 10-minute appointments, generic exercises, no follow-up. We built something different.
+            </p>
+
+            <p className="vt-bloom" style={{
+              fontFamily: FB, fontSize: 16, color: V.muted,
+              marginTop: 14, lineHeight: 1.85, maxWidth: 480,
+            }}>
+              Today, every session is unhurried. Every plan is tailored. Every patient matters.
+            </p>
+          </div>
+
+          {/* Organic blob shape */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div className="vt-blob" style={{
+              width: isMobile ? 240 : 340,
+              height: isMobile ? 240 : 340,
+              borderRadius: "60% 40% 50% 50% / 50% 60% 40% 50%",
+              background: `linear-gradient(135deg, ${V.accentLight}, ${V.bgSoft})`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              position: "relative",
+            }}>
+              <div style={{
+                width: "60%", height: "60%",
+                borderRadius: "50%",
+                background: V.white,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                boxShadow: "0 16px 48px rgba(61,139,112,0.08)",
+              }}>
+                <span style={{ fontSize: 48, opacity: 0.7 }}>🌿</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Mission */}
-        <section
-          style={{
-            padding: isMobile ? "48px 20px" : "80px 48px",
-            background: V.bgDark,
-            textAlign: "center",
-          }}
-        >
-          <div style={{ maxWidth: 700, margin: "0 auto" }}>
-            <span
-              className="vt-rev"
-              style={{
-                fontFamily: FB,
-                fontSize: 13,
-                fontWeight: 600,
-                color: V.warm,
-                letterSpacing: 2,
-                display: "block",
-                marginBottom: 14,
-              }}
-            >
-              OUR MISSION
-            </span>
-            <h2
-              className="vt-rev"
-              style={{
-                fontFamily: FH,
-                fontSize: "clamp(28px, 4vw, 48px)",
-                fontWeight: 400,
-                color: V.white,
-                lineHeight: 1.2,
-                marginTop: 0,
-              }}
-            >
-              To restore movement, relieve pain, and empower every patient to live{" "}
-              <em style={{ fontStyle: "italic", color: V.warm }}>without limits.</em>
-            </h2>
-            <p
-              className="vt-rev"
-              style={{
-                fontFamily: FB,
-                fontSize: 16,
-                color: "rgba(255,255,255,0.5)",
-                marginTop: 20,
-                lineHeight: 1.8,
-              }}
-            >
-              We combine clinical expertise with genuine compassion. Our practitioners don&apos;t
-              just treat — they listen, educate, and guide you toward long-term wellness.
-            </p>
+        {/* ═══ STATS — Soft blur-in counters ═══ */}
+        <section style={{
+          padding: isMobile ? "48px 20px" : "72px 48px",
+          background: V.bgSoft,
+          borderTop: `1px solid ${V.border}`,
+          borderBottom: `1px solid ${V.border}`,
+        }}>
+          <div style={{
+            maxWidth: 900, margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
+            gap: isMobile ? 24 : 0,
+          }}>
+            {stats.map((s, i) => (
+              <div key={s.label} className="vt-stat" style={{
+                textAlign: "center",
+                borderRight: !isMobile && i < stats.length - 1 ? `1px solid ${V.border}` : "none",
+                padding: "0 20px",
+              }}>
+                <span style={{
+                  fontFamily: FH, fontSize: isMobile ? 28 : 36,
+                  fontWeight: 400, color: V.accent, display: "block",
+                  fontStyle: "italic",
+                }}>{s.value}</span>
+                <span style={{
+                  fontFamily: FB, fontSize: 12, color: V.muted,
+                  display: "block", marginTop: 6, fontWeight: 600,
+                }}>{s.label}</span>
+              </div>
+            ))}
           </div>
         </section>
 
-        {/* Values */}
-        <section style={{ padding: isMobile ? "60px 20px" : "100px 48px" }}>
+        {/* ═══ MISSION — Word-by-word blur reveal ═══ */}
+        <section style={{
+          padding: isMobile ? "72px 20px" : "120px 48px",
+          textAlign: "center",
+          background: V.bgDark,
+        }}>
+          <div style={{ maxWidth: 800, margin: "0 auto" }}>
+            <span style={{
+              fontFamily: FB, fontSize: 13, fontWeight: 600,
+              color: V.warm, letterSpacing: 2, display: "block", marginBottom: 24,
+            }}>OUR MISSION</span>
+
+            <h2 style={{
+              fontFamily: FH, fontSize: "clamp(28px, 4vw, 52px)",
+              fontWeight: 400, color: V.white, lineHeight: 1.3,
+              display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 12px",
+            }}>
+              {missionWords.map((word, i) => (
+                <span key={i} className="vt-mission-word" style={{
+                  display: "inline-block",
+                  fontStyle: (word === "without" || word === "limits.") ? "italic" : "normal",
+                  color: (word === "without" || word === "limits.") ? V.warm : V.white,
+                }}>{word}</span>
+              ))}
+            </h2>
+          </div>
+        </section>
+
+        {/* ═══ VALUES — Pill-shaped containers with circle clip reveal ═══ */}
+        <section style={{ padding: isMobile ? "72px 20px" : "120px 48px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <div className="vt-rev" style={{ textAlign: "center", marginBottom: 48 }}>
-              <span
-                style={{
-                  fontFamily: FB,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: V.accent,
-                  letterSpacing: 2,
-                }}
-              >
-                OUR VALUES
-              </span>
-              <h2
-                style={{
-                  fontFamily: FH,
-                  fontSize: "clamp(28px, 3.5vw, 44px)",
-                  fontWeight: 400,
-                  marginTop: 10,
-                }}
-              >
-                What we believe.
+            <div style={{ textAlign: "center", marginBottom: 56 }}>
+              <span style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.accent, letterSpacing: 2 }}>OUR PHILOSOPHY</span>
+              <h2 style={{ fontFamily: FH, fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 400, marginTop: 10 }}>
+                What guides our care.
               </h2>
             </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)",
-                gap: 20,
-              }}
-            >
+
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+              gap: 20,
+            }}>
               {values.map((val) => (
-                <div
-                  key={val.num}
-                  className="vt-val"
-                  style={{
-                    padding: isMobile ? 24 : 36,
-                    background: V.white,
-                    border: `1px solid ${V.border}`,
-                    borderRadius: 20,
-                    transition: "all 0.35s ease",
+                <div key={val.num} className="vt-value-pill" style={{
+                  padding: isMobile ? "28px 24px" : "36px 40px",
+                  background: V.white,
+                  border: `1px solid ${V.border}`,
+                  borderRadius: 999,
+                  display: "flex", alignItems: "center", gap: 20,
+                  transition: "all 0.4s ease",
+                  overflow: "hidden",
+                }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = V.accent;
+                    e.currentTarget.style.boxShadow = "0 12px 40px rgba(61,139,112,0.08)";
                   }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = V.border;
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  <div style={{
+                    width: 52, height: 52, borderRadius: "50%",
+                    background: V.accentLight, display: "flex",
+                    alignItems: "center", justifyContent: "center",
+                    fontSize: 24, flexShrink: 0,
+                  }}>{val.icon}</div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <h3 style={{ fontFamily: FB, fontSize: 16, fontWeight: 700, margin: "0 0 4px" }}>{val.title}</h3>
+                    <p style={{ fontFamily: FB, fontSize: 14, color: V.muted, lineHeight: 1.6, margin: 0 }}>{val.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ TEAM — Rounded cards with circle avatars ═══ */}
+        <section style={{ padding: isMobile ? "48px 20px 72px" : "80px 48px 120px", background: V.bgSoft }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <div style={{ textAlign: "center", marginBottom: 56 }}>
+              <span style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.accent, letterSpacing: 2 }}>YOUR PRACTITIONERS</span>
+              <h2 style={{ fontFamily: FH, fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 400, marginTop: 10 }}>
+                Hands you can trust.
+              </h2>
+            </div>
+
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)",
+              gap: 20,
+            }}>
+              {team.map((member) => (
+                <div key={member.name} className="vt-team-card" style={{
+                  padding: isMobile ? "24px 20px" : "32px 36px",
+                  background: V.white,
+                  border: `1px solid ${V.border}`,
+                  borderRadius: 24,
+                  display: "flex", gap: 20, alignItems: "center",
+                  transition: "all 0.4s ease",
+                }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "translateY(-4px)";
                     e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.06)";
@@ -365,279 +342,75 @@ export default function VitalisAboutPage() {
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >
-                  <span
-                    style={{
-                      fontFamily: FH,
-                      fontSize: 32,
-                      color: V.accentLight,
-                      fontStyle: "italic",
-                      display: "block",
-                      marginBottom: 12,
-                    }}
-                  >
-                    {val.num}
-                  </span>
-                  <h3
-                    style={{
-                      fontFamily: FB,
-                      fontSize: 18,
-                      fontWeight: 700,
-                      marginBottom: 8,
-                      margin: 0,
-                    }}
-                  >
-                    {val.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: FB,
-                      fontSize: 15,
-                      color: V.muted,
-                      lineHeight: 1.7,
-                      marginTop: 8,
-                      marginBottom: 0,
-                    }}
-                  >
-                    {val.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Team */}
-        <section
-          style={{ padding: isMobile ? "40px 20px 60px" : "60px 48px 100px", background: V.bgSoft }}
-        >
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <div className="vt-rev" style={{ textAlign: "center", marginBottom: 48 }}>
-              <span
-                style={{
-                  fontFamily: FB,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: V.accent,
-                  letterSpacing: 2,
-                }}
-              >
-                MEET THE TEAM
-              </span>
-              <h2
-                style={{
-                  fontFamily: FH,
-                  fontSize: "clamp(28px, 3.5vw, 44px)",
-                  fontWeight: 400,
-                  marginTop: 10,
-                }}
-              >
-                Your practitioners.
-              </h2>
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
-                gap: 20,
-              }}
-            >
-              {team.map((member) => (
-                <div
-                  key={member.name}
-                  className="vt-team"
-                  style={{
-                    padding: isMobile ? 20 : 28,
-                    background: V.white,
-                    border: `1px solid ${V.border}`,
-                    borderRadius: 20,
-                    textAlign: "center",
-                    transition: "all 0.35s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-6px)";
-                    e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.06)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  {/* Avatar placeholder */}
-                  <div
-                    style={{
-                      width: isMobile ? 72 : 90,
-                      height: isMobile ? 72 : 90,
-                      borderRadius: "50%",
-                      background: V.accentLight,
-                      margin: "0 auto 16px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <span style={{ fontSize: isMobile ? 28 : 36, opacity: 0.5 }}>👤</span>
+                  {/* Circular avatar */}
+                  <div style={{
+                    width: 72, height: 72, borderRadius: "50%",
+                    background: V.accentLight, flexShrink: 0,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                  }}>
+                    <span style={{ fontFamily: FH, fontSize: 24, color: V.accent, fontStyle: "italic" }}>
+                      {member.name.split(" ").map(n => n[0]).join("")}
+                    </span>
                   </div>
-                  <h3
-                    style={{
-                      fontFamily: FB,
-                      fontSize: isMobile ? 14 : 16,
-                      fontWeight: 700,
-                      margin: "0 0 4px",
-                    }}
-                  >
-                    {member.name}
-                  </h3>
-                  <span
-                    style={{
-                      fontFamily: FB,
-                      fontSize: 12,
-                      color: V.accent,
-                      fontWeight: 600,
-                      display: "block",
-                      marginBottom: 4,
-                    }}
-                  >
-                    {member.role}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: FB,
-                      fontSize: 11,
-                      color: V.dim,
-                      display: "block",
-                      marginBottom: 10,
-                    }}
-                  >
-                    {member.credentials}
-                  </span>
-                  <p
-                    style={{
-                      fontFamily: FB,
-                      fontSize: 13,
-                      color: V.muted,
-                      lineHeight: 1.6,
-                      margin: 0,
-                      display: isMobile ? "none" : "block",
-                    }}
-                  >
-                    {member.bio}
-                  </p>
+
+                  <div style={{ flex: 1 }}>
+                    <h3 style={{ fontFamily: FB, fontSize: 16, fontWeight: 700, margin: "0 0 2px" }}>{member.name}</h3>
+                    <span style={{ fontFamily: FB, fontSize: 13, color: V.accent, fontWeight: 600, display: "block" }}>{member.role}</span>
+                    <span style={{ fontFamily: FB, fontSize: 12, color: V.dim, display: "block", marginTop: 2 }}>{member.credentials}</span>
+                    <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
+                      <span style={{
+                        padding: "3px 10px", borderRadius: 999,
+                        background: V.accentLight, fontFamily: FB, fontSize: 11,
+                        color: V.accent, fontWeight: 600,
+                      }}>{member.years}</span>
+                      <span style={{
+                        padding: "3px 10px", borderRadius: 999,
+                        background: V.bgSoft, fontFamily: FB, fontSize: 11,
+                        color: V.muted, fontWeight: 500, border: `1px solid ${V.border}`,
+                      }}>{member.specialty}</span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Certifications */}
+        {/* ═══ CERTIFICATIONS — Horizontal ribbon ═══ */}
         <section style={{ padding: isMobile ? "48px 20px" : "80px 48px" }}>
           <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-            <div className="vt-rev">
-              <span
-                style={{
-                  fontFamily: FB,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: V.accent,
-                  letterSpacing: 2,
+            <span style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.accent, letterSpacing: 2 }}>ACCREDITATIONS</span>
+            <h2 style={{ fontFamily: FH, fontSize: "clamp(26px, 3vw, 40px)", fontWeight: 400, marginTop: 10, marginBottom: 36 }}>
+              Trusted and <em style={{ fontStyle: "italic" }}>verified.</em>
+            </h2>
+
+            <div style={{
+              display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center",
+            }}>
+              {[
+                "MOH Registered", "Malaysian Physiotherapy Association",
+                "World Confederation for Physical Therapy", "NSCA Certified",
+                "ISO 9001:2015", "Allied Health Compliant",
+              ].map((cert) => (
+                <div key={cert} className="vt-cert" style={{
+                  padding: "10px 20px", borderRadius: 999,
+                  background: V.white, border: `1px solid ${V.border}`,
+                  fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.text,
+                  display: "flex", alignItems: "center", gap: 8,
+                  transition: "all 0.3s",
                 }}
-              >
-                CERTIFICATIONS & ACCREDITATIONS
-              </span>
-              <h2
-                style={{
-                  fontFamily: FH,
-                  fontSize: "clamp(26px, 3vw, 40px)",
-                  fontWeight: 400,
-                  marginTop: 10,
-                  marginBottom: 36,
-                }}
-              >
-                Trusted and <em style={{ fontStyle: "italic" }}>verified.</em>
-              </h2>
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(3, 1fr)",
-                gap: 16,
-              }}
-            >
-              {certifications.map((cert) => (
-                <div
-                  key={cert}
-                  className="vt-rev"
-                  style={{
-                    padding: isMobile ? "16px 12px" : "20px 24px",
-                    background: V.white,
-                    border: `1px solid ${V.border}`,
-                    borderRadius: 16,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 10,
-                    transition: "all 0.3s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = V.accent;
-                    e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.04)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = V.border;
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = V.accent; e.currentTarget.style.background = V.accentLight; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = V.border; e.currentTarget.style.background = V.white; }}
                 >
-                  <div
-                    style={{
-                      width: 28,
-                      height: 28,
-                      borderRadius: "50%",
-                      background: V.accentLight,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 13,
-                      color: V.accent,
-                      flexShrink: 0,
-                    }}
-                  >
-                    ✓
-                  </div>
-                  <span
-                    style={{
-                      fontFamily: FB,
-                      fontSize: isMobile ? 12 : 14,
-                      fontWeight: 600,
-                      color: V.text,
-                    }}
-                  >
-                    {cert}
-                  </span>
+                  <span style={{
+                    width: 20, height: 20, borderRadius: "50%",
+                    background: V.accentLight, display: "flex",
+                    alignItems: "center", justifyContent: "center",
+                    fontSize: 10, color: V.accent,
+                  }}>✓</span>
+                  {cert}
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Clinic photo banner */}
-        <section style={{ padding: isMobile ? "0 20px 60px" : "0 48px 100px" }}>
-          <div
-            className="vt-clip"
-            style={{
-              maxWidth: 1100,
-              margin: "0 auto",
-              height: isMobile ? 220 : 360,
-              background: V.bgSoft,
-              borderRadius: 24,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              overflow: "hidden",
-            }}
-          >
-            <div style={{ textAlign: "center" }}>
-              <span style={{ fontSize: 64, opacity: 0.12, display: "block" }}>🌿</span>
-              <span style={{ fontFamily: FB, fontSize: 14, color: V.dim }}>
-                Clinic Reception & Waiting Area
-              </span>
             </div>
           </div>
         </section>

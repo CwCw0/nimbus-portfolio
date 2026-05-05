@@ -1,18 +1,18 @@
 "use client";
 
 /**
- * MONO — Single Project Detail
+ * MONO — Project Detail (Horizontal Scroll Case Study)
  *
- * Massive title, full-width image placeholder,
- * minimal info grid, next/prev navigation.
+ * Horizontal scroll with full-viewport panels per project.
+ * Each panel: huge project name + small metadata below.
+ * Hover reveals accent color on project names only.
+ * Type only — zero images, zero thumbnails.
  */
 
 import { Suspense, useRef, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
-import Link from "next/link";
 import {
   MonoLayout,
   Divider,
@@ -28,217 +28,235 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectPage() {
   return (
-    <Suspense fallback={<div style={{ background: PALETTE.bg, minHeight: "100vh" }} />}>
+    <Suspense
+      fallback={
+        <div style={{ background: PALETTE.bg, minHeight: "100vh" }} />
+      }
+    >
       <ProjectContent />
     </Suspense>
   );
 }
 
 function ProjectContent() {
-  const params = useSearchParams();
-  const slug = params.get("slug") || projects[0].slug;
-
-  const idx = projects.findIndex((p) => p.slug === slug);
-  const project = projects[idx >= 0 ? idx : 0];
-  const prevProject = idx > 0 ? projects[idx - 1] : null;
-  const nextProject = idx < projects.length - 1 ? projects[idx + 1] : null;
-
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const horizontalRef = useRef<HTMLDivElement>(null);
+  const panelsRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLHeadingElement>(null);
   const isMobile = useIsMobile();
-  const [hoveredNav, setHoveredNav] = useState<"prev" | "next" | null>(null);
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   useLineDraw(containerRef);
 
-  /* Title char reveal */
+  /* Intro text char reveal */
   useEffect(() => {
-    const el = titleRef.current;
+    const el = introRef.current;
     if (!el) return;
 
     const split = new SplitType(el, { types: "chars" });
-    gsap.set(split.chars || [], { y: "110%", opacity: 0 });
+    gsap.set(split.chars || [], { y: "100%", opacity: 0 });
     gsap.to(split.chars || [], {
       y: "0%",
       opacity: 1,
       duration: 0.9,
-      stagger: 0.03,
+      stagger: 0.025,
       ease: "power3.out",
       delay: 0.15,
     });
 
     return () => split.revert();
-  }, [slug]);
+  }, []);
 
-  /* Fade-up animations */
+  /* Horizontal scroll */
   useEffect(() => {
+    const horizontal = horizontalRef.current;
+    const panels = panelsRef.current;
+    if (!horizontal || !panels || isMobile) return;
+
+    const totalWidth = panels.scrollWidth - window.innerWidth;
+
+    const ctx = gsap.context(() => {
+      gsap.to(panels, {
+        x: -totalWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: horizontal,
+          start: "top top",
+          end: () => `+=${totalWidth}`,
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, [isMobile]);
+
+  /* Mobile: staggered reveal for project panels */
+  useEffect(() => {
+    if (!isMobile) return;
     const el = containerRef.current;
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      el.querySelectorAll(".mn-proj-fade").forEach((item, i) => {
+      el.querySelectorAll(".mn-project-panel").forEach((panel) => {
         gsap.fromTo(
-          item,
-          { y: 25, opacity: 0 },
+          panel,
+          { y: 50, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.7,
+            duration: 0.9,
             ease: "power2.out",
-            delay: 0.5 + i * 0.1,
+            scrollTrigger: {
+              trigger: panel,
+              start: "top 85%",
+              once: true,
+            },
           }
         );
       });
     }, el);
 
     return () => ctx.revert();
-  }, [slug]);
+  }, [isMobile]);
 
   return (
     <MonoLayout>
       <div ref={containerRef}>
-        {/* Hero section — massive title */}
+        {/* Intro section */}
         <section
           style={{
-            padding: isMobile ? "80px 24px 60px" : "120px 48px 80px",
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: isMobile ? "120px 24px" : "0 48px",
           }}
         >
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <span
-              className="mn-proj-fade"
-              style={{
-                fontFamily: FONT,
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: 5,
-                color: PALETTE.muted,
-                display: "block",
-                marginBottom: 24,
-              }}
-            >
-              {project.cat.toUpperCase()}
-            </span>
+          <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%" }}>
             <div style={{ overflow: "hidden" }}>
               <h1
-                ref={titleRef}
+                ref={introRef}
                 style={{
                   fontFamily: FONT,
                   fontSize: isMobile
-                    ? "clamp(56px, 16vw, 80px)"
-                    : "clamp(80px, 10vw, 160px)",
+                    ? "clamp(48px, 14vw, 72px)"
+                    : "clamp(80px, 9vw, 160px)",
                   fontWeight: 800,
                   lineHeight: 0.92,
-                  letterSpacing: "-0.04em",
+                  letterSpacing: "-0.05em",
                   margin: 0,
+                  textTransform: "uppercase",
                 }}
               >
-                {project.title}
+                Selected
+                <br />
+                Work
               </h1>
             </div>
-          </div>
-        </section>
-
-        {/* Full-width image placeholder */}
-        <section
-          className="mn-proj-fade"
-          style={{
-            padding: isMobile ? "0 24px" : "0 48px",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: 1200,
-              margin: "0 auto",
-              aspectRatio: "16 / 9",
-              background: PALETTE.border,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <span
+            <p
+              className="mn-fade-up"
               style={{
                 fontFamily: FONT,
-                fontSize: 14,
-                fontWeight: 500,
-                color: PALETTE.dim,
-                letterSpacing: 3,
+                fontSize: 15,
+                fontWeight: 400,
+                color: PALETTE.muted,
+                marginTop: 40,
+                maxWidth: 400,
               }}
             >
-              PROJECT IMAGE
-            </span>
+              {projects.length} projects. Scroll{isMobile ? " down" : " right"} to explore.
+            </p>
           </div>
         </section>
 
-        {/* Description */}
-        <section
-          style={{
-            padding: isMobile ? "80px 24px" : "120px 48px",
-          }}
-        >
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <Divider style={{ marginBottom: isMobile ? 48 : 64 }} />
-
+        {/* Horizontal scroll section (desktop) / Vertical stack (mobile) */}
+        {!isMobile ? (
+          <section ref={horizontalRef} style={{ overflow: "hidden" }}>
             <div
+              ref={panelsRef}
               style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-                gap: isMobile ? 48 : 80,
+                display: "flex",
+                width: "fit-content",
+                height: "100vh",
               }}
             >
-              {/* Left — description */}
-              <div className="mn-fade-up">
-                <p
-                  style={{
-                    fontFamily: FONT,
-                    fontSize: isMobile
-                      ? "clamp(20px, 5vw, 28px)"
-                      : "clamp(24px, 2.5vw, 36px)",
-                    fontWeight: 500,
-                    lineHeight: 1.45,
-                    letterSpacing: "-0.01em",
-                    margin: 0,
-                  }}
-                >
-                  {project.description}
-                </p>
-              </div>
-
-              {/* Right — metadata grid */}
-              <div className="mn-fade-up">
+              {projects.map((project, i) => (
                 <div
+                  key={project.slug}
+                  className="mn-project-panel"
+                  onMouseEnter={() => setHoveredProject(i)}
+                  onMouseLeave={() => setHoveredProject(null)}
                   style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr",
-                    gap: 0,
+                    width: "100vw",
+                    height: "100vh",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    padding: "0 80px",
+                    position: "relative",
+                    cursor: "default",
                   }}
                 >
-                  {[
-                    { label: "Client", value: project.client },
-                    { label: "Role", value: project.role },
-                    { label: "Timeline", value: project.timeline },
-                    { label: "Year", value: project.year },
-                  ].map((item) => (
-                    <div
-                      key={item.label}
-                      style={{
-                        padding: "20px 0",
-                        borderBottom: `1px solid ${PALETTE.border}`,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "baseline",
-                      }}
-                    >
+                  {/* Project number */}
+                  <span
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: 13,
+                      fontWeight: 700,
+                      letterSpacing: 4,
+                      color: PALETTE.muted,
+                      position: "absolute",
+                      top: 60,
+                      left: 80,
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                  </span>
+
+                  {/* Massive project name */}
+                  <h2
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: "clamp(80px, 12vw, 200px)",
+                      fontWeight: 800,
+                      letterSpacing: "-0.06em",
+                      lineHeight: 0.9,
+                      margin: 0,
+                      textTransform: "uppercase",
+                      color:
+                        hoveredProject === i
+                          ? PALETTE.accent
+                          : PALETTE.text,
+                      transition: "color 0.4s ease",
+                    }}
+                  >
+                    {project.title}
+                  </h2>
+
+                  {/* Metadata below */}
+                  <div
+                    style={{
+                      marginTop: 48,
+                      display: "flex",
+                      gap: 56,
+                    }}
+                  >
+                    <div>
                       <span
                         style={{
                           fontFamily: FONT,
-                          fontSize: 12,
+                          fontSize: 11,
                           fontWeight: 700,
-                          letterSpacing: 3,
+                          letterSpacing: 4,
                           color: PALETTE.muted,
-                          textTransform: "uppercase",
+                          display: "block",
+                          marginBottom: 8,
                         }}
                       >
-                        {item.label}
+                        TYPE
                       </span>
                       <span
                         style={{
@@ -246,199 +264,240 @@ function ProjectContent() {
                           fontSize: 15,
                           fontWeight: 500,
                           color: PALETTE.text,
-                          textAlign: "right",
                         }}
                       >
-                        {item.value}
+                        {project.cat}
                       </span>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+                    <div>
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontSize: 11,
+                          fontWeight: 700,
+                          letterSpacing: 4,
+                          color: PALETTE.muted,
+                          display: "block",
+                          marginBottom: 8,
+                        }}
+                      >
+                        YEAR
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontSize: 15,
+                          fontWeight: 500,
+                          color: PALETTE.text,
+                        }}
+                      >
+                        {project.year}
+                      </span>
+                    </div>
+                    <div>
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontSize: 11,
+                          fontWeight: 700,
+                          letterSpacing: 4,
+                          color: PALETTE.muted,
+                          display: "block",
+                          marginBottom: 8,
+                        }}
+                      >
+                        DURATION
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontSize: 15,
+                          fontWeight: 500,
+                          color: PALETTE.text,
+                        }}
+                      >
+                        {project.timeline}
+                      </span>
+                    </div>
+                  </div>
 
-        {/* Additional image placeholders */}
-        <section
-          style={{
-            padding: isMobile ? "0 24px 80px" : "0 48px 120px",
-          }}
-        >
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-                gap: isMobile ? 16 : 24,
-              }}
-            >
-              {[1, 2].map((n) => (
-                <div
-                  key={n}
-                  className="mn-fade-up"
+                  {/* Description — subtle, below */}
+                  <p
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: 14,
+                      fontWeight: 400,
+                      color: PALETTE.muted,
+                      lineHeight: 1.7,
+                      marginTop: 32,
+                      maxWidth: 500,
+                    }}
+                  >
+                    {project.description}
+                  </p>
+
+                  {/* Vertical line divider between panels */}
+                  {i < projects.length - 1 && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        right: 0,
+                        top: "20%",
+                        bottom: "20%",
+                        width: 1,
+                        background: PALETTE.border,
+                      }}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : (
+          /* Mobile: vertical stack */
+          <section style={{ padding: "0 24px 120px" }}>
+            {projects.map((project, i) => (
+              <div
+                key={project.slug}
+                className="mn-project-panel"
+                onMouseEnter={() => setHoveredProject(i)}
+                onMouseLeave={() => setHoveredProject(null)}
+                style={{
+                  padding: "80px 0",
+                  borderBottom:
+                    i < projects.length - 1
+                      ? `1px solid ${PALETTE.border}`
+                      : "none",
+                }}
+              >
+                {/* Number */}
+                <span
                   style={{
-                    aspectRatio: "4 / 3",
-                    background: PALETTE.border,
+                    fontFamily: FONT,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: 4,
+                    color: PALETTE.muted,
+                    display: "block",
+                    marginBottom: 20,
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                {/* Name */}
+                <h2
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: "clamp(48px, 14vw, 72px)",
+                    fontWeight: 800,
+                    letterSpacing: "-0.05em",
+                    lineHeight: 0.92,
+                    margin: 0,
+                    textTransform: "uppercase",
+                    color:
+                      hoveredProject === i
+                        ? PALETTE.accent
+                        : PALETTE.text,
+                    transition: "color 0.4s ease",
+                  }}
+                >
+                  {project.title}
+                </h2>
+
+                {/* Meta */}
+                <div
+                  style={{
+                    marginTop: 24,
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    gap: 32,
+                    flexWrap: "wrap",
                   }}
                 >
                   <span
                     style={{
                       fontFamily: FONT,
                       fontSize: 13,
-                      fontWeight: 500,
-                      color: PALETTE.dim,
-                      letterSpacing: 3,
+                      color: PALETTE.muted,
                     }}
                   >
-                    DETAIL {n}
+                    {project.cat}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: 13,
+                      color: PALETTE.muted,
+                    }}
+                  >
+                    {project.year}
                   </span>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* Prev / Next navigation */}
+                {/* Description */}
+                <p
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: 14,
+                    fontWeight: 400,
+                    color: PALETTE.muted,
+                    lineHeight: 1.7,
+                    marginTop: 20,
+                    maxWidth: 400,
+                  }}
+                >
+                  {project.description}
+                </p>
+              </div>
+            ))}
+          </section>
+        )}
+
+        {/* Footer line */}
+        <div style={{ padding: isMobile ? "0 24px" : "0 48px" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <div
+              className="mn-line-draw"
+              style={{ height: 1, background: PALETTE.border }}
+            />
+          </div>
+        </div>
+
+        {/* End statement */}
         <section
           style={{
-            padding: isMobile ? "0 24px 120px" : "0 48px 160px",
+            padding: isMobile ? "80px 24px 140px" : "120px 48px 200px",
           }}
         >
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <Divider style={{ marginBottom: 0 }} />
-
-            <div
+          <div style={{ maxWidth: 900, margin: "0 auto" }}>
+            <p
+              className="mn-fade-up"
               style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                fontFamily: FONT,
+                fontSize: isMobile
+                  ? "clamp(24px, 6vw, 36px)"
+                  : "clamp(32px, 3vw, 48px)",
+                fontWeight: 700,
+                lineHeight: 1.3,
+                letterSpacing: "-0.03em",
+                margin: 0,
+                color: PALETTE.text,
               }}
             >
-              {/* Previous */}
-              <div
-                style={{
-                  padding: isMobile ? "40px 0" : "56px 0",
-                  borderBottom: isMobile
-                    ? `1px solid ${PALETTE.border}`
-                    : "none",
-                  borderRight: isMobile
-                    ? "none"
-                    : `1px solid ${PALETTE.border}`,
-                }}
-              >
-                {prevProject ? (
-                  <Link
-                    href={`${BASE_PATH}/project?slug=${prevProject.slug}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                    onMouseEnter={() => setHoveredNav("prev")}
-                    onMouseLeave={() => setHoveredNav(null)}
-                  >
-                    <span
-                      style={{
-                        fontFamily: FONT,
-                        fontSize: 12,
-                        fontWeight: 700,
-                        letterSpacing: 3,
-                        color: PALETTE.muted,
-                        display: "block",
-                        marginBottom: 12,
-                      }}
-                    >
-                      &larr; PREVIOUS
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: FONT,
-                        fontSize: isMobile ? 28 : 36,
-                        fontWeight: 800,
-                        letterSpacing: "-0.03em",
-                        color:
-                          hoveredNav === "prev"
-                            ? PALETTE.accent
-                            : PALETTE.text,
-                        transition: "color 0.3s",
-                      }}
-                    >
-                      {prevProject.title}
-                    </span>
-                  </Link>
-                ) : (
-                  <span
-                    style={{
-                      fontFamily: FONT,
-                      fontSize: 12,
-                      fontWeight: 700,
-                      letterSpacing: 3,
-                      color: PALETTE.dim,
-                    }}
-                  >
-                    &mdash;
-                  </span>
-                )}
-              </div>
-
-              {/* Next */}
-              <div
-                style={{
-                  padding: isMobile ? "40px 0" : "56px 0",
-                  textAlign: isMobile ? "left" : "right",
-                  paddingLeft: isMobile ? 0 : 56,
-                }}
-              >
-                {nextProject ? (
-                  <Link
-                    href={`${BASE_PATH}/project?slug=${nextProject.slug}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                    onMouseEnter={() => setHoveredNav("next")}
-                    onMouseLeave={() => setHoveredNav(null)}
-                  >
-                    <span
-                      style={{
-                        fontFamily: FONT,
-                        fontSize: 12,
-                        fontWeight: 700,
-                        letterSpacing: 3,
-                        color: PALETTE.muted,
-                        display: "block",
-                        marginBottom: 12,
-                      }}
-                    >
-                      NEXT &rarr;
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: FONT,
-                        fontSize: isMobile ? 28 : 36,
-                        fontWeight: 800,
-                        letterSpacing: "-0.03em",
-                        color:
-                          hoveredNav === "next"
-                            ? PALETTE.accent
-                            : PALETTE.text,
-                        transition: "color 0.3s",
-                      }}
-                    >
-                      {nextProject.title}
-                    </span>
-                  </Link>
-                ) : (
-                  <span
-                    style={{
-                      fontFamily: FONT,
-                      fontSize: 12,
-                      fontWeight: 700,
-                      letterSpacing: 3,
-                      color: PALETTE.dim,
-                    }}
-                  >
-                    &mdash;
-                  </span>
-                )}
-              </div>
-            </div>
+              Every project starts with understanding the problem.
+            </p>
+            <p
+              className="mn-fade-up"
+              style={{
+                fontFamily: FONT,
+                fontSize: 14,
+                fontWeight: 400,
+                color: PALETTE.muted,
+                marginTop: 24,
+              }}
+            >
+              Not jumping to the solution.
+            </p>
           </div>
         </section>
       </div>

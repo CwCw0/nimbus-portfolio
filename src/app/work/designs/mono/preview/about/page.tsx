@@ -3,8 +3,9 @@
 /**
  * MONO — About Page
  *
- * One large paragraph IS the content.
- * Experience list, comma-separated skills, social links.
+ * Pure typography. Giant statement text fills the viewport.
+ * Counter-scrolling text columns. Massive typographic numbers for stats.
+ * Line-draw reveals for section dividers. Zero decoration.
  */
 
 import { useRef, useEffect, useState } from "react";
@@ -22,67 +23,115 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const experience = [
-  { role: "Lead Designer", company: "Studio Null", period: "2024 — Present" },
-  { role: "Senior Designer", company: "Form & Co", period: "2021 — 2024" },
-  { role: "Designer", company: "Pixel Bureau", period: "2019 — 2021" },
-  { role: "Junior Designer", company: "Freelance", period: "2017 — 2019" },
+const leftColumnText = [
+  "Clarity over complexity.",
+  "Restraint as a feature.",
+  "Negative space speaks.",
+  "Type is the interface.",
+  "Less decided, more discovered.",
+  "Every pixel justified.",
 ];
 
-const skills =
-  "Brand Identity, Web Design, UI/UX, Art Direction, Typography, Motion Design, Design Systems, Frontend Development, Prototyping, Strategy";
+const rightColumnText = [
+  "Eight years of practice.",
+  "Hundreds of projects shipped.",
+  "Zero unnecessary elements.",
+  "One font is enough.",
+  "Precision over decoration.",
+  "The work speaks for itself.",
+];
 
-const socials = [
-  { label: "LinkedIn", href: "#" },
-  { label: "Dribbble", href: "#" },
-  { label: "GitHub", href: "#" },
-  { label: "Twitter", href: "#" },
+const stats = [
+  { number: "08", label: "YEARS" },
+  { number: "47", label: "PROJECTS" },
+  { number: "01", label: "FONT" },
+  { number: "00", label: "DECORATION" },
 ];
 
 export default function AboutPage() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
+  const statementRef = useRef<HTMLHeadingElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const rightColRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-  const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
-  const [hoveredExp, setHoveredExp] = useState<number | null>(null);
+  const [hoveredStat, setHoveredStat] = useState<number | null>(null);
 
   useLineDraw(containerRef);
 
-  /* Heading char reveal */
+  /* Giant statement char reveal */
   useEffect(() => {
-    const el = headingRef.current;
+    const el = statementRef.current;
     if (!el) return;
 
     const split = new SplitType(el, { types: "chars" });
-    gsap.set(split.chars || [], { y: "110%", opacity: 0 });
+    gsap.set(split.chars || [], { y: "120%", opacity: 0 });
     gsap.to(split.chars || [], {
       y: "0%",
       opacity: 1,
-      duration: 0.9,
-      stagger: 0.03,
+      duration: 1.1,
+      stagger: 0.02,
       ease: "power3.out",
-      delay: 0.15,
+      delay: 0.1,
     });
 
     return () => split.revert();
   }, []);
 
-  /* Staggered fade-ups */
+  /* Counter-scrolling columns */
+  useEffect(() => {
+    const left = leftColRef.current;
+    const right = rightColRef.current;
+    if (!left || !right || isMobile) return;
+
+    const ctx = gsap.context(() => {
+      // Left column scrolls UP (normal direction, faster)
+      gsap.to(left, {
+        y: -120,
+        ease: "none",
+        scrollTrigger: {
+          trigger: left.parentElement,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+
+      // Right column scrolls DOWN (counter direction)
+      gsap.to(right, {
+        y: 120,
+        ease: "none",
+        scrollTrigger: {
+          trigger: right.parentElement,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, [isMobile]);
+
+  /* Stats number reveal */
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      el.querySelectorAll(".mn-about-fade").forEach((item, i) => {
+      el.querySelectorAll(".mn-stat-number").forEach((num) => {
         gsap.fromTo(
-          item,
-          { y: 30, opacity: 0 },
+          num,
+          { y: 60, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.6 + i * 0.12,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: num,
+              start: "top 85%",
+              once: true,
+            },
           }
         );
       });
@@ -94,237 +143,242 @@ export default function AboutPage() {
   return (
     <MonoLayout>
       <div ref={containerRef}>
-        {/* Hero — page title */}
+        {/* Hero — viewport-filling statement */}
         <section
           style={{
-            padding: isMobile ? "80px 24px 40px" : "120px 48px 60px",
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: isMobile ? "120px 24px" : "0 48px",
           }}
         >
-          <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1400, width: "100%" }}>
             <div style={{ overflow: "hidden" }}>
               <h1
-                ref={headingRef}
+                ref={statementRef}
                 style={{
                   fontFamily: FONT,
                   fontSize: isMobile
-                    ? "clamp(48px, 14vw, 72px)"
-                    : "clamp(72px, 9vw, 140px)",
+                    ? "clamp(40px, 12vw, 64px)"
+                    : "clamp(72px, 8.5vw, 150px)",
                   fontWeight: 800,
-                  lineHeight: 0.92,
-                  letterSpacing: "-0.04em",
+                  lineHeight: 0.95,
+                  letterSpacing: "-0.05em",
                   margin: 0,
+                  textTransform: "uppercase",
                 }}
               >
-                About
+                I design with
+                <br />
+                restraint and
+                <br />
+                build with
+                <br />
+                precision.
               </h1>
             </div>
           </div>
         </section>
 
-        {/* Bio — the about IS the content */}
+        {/* Counter-scrolling columns */}
         <section
           style={{
-            padding: isMobile ? "60px 24px" : "80px 48px 120px",
+            padding: isMobile ? "80px 24px" : "160px 48px",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 1200,
+              margin: "0 auto",
+              display: isMobile ? "block" : "flex",
+              gap: 120,
+            }}
+          >
+            {/* Left column — scrolls up */}
+            <div
+              ref={leftColRef}
+              style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                gap: isMobile ? 32 : 48,
+              }}
+            >
+              {leftColumnText.map((text, i) => (
+                <p
+                  key={i}
+                  className="mn-fade-up"
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: isMobile ? 18 : 22,
+                    fontWeight: 500,
+                    lineHeight: 1.5,
+                    margin: 0,
+                    color: PALETTE.text,
+                  }}
+                >
+                  {text}
+                </p>
+              ))}
+            </div>
+
+            {/* Right column — scrolls down (counter) */}
+            <div
+              ref={rightColRef}
+              style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                gap: isMobile ? 32 : 48,
+                marginTop: isMobile ? 48 : 0,
+              }}
+            >
+              {rightColumnText.map((text, i) => (
+                <p
+                  key={i}
+                  className="mn-fade-up"
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: isMobile ? 18 : 22,
+                    fontWeight: 500,
+                    lineHeight: 1.5,
+                    margin: 0,
+                    color: PALETTE.muted,
+                  }}
+                >
+                  {text}
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Line divider */}
+        <div
+          style={{ padding: isMobile ? "0 24px" : "0 48px" }}
+        >
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <div
+              className="mn-line-draw"
+              style={{ height: 1, background: PALETTE.border }}
+            />
+          </div>
+        </div>
+
+        {/* Stats — massive typographic numbers */}
+        <section
+          style={{
+            padding: isMobile ? "100px 24px" : "180px 48px",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 1200,
+              margin: "0 auto",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+              gap: isMobile ? 60 : 0,
+            }}
+          >
+            {stats.map((stat, i) => (
+              <div
+                key={i}
+                onMouseEnter={() => setHoveredStat(i)}
+                onMouseLeave={() => setHoveredStat(null)}
+                style={{
+                  textAlign: "center",
+                  flex: isMobile ? "0 0 45%" : "0 0 auto",
+                  cursor: "default",
+                }}
+              >
+                <span
+                  className="mn-stat-number"
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: isMobile
+                      ? "clamp(64px, 18vw, 90px)"
+                      : "clamp(100px, 10vw, 180px)",
+                    fontWeight: 800,
+                    letterSpacing: "-0.06em",
+                    lineHeight: 1,
+                    display: "block",
+                    color:
+                      hoveredStat === i ? PALETTE.accent : PALETTE.text,
+                    transition: "color 0.3s",
+                  }}
+                >
+                  {stat.number}
+                </span>
+                <span
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: 6,
+                    color: PALETTE.muted,
+                    display: "block",
+                    marginTop: 16,
+                  }}
+                >
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Line divider */}
+        <div
+          style={{ padding: isMobile ? "0 24px" : "0 48px" }}
+        >
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <div
+              className="mn-line-draw"
+              style={{ height: 1, background: PALETTE.border }}
+            />
+          </div>
+        </div>
+
+        {/* Closing statement */}
+        <section
+          style={{
+            padding: isMobile ? "100px 24px 140px" : "160px 48px 200px",
           }}
         >
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
-            <Divider style={{ marginBottom: isMobile ? 48 : 64 }} />
-
             <p
-              className="mn-about-fade"
+              className="mn-fade-up"
               style={{
                 fontFamily: FONT,
                 fontSize: isMobile
-                  ? "clamp(22px, 5.5vw, 30px)"
-                  : "clamp(28px, 3vw, 40px)",
-                fontWeight: 500,
-                lineHeight: 1.5,
-                letterSpacing: "-0.01em",
+                  ? "clamp(28px, 7vw, 40px)"
+                  : "clamp(36px, 3.5vw, 56px)",
+                fontWeight: 700,
+                lineHeight: 1.3,
+                letterSpacing: "-0.03em",
                 margin: 0,
-                maxWidth: 800,
-              }}
-            >
-              I design and build digital products with a focus on clarity,
-              restraint, and craft. Every project starts with understanding the
-              problem — not jumping to the solution. Good design disappears.
-              Great design was never noticed in the first place.
-            </p>
-
-            <p
-              className="mn-about-fade"
-              style={{
-                fontFamily: FONT,
-                fontSize: 16,
-                color: PALETTE.muted,
-                lineHeight: 1.8,
-                marginTop: 32,
-                maxWidth: 600,
-              }}
-            >
-              Currently based in [City]. Eight years shaping brands, interfaces,
-              and experiences across tech, culture, and commerce. I believe the
-              best work comes from saying no to almost everything.
-            </p>
-          </div>
-        </section>
-
-        {/* Experience */}
-        <section
-          style={{
-            padding: isMobile ? "0 24px 80px" : "0 48px 120px",
-          }}
-        >
-          <div style={{ maxWidth: 900, margin: "0 auto" }}>
-            <span
-              className="mn-about-fade"
-              style={{
-                fontFamily: FONT,
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: 5,
-                color: PALETTE.muted,
-                display: "block",
-                marginBottom: 40,
-              }}
-            >
-              EXPERIENCE
-            </span>
-
-            {experience.map((exp, i) => (
-              <div key={i}>
-                <div className="mn-line-draw" style={{ height: 1, background: PALETTE.border }} />
-                <div
-                  className="mn-fade-up"
-                  onMouseEnter={() => setHoveredExp(i)}
-                  onMouseLeave={() => setHoveredExp(null)}
-                  style={{
-                    display: "flex",
-                    alignItems: isMobile ? "flex-start" : "center",
-                    flexDirection: isMobile ? "column" : "row",
-                    padding: isMobile ? "24px 0" : "28px 0",
-                    gap: isMobile ? 4 : 0,
-                    transition: "padding-left 0.3s",
-                    paddingLeft: hoveredExp === i ? 12 : 0,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: FONT,
-                      fontSize: isMobile ? 18 : 22,
-                      fontWeight: 700,
-                      flex: 1,
-                      color:
-                        hoveredExp === i ? PALETTE.accent : PALETTE.text,
-                      transition: "color 0.3s",
-                    }}
-                  >
-                    {exp.role}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: FONT,
-                      fontSize: 14,
-                      color: PALETTE.muted,
-                      fontWeight: 400,
-                      minWidth: isMobile ? "auto" : 160,
-                      textAlign: isMobile ? "left" : "center",
-                    }}
-                  >
-                    {exp.company}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: FONT,
-                      fontSize: 13,
-                      color: PALETTE.dim,
-                      fontWeight: 400,
-                      minWidth: isMobile ? "auto" : 140,
-                      textAlign: isMobile ? "left" : "right",
-                    }}
-                  >
-                    {exp.period}
-                  </span>
-                </div>
-              </div>
-            ))}
-            <div className="mn-line-draw" style={{ height: 1, background: PALETTE.border }} />
-          </div>
-        </section>
-
-        {/* Skills — comma-separated, nothing else */}
-        <section
-          style={{
-            padding: isMobile ? "0 24px 80px" : "0 48px 120px",
-          }}
-        >
-          <div style={{ maxWidth: 900, margin: "0 auto" }}>
-            <span
-              className="mn-about-fade"
-              style={{
-                fontFamily: FONT,
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: 5,
-                color: PALETTE.muted,
-                display: "block",
-                marginBottom: 24,
-              }}
-            >
-              CAPABILITIES
-            </span>
-            <p
-              className="mn-fade-up"
-              style={{
-                fontFamily: FONT,
-                fontSize: isMobile ? 16 : 18,
-                fontWeight: 400,
-                lineHeight: 1.8,
                 color: PALETTE.text,
-                margin: 0,
               }}
             >
-              {skills}
+              Good design disappears. Great design was never noticed in the first place.
             </p>
-          </div>
-        </section>
-
-        {/* Social links */}
-        <section
-          style={{
-            padding: isMobile ? "0 24px 120px" : "0 48px 160px",
-          }}
-        >
-          <div style={{ maxWidth: 900, margin: "0 auto" }}>
-            <Divider style={{ marginBottom: isMobile ? 36 : 48 }} />
-            <div
+            <p
               className="mn-fade-up"
-              style={{ display: "flex", gap: isMobile ? 24 : 36, flexWrap: "wrap" }}
+              style={{
+                fontFamily: FONT,
+                fontSize: 15,
+                fontWeight: 400,
+                color: PALETTE.muted,
+                marginTop: 32,
+                lineHeight: 1.8,
+              }}
             >
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  style={{
-                    fontFamily: FONT,
-                    fontSize: 14,
-                    color:
-                      hoveredSocial === s.label ? PALETTE.accent : PALETTE.muted,
-                    textDecoration: "none",
-                    fontWeight: 500,
-                    transition: "color 0.2s",
-                    borderBottom:
-                      hoveredSocial === s.label
-                        ? `1px solid ${PALETTE.accent}`
-                        : "1px solid transparent",
-                    paddingBottom: 2,
-                  }}
-                  onMouseEnter={() => setHoveredSocial(s.label)}
-                  onMouseLeave={() => setHoveredSocial(null)}
-                >
-                  {s.label}
-                </a>
-              ))}
-            </div>
+              Currently based in [City]. Open to collaborations that value
+              clarity, restraint, and craft above all else.
+            </p>
           </div>
         </section>
       </div>
