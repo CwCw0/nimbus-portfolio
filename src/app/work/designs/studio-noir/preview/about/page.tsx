@@ -234,8 +234,9 @@ export default function StudioNoirAbout() {
               letterSpacing: "0.02em",
               overflow: "hidden",
               maxWidth: 1000,
+              textWrap: "balance",
             }}>
-              WE BELIEVE IN THE POWER OF RESTRAINT
+              WE BELIEVE IN THE{"\u00A0"}POWER OF{"\u00A0"}RESTRAINT
             </h1>
 
             <div className="sn-subtitle" style={{

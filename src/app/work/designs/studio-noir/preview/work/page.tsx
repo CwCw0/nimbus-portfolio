@@ -136,8 +136,9 @@ export default function StudioNoirWork() {
               letterSpacing: "0.02em",
               overflow: "hidden",
               maxWidth: 900,
+              textWrap: "balance",
             }}>
-              SIX PROJECTS. ZERO FILLER.
+              SIX PROJECTS.{"\u00A0"}ZERO{"\u00A0"}FILLER.
             </h1>
             <p style={{
               fontFamily: F_BODY,

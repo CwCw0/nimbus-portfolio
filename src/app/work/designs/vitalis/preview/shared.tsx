@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import PreviewBar from "../../PreviewBar";
 
 /* ───── Fonts ───── */
 export const FH = "'Playfair Display', Georgia, serif";
@@ -266,28 +267,6 @@ export function VitalisFooter() {
 
   return (
     <>
-      {/* Back to breakdown button */}
-      <div style={{ position: "fixed", bottom: 24, right: 24, zIndex: 200 }}>
-        <Link
-          href="/work/designs/vitalis"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            padding: "10px 20px",
-            background: V.accent,
-            color: V.white,
-            fontFamily: FB,
-            fontSize: 12,
-            fontWeight: 600,
-            textDecoration: "none",
-            borderRadius: 100,
-          }}
-        >
-          ← Breakdown
-        </Link>
-      </div>
-
       <footer
         style={{
           padding: isMobile ? "40px 20px" : "48px",
@@ -378,6 +357,7 @@ export function VitalisLayout({ children }: { children: React.ReactNode }) {
       }}
     >
       <VitalisFonts />
+      <PreviewBar />
       <VitalisNav />
       <main style={{ paddingTop: 80 }}>{children}</main>
       <VitalisFooter />

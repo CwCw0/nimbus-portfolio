@@ -8,6 +8,7 @@
  */
 
 import { useRef, useEffect, useState, ReactNode } from "react";
+import PreviewBar from "../../PreviewBar";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -216,6 +217,7 @@ export function MonoLayout({ children }: { children: ReactNode }) {
       }}
     >
       <style>{`@import url('${FONT_LINK}');`}</style>
+      <PreviewBar />
       <MonoNav />
       <main style={{ paddingTop: 80 }}>{children}</main>
       <MonoFooter />

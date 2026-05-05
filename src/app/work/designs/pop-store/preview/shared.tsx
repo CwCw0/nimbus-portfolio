@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
+import PreviewBar from "../../PreviewBar";
 
 /* ── Palette & Constants ────────────────────────────────────────────── */
 export const P = {
@@ -234,10 +235,10 @@ export function PopLayout({
         overflowX: "hidden",
       }}
     >
+      <PreviewBar />
       <PopNav cartCount={cartCount} />
       <div style={{ paddingTop: 60 }}>{children}</div>
       <PopFooter />
-      <BreakdownFab />
     </div>
   );
 }

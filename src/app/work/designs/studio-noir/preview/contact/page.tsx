@@ -132,12 +132,13 @@ export default function StudioNoirContact() {
               onMouseLeave={() => setEmailHovered(false)}
               style={{
                 fontFamily: F_HEAD,
-                fontSize: isMobile ? "36px" : "clamp(56px, 8vw, 120px)",
+                fontSize: isMobile ? "32px" : "clamp(48px, 7vw, 110px)",
                 lineHeight: 1,
                 letterSpacing: "0.02em",
                 cursor: "pointer",
                 color: emailHovered ? C.accent : C.text,
                 transition: "color 0.3s",
+                whiteSpace: isMobile ? "normal" : "nowrap",
               }}
             >
               HELLO@STUDIONOIR.COM

@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import PreviewBar from "../../PreviewBar";
 
 export const F_HEAD = "'Bebas Neue', 'Impact', sans-serif";
 export const F_BODY = "'DM Sans', 'Helvetica Neue', sans-serif";
@@ -76,14 +77,10 @@ export function SNLayout({ children, current }: { children: React.ReactNode; cur
   return (
     <div style={{ background: C.bg, color: C.text, minHeight: "100vh", overflowX: "hidden" }}>
       <style>{FONT_IMPORT}</style>
+      <PreviewBar />
       <SNNav current={current} />
       {children}
       <SNFooter />
-      <div style={{ position: "fixed", bottom: 24, left: 24, zIndex: 300 }}>
-        <Link href="/work/designs/studio-noir" style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 20px", background: C.accent, color: C.bg, fontFamily: F_HEAD, fontSize: 11, letterSpacing: 3, textDecoration: "none" }}>
-          ← BREAKDOWN
-        </Link>
-      </div>
     </div>
   );
 }

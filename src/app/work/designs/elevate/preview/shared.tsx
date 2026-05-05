@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
+import PreviewBar from "../../PreviewBar";
 
 /* ───── Palette ───── */
 export const E = {
@@ -250,28 +251,6 @@ export function ElevateFooter() {
 
   return (
     <>
-      {/* Back to breakdown button */}
-      <div style={{ position: "fixed", bottom: 24, right: 24, zIndex: 200 }}>
-        <Link
-          href="/work/designs/elevate"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            padding: "10px 20px",
-            background: E.text,
-            color: "#fff",
-            fontFamily: "Inter, sans-serif",
-            fontSize: 12,
-            fontWeight: 600,
-            textDecoration: "none",
-            borderRadius: 8,
-          }}
-        >
-          ← Breakdown
-        </Link>
-      </div>
-
       <footer
         style={{
           padding: isMobile ? "36px 20px" : "48px",
@@ -359,6 +338,7 @@ export function ElevateLayout({ children }: { children: React.ReactNode }) {
         fontFamily: "Inter, sans-serif",
       }}
     >
+      <PreviewBar />
       <ElevateNav />
       <main style={{ paddingTop: 60 }}>{children}</main>
       <ElevateFooter />

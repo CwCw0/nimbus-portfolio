@@ -10,6 +10,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import PreviewBar from "../../PreviewBar";
 
 /* ───── Typography ───── */
 export const FH = "'Cormorant Garamond', Georgia, serif";
@@ -337,6 +338,7 @@ export function RoastLayout({ children, current }: { children: React.ReactNode; 
   return (
     <div style={{ background: R.bg, color: R.text, minHeight: "100vh", overflowX: "hidden" }}>
       <style>{FONT_IMPORT}</style>
+      <PreviewBar />
       <RoastNav current={current} />
       {children}
       <RoastFooter />
