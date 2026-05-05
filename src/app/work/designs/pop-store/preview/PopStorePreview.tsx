@@ -46,6 +46,9 @@ const reviews = [
 export default function PopStorePreview() {
   const mainRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => { setIsMobile(window.innerWidth < 769); }, []);
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
@@ -219,7 +222,7 @@ export default function PopStorePreview() {
             </div>
             <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, borderBottom: `2px solid ${P.text}`, paddingBottom: 2, cursor: "pointer" }}>VIEW ALL →</span>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 20 }}>
             {products.map((prod) => (
               <div key={prod.name} className="ps-prod" style={{ background: prod.color + "12", border: P.border, position: "relative", cursor: "pointer", transition: "all 0.15s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-5px, -5px)"; e.currentTarget.style.boxShadow = "10px 10px 0 #1A1A1A"; }}
@@ -249,7 +252,7 @@ export default function PopStorePreview() {
       <section style={{ padding: "80px 40px", background: P.text }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, color: P.coral, letterSpacing: 2, marginBottom: 28 }}>BROWSE BY VIBE</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 14 }}>
             {[{ name: "All Products", count: 24, emoji: "🛍️" }, { name: "New Drops", count: 6, emoji: "🆕" }, { name: "Bestsellers", count: 8, emoji: "🏆" }, { name: "Limited", count: 3, emoji: "💎" }].map((cat) => (
               <div key={cat.name} className="ps-cat" style={{ padding: "28px 20px", border: "2px solid rgba(255,255,255,0.08)", cursor: "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", gap: 14 }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = P.coral; e.currentTarget.style.transform = "translateX(4px)"; }}
@@ -273,7 +276,7 @@ export default function PopStorePreview() {
             <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, color: P.coral, letterSpacing: 2 }}>WHAT PEOPLE SAY</span>
             <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(32px, 4.5vw, 52px)", fontWeight: 700, marginTop: 6 }}>Don&apos;t trust us. Trust them.</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 20 }}>
             {reviews.map((r) => (
               <div key={r.name} className="ps-review" style={{ padding: 28, border: P.border, background: P.bg, boxShadow: "4px 4px 0 #1A1A1A", transition: "all 0.12s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-3px, -3px)"; e.currentTarget.style.boxShadow = "7px 7px 0 #1A1A1A"; }}

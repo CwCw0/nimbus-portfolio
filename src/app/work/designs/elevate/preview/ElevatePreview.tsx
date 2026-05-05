@@ -49,6 +49,9 @@ const metrics = [
 export default function ElevatePreview() {
   const mainRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => { setIsMobile(window.innerWidth < 769); }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1500);
@@ -243,7 +246,7 @@ export default function ElevatePreview() {
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 700, color: E.accent, letterSpacing: 1.5, textTransform: "uppercase" }}>Features</span>
             <h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 800, marginTop: 14, letterSpacing: "-0.025em" }}>Everything you need.<br />Nothing you don&apos;t.</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 20 }}>
             {features.map((f) => (
               <div key={f.title} className="el-feature"
                 onMouseMove={handleCardMove}

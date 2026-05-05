@@ -41,6 +41,9 @@ const coffees = [
 export default function RoastPreview() {
   const mainRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => { setIsMobile(window.innerWidth < 769); }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1800);
@@ -138,7 +141,7 @@ export default function RoastPreview() {
       </nav>
 
       {/* HERO — full-bleed dark with parallax */}
-      <section style={{ height: "100vh", position: "relative", display: "flex", alignItems: "flex-end", padding: "0 48px 72px", overflow: "hidden" }}>
+      <section style={{ height: "100vh", position: "relative", display: "flex", alignItems: "flex-end", padding: isMobile ? "0 20px 60px" : "0 48px 72px", overflow: "hidden" }}>
         <div className="rs-hero-bg" style={{ position: "absolute", inset: -80, background: R.bgDark, display: "flex", alignItems: "center", justifyContent: "center" }}>
           <span style={{ fontSize: 240, opacity: 0.04 }}>☕</span>
         </div>
@@ -169,13 +172,13 @@ export default function RoastPreview() {
       </section>
 
       {/* COFFEE SELECTION */}
-      <section style={{ padding: "120px 48px" }}>
+      <section style={{ padding: isMobile ? "80px 20px" : "120px 48px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div className="rs-rev" style={{ marginBottom: 56 }}>
             <span style={{ fontFamily: FB, fontSize: 12, letterSpacing: 5, color: R.accent, fontWeight: 700 }}>CURRENT SELECTION</span>
             <h2 style={{ fontFamily: FH, fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 400, marginTop: 10 }}>What&apos;s <em style={{ fontStyle: "italic" }}>roasting.</em></h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 24 }}>
             {coffees.map((c) => (
               <div key={c.name} className="rs-coffee" style={{ background: R.cream, border: `1px solid ${R.border}`, overflow: "hidden", transition: "all 0.4s", cursor: "pointer" }}
                 onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-8px)"; e.currentTarget.style.boxShadow = "0 20px 56px rgba(28,24,20,0.1)"; }}
@@ -202,8 +205,8 @@ export default function RoastPreview() {
       </section>
 
       {/* STORY — dark split */}
-      <section style={{ padding: "120px 48px", background: R.bgDark }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
+      <section style={{ padding: isMobile ? "80px 20px" : "120px 48px", background: R.bgDark }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 72, alignItems: "center" }}>
           <div className="rs-clip" style={{ height: 460, background: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <span style={{ fontSize: 100, opacity: 0.15 }}>🌱</span>
           </div>
@@ -223,11 +226,11 @@ export default function RoastPreview() {
       </section>
 
       {/* LOCATIONS */}
-      <section style={{ padding: "100px 48px" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 48px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
           <span className="rs-rev" style={{ fontFamily: FB, fontSize: 12, letterSpacing: 5, color: R.accent, fontWeight: 700 }}>VISIT US</span>
           <h2 className="rs-rev" style={{ fontFamily: FH, fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 400, marginTop: 12 }}>Three locations. <em style={{ fontStyle: "italic" }}>One standard.</em></h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginTop: 44 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 20, marginTop: 44 }}>
             {[{ name: "Downtown", addr: "42 Roast Lane", hrs: "7am–6pm" }, { name: "Uptown", addr: "118 Bean Street", hrs: "7am–5pm" }, { name: "Harbour", addr: "7 Wharf Road", hrs: "8am–4pm" }].map((loc) => (
               <div key={loc.name} className="rs-loc" style={{ padding: 32, background: R.cream, border: `1px solid ${R.border}`, textAlign: "left", transition: "all 0.3s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(28,24,20,0.06)"; }}
@@ -243,7 +246,7 @@ export default function RoastPreview() {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: "100px 48px", background: R.accent, textAlign: "center" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: R.accent, textAlign: "center" }}>
         <h2 className="rs-rev" style={{ fontFamily: FH, fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 400, color: R.cream, lineHeight: 1.08 }}>
           Life&apos;s too short for<br /><em style={{ fontStyle: "italic" }}>bad coffee.</em>
         </h2>

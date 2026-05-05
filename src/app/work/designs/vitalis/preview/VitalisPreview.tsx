@@ -48,6 +48,9 @@ const testimonials = [
 export default function VitalisPreview() {
   const mainRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => { setIsMobile(window.innerWidth < 769); }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1400);
@@ -141,15 +144,15 @@ export default function VitalisPreview() {
     <div ref={mainRef} style={{ background: V.bg, color: V.text, minHeight: "100vh", overflowX: "hidden" }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');`}</style>
 
-      {/* NAV — pill-shaped floating */}
-      <nav style={{ position: "fixed", top: 16, left: "50%", transform: "translateX(-50%)", zIndex: 100, display: "flex", alignItems: "center", gap: 32, padding: "12px 32px", background: "rgba(250,250,247,0.85)", backdropFilter: "blur(20px)", borderRadius: 100, border: `1px solid ${V.border}`, boxShadow: "0 4px 24px rgba(0,0,0,0.04)" }}>
+      {/* NAV — pill-shaped floating on desktop, simple bar on mobile */}
+      <nav style={{ position: "fixed", top: isMobile ? 0 : 16, left: isMobile ? 0 : "50%", right: isMobile ? 0 : "auto", transform: isMobile ? "none" : "translateX(-50%)", zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", gap: isMobile ? 0 : 32, padding: isMobile ? "12px 20px" : "12px 32px", background: "rgba(250,250,247,0.9)", backdropFilter: "blur(20px)", borderRadius: isMobile ? 0 : 100, border: isMobile ? "none" : `1px solid ${V.border}`, borderBottom: isMobile ? `1px solid ${V.border}` : undefined, boxShadow: isMobile ? "none" : "0 4px 24px rgba(0,0,0,0.04)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <div style={{ width: 28, height: 28, borderRadius: "50%", background: V.accent, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: 7, height: 7, borderRadius: "50%", background: V.white }} />
           </div>
           <span style={{ fontFamily: FH, fontSize: 20, fontWeight: 400, fontStyle: "italic" }}>Vitalis</span>
         </div>
-        {["Services", "About", "Contact"].map((item) => (
+        {!isMobile && ["Services", "About", "Contact"].map((item) => (
           <a key={item} href="#" style={{ fontFamily: FB, fontSize: 13, color: V.muted, textDecoration: "none", fontWeight: 500, transition: "color 0.2s" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = V.accent)}
             onMouseLeave={(e) => (e.currentTarget.style.color = V.muted)}
@@ -162,7 +165,7 @@ export default function VitalisPreview() {
       </nav>
 
       {/* HERO — split, warm, with floating badge */}
-      <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", alignItems: "center", padding: "100px 48px 60px", gap: 48 }}>
+      <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", alignItems: "center", padding: "100px 48px 60px", gap: 48 }}>
         <div>
           <span className="vt-anim" style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.accent, letterSpacing: 2, textTransform: "uppercase", display: "block", marginBottom: 20 }}>WELLNESS CLINIC</span>
           <h1 className="vt-anim" style={{ fontFamily: FH, fontSize: "clamp(42px, 5.5vw, 72px)", fontWeight: 400, lineHeight: 1.12 }}>
@@ -208,13 +211,13 @@ export default function VitalisPreview() {
       </section>
 
       {/* SERVICES — rounded cards */}
-      <section style={{ padding: "100px 48px" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 48px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div className="vt-rev" style={{ textAlign: "center", marginBottom: 56 }}>
             <span style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.accent, letterSpacing: 2, textTransform: "uppercase" }}>Our Services</span>
             <h2 style={{ fontFamily: FH, fontSize: "clamp(32px, 4vw, 50px)", fontWeight: 400, marginTop: 10 }}>Comprehensive care, <em style={{ fontStyle: "italic" }}>personalised.</em></h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 18 }}>
             {services.map((svc) => (
               <div key={svc.title} className="vt-svc" style={{ padding: 28, background: V.white, border: `1px solid ${V.border}`, borderRadius: 20, transition: "all 0.3s", cursor: "default" }}
                 onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-8px)"; e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.06)"; e.currentTarget.style.borderColor = V.accent; }}
@@ -231,8 +234,8 @@ export default function VitalisPreview() {
       </section>
 
       {/* WHY VITALIS — dark section */}
-      <section style={{ padding: "100px 48px", background: V.bgDark }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: V.bgDark }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 72, alignItems: "center" }}>
           <div>
             <span className="vt-rev" style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.warm, letterSpacing: 2 }}>WHY VITALIS</span>
             <h2 className="vt-rev" style={{ fontFamily: FH, fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 400, color: V.white, marginTop: 14, lineHeight: 1.15 }}>
@@ -257,13 +260,13 @@ export default function VitalisPreview() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section style={{ padding: "100px 48px" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 48px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div className="vt-rev" style={{ textAlign: "center", marginBottom: 48 }}>
             <span style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.accent, letterSpacing: 2 }}>TESTIMONIALS</span>
             <h2 style={{ fontFamily: FH, fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 400, marginTop: 10 }}>What patients say.</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 20 }}>
             {testimonials.map((t) => (
               <div key={t.name} className="vt-test" style={{ padding: 32, background: V.white, border: `1px solid ${V.border}`, borderRadius: 20, transition: "all 0.3s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,0.05)"; }}
@@ -282,7 +285,7 @@ export default function VitalisPreview() {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: "80px 48px", background: V.bgAccent, textAlign: "center", borderRadius: 0 }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "80px 48px", background: V.bgAccent, textAlign: "center", borderRadius: 0 }}>
         <div className="vt-rev" style={{ maxWidth: 560, margin: "0 auto" }}>
           <span style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.accent, letterSpacing: 2 }}>READY?</span>
           <h2 style={{ fontFamily: FH, fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 400, marginTop: 12 }}>Book your <em style={{ fontStyle: "italic" }}>first session.</em></h2>

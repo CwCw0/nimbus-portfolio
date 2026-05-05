@@ -56,7 +56,10 @@ export default function StudioNoirPreview() {
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const mousePos = useRef({ x: 0, y: 0 });
+
+  useEffect(() => { setIsMobile(window.innerWidth < 769); }, []);
 
   // Custom cursor — only runs after loaded
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -256,15 +259,26 @@ export default function StudioNoirPreview() {
       {/* Animated grain overlay */}
       <div className="sn-grain" style={{ position: "fixed", inset: 0, zIndex: 100, pointerEvents: "none", opacity: 0.03, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`, backgroundRepeat: "repeat", backgroundSize: "128px" }} />
 
-      {/* NAVIGATION — side-mounted vertical, unique to Studio Noir */}
-      <nav style={{ position: "fixed", right: 0, top: 0, bottom: 0, width: 80, zIndex: 200, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 32, borderLeft: `1px solid ${C.border}`, background: "rgba(13,11,8,0.5)", backdropFilter: "blur(12px)" }}>
-        {["Work", "Info", "Services", "Say Hi"].map((item, i) => (
-          <a key={item} href={`#sn-${item.toLowerCase().replace(" ", "")}`} style={{ fontFamily: F_BODY, fontSize: 10, color: C.muted, textDecoration: "none", letterSpacing: 3, writingMode: "vertical-rl", transform: "rotate(180deg)", transition: "all 0.3s", cursor: "none" }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = C.accent; e.currentTarget.style.letterSpacing = "5px"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = C.muted; e.currentTarget.style.letterSpacing = "3px"; }}
-          >{item.toUpperCase()}</a>
-        ))}
-      </nav>
+      {/* NAVIGATION — side-mounted on desktop, top bar on mobile */}
+      {!isMobile ? (
+        <nav style={{ position: "fixed", right: 0, top: 0, bottom: 0, width: 80, zIndex: 200, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 32, borderLeft: `1px solid ${C.border}`, background: "rgba(13,11,8,0.5)", backdropFilter: "blur(12px)" }}>
+          {["Work", "Info", "Services", "Say Hi"].map((item) => (
+            <a key={item} href={`#sn-${item.toLowerCase().replace(" ", "")}`} style={{ fontFamily: F_BODY, fontSize: 10, color: C.muted, textDecoration: "none", letterSpacing: 3, writingMode: "vertical-rl", transform: "rotate(180deg)", transition: "all 0.3s", cursor: "none" }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = C.accent; e.currentTarget.style.letterSpacing = "5px"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = C.muted; e.currentTarget.style.letterSpacing = "3px"; }}
+            >{item.toUpperCase()}</a>
+          ))}
+        </nav>
+      ) : (
+        <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 200, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", background: "rgba(13,11,8,0.9)", backdropFilter: "blur(12px)" }}>
+          <span style={{ fontFamily: F_HEAD, fontSize: 16, color: C.text, letterSpacing: "0.12em" }}>STUDIO<span style={{ color: C.accent }}>.</span>NOIR</span>
+          <div style={{ display: "flex", gap: 16 }}>
+            {["Work", "Info"].map((item) => (
+              <a key={item} href={`#sn-${item.toLowerCase()}`} style={{ fontFamily: F_BODY, fontSize: 11, color: C.muted, textDecoration: "none", letterSpacing: 2 }}>{item.toUpperCase()}</a>
+            ))}
+          </div>
+        </nav>
+      )}
 
       {/* Logo — top left, fixed */}
       <div style={{ position: "fixed", top: 24, left: 48, zIndex: 200 }}>
@@ -274,7 +288,7 @@ export default function StudioNoirPreview() {
       </div>
 
       {/* HERO — full viewport, left-aligned, with moving accent line */}
-      <section style={{ height: "100vh", display: "flex", alignItems: "center", padding: "0 48px", paddingRight: 128, position: "relative" }}>
+      <section style={{ height: "100vh", display: "flex", alignItems: "center", padding: "0 48px", paddingRight: isMobile ? 20 : 128, position: "relative" }}>
         {/* Animated accent line — moves diagonally */}
         <div style={{ position: "absolute", top: 0, left: "30%", width: 1, height: "100%", background: `linear-gradient(to bottom, transparent, ${C.accent}30, transparent)`, animation: "sn-line-float 8s ease-in-out infinite" }} />
         <style>{`@keyframes sn-line-float { 0%, 100% { transform: translateX(0) skewX(0); opacity: 0.3; } 50% { transform: translateX(100px) skewX(-2deg); opacity: 0.6; } }`}</style>
@@ -320,7 +334,7 @@ export default function StudioNoirPreview() {
           <span style={{ fontFamily: F_BODY, fontSize: 11, color: C.muted, marginLeft: 24 }}>05 PROJECTS</span>
         </div>
 
-        <div className="sn-track" style={{ display: "flex", gap: 40, height: "100%", alignItems: "center", padding: "0 48px", paddingRight: 128, paddingTop: 40 }}>
+        <div className="sn-track" style={{ display: "flex", gap: 40, height: "100%", alignItems: "center", padding: "0 48px", paddingRight: isMobile ? 20 : 128, paddingTop: 40 }}>
           {projects.map((proj) => (
             <div key={proj.num} className="sn-proj-card" style={{ minWidth: "clamp(400px, 35vw, 600px)", height: "65vh", flexShrink: 0, position: "relative", overflow: "hidden", cursor: "none", border: `1px solid ${C.border}`, transition: "border-color 0.4s" }}
               onMouseEnter={(e) => {
@@ -364,9 +378,9 @@ export default function StudioNoirPreview() {
       </section>
 
       {/* ABOUT — clip-path wipe reveal + scroll-driven word opacity */}
-      <section id="sn-info" style={{ padding: "180px 48px", paddingRight: 128 }}>
+      <section id="sn-info" style={{ padding: "180px 48px", paddingRight: isMobile ? 20 : 128 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div className="sn-about-section" style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 100, alignItems: "center" }}>
+          <div className="sn-about-section" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.2fr 1fr", gap: isMobile ? 40 : 100, alignItems: "center" }}>
             <div>
               <span style={{ fontFamily: F_HEAD, fontSize: 14, letterSpacing: 8, color: C.accent, display: "block", marginBottom: 40 }}>ABOUT THE STUDIO</span>
               <p className="sn-about-text" style={{ fontFamily: F_HEAD, fontSize: "clamp(32px, 4vw, 56px)", color: C.text, lineHeight: 1.15, letterSpacing: "0.02em" }}>
@@ -396,10 +410,10 @@ export default function StudioNoirPreview() {
       </section>
 
       {/* SERVICES — angled cards with 3D rotation reveal */}
-      <section id="sn-services" style={{ padding: "140px 48px", paddingRight: 128, background: C.bgAlt }}>
+      <section id="sn-services" style={{ padding: "140px 48px", paddingRight: isMobile ? 20 : 128, background: C.bgAlt }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <span style={{ fontFamily: F_HEAD, fontSize: 14, letterSpacing: 8, color: C.accent, display: "block", marginBottom: 60 }}>WHAT WE DO</span>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 24 }}>
             {[
               { num: "01", title: "WEB DESIGN", desc: "Websites that move. Editorial layouts, cinematic scroll, modern engineering.", icon: "◆" },
               { num: "02", title: "BRAND IDENTITY", desc: "Visual systems that communicate before a word is read.", icon: "○" },
@@ -425,7 +439,7 @@ export default function StudioNoirPreview() {
       </section>
 
       {/* CONTACT — dramatic char-by-char reveal */}
-      <section id="sn-sayhi" style={{ padding: "200px 48px", paddingRight: 128, textAlign: "center", position: "relative" }}>
+      <section id="sn-sayhi" style={{ padding: "200px 48px", paddingRight: isMobile ? 20 : 128, textAlign: "center", position: "relative" }}>
         {/* Decorative cross */}
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
           <div style={{ width: 200, height: 1, background: C.border }} />
@@ -447,7 +461,7 @@ export default function StudioNoirPreview() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: "32px 48px", paddingRight: 128, borderTop: `1px solid ${C.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <footer style={{ padding: "32px 48px", paddingRight: isMobile ? 20 : 128, borderTop: `1px solid ${C.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <span style={{ fontFamily: F_BODY, fontSize: 11, color: C.muted }}>&copy; 2026 Studio Noir</span>
         <div style={{ display: "flex", gap: 24 }}>
           {["Dribbble", "Behance", "Instagram", "Twitter"].map((s) => (
