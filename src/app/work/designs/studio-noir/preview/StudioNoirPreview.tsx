@@ -58,27 +58,33 @@ export default function StudioNoirPreview() {
   const [menuOpen, setMenuOpen] = useState(false);
   const mousePos = useRef({ x: 0, y: 0 });
 
-  // Custom cursor
+  // Custom cursor — only runs after loaded
   const handleMouseMove = useCallback((e: MouseEvent) => {
     mousePos.current = { x: e.clientX, y: e.clientY };
   }, []);
 
   useEffect(() => {
+    if (!loaded) return;
+
     window.addEventListener("mousemove", handleMouseMove);
 
     const ring = cursorRef.current;
     const dot = cursorDotRef.current;
     if (!ring || !dot) return;
 
+    let rafId: number;
     const follow = () => {
-      gsap.to(ring, { x: mousePos.current.x, y: mousePos.current.y, duration: 0.5, ease: "power2.out" });
-      gsap.to(dot, { x: mousePos.current.x, y: mousePos.current.y, duration: 0.1, ease: "power2.out" });
-      requestAnimationFrame(follow);
+      gsap.set(ring, { x: mousePos.current.x - 20, y: mousePos.current.y - 20 });
+      gsap.set(dot, { x: mousePos.current.x - 3, y: mousePos.current.y - 3 });
+      rafId = requestAnimationFrame(follow);
     };
-    requestAnimationFrame(follow);
+    rafId = requestAnimationFrame(follow);
 
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [handleMouseMove]);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, [loaded, handleMouseMove]);
 
   // Loader
   useEffect(() => {
@@ -244,8 +250,8 @@ export default function StudioNoirPreview() {
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap');`}</style>
 
       {/* Custom cursor */}
-      <div ref={cursorRef} style={{ position: "fixed", top: -20, left: -20, width: 40, height: 40, border: `1px solid ${C.accent}`, borderRadius: "50%", pointerEvents: "none", zIndex: 9998, mixBlendMode: "difference", transition: "width 0.3s, height 0.3s, top 0.3s, left 0.3s" }} />
-      <div ref={cursorDotRef} style={{ position: "fixed", top: -3, left: -3, width: 6, height: 6, background: C.accent, borderRadius: "50%", pointerEvents: "none", zIndex: 9999 }} />
+      <div ref={cursorRef} style={{ position: "fixed", top: 0, left: 0, width: 40, height: 40, border: `1px solid ${C.accent}`, borderRadius: "50%", pointerEvents: "none", zIndex: 9998, mixBlendMode: "difference" }} />
+      <div ref={cursorDotRef} style={{ position: "fixed", top: 0, left: 0, width: 6, height: 6, background: C.accent, borderRadius: "50%", pointerEvents: "none", zIndex: 9999 }} />
 
       {/* Animated grain overlay */}
       <div className="sn-grain" style={{ position: "fixed", inset: 0, zIndex: 100, pointerEvents: "none", opacity: 0.03, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`, backgroundRepeat: "repeat", backgroundSize: "128px" }} />
@@ -427,8 +433,10 @@ export default function StudioNoirPreview() {
         </div>
 
         <span style={{ fontFamily: F_HEAD, fontSize: 14, letterSpacing: 8, color: C.accent, display: "block", marginBottom: 40, position: "relative", zIndex: 1 }}>GET IN TOUCH</span>
-        <h2 className="sn-cta-heading" style={{ fontFamily: F_HEAD, fontSize: "clamp(56px, 9vw, 140px)", color: C.text, lineHeight: 0.9, letterSpacing: "0.03em", position: "relative", zIndex: 1 }}>
-          LET&apos;S BUILD SOMETHING REMARKABLE
+        <h2 className="sn-cta-heading" style={{ fontFamily: F_HEAD, fontSize: "clamp(44px, 7vw, 110px)", color: C.text, lineHeight: 0.92, letterSpacing: "0.02em", position: "relative", zIndex: 1, maxWidth: 900, marginLeft: "auto", marginRight: "auto" }}>
+          LET&apos;S BUILD
+          <br />SOMETHING
+          <br /><span style={{ color: C.accent }}>REMARKABLE</span>
         </h2>
         <div style={{ marginTop: 56, position: "relative", zIndex: 1 }}>
           <a href="mailto:hello@studionoir.com" style={{ fontFamily: F_HEAD, fontSize: 18, letterSpacing: 6, padding: "20px 48px", border: `1px solid ${C.accent}`, color: C.accent, textDecoration: "none", transition: "all 0.4s", cursor: "none", display: "inline-block" }}

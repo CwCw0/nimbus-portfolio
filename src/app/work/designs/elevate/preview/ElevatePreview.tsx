@@ -166,31 +166,23 @@ export default function ElevatePreview() {
   return (
     <div ref={mainRef} style={{ background: E.bg, color: E.text, minHeight: "100vh", overflowX: "hidden" }}>
       {/* NAV — centered logo, split links */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: "14px 48px", background: "rgba(255,255,255,0.7)", backdropFilter: "blur(20px) saturate(180%)", borderBottom: `1px solid ${E.border}` }}>
-        <div style={{ flex: 1, display: "flex", gap: 32, justifyContent: "flex-end", paddingRight: 40 }}>
-          {["Product", "Pricing"].map((item) => (
-            <a key={item} href="#" style={{ fontFamily: "Inter, sans-serif", fontSize: 14, color: E.textMuted, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = E.text)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = E.textMuted)}
-            >{item}</a>
-          ))}
-        </div>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 48px", background: "rgba(255,255,255,0.7)", backdropFilter: "blur(20px) saturate(180%)", borderBottom: `1px solid ${E.border}` }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 30, height: 30, background: `linear-gradient(135deg, ${E.gradient1}, ${E.gradient2})`, borderRadius: 7, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 700 }}>E</div>
           <span style={{ fontFamily: "Inter, sans-serif", fontSize: 17, fontWeight: 700 }}>Elevate</span>
         </div>
-        <div style={{ flex: 1, display: "flex", gap: 32, paddingLeft: 40 }}>
-          {["Docs", "Blog"].map((item) => (
+        <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
+          {["Product", "Pricing", "Docs", "Blog"].map((item) => (
             <a key={item} href="#" style={{ fontFamily: "Inter, sans-serif", fontSize: 14, color: E.textMuted, textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = E.text)}
               onMouseLeave={(e) => (e.currentTarget.style.color = E.textMuted)}
             >{item}</a>
           ))}
-          <span style={{ marginLeft: "auto", padding: "8px 20px", background: E.text, color: "#fff", fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, borderRadius: 6, cursor: "pointer", transition: "transform 0.2s" }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
-          >Get Started</span>
         </div>
+        <span style={{ padding: "8px 20px", background: E.text, color: "#fff", fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, borderRadius: 6, cursor: "pointer", transition: "transform 0.2s" }}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
+          onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+        >Get Started</span>
       </nav>
 
       {/* HERO — with animated gradient blob */}
