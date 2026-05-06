@@ -56,6 +56,21 @@ export default function CaseStudies() {
         );
       }
 
+      // Parallax depth on section header
+      const sectionHeader = section.querySelector(".cs-header");
+      if (sectionHeader && !isMobile) {
+        gsap.to(sectionHeader, {
+          yPercent: -15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "40% top",
+            scrub: 1.5,
+          },
+        });
+      }
+
       if (isMobile) {
         // Mobile — card reveals
         const cards = section.querySelectorAll(".cs-mobile-card");

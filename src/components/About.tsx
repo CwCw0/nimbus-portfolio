@@ -158,12 +158,55 @@ export default function About() {
           },
         }
       );
+      // Parallax depth — stats column and text column scroll at different rates
+      const statsCol = el.querySelector(".about-stats-col");
+      const textCol = el.querySelector(".about-text-col");
+
+      if (statsCol && window.innerWidth >= 769) {
+        gsap.to(statsCol, {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+          },
+        });
+      }
+
+      if (textCol && window.innerWidth >= 769) {
+        gsap.to(textCol, {
+          yPercent: 5,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+          },
+        });
+      }
+
+      // Heading parallax — drifts up slightly faster
+      if (heading && window.innerWidth >= 769) {
+        gsap.to(heading, {
+          yPercent: -12,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+          },
+        });
+      }
+
       // Staggered exit — elements fade out as section scrolls away
       const exitElements = el.querySelectorAll(
         ".about-cta, .tech-pills, .about-para, .stat-item, .about-label"
       );
       if (exitElements.length > 0) {
-        // Convert to array and reverse for bottom-up exit
         const reversed = Array.from(exitElements).reverse();
         gsap.to(reversed, {
           autoAlpha: 0,
@@ -212,7 +255,7 @@ export default function About() {
         {/* Main content — asymmetric columns */}
         <div className="flex gap-20 max-md:flex-col max-md:gap-12">
           {/* Left column — narrower, stats + CTA (35%) */}
-          <div className="flex w-[35%] flex-col gap-12 max-md:w-full">
+          <div className="about-stats-col flex w-[35%] flex-col gap-12 max-md:w-full">
             {/* Stats — big numbers */}
             <div ref={statsRef} className="flex flex-col gap-8">
               <div className="stat-item">
@@ -284,7 +327,7 @@ export default function About() {
           />
 
           {/* Right column — wider, body text (60%) */}
-          <div className="flex flex-1 flex-col gap-8">
+          <div className="about-text-col flex flex-1 flex-col gap-8">
             <p className="about-para font-body text-lg leading-[1.8] text-(--color-text-dim)">
               Developer, designer, and founder of Nimbus Forma Studio. I
               don&apos;t just write code — I study the systems, the design, the
