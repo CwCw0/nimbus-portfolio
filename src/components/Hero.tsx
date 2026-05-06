@@ -1,9 +1,24 @@
 "use client";
 
+/**
+ * HERO — "Built with intention."
+ *
+ * Signature animation: "intention." assembles from scattered letter positions,
+ * each character pulling into place with magnetic precision. The animation
+ * IS the message — letters arriving with purpose, finding their exact spot.
+ *
+ * The period lands last with a subtle pulse — the final punctuation of
+ * a deliberate statement.
+ *
+ * Scroll behavior: lines drift apart at different speeds (parallax),
+ * creating depth as you leave the hero.
+ */
+
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitType from "split-type";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,13 +29,11 @@ export default function Hero() {
   const subtextRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollLineRef = useRef<HTMLDivElement>(null);
-  const mouseGlowRef = useRef<HTMLDivElement>(null);
   const accentLineRef = useRef<HTMLDivElement>(null);
-  const watermarkRef = useRef<HTMLSpanElement>(null);
+  const orbRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const mouseGlow = mouseGlowRef.current;
     if (!section) return;
 
     const prefersReducedMotion = window.matchMedia(
@@ -29,91 +42,9 @@ export default function Hero() {
 
     const cleanups: (() => void)[] = [];
 
-    // Mouse-reactive ambient glow
-    if (mouseGlow && !prefersReducedMotion) {
-      const onMove = (e: MouseEvent) => {
-        const rect = section.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        mouseGlow.style.opacity = "1";
-        mouseGlow.style.background = `radial-gradient(600px circle at ${x}% ${y}%, rgba(124,92,252,0.08) 0%, transparent 70%)`;
-      };
-      const onLeave = () => {
-        mouseGlow.style.opacity = "0";
-      };
-      section.addEventListener("mousemove", onMove);
-      section.addEventListener("mouseleave", onLeave);
-      cleanups.push(() => {
-        section.removeEventListener("mousemove", onMove);
-        section.removeEventListener("mouseleave", onLeave);
-      });
-    }
-
-    // Watermark — pool floor refraction. Text shifts like looking through water.
-    const watermark = watermarkRef.current;
-    if (watermark && !prefersReducedMotion) {
-      let mouseX = 0.5; // normalized 0-1
-      let mouseY = 0.5;
-      let velX = 0;
-      let velY = 0;
-      let prevMX = 0.5;
-      let prevMY = 0.5;
-      // Current refraction offset (smoothed)
-      let offsetX = 0;
-      let offsetY = 0;
-      let time = 0;
-
-      const onMove = (e: MouseEvent) => {
-        const rect = section.getBoundingClientRect();
-        mouseX = (e.clientX - rect.left) / rect.width;
-        mouseY = (e.clientY - rect.top) / rect.height;
-      };
-
-      section.addEventListener("mousemove", onMove);
-      cleanups.push(() => section.removeEventListener("mousemove", onMove));
-
-      const animate = () => {
-        time += 0.016;
-
-        // Velocity of cursor (how fast the "water" is being disturbed)
-        velX += (mouseX - prevMX) * 8;
-        velY += (mouseY - prevMY) * 8;
-        prevMX = mouseX;
-        prevMY = mouseY;
-
-        // Dampen velocity
-        velX *= 0.92;
-        velY *= 0.92;
-
-        // Add gentle sine oscillation (water is never perfectly still)
-        const ambientX = Math.sin(time * 1.2) * 0.3;
-        const ambientY = Math.cos(time * 0.9) * 0.2;
-
-        // Smoothly approach target offset
-        const targetX = velX * 15 + ambientX;
-        const targetY = velY * 12 + ambientY;
-        offsetX += (targetX - offsetX) * 0.08;
-        offsetY += (targetY - offsetY) * 0.08;
-
-        // Apply as transform — like light refracting through water surface
-        const disturbance = Math.sqrt(velX * velX + velY * velY);
-        const blur = Math.min(3, disturbance * 4);
-        const scaleShift = 1 + Math.sin(time * 1.5) * 0.003 * (1 + disturbance * 2);
-
-        watermark.style.transform =
-          `translate(${offsetX}px, ${offsetY}px) scale(${scaleShift})`;
-        watermark.style.filter = blur > 0.1 ? `blur(${blur}px)` : "none";
-
-        frame = requestAnimationFrame(animate);
-      };
-
-      let frame = requestAnimationFrame(animate);
-      cleanups.push(() => cancelAnimationFrame(frame));
-    }
-
     const ctx = gsap.context(() => {
       if (prefersReducedMotion) {
-        gsap.set([line1Ref.current, line2Ref.current], { y: 0, autoAlpha: 1 });
+        gsap.set([line1Ref.current, line2Ref.current], { autoAlpha: 1 });
         gsap.set([subtextRef.current, ctaRef.current, scrollLineRef.current], {
           autoAlpha: 1,
           y: 0,
@@ -121,67 +52,152 @@ export default function Hero() {
         return;
       }
 
-      // Initial states — hide everything
-      gsap.set(line1Ref.current, { y: 60, autoAlpha: 0 });
-      gsap.set(line2Ref.current, { y: 80, autoAlpha: 0, scale: 0.95 });
-      gsap.set(subtextRef.current, { autoAlpha: 0, y: 40 });
-      gsap.set(ctaRef.current, { autoAlpha: 0, y: 30 });
+      // ── Initial states ──
+      gsap.set(line1Ref.current, { y: 40, autoAlpha: 0 });
+      gsap.set(subtextRef.current, { autoAlpha: 0, y: 30 });
+      gsap.set(ctaRef.current, { autoAlpha: 0, y: 20 });
       gsap.set(scrollLineRef.current, { autoAlpha: 0 });
       if (accentLineRef.current) gsap.set(accentLineRef.current, { scaleX: 0 });
 
-      // Entrance timeline
-      const tl = gsap.timeline({ delay: 0.3 });
+      // Orb: start invisible, bloom in
+      if (orbRef.current) {
+        gsap.set(orbRef.current, { scale: 0.4, autoAlpha: 0 });
+      }
 
-      // Line 1 — "Built with" slides up
+      // ── Split "intention." into chars for assembly animation ──
+      const line2El = line2Ref.current;
+      let split: SplitType | null = null;
+
+      if (line2El) {
+        gsap.set(line2El, { autoAlpha: 1 });
+        split = new SplitType(line2El, { types: "chars" });
+        const chars = split.chars || [];
+
+        // Scatter each character to a unique random position
+        chars.forEach((char, i) => {
+          const angle = (i / chars.length) * Math.PI * 2 + Math.random() * 0.5;
+          const distance = 60 + Math.random() * 100;
+          const x = Math.cos(angle) * distance;
+          const y = Math.sin(angle) * distance + (Math.random() - 0.5) * 40;
+          const rotation = (Math.random() - 0.5) * 40;
+
+          gsap.set(char, {
+            x,
+            y,
+            rotation,
+            opacity: 0,
+            scale: 0.6 + Math.random() * 0.4,
+            filter: "blur(4px)",
+          });
+        });
+      }
+
+      // ── Entrance timeline ──
+      const tl = gsap.timeline({ delay: 0.4 });
+
+      // 1. "Built with" — clean slide up
       tl.to(line1Ref.current, {
         y: 0,
         autoAlpha: 1,
-        duration: 1,
+        duration: 0.9,
         ease: "power3.out",
       });
 
-      // Line 2 — "intention." scales in with emphasis
-      tl.to(
-        line2Ref.current,
-        {
-          y: 0,
-          autoAlpha: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: "power3.out",
-        },
-        "-=0.6"
-      );
-
-      // Accent line draws under heading
-      if (accentLineRef.current) {
+      // 2. Orb blooms behind "intention"
+      if (orbRef.current) {
         tl.to(
-          accentLineRef.current,
-          { scaleX: 1, duration: 0.8, ease: "power2.inOut" },
-          "-=0.5"
+          orbRef.current,
+          { scale: 1, autoAlpha: 1, duration: 1.2, ease: "power2.out" },
+          "-=0.3"
         );
       }
 
-      // Subtext + CTA
+      // 3. "intention." — letters assemble from scattered positions
+      if (split?.chars) {
+        const chars = split.chars;
+
+        // All chars pull to origin simultaneously but with stagger
+        chars.forEach((char, i) => {
+          const isPeriod = char.textContent === ".";
+          const delay = isPeriod ? chars.length * 0.035 + 0.15 : i * 0.035;
+
+          tl.to(
+            char,
+            {
+              x: 0,
+              y: 0,
+              rotation: 0,
+              opacity: 1,
+              scale: 1,
+              filter: "blur(0px)",
+              duration: isPeriod ? 0.6 : 0.8,
+              ease: isPeriod ? "back.out(3)" : "power3.out",
+            },
+            `-=0.7${i > 0 ? "" : ""}` // overlap with orb bloom
+          ).add(() => {}, `-=${0.8 - delay}`);
+        });
+
+        // Stagger the chars properly
+        tl.addLabel("assembleStart", "-=0.7");
+        chars.forEach((char, i) => {
+          const isPeriod = char.textContent === ".";
+          tl.to(
+            char,
+            {
+              x: 0,
+              y: 0,
+              rotation: 0,
+              opacity: 1,
+              scale: 1,
+              filter: "blur(0px)",
+              duration: isPeriod ? 0.5 : 0.7,
+              ease: isPeriod ? "back.out(4)" : "power3.out",
+            },
+            `assembleStart+=${i * 0.04}`
+          );
+        });
+      }
+
+      // 4. Accent line draws
+      if (accentLineRef.current) {
+        tl.to(
+          accentLineRef.current,
+          { scaleX: 1, duration: 0.7, ease: "power2.inOut" },
+          "-=0.3"
+        );
+      }
+
+      // 5. Subtext + CTA
       tl.to(
         subtextRef.current,
-        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" },
-        "-=0.4"
+        { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" },
+        "-=0.3"
       );
 
       tl.to(
         ctaRef.current,
-        { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" },
-        "-=0.4"
+        { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" },
+        "-=0.3"
       );
 
-      // Scroll line
-      tl.to(scrollLineRef.current, { autoAlpha: 1, duration: 0.6 }, "-=0.2");
+      // 6. Scroll line
+      tl.to(scrollLineRef.current, { autoAlpha: 1, duration: 0.5 }, "-=0.2");
 
-      // --- Scroll-driven parallax: lines drift apart, content parallaxes ---
+      // ── Orb breathing (continuous, after entrance) ──
+      if (orbRef.current) {
+        gsap.to(orbRef.current, {
+          scale: 1.08,
+          duration: 4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 2.5,
+        });
+      }
+
+      // ── Scroll-driven parallax ──
       ScrollTrigger.matchMedia({
         "(min-width: 769px)": () => {
-          // Line 1 — drifts up with parallax (stays visible)
           if (line1Ref.current) {
             gsap.to(line1Ref.current, {
               yPercent: -30,
@@ -195,7 +211,6 @@ export default function Hero() {
             });
           }
 
-          // Line 2 — drifts slower, creating spread
           if (line2Ref.current) {
             gsap.to(line2Ref.current, {
               yPercent: -10,
@@ -209,7 +224,6 @@ export default function Hero() {
             });
           }
 
-          // Subtext drifts down relatively
           if (subtextRef.current) {
             gsap.to(subtextRef.current, {
               yPercent: 20,
@@ -223,7 +237,6 @@ export default function Hero() {
             });
           }
 
-          // Scroll indicator fades out
           if (scrollLineRef.current) {
             gsap.to(scrollLineRef.current, {
               autoAlpha: 0,
@@ -232,6 +245,21 @@ export default function Hero() {
                 trigger: section,
                 start: "top top",
                 end: "20% top",
+                scrub: true,
+              },
+            });
+          }
+
+          // Orb drifts up on scroll (slower than text)
+          if (orbRef.current) {
+            gsap.to(orbRef.current, {
+              yPercent: -40,
+              scale: 0.7,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "bottom top",
                 scrub: true,
               },
             });
@@ -251,14 +279,6 @@ export default function Hero() {
       id="hero"
       className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-(--color-bg-primary)"
     >
-      {/* Mouse-reactive ambient glow */}
-      <div
-        ref={mouseGlowRef}
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-        style={{ opacity: 0, transition: "opacity 0.4s ease" }}
-      />
-
       {/* Grain texture */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03] grain-shift"
@@ -270,37 +290,20 @@ export default function Hero() {
         }}
       />
 
-      {/* Ghost watermark — pool floor refraction via cursor-driven transforms */}
+      {/* Ambient orb — breathes behind "intention" */}
       <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center select-none max-md:hidden"
+        ref={orbRef}
+        className="pointer-events-none absolute"
         aria-hidden="true"
-      >
-        <span
-          ref={watermarkRef}
-          className="font-display text-(--color-text-primary)"
-          style={{
-            fontSize: "clamp(120px, 20vw, 320px)",
-            opacity: 0.06,
-            letterSpacing: "0.1em",
-            lineHeight: 1,
-            willChange: "transform, filter",
-          }}
-        >
-          NIMBUS
-        </span>
-      </div>
-
-      {/* Corner marks */}
-      <div className="pointer-events-none absolute inset-0 max-md:hidden" aria-hidden="true">
-        <div className="absolute left-16 top-24 h-12 w-px bg-(--color-accent) opacity-[0.08]" />
-        <div className="absolute left-16 top-24 h-px w-12 bg-(--color-accent) opacity-[0.08]" />
-        <div className="absolute right-16 top-24 h-12 w-px bg-(--color-accent) opacity-[0.08]" />
-        <div className="absolute right-16 top-24 h-px w-12 bg-(--color-accent) opacity-[0.08]" style={{ transform: "translateX(-100%)" }} />
-        <div className="absolute left-16 bottom-24 h-12 w-px bg-(--color-accent) opacity-[0.08]" style={{ transform: "translateY(-100%)" }} />
-        <div className="absolute left-16 bottom-24 h-px w-12 bg-(--color-accent) opacity-[0.08]" />
-        <div className="absolute right-16 bottom-24 h-12 w-px bg-(--color-accent) opacity-[0.08]" style={{ transform: "translateY(-100%)" }} />
-        <div className="absolute right-16 bottom-24 h-px w-12 bg-(--color-accent) opacity-[0.08]" style={{ transform: "translateX(-100%)" }} />
-      </div>
+        style={{
+          width: "clamp(300px, 40vw, 600px)",
+          height: "clamp(300px, 40vw, 600px)",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(124,92,252,0.12) 0%, rgba(94,234,212,0.04) 50%, transparent 70%)",
+          filter: "blur(60px)",
+          willChange: "transform, opacity",
+        }}
+      />
 
       {/* Centered content */}
       <div className="relative z-10 flex flex-col items-center gap-8 px-6 text-center max-md:gap-6">
