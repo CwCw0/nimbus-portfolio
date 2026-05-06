@@ -77,6 +77,44 @@ export default function Process() {
         return;
       }
 
+      // Scroll-linked progress line
+      const progressLine = el.querySelector(".process-progress-fill");
+      if (progressLine) {
+        gsap.fromTo(
+          progressLine,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: el.querySelector(".process-stack"),
+              start: "top 40%",
+              end: "bottom 60%",
+              scrub: 1,
+            },
+          }
+        );
+      }
+
+      // Step dots — light up as progress reaches them
+      el.querySelectorAll(".process-dot").forEach((dot, i) => {
+        gsap.fromTo(
+          dot,
+          { scale: 0.5, opacity: 0.2 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.4,
+            ease: "back.out(2)",
+            scrollTrigger: {
+              trigger: el.querySelectorAll(".process-card")[i],
+              start: "top 50%",
+              once: true,
+            },
+          }
+        );
+      });
+
       // Desktop — stacking cards with scroll pinning
       const cards = el.querySelectorAll<HTMLElement>(".process-card");
       const stackContainer = el.querySelector(".process-stack");
@@ -163,8 +201,33 @@ export default function Process() {
         </h2>
       </div>
 
-      {/* Desktop — stacking cards */}
-      <div className="process-stack mx-auto max-w-250 max-md:hidden">
+      {/* Desktop — stacking cards with progress line */}
+      <div className="process-stack relative mx-auto max-w-250 max-md:hidden">
+        {/* Vertical progress line — left edge */}
+        <div className="absolute left-0 top-0 bottom-0 w-px max-md:hidden" style={{ marginLeft: -40 }}>
+          {/* Track */}
+          <div className="absolute inset-0 bg-(--color-border) opacity-20" />
+          {/* Fill — scroll-linked */}
+          <div
+            className="process-progress-fill absolute inset-0 origin-top"
+            style={{
+              background: "linear-gradient(to bottom, var(--color-accent), var(--color-accent-secondary))",
+              transformOrigin: "top center",
+            }}
+          />
+          {/* Step dots */}
+          {steps.map((_, i) => (
+            <div
+              key={i}
+              className="process-dot absolute left-1/2 -translate-x-1/2 h-3 w-3 rounded-full border-2 border-(--color-accent) bg-(--color-bg-primary)"
+              style={{
+                top: `${(i / (steps.length - 1)) * 100}%`,
+                boxShadow: "0 0 8px rgba(124,92,252,0.3)",
+              }}
+            />
+          ))}
+        </div>
+
         {steps.map((s, i) => {
           // Each card gets progressively deeper bg for visual depth
           const bgShades = [

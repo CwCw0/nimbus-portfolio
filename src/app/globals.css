@@ -301,7 +301,7 @@ html.lenis, html.lenis body {
   padding: 20px 0 8px;
   font-size: 15px;
   color: var(--color-text-primary);
-  transition: border-color 300ms ease;
+  transition: border-color 400ms ease, box-shadow 400ms ease;
   outline: none;
 }
 
@@ -309,6 +309,26 @@ html.lenis, html.lenis body {
 .float-field textarea:focus,
 .float-field select:focus {
   border-bottom-color: var(--color-accent-secondary);
+  box-shadow: 0 1px 0 0 var(--color-accent-secondary), 0 4px 16px -4px rgba(94, 234, 212, 0.08);
+}
+
+/* Focus glow line — gradient draws under the input */
+.float-field::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-secondary));
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.float-field:focus-within::after {
+  transform: scaleX(1);
 }
 
 .float-field label {

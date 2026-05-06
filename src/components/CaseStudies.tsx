@@ -10,6 +10,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Category accent colors — each project type has its own visual identity
+const categoryAccents: Record<string, string> = {
+  Website: "#5EEAD4",    // teal
+  "Web App": "#7C5CFC",  // purple
+  SaaS: "#F59E0B",       // amber
+  Platform: "#EC4899",   // pink
+};
+
 const studies = allCaseStudies.map((s) => ({
   tags: [s.category, ...s.tags.slice(0, 1)],
   title: s.shortTitle,
@@ -17,6 +25,8 @@ const studies = allCaseStudies.map((s) => ({
   slug: s.slug,
   image: s.heroImage || "",
   status: s.status,
+  category: s.category,
+  accent: categoryAccents[s.category] || "#7C5CFC",
 }));
 
 export default function CaseStudies() {
@@ -302,19 +312,45 @@ export default function CaseStudies() {
 
             {/* Row content */}
             <div className="cs-row-inner flex items-center gap-8 py-10 md:py-12">
-              <span className="w-16 shrink-0 font-body text-sm tracking-[2px] text-(--color-text-subtle) transition-colors duration-300 group-hover:text-(--color-accent)">
-                {String(i + 1).padStart(2, "0")}
-              </span>
+              {/* Category accent dot */}
+              <div className="flex w-16 shrink-0 items-center gap-3">
+                <div
+                  className="h-2 w-2 rounded-full transition-all duration-300 group-hover:scale-150"
+                  style={{ background: s.accent, opacity: 0.5, boxShadow: `0 0 0px ${s.accent}` }}
+                  onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.boxShadow = `0 0 12px ${s.accent}50`; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.opacity = "0.5"; e.currentTarget.style.boxShadow = `0 0 0px ${s.accent}`; }}
+                />
+                <span className="font-body text-sm tracking-[2px] text-(--color-text-subtle) transition-colors duration-300 group-hover:text-(--color-accent)">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
 
               <h3
-                className="flex-1 font-display tracking-[-1px] text-(--color-text-primary) transition-all duration-500 group-hover:translate-x-4 group-hover:text-(--color-accent)"
-                style={{ fontSize: "clamp(28px, 4vw, 56px)", lineHeight: 1.1 }}
+                className="flex-1 font-display tracking-[-1px] text-(--color-text-primary) transition-all duration-500 group-hover:translate-x-4"
+                style={{
+                  fontSize: "clamp(28px, 4vw, 56px)",
+                  lineHeight: 1.1,
+                  // Per-project hover color via CSS custom property
+                  ["--row-accent" as string]: s.accent,
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = s.accent; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = ""; }}
               >
                 {s.title}
               </h3>
 
               <div className="flex items-center gap-4 max-lg:hidden">
-                {s.tags.map((tag) => (
+                {/* Category pill with accent border */}
+                <span
+                  className="px-2.5 py-1 font-body text-[10px] tracking-[1px] transition-all duration-300 border"
+                  style={{
+                    borderColor: `${s.accent}30`,
+                    color: `${s.accent}AA`,
+                  }}
+                >
+                  {s.category}
+                </span>
+                {s.tags.slice(1).map((tag) => (
                   <span
                     key={tag}
                     className="font-body text-[11px] tracking-[1px] text-(--color-text-muted) transition-colors duration-300 group-hover:text-(--color-text-secondary)"
@@ -330,7 +366,12 @@ export default function CaseStudies() {
                 </span>
               )}
 
-              <div className="ml-4 flex h-12 w-12 shrink-0 items-center justify-center border border-(--color-border) transition-all duration-300 group-hover:border-(--color-accent) group-hover:bg-(--color-accent)">
+              <div
+                className="ml-4 flex h-12 w-12 shrink-0 items-center justify-center border border-(--color-border) transition-all duration-300"
+                style={{ ["--btn-accent" as string]: s.accent }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = s.accent; e.currentTarget.style.background = s.accent; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = ""; e.currentTarget.style.background = ""; }}
+              >
                 <ArrowRight className="h-4 w-4 text-(--color-text-muted) transition-all duration-300 group-hover:-rotate-45 group-hover:text-white" />
               </div>
             </div>
