@@ -192,6 +192,8 @@ export default function Process() {
           HOW IT WORKS
         </span>
         <h2
+          data-velocity
+          data-velocity-strength="0.6"
           className="mt-4 font-display tracking-[-2px] text-(--color-text-primary)"
           style={{ fontSize: "clamp(32px, 5vw, 64px)" }}
         >
@@ -241,7 +243,7 @@ export default function Process() {
               style={{ willChange: "transform" }}
             >
               <div
-                className="process-card-inner relative flex min-h-[320px] flex-col justify-between border border-(--color-border) p-12 md:p-16"
+                className="process-card-inner relative flex min-h-80 flex-col justify-between border border-(--color-border) p-12 md:p-16"
                 style={{ background: bgShades[i] }}
               >
                 {/* Top row — number + detail */}

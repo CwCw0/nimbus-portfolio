@@ -15,6 +15,7 @@ import SmoothScroll from "../components/SmoothScroll";
 import AmbientOrbs from "../components/AmbientOrbs";
 import WaterRipple from "../components/WaterRipple";
 import ScrollRevealText from "../components/ScrollRevealText";
+import ScrollVelocity from "../components/ScrollVelocity";
 import LatestBlog from "../components/LatestBlog";
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
     <>
       <CustomCursor />
       <ScrollToTop />
+      <ScrollVelocity />
       <AmbientOrbs />
       <WaterRipple />
       <SmoothScroll>

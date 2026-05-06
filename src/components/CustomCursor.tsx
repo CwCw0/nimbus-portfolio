@@ -74,16 +74,24 @@ export default function CustomCursor() {
     const magneticHandlers: Array<{ el: Element; move: (e: MouseEvent) => void; leave: () => void }> = [];
 
     magneticElements.forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      const strength = parseFloat(htmlEl.dataset.magneticStrength || "0.35");
+
       const move = (e: MouseEvent) => {
-        const rect = (el as HTMLElement).getBoundingClientRect();
+        const rect = htmlEl.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         const distX = e.clientX - centerX;
         const distY = e.clientY - centerY;
-        gsap.to(el, { x: distX * 0.3, y: distY * 0.3, duration: 0.4, ease: "power2.out" });
+        gsap.to(el, {
+          x: distX * strength,
+          y: distY * strength,
+          duration: 0.4,
+          ease: "power2.out",
+        });
       };
       const leave = () => {
-        gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+        gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
       };
       el.addEventListener("mousemove", move as EventListener);
       el.addEventListener("mouseleave", leave);

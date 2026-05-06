@@ -160,6 +160,8 @@ export default function Services() {
           SERVICES
         </span>
         <h2
+          data-velocity
+          data-velocity-strength="0.7"
           className="font-display leading-[1.05] tracking-[-2px] text-(--color-text-primary) max-w-150"
           style={{ fontSize: "clamp(32px, 4vw, 56px)" }}
         >

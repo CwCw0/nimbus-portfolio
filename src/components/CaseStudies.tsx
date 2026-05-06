@@ -285,6 +285,7 @@ export default function CaseStudies() {
           SELECTED WORK
         </span>
         <h2
+          data-velocity
           className="mt-4 font-display tracking-[-2px] text-(--color-text-primary)"
           style={{ fontSize: "clamp(36px, 5vw, 72px)" }}
         >

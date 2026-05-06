@@ -149,6 +149,7 @@ export default function Contact() {
       {/* Massive heading — viewport-aware */}
       <h2
         ref={headingRef}
+        data-velocity
         className="mb-6 text-center font-display tracking-[-3px] text-(--color-text-primary) max-md:mb-8 max-md:tracking-[-1px]"
         style={{
           fontSize: "clamp(36px, 8vw, 130px)",
@@ -173,7 +174,7 @@ export default function Contact() {
         <form
           onSubmit={handleSubmit}
           className={`contact-reveal flex flex-col gap-10 transition-colors duration-500 ${
-            submitState === "sent" ? "bg-emerald-500/[0.03]" : ""
+            submitState === "sent" ? "bg-emerald-500/3" : ""
           }`}
         >
           <input
@@ -274,7 +275,7 @@ export default function Contact() {
             {submitState === "idle" && (
               <>
                 <span>Send Message</span>
-                <ArrowRight className="h-[18px] w-[18px]" />
+                <ArrowRight className="h-4.5 w-4.5" />
               </>
             )}
             {submitState === "sending" && (

@@ -245,7 +245,8 @@ export default function About() {
 
           <h2
             ref={headingRef}
-            className="font-display leading-[1.05] tracking-[-2px] text-(--color-text-primary) max-w-[900px]"
+            data-velocity
+            className="font-display leading-[1.05] tracking-[-2px] text-(--color-text-primary) max-w-225"
             style={{ fontSize: "clamp(36px, 5vw, 72px)" }}
           >
             Not just a dev. A builder from end to end.
