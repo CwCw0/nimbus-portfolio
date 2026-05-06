@@ -401,13 +401,13 @@ export default function CaseStudies() {
                   sizes="100vw"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-[#7C5CFC12] to-[#7C5CFC06]">
+                <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-(--color-accent-subtle) to-(--color-bg-card)">
                   <span className="font-body text-sm tracking-[2px] text-(--color-text-subtle)">
                     {s.title}
                   </span>
                 </div>
               )}
-              <div className="absolute inset-0 bg-linear-to-t from-[#0A0A0F] via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-(--color-bg-primary) via-transparent to-transparent" />
               {s.status === "in-development" && (
                 <span className="absolute top-3 right-3 bg-amber-500/15 border border-amber-500/25 px-2.5 py-1 font-body text-[9px] font-semibold tracking-[1px] text-amber-400">
                   IN DEV

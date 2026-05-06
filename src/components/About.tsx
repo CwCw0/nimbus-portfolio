@@ -84,18 +84,18 @@ export default function About() {
         );
       });
 
-      // Stats — scale in with stagger
+      // Proof point — fade in with purpose
       if (statsRef.current) {
         const statItems = statsRef.current.querySelectorAll(".stat-item");
         gsap.fromTo(
           statItems,
-          { autoAlpha: 0, scale: 0.8 },
+          { autoAlpha: 0, y: 24 },
           {
             autoAlpha: 1,
-            scale: 1,
-            duration: 0.6,
-            stagger: 0.12,
-            ease: "back.out(1.4)",
+            y: 0,
+            duration: 0.7,
+            stagger: 0.15,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: statsRef.current,
               start: "top 80%",
@@ -233,7 +233,7 @@ export default function About() {
       ref={ref}
       id="about"
       className="relative w-full overflow-hidden px-16 py-32 max-md:px-6 max-md:py-20"
-      style={{ background: "#0D0C14" }}
+      style={{ background: "var(--color-bg-elevated)" }}
     >
       {/* Asymmetric layout — offset grid */}
       <div className="relative mx-auto max-w-350">
@@ -256,54 +256,36 @@ export default function About() {
         <div className="flex gap-20 max-md:flex-col max-md:gap-12">
           {/* Left column — narrower, stats + CTA (35%) */}
           <div className="about-stats-col flex w-[35%] flex-col gap-12 max-md:w-full">
-            {/* Stats — big numbers */}
-            <div ref={statsRef} className="flex flex-col gap-8">
-              <div className="stat-item">
+            {/* Proof point — one real commitment, not vanity numbers */}
+            <div ref={statsRef} className="flex flex-col gap-10">
+              <div className="stat-item flex flex-col gap-3">
                 <span
-                  className="block font-display text-(--color-accent)"
+                  className="block font-display italic text-(--color-accent)"
                   style={{
-                    fontSize: "clamp(56px, 7vw, 96px)",
-                    lineHeight: 0.9,
-                    letterSpacing: "-0.03em",
+                    fontSize: "clamp(28px, 3.5vw, 44px)",
+                    lineHeight: 1.15,
+                    letterSpacing: "-0.02em",
                   }}
                 >
-                  4+
+                  One project at a time.
                 </span>
-                <span className="mt-2 block font-body text-sm text-(--color-text-muted)">
-                  Active projects
-                </span>
+                <p className="font-body text-sm leading-[1.7] text-(--color-text-muted)">
+                  No juggling ten clients. No junior designers learning on your project. When I take your work on, it gets my full focus until it ships.
+                </p>
               </div>
 
-              <div className="stat-item">
-                <span
-                  className="block font-display text-(--color-text-primary)"
-                  style={{
-                    fontSize: "clamp(56px, 7vw, 96px)",
-                    lineHeight: 0.9,
-                    letterSpacing: "-0.03em",
-                  }}
-                >
-                  3
+              <div className="stat-item border-t border-(--color-border) pt-8">
+                <span className="font-body text-[11px] font-medium tracking-[2px] text-(--color-text-subtle)">
+                  WHAT THAT MEANS
                 </span>
-                <span className="mt-2 block font-body text-sm text-(--color-text-muted)">
-                  Products building
-                </span>
-              </div>
-
-              <div className="stat-item">
-                <span
-                  className="block font-display text-(--color-accent-secondary)"
-                  style={{
-                    fontSize: "clamp(56px, 7vw, 96px)",
-                    lineHeight: 0.9,
-                    letterSpacing: "-0.03em",
-                  }}
-                >
-                  100%
-                </span>
-                <span className="mt-2 block font-body text-sm text-(--color-text-muted)">
-                  Attention per project
-                </span>
+                <div className="mt-4 flex flex-col gap-3">
+                  {["Direct communication, no middlemen", "Weekly progress you can see", "Code you own, fully documented"].map((point) => (
+                    <div key={point} className="flex items-center gap-3">
+                      <div className="h-1 w-1 rounded-full bg-(--color-accent) shrink-0" />
+                      <span className="font-body text-sm text-(--color-text-dim)">{point}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -330,20 +312,20 @@ export default function About() {
           <div className="about-text-col flex flex-1 flex-col gap-8">
             <p className="about-para font-body text-lg leading-[1.8] text-(--color-text-dim)">
               Developer, designer, and founder of Nimbus Forma Studio. I
-              don&apos;t just write code — I study the systems, the design, the
-              business, and the user.
+              study the systems, the design, the business, and the user
+              before writing a single line of code.
             </p>
 
             <p className="about-para font-body text-base leading-[1.8] text-(--color-text-dim)">
-              Every project gets the same obsessive attention to detail:
-              performance tuning, pixel-perfect design, and code that&apos;s
-              built to last. I work directly with founders and small teams who
+              Every project gets obsessive attention: performance tuning,
+              design that communicates, and code built to outlast its
+              framework. I work directly with founders and small teams who
               want a partner, not a vendor.
             </p>
 
             <p className="about-para font-body text-base leading-[1.8] text-(--color-text-dim)">
-              Fast to respond, focused when it counts. Every project gets full
-              attention — not split between ten clients at once.
+              One project at a time. Full attention. No split focus,
+              no account managers, no handoffs.
             </p>
 
             {/* Tech pills */}
@@ -354,16 +336,9 @@ export default function About() {
               {[
                 "Next.js",
                 "React",
-                "Python",
-                "Node.js",
-                "Swift",
-                "Flutter",
-                ".NET",
                 "TypeScript",
+                "GSAP",
                 "Tailwind",
-                "LLMs",
-                "AI Agents",
-                "Figma",
                 "Vercel",
               ].map((tool) => (
                 <span

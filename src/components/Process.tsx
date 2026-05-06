@@ -9,21 +9,21 @@ gsap.registerPlugin(ScrollTrigger);
 const steps = [
   {
     num: "01",
-    title: "Discovery",
-    desc: "I learn about your goals, audience and vision. I research your market and competitors to find the right approach.",
-    detail: "Strategy · Research · Direction",
+    title: "Five questions, not fifty.",
+    desc: "I send you 5 targeted questions about your business, your customers, and what success looks like. We do one 30-minute call. Within 48 hours, you get a strategy document with scope, timeline, and exactly what I'll build.",
+    detail: "48hr turnaround · 1 call · No questionnaire",
   },
   {
     num: "02",
-    title: "Design & Build",
-    desc: "I design and develop your solution iteratively, keeping you in the loop with regular checkpoints.",
-    detail: "UI/UX · Code · Iteration",
+    title: "You see it every week.",
+    desc: "I design and build in the open. Every Friday you get a live link to the current state, not a PDF mockup. You give feedback on real, working pages. No surprises at the end.",
+    detail: "Weekly builds · Live previews · Real feedback",
   },
   {
     num: "03",
-    title: "Launch & Grow",
-    desc: "I launch your project, monitor performance, and iterate. I stay available for ongoing support and optimizations.",
-    detail: "Deploy · Measure · Scale",
+    title: "It ships. Then I stay.",
+    desc: "Launch day is a deploy, not a goodbye. I handle hosting, domain, analytics setup, and a 30-day support window. If something breaks at 2am, I fix it. You don't need to find someone new.",
+    detail: "Full deploy · 30-day support · No handoff drama",
   },
 ];
 
@@ -195,9 +195,7 @@ export default function Process() {
           className="mt-4 font-display tracking-[-2px] text-(--color-text-primary)"
           style={{ fontSize: "clamp(32px, 5vw, 64px)" }}
         >
-          Three steps.
-          <br />
-          <span className="text-(--color-text-muted)">Zero fluff.</span>
+          How it actually works.
         </h2>
       </div>
 

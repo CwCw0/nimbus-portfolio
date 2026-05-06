@@ -27,7 +27,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
   const ctaHeadingRef = useRef<HTMLHeadingElement>(null);
-  const ctaButtonRef = useRef<HTMLAnchorElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
   const quoteRef = useRef<HTMLDivElement>(null);
   const wordmarkRef = useRef<HTMLSpanElement>(null);
@@ -49,16 +48,15 @@ export default function Footer() {
 
     const cleanups: (() => void)[] = [];
 
-    // ── 1. CTA heading: word-by-word reveal ──
+    // ── Step 1: CTA block entrance (heading + button together) ──
     if (ctaHeadingRef.current) {
       const ctaSplit = new SplitType(ctaHeadingRef.current, { types: "words" });
-      gsap.set(ctaSplit.words || [], { opacity: 0, y: 24, filter: "blur(4px)" });
+      gsap.set(ctaSplit.words || [], { opacity: 0, y: 20 });
       gsap.to(ctaSplit.words || [], {
         opacity: 1,
         y: 0,
-        filter: "blur(0px)",
-        duration: 0.6,
-        stagger: 0.06,
+        duration: 0.5,
+        stagger: 0.05,
         ease: "power3.out",
         scrollTrigger: {
           trigger: ctaHeadingRef.current,
@@ -69,26 +67,7 @@ export default function Footer() {
       cleanups.push(() => ctaSplit.revert());
     }
 
-    // ── 2. CTA button: slide up ──
-    if (ctaButtonRef.current) {
-      gsap.fromTo(
-        ctaButtonRef.current,
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ctaButtonRef.current,
-            start: "top 90%",
-            once: true,
-          },
-        }
-      );
-    }
-
-    // ── 3. Gradient divider: draw left to right ──
+    // ── Step 2: Divider draws, wordmark sequence plays ──
     if (dividerRef.current) {
       gsap.fromTo(
         dividerRef.current,
@@ -97,16 +76,11 @@ export default function Footer() {
           scaleX: 1,
           duration: 1,
           ease: "power2.inOut",
-          scrollTrigger: {
-            trigger: dividerRef.current,
-            start: "top 90%",
-            once: true,
-          },
+          scrollTrigger: { trigger: dividerRef.current, start: "top 90%", once: true },
         }
       );
     }
 
-    // ── 4. Wordmark → strikethrough → Forma Studio ──
     const wordmark = wordmarkRef.current;
     const strikethrough = strikethroughRef.current;
     const formaStudio = formaStudioRef.current;
@@ -118,94 +92,29 @@ export default function Footer() {
       gsap.set(formaStudio, { opacity: 0, y: 8 });
 
       const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wordmark,
-          start: "top 90%",
-          once: true,
-        },
+        scrollTrigger: { trigger: wordmark, start: "top 90%", once: true },
       });
 
-      // Chars stagger in
-      tl.to(split.chars || [], {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        stagger: 0.05,
-        ease: "power3.out",
-      });
-
-      // Strikethrough draws
-      tl.to(strikethrough, {
-        scaleX: 1,
-        duration: 0.6,
-        ease: "power2.inOut",
-      }, "+=0.25");
-
-      // Forma Studio fades in
-      tl.to(formaStudio, {
-        opacity: 0.3,
-        y: 0,
-        duration: 0.5,
-        ease: "power3.out",
-      }, "-=0.25");
+      tl.to(split.chars || [], { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: "power3.out" });
+      tl.to(strikethrough, { scaleX: 1, duration: 0.6, ease: "power2.inOut" }, "+=0.25");
+      tl.to(formaStudio, { opacity: 0.3, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.25");
 
       cleanups.push(() => split.revert());
     }
 
-    // ── 5. Quote: contemplative char-by-char ──
-    if (quoteRef.current) {
-      const quoteText = quoteRef.current.querySelector("p");
-      if (quoteText) {
-        const quoteSplit = new SplitType(quoteText, { types: "words" });
-        gsap.set(quoteSplit.words || [], { opacity: 0 });
-        gsap.to(quoteSplit.words || [], {
-          opacity: 1,
-          duration: 0.3,
-          stagger: 0.04,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: quoteRef.current,
-            start: "top 90%",
-            once: true,
-          },
-        });
-        cleanups.push(() => quoteSplit.revert());
-      }
-    }
-
-    // ── 6. Nav links: cascade ──
-    if (navRef.current) {
-      const links = navRef.current.querySelectorAll("a");
+    // ── Step 3: Everything below appears together ──
+    const belowElements = [quoteRef.current, navRef.current, copyrightRef.current].filter(Boolean);
+    if (belowElements.length) {
       gsap.fromTo(
-        links,
-        { y: 12, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.4,
-          stagger: 0.06,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: navRef.current,
-            start: "top 95%",
-            once: true,
-          },
-        }
-      );
-    }
-
-    // ── 7. Copyright: last to appear ──
-    if (copyrightRef.current) {
-      gsap.fromTo(
-        copyrightRef.current,
+        belowElements,
         { opacity: 0 },
         {
           opacity: 1,
-          duration: 0.8,
+          duration: 0.6,
           ease: "power2.out",
           scrollTrigger: {
-            trigger: copyrightRef.current,
-            start: "top 98%",
+            trigger: belowElements[0]!,
+            start: "top 95%",
             once: true,
           },
         }
@@ -228,10 +137,9 @@ export default function Footer() {
           Have a project in mind?
         </h3>
         <p className="mb-10 max-w-md text-center font-body text-base text-(--color-text-muted)">
-          Let&apos;s make something remarkable.
+          Tell me what you need. I&apos;ll tell you how I&apos;d build it.
         </p>
         <Link
-          ref={ctaButtonRef}
           href="/contact"
           data-magnetic
           className="flex items-center gap-3 bg-(--color-accent-warm) px-10 py-4 font-body text-[15px] font-semibold text-[#1a1400] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_rgba(245,194,107,0.25)]"
@@ -308,9 +216,9 @@ export default function Footer() {
       {/* Pull quote — contemplative word reveal */}
       <div ref={quoteRef} className="flex justify-center py-6 max-md:py-4">
         <p className="max-w-125 text-center font-display text-lg italic leading-normal text-(--color-text-subtle) max-md:text-base">
-          &ldquo;Good design is as little design as possible.&rdquo;
+          &ldquo;The details are not the details. They make the design.&rdquo;
           <span className="mt-2 block font-body text-[11px] not-italic tracking-[2px] text-(--color-text-faint)">
-            — DIETER RAMS
+            — CHARLES EAMES
           </span>
         </p>
       </div>
@@ -351,7 +259,7 @@ export default function Footer() {
             &copy; 2026 Nimbus Forma Studio. All rights reserved.
           </span>
           <span className="font-body text-[11px] tracking-[0.5px] text-(--color-text-faint)">
-            Designed & built with <span className="text-(--color-accent)">intention</span>
+            Built with <span className="text-(--color-accent)">intention</span>
           </span>
         </div>
       </div>

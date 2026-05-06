@@ -214,6 +214,7 @@ export default function Contact() {
                 name="subject"
                 className="appearance-none"
                 defaultValue=""
+                aria-label="Project type"
               >
                 <option value="" disabled>
                   Select type...
@@ -233,6 +234,7 @@ export default function Contact() {
                 name="budget"
                 className="appearance-none"
                 defaultValue=""
+                aria-label="Budget range"
               >
                 <option value="" disabled>
                   Select range...
@@ -283,7 +285,7 @@ export default function Contact() {
             )}
             {submitState === "error" && (
               <span className="mx-auto">
-                Something went wrong — try again
+                Something went wrong. Try again
               </span>
             )}
           </button>

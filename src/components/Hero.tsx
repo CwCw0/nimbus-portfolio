@@ -350,8 +350,8 @@ export default function Hero() {
           ref={subtextRef}
           className="max-w-130 font-body text-lg leading-[1.7] text-(--color-text-dim) max-md:text-base max-md:max-w-100"
         >
-          A creative studio for businesses that want more than a template.
-          Design, development, and AI — built with precision.
+          For businesses that want more than a template.
+          Design, development, and AI; built with precision.
         </p>
 
         <div
