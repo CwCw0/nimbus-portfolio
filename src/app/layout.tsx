@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_MY",
     url: siteUrl,
     siteName: "Nimbus Forma Studio",
     title: "Nimbus Forma Studio — Built with intention.",
@@ -82,6 +82,21 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
+
+        {/* Geo targeting — Malaysia primary, global reach */}
+        <meta name="geo.region" content="MY" />
+        <meta name="geo.placename" content="Kuala Lumpur" />
+        <meta name="geo.position" content="3.1390;101.6869" />
+        <meta name="ICBM" content="3.1390, 101.6869" />
+
+        {/* Language targeting */}
+        <link rel="alternate" hrefLang="en" href={siteUrl} />
+        <link rel="alternate" hrefLang="x-default" href={siteUrl} />
+
+        {/* Google Search Console verification — replace content value after setup */}
+        {process.env.NEXT_PUBLIC_GSC_VERIFICATION && (
+          <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GSC_VERIFICATION} />
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -113,10 +128,25 @@ export default function RootLayout({
                   description: "Creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
                   url: siteUrl,
                   email: "heyitsnimbus@gmail.com",
+                  telephone: "+60128890318",
                   priceRange: "$$",
-                  areaServed: "Worldwide",
-                  serviceType: ["Web Design", "Web Development", "Brand Identity", "AI Tools & Automation", "SEO"],
+                  areaServed: [
+                    { "@type": "Country", name: "Malaysia" },
+                    { "@type": "Place", name: "Worldwide" },
+                  ],
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Kuala Lumpur",
+                    addressCountry: "MY",
+                  },
+                  geo: {
+                    "@type": "GeoCoordinates",
+                    latitude: 3.1390,
+                    longitude: 101.6869,
+                  },
+                  serviceType: ["Web Design", "Web Development", "Brand Identity", "UI/UX Design", "AI Tools & Automation", "SEO", "Branding"],
                   founder: { "@id": `${siteUrl}/#person` },
+                  sameAs: ["https://github.com/CwCw0"],
                 },
               ],
             }),
