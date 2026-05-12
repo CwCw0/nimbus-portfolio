@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import PageLoader from "../components/PageLoader";
 import ScrollProgress from "../components/ScrollProgress";
 import GrainOverlay from "../components/GrainOverlay";
+import TabTitle from "../components/TabTitle";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -23,12 +24,12 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbusformastudio.c
 
 export const metadata: Metadata = {
   title: {
-    default: "Nimbus Forma Studio — Websites, Branding & AI Tools",
+    default: "Nimbus Forma Studio — Built with intention.",
     template: "%s | Nimbus Forma Studio",
   },
   description:
     "Nimbus Forma Studio is a creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
-  keywords: ["web development", "branding", "UI/UX design", "SEO", "AI tools", "creative studio", "freelance developer", "Next.js developer", "React developer", "web designer"],
+  keywords: ["web design Malaysia", "freelance web developer KL", "website designer Kuala Lumpur", "Next.js developer Malaysia", "branding agency Malaysia", "UI/UX design", "AI tools", "web development", "React developer", "creative studio Malaysia", "Nimbus Forma Studio"],
   authors: [{ name: "Nimbus Forma Studio" }],
   creator: "Nimbus Forma Studio",
   metadataBase: new URL(siteUrl),
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Nimbus Forma Studio",
-    title: "Nimbus Forma Studio — Websites, Branding & AI Tools",
+    title: "Nimbus Forma Studio — Built with intention.",
     description:
       "Nimbus Forma Studio is a creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
     images: [
@@ -131,6 +132,7 @@ export default function RootLayout({
         <PageLoader />
         <ScrollProgress />
         <GrainOverlay />
+        <TabTitle />
         {children}
         <Analytics />
       </body>
