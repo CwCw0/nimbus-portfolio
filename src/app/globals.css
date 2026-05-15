@@ -120,6 +120,7 @@
   /* ── Glass backgrounds ── */
   --glass-bg: rgba(10, 10, 15, 0.55);
   --glass-bg-strong: rgba(10, 10, 15, 0.72);
+  --glass-bg-nav: rgba(10, 10, 15, 0.88);
 
   /* ── Shadows ── */
   --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.4);
@@ -149,6 +150,7 @@
   --accent-soft: rgba(90, 63, 204, 0.08);
   --glass-bg: rgba(245, 242, 236, 0.65);
   --glass-bg-strong: rgba(245, 242, 236, 0.82);
+  --glass-bg-nav: rgba(245, 242, 236, 0.92);
   --line: rgba(20, 16, 31, 0.10);
   --line-strong: rgba(20, 16, 31, 0.22);
   --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.08);
@@ -489,18 +491,19 @@
     background 300ms var(--ease-out);
 }
 
-/* Hover: pointer hides, ring becomes accent-filled circle */
+/* Hover: pointer shrinks, ring becomes visible accent circle */
 #custom-cursor-dot.hovering {
-  opacity: 0;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 8px rgba(124, 92, 252, 0.8)) drop-shadow(0 0 16px rgba(124, 92, 252, 0.4));
 }
 #custom-cursor-ring.hovering {
-  width: 48px;
-  height: 48px;
-  margin-left: -24px;
-  margin-top: -24px;
-  background: radial-gradient(circle, rgba(124, 92, 252, 0.12) 0%, rgba(124, 92, 252, 0.04) 60%, transparent 80%);
-  border: 1px solid rgba(124, 92, 252, 0.25);
-  box-shadow: 0 0 20px rgba(124, 92, 252, 0.15);
+  width: 52px;
+  height: 52px;
+  margin-left: -26px;
+  margin-top: -26px;
+  background: radial-gradient(circle, rgba(124, 92, 252, 0.18) 0%, rgba(124, 92, 252, 0.06) 60%, transparent 80%);
+  border: 1.5px solid rgba(124, 92, 252, 0.45);
+  box-shadow: 0 0 24px rgba(124, 92, 252, 0.25), inset 0 0 12px rgba(124, 92, 252, 0.08);
 }
 
 /* Click: glow intensifies */
@@ -914,14 +917,14 @@ main, footer, nav, header {
 }
 
 .nav-bar.nav-scrolled {
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--glass-bg-nav);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
   border-bottom-color: var(--line);
 }
 
 [data-theme="light"] .nav-bar.nav-scrolled {
-  background: var(--glass-bg-strong);
+  background: var(--glass-bg-nav);
 }
 
 .nav-inner {
@@ -1002,8 +1005,16 @@ main, footer, nav, header {
   background: var(--accent-soft);
 }
 
+.nav-link:hover .nav-link-label {
+  color: var(--accent-2);
+}
+
 .nav-link-active {
   background: var(--accent-soft);
+}
+
+.nav-link-active .nav-link-label {
+  color: var(--accent-2);
 }
 
 .nav-link-label {
@@ -1012,6 +1023,7 @@ main, footer, nav, header {
   font-size: 13.5px;
   color: var(--fg);
   line-height: 1.2;
+  transition: color 0.3s var(--ease-out);
 }
 
 .nav-link-sub {
