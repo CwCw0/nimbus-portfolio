@@ -135,7 +135,7 @@ function CaseStudyRow({
     <div
       className="case-study-row"
       style={{
-        minHeight: '100vh',
+        minHeight: 'var(--case-study-min-height, 100vh)',
         display: 'grid',
         gridTemplateColumns: even ? '1fr 1fr' : '1fr 1fr',
         gap: 'var(--sp-12)',
@@ -226,7 +226,7 @@ function CaseStudyRow({
         </p>
 
         {/* Stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-4)', marginBottom: 'var(--sp-8)' }}>
+        <div className="case-study-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-4)', marginBottom: 'var(--sp-8)' }}>
           {p.stats.map(([label, value], i) => (
             <FadeIn key={label} delay={i * 120}>
               <div

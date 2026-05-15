@@ -34,12 +34,10 @@ export default function FinalCTA() {
         <h2 className="text-center font-display text-[52px] leading-[1.1] tracking-[-2px] text-[var(--color-text-primary)] max-md:text-[32px]">
           Ready to build
           <br />
-          something remarkable?
+          the system you need?
         </h2>
         <p className="w-[600px] text-center font-body text-lg leading-[1.6] text-[var(--color-text-dim)] max-md:w-full">
-          Whether it&apos;s a single landing page or a long-term contract —
-          <br />
-          let&apos;s talk about what Nimbus can do for you.
+          Whether it&apos;s a single landing page or a long-term contract — let&apos;s talk about what Nimbus can do for you.
         </p>
         <div className="flex items-center gap-4 max-md:flex-col max-md:w-full">
           <a

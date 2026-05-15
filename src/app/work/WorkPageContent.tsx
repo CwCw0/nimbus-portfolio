@@ -166,8 +166,7 @@ export default function WorkPageContent() {
                           padding: '4px 10px',
                           borderRadius: 'var(--r-pill)',
                           border: '1px solid var(--line-strong)',
-                          background: 'var(--glass-bg)',
-                          backdropFilter: 'blur(8px)',
+                          background: 'rgba(10, 10, 15, 0.75)',
                           color: 'var(--fg-dim)',
                         }}
                       >
@@ -246,20 +245,35 @@ export default function WorkPageContent() {
           <div className="container">
             {/* Section intro */}
             <FadeIn>
-              <div style={{ marginBottom: 'var(--sp-12)' }}>
-                <p style={{ color: 'var(--fg-dim)', maxWidth: 560, lineHeight: 1.7 }}>
-                  6 production-quality web design templates, each with a distinct personality.
-                  Next.js + GSAP animations, fully responsive, ready to ship.
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-end',
+                  marginBottom: 'var(--sp-12)',
+                  gap: 'var(--sp-6)',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <p style={{ color: 'var(--fg-dim)', maxWidth: 480, lineHeight: 1.7 }}>
+                  Production-quality templates built with Next.js and GSAP.
+                  Each one ships with animations, responsive layouts, and real code.
                 </p>
+                <span
+                  className="mono"
+                  style={{ color: 'var(--fg-faint)', fontSize: 'var(--t-mono)', letterSpacing: '0.12em' }}
+                >
+                  06 TEMPLATES
+                </span>
               </div>
             </FadeIn>
 
-            {/* Template grid */}
+            {/* Template grid — 2 columns, large image cards */}
             <div
               className="design-lab-grid"
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
+                gridTemplateColumns: 'repeat(2, 1fr)',
                 gap: 'var(--sp-6)',
               }}
             >
@@ -267,84 +281,102 @@ export default function WorkPageContent() {
                 {
                   name: 'Studio Noir',
                   slug: 'studio-noir',
-                  description: 'Dark creative studio — side nav, horizontal scroll, custom cursor',
+                  description: 'Dark creative studio with horizontal scroll gallery, custom cursor, and cinematic animations',
                   price: '$79',
                   tag: 'Creative',
-                  tone: 'ink',
+                  pages: '4 pages',
                 },
                 {
                   name: 'Elevate',
                   slug: 'elevate',
-                  description: 'Corporate SaaS — 3D tilt cards, gradient blob, clean structure',
+                  description: 'Corporate SaaS with 3D tilt cards, gradient blobs, and structured layouts',
                   price: '$69',
                   tag: 'SaaS',
-                  tone: 'deep',
+                  pages: '5 pages',
                 },
                 {
                   name: 'Pop Store',
                   slug: 'pop-store',
-                  description: 'Neo-brutalist e-commerce — spring physics, bold typography',
+                  description: 'Neo-brutalist e-commerce with spring physics, bold type, and playful interactions',
                   price: '$89',
                   tag: 'E-Commerce',
-                  tone: 'ember',
+                  pages: '4 pages',
                 },
                 {
                   name: 'Vitalis',
                   slug: 'vitalis',
-                  description: 'Healthcare & wellness — pill nav, soft rounded, trust-first',
+                  description: 'Healthcare and wellness with pill navigation, rounded forms, and trust-first design',
                   price: '$79',
                   tag: 'Healthcare',
-                  tone: 'deep',
+                  pages: '4 pages',
                 },
                 {
                   name: 'Roast',
                   slug: 'roast',
-                  description: 'Coffee & cafe editorial — parallax hero, warm textures',
+                  description: 'Coffee and cafe editorial with parallax hero, warm textures, and rich photography',
                   price: '$75',
                   tag: 'F&B',
-                  tone: 'ember',
+                  pages: '5 pages',
                 },
                 {
                   name: 'Mono',
                   slug: 'mono',
-                  description: 'Ultra-minimal portfolio — one font, zero noise, pure craft',
+                  description: 'Ultra-minimal portfolio with one font, zero noise, and pure structural craft',
                   price: '$59',
                   tag: 'Portfolio',
-                  tone: 'violet',
+                  pages: '4 pages',
                 },
               ].map((template, i) => (
                 <FadeIn key={template.slug} delay={i * 80}>
-                  <div
-                    className="card-highlight"
+                  <Link
+                    href={`/work/designs/${template.slug}`}
+                    className="design-lab-card"
                     style={{
+                      display: 'block',
+                      textDecoration: 'none',
+                      color: 'inherit',
                       border: '1px solid var(--line)',
                       borderRadius: 'var(--r-lg)',
                       overflow: 'hidden',
                       background: 'var(--ink-2)',
-                      display: 'flex',
-                      flexDirection: 'column',
+                      transition: 'border-color 0.4s var(--ease-out), transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out)',
                     }}
                   >
-                    {/* Colour swatch header */}
+                    {/* Screenshot */}
                     <div
                       style={{
-                        height: 80,
-                        background: toneGradients[template.tone] || toneGradients.violet,
-                        display: 'flex',
-                        alignItems: 'flex-end',
-                        padding: 'var(--sp-3) var(--sp-5)',
+                        position: 'relative',
+                        aspectRatio: '16 / 9',
+                        overflow: 'hidden',
+                        background: 'var(--ink-1)',
                       }}
                     >
+                      <Image
+                        src={`/images/templates/${template.slug}/hero.png`}
+                        alt={`${template.name} template preview`}
+                        fill
+                        style={{
+                          objectFit: 'cover',
+                          objectPosition: 'top center',
+                          transition: 'transform 0.6s var(--ease-out)',
+                        }}
+                        sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 45vw"
+                        className="design-lab-card-img"
+                      />
+                      {/* Tag badge */}
                       <span
                         className="mono"
                         style={{
+                          position: 'absolute',
+                          top: 'var(--sp-4)',
+                          left: 'var(--sp-4)',
                           fontSize: 10,
                           letterSpacing: '0.14em',
-                          color: 'var(--fg-faint)',
-                          padding: '3px 10px',
+                          color: 'var(--fg-dim)',
+                          padding: '4px 12px',
                           borderRadius: 'var(--r-pill)',
                           border: '1px solid var(--line-strong)',
-                          background: 'var(--glass-bg)',
+                          background: 'rgba(10, 10, 15, 0.88)',
                         }}
                       >
                         {template.tag}
@@ -354,16 +386,20 @@ export default function WorkPageContent() {
                     {/* Card body */}
                     <div
                       style={{
-                        padding: 'var(--sp-6)',
+                        padding: 'var(--sp-6) var(--sp-6) var(--sp-5)',
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: 'var(--sp-3)',
-                        flex: 1,
+                        gap: 'var(--sp-2)',
                       }}
                     >
-                      {/* Name + price row */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 'var(--sp-3)' }}>
-                        <h3 className="display-sm" style={{ fontSize: 'clamp(18px, 2vw, 22px)' }}>{template.name}</h3>
+                      {/* Name + price */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                        <h3
+                          className="display-sm design-lab-card-title"
+                          style={{ fontSize: 'clamp(18px, 2vw, 22px)' }}
+                        >
+                          {template.name}
+                        </h3>
                         <span
                           style={{
                             fontFamily: 'var(--f-mono)',
@@ -383,22 +419,43 @@ export default function WorkPageContent() {
                           color: 'var(--fg-dim)',
                           fontSize: 'var(--t-body-sm)',
                           lineHeight: 1.6,
-                          flex: 1,
                         }}
                       >
                         {template.description}
                       </p>
 
-                      {/* CTA */}
-                      <Link
-                        href={`/work/designs/${template.slug}`}
-                        className="btn ghost"
-                        style={{ fontSize: 'var(--t-body-sm)', marginTop: 'var(--sp-2)', textAlign: 'center' }}
+                      {/* Footer meta */}
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          marginTop: 'var(--sp-3)',
+                          paddingTop: 'var(--sp-3)',
+                          borderTop: '1px solid var(--line)',
+                        }}
                       >
-                        Preview template <span aria-hidden="true">↗</span>
-                      </Link>
+                        <span
+                          className="mono"
+                          style={{ color: 'var(--fg-faint)', fontSize: 'var(--t-mono)' }}
+                        >
+                          Next.js + GSAP &middot; {template.pages}
+                        </span>
+                        <span
+                          style={{
+                            color: 'var(--accent)',
+                            fontSize: 'var(--t-body-sm)',
+                            fontWeight: 500,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 4,
+                          }}
+                        >
+                          Preview <span aria-hidden="true">↗</span>
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </FadeIn>
               ))}
             </div>

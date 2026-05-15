@@ -169,7 +169,7 @@ export default function VitalisPreview() {
       </nav>
 
       {/* HERO — split, warm, with floating badge */}
-      <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", alignItems: "center", padding: "140px 48px 60px", gap: 48 }}>
+      <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", alignItems: "center", padding: isMobile ? "100px 20px 40px" : "140px 48px 60px", gap: isMobile ? 32 : 48 }}>
         <div>
           <span className="vt-anim" style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.accent, letterSpacing: 2, textTransform: "uppercase", display: "block", marginBottom: 20 }}>WELLNESS CLINIC</span>
           <h1 className="vt-anim" style={{ fontFamily: FH, fontSize: "clamp(42px, 5.5vw, 72px)", fontWeight: 400, lineHeight: 1.1, textWrap: "balance" as any }}>
@@ -302,7 +302,7 @@ export default function VitalisPreview() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: "40px 48px", background: V.bgDark, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <footer style={{ padding: isMobile ? "24px 20px" : "40px 48px", background: V.bgDark, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <div style={{ width: 22, height: 22, borderRadius: "50%", background: V.accent }} />
           <span style={{ fontFamily: FH, fontSize: 18, color: V.white, fontStyle: "italic" }}>Vitalis</span>

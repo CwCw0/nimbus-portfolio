@@ -36,6 +36,7 @@ export function useIsMobile() {
 
 /* ── Nav ────────────────────────────────────────────────────────────── */
 export function PopNav({ cartCount = 0 }: { cartCount?: number }) {
+  const mobile = useIsMobile();
   return (
     <nav
       style={{
@@ -47,7 +48,7 @@ export function PopNav({ cartCount = 0 }: { cartCount?: number }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "12px 40px",
+        padding: mobile ? "10px 16px" : "12px 40px",
         background: P.bg,
         borderBottom: P.border,
       }}
@@ -56,7 +57,7 @@ export function PopNav({ cartCount = 0 }: { cartCount?: number }) {
         href={BASE}
         style={{
           fontFamily: "'Space Grotesk', sans-serif",
-          fontSize: 26,
+          fontSize: mobile ? 20 : 26,
           fontWeight: 700,
           textDecoration: "none",
           color: P.text,
@@ -65,10 +66,10 @@ export function PopNav({ cartCount = 0 }: { cartCount?: number }) {
         POP<span style={{ color: P.coral }}>.</span>
       </Link>
 
-      <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
+      <div style={{ display: "flex", gap: mobile ? 14 : 28, alignItems: "center" }}>
         {[
-          { label: "Home", href: BASE },
-          { label: "Shop", href: `${BASE}/shop` },
+          { label: mobile ? "Shop" : "Home", href: mobile ? `${BASE}/shop` : BASE },
+          ...(!mobile ? [{ label: "Shop", href: `${BASE}/shop` }] : []),
           { label: "About", href: `${BASE}/about` },
         ].map((item) => (
           <Link
@@ -76,7 +77,7 @@ export function PopNav({ cartCount = 0 }: { cartCount?: number }) {
             href={item.href}
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: 15,
+              fontSize: mobile ? 13 : 15,
               fontWeight: 600,
               color: P.text,
               textDecoration: "none",
@@ -91,11 +92,11 @@ export function PopNav({ cartCount = 0 }: { cartCount?: number }) {
 
         <span
           style={{
-            padding: "10px 24px",
+            padding: mobile ? "8px 14px" : "10px 24px",
             background: P.text,
             color: P.textLight,
             fontFamily: "'Space Grotesk', sans-serif",
-            fontSize: 14,
+            fontSize: mobile ? 12 : 14,
             fontWeight: 700,
             border: P.border,
             boxShadow: P.shadow,

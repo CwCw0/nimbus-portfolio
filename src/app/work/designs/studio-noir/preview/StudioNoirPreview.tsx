@@ -105,9 +105,14 @@ export default function StudioNoirPreview() {
       // Hero title — char reveal with blur
       const title = heroTitleRef.current;
       if (title) {
-        const split = new SplitType(title, { types: "chars" });
-        gsap.set(split.chars || [], { y: "120%", opacity: 0, filter: "blur(8px)", rotateX: -60 });
-        gsap.to(split.chars || [], {
+        const lines = title.querySelectorAll(".sn-hero-line");
+        const allChars: HTMLElement[] = [];
+        lines.forEach((line) => {
+          const split = new SplitType(line as HTMLElement, { types: "chars" });
+          if (split.chars) allChars.push(...split.chars);
+        });
+        gsap.set(allChars, { y: "120%", opacity: 0, filter: "blur(8px)", rotateX: -60 });
+        gsap.to(allChars, {
           y: "0%", opacity: 1, filter: "blur(0px)", rotateX: 0,
           duration: 0.8, stagger: 0.025, ease: "power3.out", delay: 0.3,
         });
@@ -280,7 +285,7 @@ export default function StudioNoirPreview() {
       </nav>
 
       {/* HERO — full viewport, left-aligned, with moving accent line */}
-      <section style={{ height: "100vh", display: "flex", alignItems: "center", padding: "0 48px", paddingRight: isMobile ? 20 : 128, position: "relative" }}>
+      <section style={{ height: "100vh", display: "flex", alignItems: "center", padding: isMobile ? "0 20px" : "0 48px", paddingRight: isMobile ? 20 : 128, position: "relative" }}>
         {/* Animated accent line — moves diagonally */}
         <div style={{ position: "absolute", top: 0, left: "30%", width: 1, height: "100%", background: `linear-gradient(to bottom, transparent, ${C.accent}30, transparent)`, animation: "sn-line-float 8s ease-in-out infinite" }} />
         <style>{`@keyframes sn-line-float { 0%, 100% { transform: translateX(0) skewX(0); opacity: 0.3; } 50% { transform: translateX(100px) skewX(-2deg); opacity: 0.6; } }`}</style>
@@ -290,8 +295,10 @@ export default function StudioNoirPreview() {
             ✦ CREATIVE STUDIO — EST. 2024
           </span>
 
-          <h1 ref={heroTitleRef} style={{ fontFamily: F_HEAD, fontSize: "clamp(64px, 9vw, 140px)", color: C.text, lineHeight: 0.88, letterSpacing: "-0.02em", perspective: "600px", wordBreak: "keep-all", overflowWrap: "normal" }}>
-            WE DESIGN WHAT<br />OTHERS OVERLOOK
+          <h1 ref={heroTitleRef} style={{ fontFamily: F_HEAD, fontSize: isMobile ? "clamp(28px, 9vw, 52px)" : "clamp(48px, 7.5vw, 140px)", color: C.text, lineHeight: 0.92, letterSpacing: "-0.02em", perspective: "600px" }}>
+            <div className="sn-hero-line">WE DESIGN</div>
+            <div className="sn-hero-line">WHAT OTHERS</div>
+            <div className="sn-hero-line">OVERLOOK</div>
           </h1>
 
           <p className="sn-fade" style={{ fontFamily: F_BODY, fontSize: 17, color: C.dim, marginTop: 40, maxWidth: 440, lineHeight: 1.85 }}>
@@ -328,7 +335,7 @@ export default function StudioNoirPreview() {
 
         <div className="sn-track" style={{ display: "flex", gap: 40, height: "100%", alignItems: "center", padding: "0 48px", paddingRight: isMobile ? 20 : 128, paddingTop: 40 }}>
           {projects.map((proj) => (
-            <div key={proj.num} className="sn-proj-card" style={{ minWidth: "clamp(400px, 35vw, 600px)", height: "65vh", flexShrink: 0, position: "relative", overflow: "hidden", cursor: "none", border: `1px solid ${C.border}`, transition: "border-color 0.4s" }}
+            <div key={proj.num} className="sn-proj-card" style={{ minWidth: isMobile ? "280px" : "clamp(400px, 35vw, 600px)", height: "65vh", flexShrink: 0, position: "relative", overflow: "hidden", cursor: "none", border: `1px solid ${C.border}`, transition: "border-color 0.4s" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = proj.color;
                 const overlay = e.currentTarget.querySelector(".sn-proj-reveal") as HTMLElement;
@@ -370,7 +377,7 @@ export default function StudioNoirPreview() {
       </section>
 
       {/* ABOUT — clip-path wipe reveal + scroll-driven word opacity */}
-      <section id="sn-info" style={{ padding: "180px 48px", paddingRight: isMobile ? 20 : 128 }}>
+      <section id="sn-info" style={{ padding: isMobile ? "80px 20px" : "180px 48px", paddingRight: isMobile ? 20 : 128 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div className="sn-about-section" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.2fr 1fr", gap: isMobile ? 40 : 100, alignItems: "center" }}>
             <div>
@@ -402,7 +409,7 @@ export default function StudioNoirPreview() {
       </section>
 
       {/* SERVICES — angled cards with 3D rotation reveal */}
-      <section id="sn-services" style={{ padding: "140px 48px", paddingRight: isMobile ? 20 : 128, background: C.bgAlt }}>
+      <section id="sn-services" style={{ padding: isMobile ? "80px 20px" : "140px 48px", paddingRight: isMobile ? 20 : 128, background: C.bgAlt }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <span style={{ fontFamily: F_HEAD, fontSize: 14, letterSpacing: 8, color: C.accent, display: "block", marginBottom: 60 }}>WHAT WE DO</span>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 24 }}>
@@ -431,7 +438,7 @@ export default function StudioNoirPreview() {
       </section>
 
       {/* CONTACT — dramatic char-by-char reveal */}
-      <section id="sn-sayhi" style={{ padding: "200px 48px", paddingRight: isMobile ? 20 : 128, textAlign: "center", position: "relative" }}>
+      <section id="sn-sayhi" style={{ padding: isMobile ? "80px 20px" : "200px 48px", paddingRight: isMobile ? 20 : 128, textAlign: "center", position: "relative" }}>
         {/* Decorative cross */}
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
           <div style={{ width: 200, height: 1, background: C.border }} />
@@ -453,7 +460,7 @@ export default function StudioNoirPreview() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: "32px 48px", paddingRight: isMobile ? 20 : 128, borderTop: `1px solid ${C.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <footer style={{ padding: isMobile ? "20px 20px" : "32px 48px", paddingRight: isMobile ? 20 : 128, borderTop: `1px solid ${C.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <span style={{ fontFamily: F_BODY, fontSize: 11, color: C.muted }}>&copy; 2026 Studio Noir</span>
         <div style={{ display: "flex", gap: 24 }}>
           {["Dribbble", "Behance", "Instagram", "Twitter"].map((s) => (

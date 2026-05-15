@@ -139,9 +139,9 @@ export default function Services() {
                 >
                   <div style={{ overflow: 'hidden' }}>
                     <div
+                      className="services-body"
                       style={{
                         padding: '0 0 var(--sp-8) 0',
-                        paddingLeft: 50,
                         maxWidth: 640,
                       }}
                     >
@@ -187,6 +187,20 @@ export default function Services() {
             display: none;
           }
           .services-col-title { grid-column: 2; }
+        }
+
+        .services-body {
+          padding-left: 50px;
+        }
+
+        @media (max-width: 640px) {
+          .services-row {
+            grid-template-columns: 36px 1fr 32px;
+            gap: var(--sp-3);
+          }
+          .services-body {
+            padding-left: 20px;
+          }
         }
       `}</style>
     </section>

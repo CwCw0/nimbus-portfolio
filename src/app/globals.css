@@ -653,6 +653,31 @@ body[data-strings="on"] footer {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — SECTION OVERRIDES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Case study rows: remove full-viewport min-height on mobile */
+@media (max-width: 768px) {
+  .case-study-row {
+    --case-study-min-height: auto !important;
+  }
+}
+
+/* Case study stats grid: collapse to single column on small screens */
+@media (max-width: 560px) {
+  .case-study-stats {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Services accordion body: remove left padding on mobile */
+@media (max-width: 768px) {
+  .services-body {
+    padding-left: 0 !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    404 GLITCH (carried over)
    ═══════════════════════════════════════════════════════════════════════════ */
 @keyframes glitch {
@@ -731,6 +756,29 @@ body[data-strings="on"] footer {
   color: var(--fg);
   transition: border-color 400ms ease, box-shadow 400ms ease;
   outline: none;
+}
+
+.float-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%237A7590' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  padding-right: 24px;
+  cursor: pointer;
+}
+
+.float-field select option {
+  background: var(--ink-1);
+  color: var(--fg);
+  padding: 8px 12px;
+  font-family: var(--f-body);
+  font-size: 14px;
+}
+
+.float-field select option:checked {
+  background: var(--accent);
+  color: white;
 }
 
 .float-field input:focus,
@@ -836,6 +884,8 @@ body[data-strings="on"] footer {
   height: 100vh;
   z-index: 0;
   pointer-events: none;
+  will-change: transform;
+  contain: strict;
 }
 
 /* Ensure content layers above the waves */
@@ -1469,6 +1519,31 @@ main, footer, nav, header {
 .card-highlight:hover {
   border-color: rgba(124, 92, 252, 0.3);
   box-shadow: 0 8px 32px -8px rgba(124, 92, 252, 0.12);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN LAB CARDS — hover effects for template grid
+   ═══════════════════════════════════════════════════════════════════════════ */
+.design-lab-card {
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.design-lab-card:hover {
+  border-color: rgba(124, 92, 252, 0.5) !important;
+  transform: translateY(-6px) scale(1.01);
+  box-shadow:
+    0 20px 60px -15px rgba(124, 92, 252, 0.25),
+    0 0 0 1px rgba(124, 92, 252, 0.1);
+}
+.design-lab-card:hover .design-lab-card-img {
+  transform: scale(1.05);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.design-lab-card:hover .design-lab-card-title {
+  color: var(--accent) !important;
+  transition: color 0.2s ease;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

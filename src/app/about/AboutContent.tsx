@@ -322,7 +322,7 @@ export default function AboutPage() {
               <div className="flex w-90 flex-col gap-4 max-lg:w-full">
 
                 {/* Stats */}
-                <div className="story-reveal grid grid-cols-3 gap-3 max-md:gap-2">
+                <div className="story-reveal grid grid-cols-3 gap-3 max-sm:grid-cols-1 max-md:gap-2">
                   {[
                     { target: studioIndex.length.toString(), label: "Products", accent: false },
                     { target: buildCount.toString(), label: "In build", accent: true },

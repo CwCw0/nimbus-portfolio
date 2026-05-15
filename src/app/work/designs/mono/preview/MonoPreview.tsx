@@ -30,6 +30,14 @@ export default function MonoPreview() {
   const heroRef = useRef<HTMLHeadingElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 769);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1200);
@@ -117,9 +125,9 @@ export default function MonoPreview() {
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');`}</style>
 
       {/* NAV — barely there */}
-      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "24px 48px", background: "rgba(250,250,250,0.85)", backdropFilter: "blur(8px)" }}>
+      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "16px 20px" : "24px 48px", background: "rgba(250,250,250,0.85)", backdropFilter: "blur(8px)" }}>
         <Link href={BASE_PATH} style={{ fontFamily: F, fontSize: 15, fontWeight: 800, letterSpacing: 8, color: M.text, textDecoration: "none" }}>MONO</Link>
-        <div style={{ display: "flex", gap: 28 }}>
+        <div style={{ display: "flex", gap: isMobile ? 16 : 28 }}>
           {[
             { label: "Work", href: BASE_PATH },
             { label: "About", href: `${BASE_PATH}/about` },
@@ -134,7 +142,7 @@ export default function MonoPreview() {
       </nav>
 
       {/* HERO — just a name. Extreme scale. */}
-      <section style={{ height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 48px" }}>
+      <section style={{ height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: isMobile ? "0 20px" : "0 48px" }}>
         <div style={{ overflow: "hidden" }}>
           <h1 ref={heroRef} style={{ fontFamily: F, fontSize: "clamp(80px, 14vw, 220px)", fontWeight: 800, lineHeight: 0.88, letterSpacing: "-0.04em", textWrap: "balance" as any }}>
             John
@@ -147,7 +155,7 @@ export default function MonoPreview() {
       </section>
 
       {/* PROJECTS — title-as-navigation, hover reveals accent */}
-      <section id="mn-work" style={{ padding: "80px 48px 160px" }}>
+      <section id="mn-work" style={{ padding: isMobile ? "60px 20px 80px" : "80px 48px 160px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <span style={{ fontFamily: F, fontSize: 12, fontWeight: 700, letterSpacing: 5, color: M.muted, display: "block", marginBottom: 56 }}>SELECTED WORK</span>
 
@@ -164,7 +172,7 @@ export default function MonoPreview() {
                   <h3 style={{ fontFamily: F, fontSize: "clamp(40px, 6vw, 88px)", fontWeight: 800, flex: 1, letterSpacing: "-0.03em", lineHeight: 0.95, transition: "color 0.3s", color: hovered === i ? M.accent : M.text }}>
                     {proj.title}
                   </h3>
-                  <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
+                  <div style={{ display: isMobile ? "none" : "flex", gap: 28, alignItems: "center" }}>
                     <span style={{ fontFamily: F, fontSize: 13, color: M.muted, fontWeight: 400 }}>{proj.cat}</span>
                     <span style={{ fontFamily: F, fontSize: 13, color: M.dim }}>{proj.year}</span>
                     <span style={{ fontSize: 20, color: hovered === i ? M.accent : M.muted, transition: "all 0.3s", transform: hovered === i ? "translate(4px, -4px)" : "translate(0, 0)" }}>↗</span>
@@ -178,7 +186,7 @@ export default function MonoPreview() {
       </section>
 
       {/* ABOUT — one paragraph, extreme clarity */}
-      <section id="mn-about" style={{ padding: "120px 48px" }}>
+      <section id="mn-about" style={{ padding: isMobile ? "80px 20px" : "120px 48px" }}>
         <div style={{ maxWidth: 680, margin: "0 auto" }}>
           <span className="mn-rev" style={{ fontFamily: F, fontSize: 12, fontWeight: 700, letterSpacing: 5, color: M.muted, display: "block", marginBottom: 36 }}>ABOUT</span>
           <p className="mn-rev" style={{ fontFamily: F, fontSize: "clamp(24px, 3.5vw, 40px)", fontWeight: 500, lineHeight: 1.45, letterSpacing: "-0.01em" }}>
@@ -199,7 +207,7 @@ export default function MonoPreview() {
       </section>
 
       {/* CONTACT — email as the entire visual */}
-      <section id="mn-contact" style={{ padding: "160px 48px", textAlign: "center" }}>
+      <section id="mn-contact" style={{ padding: isMobile ? "100px 20px" : "160px 48px", textAlign: "center" }}>
         <span style={{ fontFamily: F, fontSize: 12, fontWeight: 700, letterSpacing: 5, color: M.muted, display: "block", marginBottom: 36 }}>GET IN TOUCH</span>
         <h2 className="mn-email" style={{ fontFamily: F, fontSize: "clamp(36px, 7vw, 110px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, cursor: "pointer", transition: "color 0.3s", color: M.text, textDecoration: "none", wordBreak: "break-all" as any }}
           onMouseEnter={(e) => (e.currentTarget.style.color = M.accent)}
@@ -211,7 +219,7 @@ export default function MonoPreview() {
       </section>
 
       {/* Footer — barely visible */}
-      <footer style={{ padding: "28px 48px", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: `1px solid ${M.border}` }}>
+      <footer style={{ padding: isMobile ? "20px 20px" : "28px 48px", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: `1px solid ${M.border}` }}>
         <span style={{ fontFamily: F, fontSize: 12, color: M.dim }}>&copy; 2026</span>
         <span style={{ fontFamily: F, fontSize: 12, color: M.dim }}>Built with intention.</span>
       </footer>

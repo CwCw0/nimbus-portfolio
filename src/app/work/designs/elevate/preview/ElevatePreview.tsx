@@ -169,11 +169,12 @@ export default function ElevatePreview() {
   return (
     <div ref={mainRef} style={{ background: E.bg, color: E.text, minHeight: "100vh", overflowX: "hidden" }}>
       {/* NAV — centered logo, split links */}
-      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 48px", background: "rgba(255,255,255,0.7)", backdropFilter: "blur(20px) saturate(180%)", borderBottom: `1px solid ${E.border}` }}>
+      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "12px 16px" : "14px 48px", background: "rgba(255,255,255,0.7)", backdropFilter: "blur(20px) saturate(180%)", borderBottom: `1px solid ${E.border}` }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 30, height: 30, background: `linear-gradient(135deg, ${E.gradient1}, ${E.gradient2})`, borderRadius: 7, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 700 }}>E</div>
           <span style={{ fontFamily: "Inter, sans-serif", fontSize: 17, fontWeight: 700 }}>Elevate</span>
         </div>
+        {!isMobile && (
         <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
           {[
             { label: "Features", href: "/work/designs/elevate/preview/features" },
@@ -187,6 +188,7 @@ export default function ElevatePreview() {
             >{item.label}</Link>
           ))}
         </div>
+        )}
         <Link href="/work/designs/elevate/preview/contact" style={{ padding: "8px 20px", background: E.text, color: "#fff", fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, borderRadius: 6, cursor: "pointer", transition: "transform 0.2s", textDecoration: "none" }}
           onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-1px)")}
           onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
@@ -194,7 +196,7 @@ export default function ElevatePreview() {
       </nav>
 
       {/* HERO — with animated gradient blob */}
-      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "160px 48px 100px", position: "relative", overflow: "hidden" }}>
+      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: isMobile ? "120px 20px 60px" : "160px 48px 100px", position: "relative", overflow: "hidden" }}>
         {/* Dot grid */}
         <div style={{ position: "absolute", inset: 0, backgroundImage: `radial-gradient(${E.border} 1px, transparent 1px)`, backgroundSize: "28px 28px", opacity: 0.6 }} />
 
@@ -235,7 +237,7 @@ export default function ElevatePreview() {
       </section>
 
       {/* LOGOS */}
-      <div style={{ padding: "48px 48px", borderTop: `1px solid ${E.border}`, borderBottom: `1px solid ${E.border}`, textAlign: "center" }}>
+      <div style={{ padding: isMobile ? "32px 20px" : "48px 48px", borderTop: `1px solid ${E.border}`, borderBottom: `1px solid ${E.border}`, textAlign: "center" }}>
         <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: E.textDim, marginBottom: 28, letterSpacing: 0.5 }}>Trusted by 10,000+ teams worldwide</p>
         <div style={{ display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap" }}>
           {["Acme Corp", "TechFlow", "Pinnacle", "Meridian", "CloudBase", "Quantum"].map((logo) => (
@@ -245,7 +247,7 @@ export default function ElevatePreview() {
       </div>
 
       {/* FEATURES — 3D tilt cards */}
-      <section style={{ padding: "120px 48px" }}>
+      <section style={{ padding: isMobile ? "80px 20px" : "120px 48px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 72 }}>
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 700, color: E.accent, letterSpacing: 1.5, textTransform: "uppercase" }}>Features</span>
@@ -271,7 +273,7 @@ export default function ElevatePreview() {
       </section>
 
       {/* METRICS — dark strip with count-up */}
-      <section style={{ padding: "80px 48px", background: E.bgDark }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "80px 48px", background: E.bgDark }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-around", textAlign: "center" }}>
           {metrics.map((m) => (
             <div key={m.label}>
@@ -283,13 +285,13 @@ export default function ElevatePreview() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section style={{ padding: "120px 48px" }}>
+      <section style={{ padding: isMobile ? "80px 20px" : "120px 48px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 700, color: E.accent, letterSpacing: 1.5, textTransform: "uppercase" }}>Testimonials</span>
             <h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 800, marginTop: 12, letterSpacing: "-0.02em" }}>Loved by teams everywhere.</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 24 }}>
             {[
               { quote: "Elevate replaced three tools for us. Our team is faster and our clients are happier.", name: "Sarah Chen", role: "CTO, TechFlow", avatar: "SC" },
               { quote: "The API is incredibly well-documented. We had our integration running in under a day.", name: "Marcus Webb", role: "Lead Engineer, Pinnacle", avatar: "MW" },
@@ -313,7 +315,7 @@ export default function ElevatePreview() {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: "120px 48px", background: E.bgSoft, textAlign: "center" }}>
+      <section style={{ padding: isMobile ? "80px 20px" : "120px 48px", background: E.bgSoft, textAlign: "center" }}>
         <div className="el-cta" style={{ maxWidth: 600, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(36px, 4.5vw, 56px)", fontWeight: 800, letterSpacing: "-0.03em" }}>
             Ready to{" "}
@@ -330,12 +332,12 @@ export default function ElevatePreview() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: "48px", borderTop: `1px solid ${E.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <footer style={{ padding: isMobile ? "32px 20px" : "48px", borderTop: `1px solid ${E.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <div style={{ width: 22, height: 22, background: `linear-gradient(135deg, ${E.gradient1}, ${E.gradient2})`, borderRadius: 5 }} />
           <span style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700 }}>Elevate</span>
         </div>
-        <div style={{ display: "flex", gap: 28 }}>
+        <div style={{ display: "flex", gap: isMobile ? 16 : 28, flexWrap: "wrap" }}>
           {[
             { label: "Features", href: "/work/designs/elevate/preview/features" },
             { label: "Pricing", href: "/work/designs/elevate/preview/pricing" },

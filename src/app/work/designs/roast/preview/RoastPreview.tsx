@@ -124,21 +124,23 @@ export default function RoastPreview() {
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Karla:wght@400;500;700&display=swap');`}</style>
 
       {/* NAV — transparent, editorial */}
-      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 48px", background: "rgba(28,24,20,0.5)", backdropFilter: "blur(16px)" }}>
-        <span style={{ fontFamily: FH, fontSize: 28, fontWeight: 400, fontStyle: "italic", color: R.cream }}>Roast</span>
-        <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
+      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "14px 16px" : "18px 48px", background: "rgba(28,24,20,0.5)", backdropFilter: "blur(16px)" }}>
+        <span style={{ fontFamily: FH, fontSize: isMobile ? 22 : 28, fontWeight: 400, fontStyle: "italic", color: R.cream }}>Roast</span>
+        <div style={{ display: "flex", gap: isMobile ? 14 : 28, alignItems: "center" }}>
           {[
             { label: "Coffee", href: "/work/designs/roast/preview/coffee" },
             { label: "Story", href: "/work/designs/roast/preview/story" },
-            { label: "Locations", href: "/work/designs/roast/preview/locations" },
-            { label: "Contact", href: "/work/designs/roast/preview/contact" },
+            ...(isMobile ? [] : [
+              { label: "Locations", href: "/work/designs/roast/preview/locations" },
+              { label: "Contact", href: "/work/designs/roast/preview/contact" },
+            ]),
           ].map((item) => (
-            <Link key={item.label} href={item.href} style={{ fontFamily: FB, fontSize: 13, color: "rgba(250,246,238,0.6)", textDecoration: "none", fontWeight: 500, transition: "color 0.3s" }}
+            <Link key={item.label} href={item.href} style={{ fontFamily: FB, fontSize: isMobile ? 11 : 13, color: "rgba(250,246,238,0.6)", textDecoration: "none", fontWeight: 500, transition: "color 0.3s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = R.cream)}
               onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(250,246,238,0.6)")}
             >{item.label}</Link>
           ))}
-          <span style={{ padding: "10px 24px", background: R.accentLight, color: R.bgDark, fontFamily: FB, fontSize: 13, fontWeight: 700, cursor: "pointer", transition: "opacity 0.2s" }}
+          <span style={{ padding: isMobile ? "8px 14px" : "10px 24px", background: R.accentLight, color: R.bgDark, fontFamily: FB, fontSize: isMobile ? 11 : 13, fontWeight: 700, cursor: "pointer", transition: "opacity 0.2s" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >Order Online</span>
@@ -262,7 +264,7 @@ export default function RoastPreview() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: "36px 48px", background: R.bgDark, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <footer style={{ padding: isMobile ? "24px 20px" : "36px 48px", background: R.bgDark, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <span style={{ fontFamily: FH, fontSize: 20, color: R.cream, fontStyle: "italic" }}>Roast</span>
         <span style={{ fontFamily: FB, fontSize: 12, color: "rgba(250,246,238,0.3)" }}>&copy; 2026 Roast Coffee Co.</span>
       </footer>

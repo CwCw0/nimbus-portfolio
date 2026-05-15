@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://va.vercel-scripts.com",
             "style-src 'self' 'unsafe-inline' https://api.fontshare.com",
             "img-src 'self' https: data: blob:",
-            "font-src 'self' https://fonts.gstatic.com https://api.fontshare.com",
+            "font-src 'self' https://fonts.gstatic.com https://api.fontshare.com https://cdn.fontshare.com",
             "connect-src 'self' https://formspree.io https://va.vercel-scripts.com https://vercel.live wss://ws-us3.pusher.com",
             "frame-ancestors 'none'",
             "base-uri 'self'",
