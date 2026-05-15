@@ -77,7 +77,7 @@ export default function PreviewBar() {
 
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <Link
-          href="/work"
+          href="/work?view=lab"
           style={{
             display: "flex",
             alignItems: "center",

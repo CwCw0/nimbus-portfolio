@@ -3,10 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import Header from '../../../components/Header';
-import Footer from '../../../components/Footer';
-import CustomCursor from '../../../components/CustomCursor';
-import SmoothScroll from '../../../components/SmoothScroll';
 import RevealLine from '../../../components/ui/RevealLine';
 import FadeIn from '../../../components/ui/FadeIn';
 import { projects } from '../../../data/projects';
@@ -39,19 +35,12 @@ export default function CaseStudyContent({
 
   if (!caseStudy) {
     return (
-      <>
-        <CustomCursor />
-        <div className="flex w-full flex-col overflow-x-hidden">
-          <Header />
-          <section className="container" style={{ padding: '200px 0', textAlign: 'center' }}>
-            <h1 className="display-lg" style={{ color: 'var(--fg)' }}>Project not found</h1>
-            <Link href="/work" className="body" style={{ color: 'var(--accent)', marginTop: 'var(--sp-6)', display: 'inline-block' }}>
-              Back to Work
-            </Link>
-          </section>
-          <Footer />
-        </div>
-      </>
+      <section className="container" style={{ padding: '200px 0', textAlign: 'center' }}>
+        <h1 className="display-lg" style={{ color: 'var(--fg)' }}>Project not found</h1>
+        <Link href="/work" className="body" style={{ color: 'var(--accent)', marginTop: 'var(--sp-6)', display: 'inline-block' }}>
+          Back to Work
+        </Link>
+      </section>
     );
   }
 
@@ -61,11 +50,7 @@ export default function CaseStudyContent({
   const gradient = toneGradients[tone] || toneGradients.violet;
 
   return (
-    <>
-      <CustomCursor />
-      <SmoothScroll>
-        <main className="flex w-full flex-col overflow-x-hidden">
-          <Header />
+    <div className="flex w-full flex-col overflow-x-hidden">
 
           {/* ── Hero ── */}
           <section className="container" style={{ paddingTop: 'clamp(140px, 18vh, 200px)', paddingBottom: 'var(--sp-12)' }}>
@@ -579,9 +564,6 @@ export default function CaseStudyContent({
             </div>
           </section>
 
-          <Footer />
-        </main>
-      </SmoothScroll>
-    </>
+    </div>
   );
 }

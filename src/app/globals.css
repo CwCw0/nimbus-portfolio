@@ -943,6 +943,7 @@ main, footer, nav, header {
 .nav-brand-wordmark {
   position: relative;
   display: inline-block;
+  overflow: hidden;
 }
 
 .nav-brand-text {
@@ -956,11 +957,10 @@ main, footer, nav, header {
 
 .nav-brand-line {
   position: absolute;
-  inset: -2px -4px;
-  width: calc(100% + 8px);
-  height: calc(100% + 4px);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  overflow: visible;
 }
 
 .nav-brand-line line {

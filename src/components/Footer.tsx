@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import RevealLine from '@/components/ui/RevealLine';
 import FadeIn from '@/components/ui/FadeIn';
 import Magnetic from '@/components/ui/Magnetic';
@@ -25,6 +25,24 @@ const ELSEWHERE_LINKS = [
 
 export default function Footer() {
   const [wordmarkHovered, setWordmarkHovered] = useState(false);
+  const [wordmarkVisible, setWordmarkVisible] = useState(false);
+  const wordmarkRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = wordmarkRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setWordmarkVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <footer className="footer-root">
@@ -133,6 +151,7 @@ export default function Footer() {
 
       {/* ═══ 4. Giant SVG wordmark ═══ */}
         <div
+          ref={wordmarkRef}
           className="footer-wordmark container"
           onMouseEnter={() => setWordmarkHovered(true)}
           onMouseLeave={() => setWordmarkHovered(false)}
@@ -179,7 +198,7 @@ export default function Footer() {
               strokeWidth="4"
               strokeLinecap="round"
               strokeDasharray="1600"
-              strokeDashoffset={wordmarkHovered ? '0' : '1600'}
+              strokeDashoffset={(wordmarkHovered || wordmarkVisible) ? '0' : '1600'}
               style={{
                 transition: 'stroke-dashoffset 0.85s cubic-bezier(0.22, 1, 0.36, 1)',
                 filter: 'drop-shadow(0 0 10px var(--accent-glow))',

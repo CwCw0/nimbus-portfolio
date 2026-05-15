@@ -12,7 +12,7 @@ const templates = [
   { name: 'pop-store', pages: ['', '/shop', '/product', '/about'], innerIndex: 2, hasLoader: false, hasGsap: false },
   { name: 'vitalis', pages: ['', '/services', '/about', '/contact'], innerIndex: 1, hasLoader: false, hasGsap: false },
   { name: 'roast', pages: ['', '/coffee', '/story', '/locations', '/contact'], innerIndex: 2, hasLoader: false, hasGsap: false },
-  { name: 'mono', pages: ['', '/project', '/about', '/contact'], innerIndex: 1, hasLoader: false, hasGsap: false },
+  { name: 'mono', pages: ['', '/project', '/about', '/contact'], innerIndex: 2, hasLoader: false, hasGsap: false },
 ];
 
 async function scrollAndWait(page, slow = false) {

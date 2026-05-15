@@ -150,19 +150,19 @@ export default function PopStorePreview() {
   return (
     <div ref={mainRef} style={{ background: P.bg, color: P.text, minHeight: "100vh", overflowX: "hidden" }}>
       {/* NAV — thick borders, animated cart */}
-      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 40px", background: P.bg, borderBottom: P.border }}>
-        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 26, fontWeight: 700 }}>POP<span style={{ color: P.coral }}>.</span></span>
-        <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
+      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "10px 16px" : "12px 40px", background: P.bg, borderBottom: P.border }}>
+        <Link href="/work/designs/pop-store/preview" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? 20 : 26, fontWeight: 700, textDecoration: "none", color: P.text }}>POP<span style={{ color: P.coral }}>.</span></Link>
+        <div style={{ display: "flex", gap: isMobile ? 14 : 28, alignItems: "center" }}>
           {[
-            { label: "Shop", href: "/work/designs/pop-store/preview/shop" },
+            { label: isMobile ? "Shop" : "Shop", href: "/work/designs/pop-store/preview/shop" },
             { label: "About", href: "/work/designs/pop-store/preview/about" },
           ].map((item) => (
-            <Link key={item.label} href={item.href} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 15, fontWeight: 600, color: P.text, textDecoration: "none", transition: "color 0.2s" }}
+            <Link key={item.label} href={item.href} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? 13 : 15, fontWeight: 600, color: P.text, textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = P.coral)}
               onMouseLeave={(e) => (e.currentTarget.style.color = P.text)}
             >{item.label}</Link>
           ))}
-          <span style={{ padding: "10px 24px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, border: P.border, boxShadow: "4px 4px 0 #1A1A1A", cursor: "pointer", transition: "all 0.12s", position: "relative" }}
+          <span style={{ padding: isMobile ? "8px 14px" : "10px 24px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? 12 : 14, fontWeight: 700, border: P.border, boxShadow: "4px 4px 0 #1A1A1A", cursor: "pointer", transition: "all 0.12s", position: "relative" }}
             onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-2px, -2px)"; e.currentTarget.style.boxShadow = "6px 6px 0 #1A1A1A"; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "4px 4px 0 #1A1A1A"; }}
           >
@@ -173,7 +173,7 @@ export default function PopStorePreview() {
       </nav>
 
       {/* HERO */}
-      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "160px 40px 80px", position: "relative", overflow: "hidden" }}>
+      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: isMobile ? "140px 20px 60px" : "160px 40px 80px", position: "relative", overflow: "hidden" }}>
         <div className="ps-float" style={{ position: "absolute", top: "10%", left: "5%", fontSize: 90, opacity: 0.12 }}>🍋</div>
         <div className="ps-float" style={{ position: "absolute", bottom: "15%", right: "7%", fontSize: 90, opacity: 0.12 }}>🧃</div>
         <div className="ps-float" style={{ position: "absolute", top: "55%", left: "82%", fontSize: 65, opacity: 0.08 }}>🌶️</div>
@@ -192,12 +192,12 @@ export default function PopStorePreview() {
           We make things you actually want to buy. Real ingredients, real personality, real good.
         </p>
 
-        <div className="ps-hero-anim" style={{ display: "flex", gap: 14, marginTop: 40 }}>
-          <Link href="/work/designs/pop-store/preview/shop" style={{ padding: "16px 44px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, fontWeight: 700, border: P.border, boxShadow: "5px 5px 0 #1A1A1A", cursor: "pointer", transition: "all 0.12s", textDecoration: "none" }}
+        <div className="ps-hero-anim" style={{ display: "flex", flexDirection: isMobile ? "column" as const : "row" as const, gap: 14, marginTop: 40, width: isMobile ? "100%" : "auto", maxWidth: isMobile ? 320 : "none" }}>
+          <Link href="/work/designs/pop-store/preview/shop" style={{ padding: isMobile ? "14px 32px" : "16px 44px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? 14 : 16, fontWeight: 700, border: P.border, boxShadow: "5px 5px 0 #1A1A1A", cursor: "pointer", transition: "all 0.12s", textDecoration: "none", textAlign: "center" as const }}
             onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-3px, -3px)"; e.currentTarget.style.boxShadow = "8px 8px 0 #1A1A1A"; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "5px 5px 0 #1A1A1A"; }}
           >SHOP NOW →</Link>
-          <Link href="/work/designs/pop-store/preview/about" style={{ padding: "16px 36px", background: "transparent", color: P.text, fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, fontWeight: 700, border: P.border, cursor: "pointer", transition: "all 0.15s", textDecoration: "none" }}
+          <Link href="/work/designs/pop-store/preview/about" style={{ padding: isMobile ? "14px 32px" : "16px 36px", background: "transparent", color: P.text, fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? 14 : 16, fontWeight: 700, border: P.border, cursor: "pointer", transition: "all 0.15s", textDecoration: "none", textAlign: "center" as const }}
             onMouseEnter={(e) => { e.currentTarget.style.background = P.text; e.currentTarget.style.color = P.textLight; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = P.text; }}
           >OUR STORY</Link>
@@ -216,7 +216,7 @@ export default function PopStorePreview() {
       </div>
 
       {/* PRODUCTS */}
-      <section style={{ padding: "100px 40px" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 40px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 44 }}>
             <div>
@@ -252,7 +252,7 @@ export default function PopStorePreview() {
       </section>
 
       {/* CATEGORIES */}
-      <section style={{ padding: "80px 40px", background: P.text }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "80px 40px", background: P.text }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, color: P.coral, letterSpacing: 2, marginBottom: 28 }}>BROWSE BY VIBE</h2>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 14 }}>
@@ -273,7 +273,7 @@ export default function PopStorePreview() {
       </section>
 
       {/* REVIEWS */}
-      <section style={{ padding: "100px 40px" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 40px" }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 44 }}>
             <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, fontWeight: 700, color: P.coral, letterSpacing: 2 }}>WHAT PEOPLE SAY</span>
@@ -295,7 +295,7 @@ export default function PopStorePreview() {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: "100px 40px", background: P.coral, textAlign: "center", position: "relative", overflow: "hidden" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 40px", background: P.coral, textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div className="ps-float" style={{ position: "absolute", top: -30, left: "8%", fontSize: 130, opacity: 0.12 }}>🎉</div>
         <div className="ps-float" style={{ position: "absolute", bottom: -30, right: "8%", fontSize: 130, opacity: 0.12 }}>🚀</div>
         <h2 className="ps-cta-heading" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(44px, 8vw, 88px)", fontWeight: 700, color: P.textLight, lineHeight: 0.92, position: "relative", zIndex: 1, textWrap: "balance" as any }}>
@@ -309,7 +309,7 @@ export default function PopStorePreview() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: "40px", background: P.text, borderTop: P.border, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <footer style={{ padding: isMobile ? "30px 20px" : "40px", background: P.text, borderTop: P.border, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap" as const, gap: 16 }}>
         <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.35)" }}>&copy; 2026 Pop Store. Stay weird.</span>
         <div style={{ display: "flex", gap: 20 }}>
           {["TikTok", "Instagram", "Twitter"].map((s) => (
