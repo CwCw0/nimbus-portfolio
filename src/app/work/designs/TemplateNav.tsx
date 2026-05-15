@@ -24,12 +24,12 @@ export default function TemplateNav({ current }: { current: string }) {
   const next = currentIndex < templates.length - 1 ? templates[currentIndex + 1] : templates[0];
 
   return (
-    <section className="w-full border-t border-(--color-border) bg-(--color-bg-primary)">
+    <section className="w-full border-t border-(--line) bg-(--ink-0)">
       {/* Back to Design Lab */}
       <div className="mx-auto max-w-250 px-16 pt-12 max-md:px-6 max-md:pt-8">
         <Link
           href="/work?view=lab"
-          className="inline-flex items-center gap-2 font-body text-xs tracking-[2px] text-(--color-text-muted) transition-colors hover:text-(--color-accent)"
+          className="inline-flex items-center gap-2 font-body text-xs tracking-[2px] text-(--fg-faint) transition-colors hover:text-(--accent)"
         >
           ← VIEW ALL TEMPLATES
         </Link>
@@ -41,27 +41,27 @@ export default function TemplateNav({ current }: { current: string }) {
           {/* Previous */}
           <Link
             href={`/work/designs/${prev.slug}`}
-            className="group flex items-center gap-4 rounded-xl border border-(--color-border) p-6 transition-all hover:border-(--color-accent-border) hover:bg-(--color-bg-surface) max-md:p-4"
+            className="group flex items-center gap-4 rounded-xl border border-(--line) p-6 transition-all hover:border-(--accent-2) hover:bg-(--ink-1) max-md:p-4"
           >
-            <ArrowLeft className="h-5 w-5 text-(--color-text-muted) transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft className="h-5 w-5 text-(--fg-faint) transition-transform group-hover:-translate-x-1" />
             <div>
-              <span className="block font-body text-[11px] tracking-[1px] text-(--color-text-muted)">PREVIOUS</span>
-              <span className="block font-display text-lg text-(--color-text-primary) max-md:text-base">{prev.name}</span>
-              <span className="block font-body text-xs text-(--color-text-dim)">{prev.tag}</span>
+              <span className="block font-body text-[11px] tracking-[1px] text-(--fg-faint)">PREVIOUS</span>
+              <span className="block font-display text-lg text-(--fg) max-md:text-base">{prev.name}</span>
+              <span className="block font-body text-xs text-(--fg-dim)">{prev.tag}</span>
             </div>
           </Link>
 
           {/* Next */}
           <Link
             href={`/work/designs/${next.slug}`}
-            className="group flex items-center justify-end gap-4 rounded-xl border border-(--color-border) p-6 text-right transition-all hover:border-(--color-accent-border) hover:bg-(--color-bg-surface) max-md:p-4 max-md:justify-start max-md:text-left max-md:flex-row-reverse"
+            className="group flex items-center justify-end gap-4 rounded-xl border border-(--line) p-6 text-right transition-all hover:border-(--accent-2) hover:bg-(--ink-1) max-md:p-4 max-md:justify-start max-md:text-left max-md:flex-row-reverse"
           >
             <div>
-              <span className="block font-body text-[11px] tracking-[1px] text-(--color-text-muted)">NEXT</span>
-              <span className="block font-display text-lg text-(--color-text-primary) max-md:text-base">{next.name}</span>
-              <span className="block font-body text-xs text-(--color-text-dim)">{next.tag}</span>
+              <span className="block font-body text-[11px] tracking-[1px] text-(--fg-faint)">NEXT</span>
+              <span className="block font-display text-lg text-(--fg) max-md:text-base">{next.name}</span>
+              <span className="block font-body text-xs text-(--fg-dim)">{next.tag}</span>
             </div>
-            <ArrowRight className="h-5 w-5 text-(--color-text-muted) transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="h-5 w-5 text-(--fg-faint) transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

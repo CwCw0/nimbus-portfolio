@@ -12,7 +12,10 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ElevateLayout, E } from "../shared";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const faqs = [
   { q: "How quickly can we get started?", a: "Most teams are onboarded within 48 hours. Enterprise accounts with SSO requirements typically take 3-5 days." },
@@ -126,7 +129,7 @@ export default function ContactPage() {
           <h1 className="ev-ct-hero" style={{
             fontFamily: "Inter, sans-serif",
             fontSize: isMobile ? 36 : "clamp(44px, 5vw, 60px)",
-            fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", marginTop: 14,
+            fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", marginTop: 14, textWrap: "balance" as any,
           }}>
             Let&apos;s{" "}
             <span style={{

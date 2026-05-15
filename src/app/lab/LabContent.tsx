@@ -1,10 +1,5 @@
 "use client";
 
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import CustomCursor from "../../components/CustomCursor";
-import SmoothScroll from "../../components/SmoothScroll";
-import WaterRipple from "../../components/WaterRipple";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -97,12 +92,7 @@ export default function LabPage() {
   }, []);
 
   return (
-    <>
-      <CustomCursor />
-      <WaterRipple />
-      <SmoothScroll>
         <div className="flex w-full flex-col overflow-x-hidden bg-(--color-bg-primary)">
-          <Header />
 
           {/* Hero — Gallery / Exhibition energy */}
           <section
@@ -225,14 +215,6 @@ export default function LabPage() {
                         </div>
                       )}
 
-                      {/* Price badge */}
-                      {design.price && (
-                        <div className="absolute top-4 right-4 bg-(--color-accent) px-3 py-1.5">
-                          <span className="font-body text-[11px] font-semibold text-white">
-                            {design.price}
-                          </span>
-                        </div>
-                      )}
 
                       {/* Hover overlay */}
                       <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-500 group-hover:bg-black/40">
@@ -326,9 +308,6 @@ export default function LabPage() {
             </div>
           </section>
 
-          <Footer />
         </div>
-      </SmoothScroll>
-    </>
   );
 }

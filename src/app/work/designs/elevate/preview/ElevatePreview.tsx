@@ -169,7 +169,7 @@ export default function ElevatePreview() {
   return (
     <div ref={mainRef} style={{ background: E.bg, color: E.text, minHeight: "100vh", overflowX: "hidden" }}>
       {/* NAV — centered logo, split links */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 48px", background: "rgba(255,255,255,0.7)", backdropFilter: "blur(20px) saturate(180%)", borderBottom: `1px solid ${E.border}` }}>
+      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 48px", background: "rgba(255,255,255,0.7)", backdropFilter: "blur(20px) saturate(180%)", borderBottom: `1px solid ${E.border}` }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 30, height: 30, background: `linear-gradient(135deg, ${E.gradient1}, ${E.gradient2})`, borderRadius: 7, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 700 }}>E</div>
           <span style={{ fontFamily: "Inter, sans-serif", fontSize: 17, fontWeight: 700 }}>Elevate</span>
@@ -194,7 +194,7 @@ export default function ElevatePreview() {
       </nav>
 
       {/* HERO — with animated gradient blob */}
-      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "140px 48px 100px", position: "relative", overflow: "hidden" }}>
+      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "160px 48px 100px", position: "relative", overflow: "hidden" }}>
         {/* Dot grid */}
         <div style={{ position: "absolute", inset: 0, backgroundImage: `radial-gradient(${E.border} 1px, transparent 1px)`, backgroundSize: "28px 28px", opacity: 0.6 }} />
 
@@ -208,7 +208,7 @@ export default function ElevatePreview() {
           </div>
           <style>{`@keyframes el-dot-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }`}</style>
 
-          <h1 className="el-hero-anim" style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(44px, 6.5vw, 76px)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-0.035em", maxWidth: 820 }}>
+          <h1 className="el-hero-anim" style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(44px, 6.5vw, 76px)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-0.035em", maxWidth: 820, textWrap: "balance" as any }}>
             The platform your
             <br />team actually{" "}
             <span style={{ background: `linear-gradient(135deg, ${E.gradient1}, ${E.gradient2})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>wants to use.</span>
@@ -249,7 +249,7 @@ export default function ElevatePreview() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 72 }}>
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 700, color: E.accent, letterSpacing: 1.5, textTransform: "uppercase" }}>Features</span>
-            <h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 800, marginTop: 14, letterSpacing: "-0.025em" }}>Everything you need.<br />Nothing you don&apos;t.</h2>
+            <h2 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 800, marginTop: 14, letterSpacing: "-0.025em", textWrap: "balance" as any }}>Everything you need.<br />Nothing you don&apos;t.</h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 20 }}>
             {features.map((f) => (

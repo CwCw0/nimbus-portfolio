@@ -187,7 +187,7 @@ export default function AboutPage() {
             <h1 className="ev-hero-el" style={{
               fontFamily: "Inter, sans-serif",
               fontSize: isMobile ? 36 : "clamp(44px, 5vw, 64px)",
-              fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em",
+              fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.03em", textWrap: "balance" as any,
             }}>
               We&apos;re building the workspace teams{" "}
               <span style={{

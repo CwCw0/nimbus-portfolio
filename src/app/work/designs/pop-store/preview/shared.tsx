@@ -40,7 +40,7 @@ export function PopNav({ cartCount = 0 }: { cartCount?: number }) {
     <nav
       style={{
         position: "fixed",
-        top: 0,
+        top: 44,
         left: 0,
         right: 0,
         zIndex: 100,
@@ -237,7 +237,7 @@ export function PopLayout({
     >
       <PreviewBar />
       <PopNav cartCount={cartCount} />
-      <div style={{ paddingTop: 60 }}>{children}</div>
+      <div style={{ paddingTop: 104 }}>{children}</div>
       <PopFooter />
     </div>
   );

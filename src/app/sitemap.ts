@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "../data/blog";
-import { allCaseStudies } from "../data/caseStudies";
-import { products } from "../data/products";
+import { projects } from "../data/projects";
+import { vaultProducts } from "../data/vault";
 
 const designTemplates = [
   "studio-noir",
@@ -22,14 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const workRoutes = allCaseStudies.map((study) => ({
-    url: `${baseUrl}/work/${study.slug}`,
+  const workRoutes = projects.map((p) => ({
+    url: `${baseUrl}/work/${p.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
-  const vaultRoutes = products.map((product) => ({
+  const vaultRoutes = vaultProducts.map((product) => ({
     url: `${baseUrl}/vault/${product.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,

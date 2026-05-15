@@ -1,19 +1,19 @@
-import type { Metadata } from "next";
-import ProductsContent from "./ProductsContent";
+import type { Metadata } from 'next';
+import VaultPageContent from './VaultPageContent';
 
 export const metadata: Metadata = {
-  title: "Products — Things Nimbus Has Made",
+  title: 'Vault — Products by Nimbus Forma Studio',
   description:
-    "A curated wall of everything Nimbus is shipping — apps, tools, fonts, games, and the desktop fire demon. Built by one person, sold under one roof.",
-  alternates: { canonical: "/vault" },
+    'Everything Nimbus is shipping. Apps, tools, and platforms built by one person. Products from the studio, not just services.',
+  alternates: { canonical: '/vault' },
   openGraph: {
-    title: "Nimbus Products — Things Nimbus Has Made",
+    title: 'The Vault — Products by Nimbus Forma Studio',
     description:
-      "A curated wall of everything Nimbus is shipping — apps, tools, fonts, games, and the desktop fire demon.",
-    url: "/vault",
+      'Apps, tools, and platforms built by one person. Products from the studio, not just services.',
+    url: '/vault',
   },
 };
 
-export default function ProductsPage() {
-  return <ProductsContent />;
+export default function VaultPage() {
+  return <VaultPageContent />;
 }

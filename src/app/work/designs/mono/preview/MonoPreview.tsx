@@ -117,7 +117,7 @@ export default function MonoPreview() {
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');`}</style>
 
       {/* NAV — barely there */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "24px 48px", background: "rgba(250,250,250,0.85)", backdropFilter: "blur(8px)" }}>
+      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "24px 48px", background: "rgba(250,250,250,0.85)", backdropFilter: "blur(8px)" }}>
         <Link href={BASE_PATH} style={{ fontFamily: F, fontSize: 15, fontWeight: 800, letterSpacing: 8, color: M.text, textDecoration: "none" }}>MONO</Link>
         <div style={{ display: "flex", gap: 28 }}>
           {[
@@ -136,7 +136,7 @@ export default function MonoPreview() {
       {/* HERO — just a name. Extreme scale. */}
       <section style={{ height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 48px" }}>
         <div style={{ overflow: "hidden" }}>
-          <h1 ref={heroRef} style={{ fontFamily: F, fontSize: "clamp(80px, 14vw, 220px)", fontWeight: 800, lineHeight: 0.88, letterSpacing: "-0.04em" }}>
+          <h1 ref={heroRef} style={{ fontFamily: F, fontSize: "clamp(80px, 14vw, 220px)", fontWeight: 800, lineHeight: 0.88, letterSpacing: "-0.04em", textWrap: "balance" as any }}>
             John
             <br />Doe.
           </h1>
@@ -201,7 +201,7 @@ export default function MonoPreview() {
       {/* CONTACT — email as the entire visual */}
       <section id="mn-contact" style={{ padding: "160px 48px", textAlign: "center" }}>
         <span style={{ fontFamily: F, fontSize: 12, fontWeight: 700, letterSpacing: 5, color: M.muted, display: "block", marginBottom: 36 }}>GET IN TOUCH</span>
-        <h2 className="mn-email" style={{ fontFamily: F, fontSize: "clamp(36px, 7vw, 110px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, cursor: "pointer", transition: "color 0.3s", color: M.text, textDecoration: "none" }}
+        <h2 className="mn-email" style={{ fontFamily: F, fontSize: "clamp(36px, 7vw, 110px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, cursor: "pointer", transition: "color 0.3s", color: M.text, textDecoration: "none", wordBreak: "break-all" as any }}
           onMouseEnter={(e) => (e.currentTarget.style.color = M.accent)}
           onMouseLeave={(e) => (e.currentTarget.style.color = M.text)}
         >

@@ -1,17 +1,19 @@
-import type { Metadata } from "next";
-import AboutContent from "./AboutContent";
+import type { Metadata } from 'next';
+import AboutPageContent from './AboutPageContent';
 
 export const metadata: Metadata = {
-  title: "About — Founder & Builder | Kuala Lumpur, Malaysia",
-  description: "Founder of Nimbus Forma Studio in KL, Malaysia. I build websites, branding, and AI tools for clients — and ship my own products. Code, design, systems, business.",
-  alternates: { canonical: "/about" },
+  title: 'About — The Builder Behind Nimbus',
+  description:
+    'Founder of Nimbus Forma Studio in KL, Malaysia. Not just code — I build websites, branding, and AI tools for clients, and ship my own products.',
+  alternates: { canonical: '/about' },
   openGraph: {
-    title: "About Nimbus — Developer, Designer & Studio Founder",
-    description: "Founder of Nimbus. Building real software across healthtech, productivity, and gaming — for clients and for myself.",
-    url: "/about",
+    title: 'About Nimbus — The Builder Behind the Studio',
+    description:
+      'Building real software across healthtech, productivity, and gaming. Code, design, systems, business.',
+    url: '/about',
   },
 };
 
 export default function AboutPage() {
-  return <AboutContent />;
+  return <AboutPageContent />;
 }

@@ -44,7 +44,7 @@ export function SNNav({ current }: { current: string }) {
   ];
 
   return (
-    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 200, display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "16px 20px" : "20px 48px", background: "rgba(13,11,8,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${C.border}` }}>
+    <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 200, display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "16px 20px" : "20px 48px", background: "rgba(13,11,8,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${C.border}` }}>
       <Link href={BASE} style={{ fontFamily: F_HEAD, fontSize: isMobile ? 16 : 20, color: C.text, letterSpacing: "0.12em", textDecoration: "none" }}>
         STUDIO<span style={{ color: C.accent }}>.</span>NOIR
       </Link>

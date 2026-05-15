@@ -260,21 +260,21 @@ export default function StudioNoirPreview() {
       <div className="sn-grain" style={{ position: "fixed", inset: 0, zIndex: 100, pointerEvents: "none", opacity: 0.03, backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`, backgroundRepeat: "repeat", backgroundSize: "128px" }} />
 
       {/* NAVIGATION — top bar with page links */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 200, display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "16px 20px" : "20px 48px", background: "rgba(13,11,8,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${C.border}` }}>
+      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 200, display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "16px 20px" : "20px 48px", background: "rgba(13,11,8,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${C.border}` }}>
         <span style={{ fontFamily: F_HEAD, fontSize: isMobile ? 16 : 20, color: C.text, letterSpacing: "0.12em" }}>
           STUDIO<span style={{ color: C.accent }}>.</span>NOIR
         </span>
         <div style={{ display: "flex", gap: isMobile ? 16 : 32, alignItems: "center" }}>
           {[
-            { label: "Home", href: "#" },
+            { label: "Home", href: "/work/designs/studio-noir/preview" },
             { label: "Work", href: "/work/designs/studio-noir/preview/work" },
             { label: "About", href: "/work/designs/studio-noir/preview/about" },
             { label: "Contact", href: "/work/designs/studio-noir/preview/contact" },
           ].map((item) => (
-            <a key={item.label} href={item.href} style={{ fontFamily: F_BODY, fontSize: isMobile ? 11 : 12, color: item.label === "Home" ? C.accent : C.muted, textDecoration: "none", letterSpacing: 3, transition: "color 0.3s", cursor: "none" }}
+            <Link key={item.label} href={item.href} style={{ fontFamily: F_BODY, fontSize: isMobile ? 11 : 12, color: item.label === "Home" ? C.accent : C.muted, textDecoration: "none", letterSpacing: 3, transition: "color 0.3s", cursor: "none" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = C.accent)}
               onMouseLeave={(e) => (e.currentTarget.style.color = item.label === "Home" ? C.accent : C.muted)}
-            >{item.label.toUpperCase()}</a>
+            >{item.label.toUpperCase()}</Link>
           ))}
         </div>
       </nav>
@@ -290,8 +290,8 @@ export default function StudioNoirPreview() {
             ✦ CREATIVE STUDIO — EST. 2024
           </span>
 
-          <h1 ref={heroTitleRef} style={{ fontFamily: F_HEAD, fontSize: "clamp(64px, 10vw, 160px)", color: C.text, lineHeight: 0.88, letterSpacing: "0.02em", perspective: "600px" }}>
-            WE DESIGN WHAT OTHERS OVERLOOK
+          <h1 ref={heroTitleRef} style={{ fontFamily: F_HEAD, fontSize: "clamp(64px, 9vw, 140px)", color: C.text, lineHeight: 0.88, letterSpacing: "-0.02em", perspective: "600px", wordBreak: "keep-all", overflowWrap: "normal" }}>
+            WE DESIGN WHAT<br />OTHERS OVERLOOK
           </h1>
 
           <p className="sn-fade" style={{ fontFamily: F_BODY, fontSize: 17, color: C.dim, marginTop: 40, maxWidth: 440, lineHeight: 1.85 }}>
@@ -375,7 +375,7 @@ export default function StudioNoirPreview() {
           <div className="sn-about-section" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.2fr 1fr", gap: isMobile ? 40 : 100, alignItems: "center" }}>
             <div>
               <span style={{ fontFamily: F_HEAD, fontSize: 14, letterSpacing: 8, color: C.accent, display: "block", marginBottom: 40 }}>ABOUT THE STUDIO</span>
-              <p className="sn-about-text" style={{ fontFamily: F_HEAD, fontSize: "clamp(32px, 4vw, 56px)", color: C.text, lineHeight: 1.15, letterSpacing: "0.02em" }}>
+              <p className="sn-about-text" style={{ fontFamily: F_HEAD, fontSize: "clamp(32px, 4vw, 56px)", color: C.text, lineHeight: 1.05, letterSpacing: "-0.02em", textWrap: "balance" as any }}>
                 WE DON&apos;T ADD — WE REMOVE. EVERY ELEMENT ON SCREEN MUST EARN ITS PLACE.
               </p>
               <p style={{ fontFamily: F_BODY, fontSize: 16, color: C.dim, lineHeight: 1.85, marginTop: 32, maxWidth: 480 }}>
@@ -439,7 +439,7 @@ export default function StudioNoirPreview() {
         </div>
 
         <span style={{ fontFamily: F_HEAD, fontSize: 14, letterSpacing: 8, color: C.accent, display: "block", marginBottom: 40, position: "relative", zIndex: 1 }}>GET IN TOUCH</span>
-        <h2 className="sn-cta-heading" style={{ fontFamily: F_HEAD, fontSize: "clamp(44px, 7vw, 110px)", color: C.text, lineHeight: 0.92, letterSpacing: "0.02em", position: "relative", zIndex: 1, maxWidth: 900, marginLeft: "auto", marginRight: "auto" }}>
+        <h2 className="sn-cta-heading" style={{ fontFamily: F_HEAD, fontSize: "clamp(44px, 7vw, 110px)", color: C.text, lineHeight: 0.92, letterSpacing: "-0.02em", position: "relative", zIndex: 1, maxWidth: 900, marginLeft: "auto", marginRight: "auto", textWrap: "balance" as any }}>
           LET&apos;S BUILD
           <br />SOMETHING
           <br /><span style={{ color: C.accent }}>REMARKABLE</span>

@@ -49,28 +49,28 @@ export default function PreviewBar() {
         alignItems: "center",
         justifyContent: "space-between",
         padding: "10px 20px",
-        background: "rgba(15, 15, 15, 0.92)",
+        background: "rgba(10, 10, 15, 0.92)",
         backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
-        fontFamily: "Inter, -apple-system, sans-serif",
+        borderBottom: "1px solid var(--line-strong)",
+        fontFamily: "var(--f-body)",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
         <span
           style={{
             padding: "3px 10px",
-            background: "rgba(124, 92, 252, 0.15)",
+            background: "var(--accent-soft)",
             border: "1px solid rgba(124, 92, 252, 0.3)",
             borderRadius: 4,
             fontSize: 11,
             fontWeight: 600,
-            color: "#A78BFA",
+            color: "var(--accent-2)",
             letterSpacing: 0.5,
           }}
         >
           PREVIEW
         </span>
-        <span style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", fontWeight: 500 }}>
+        <span style={{ fontSize: 13, color: "var(--fg-dim)", fontWeight: 500 }}>
           {templateName} Template
         </span>
       </div>
@@ -84,21 +84,21 @@ export default function PreviewBar() {
             gap: 6,
             padding: "7px 14px",
             background: "none",
-            border: "1px solid rgba(255,255,255,0.1)",
+            border: "1px solid var(--line-strong)",
             borderRadius: 6,
             fontSize: 12,
             fontWeight: 500,
-            color: "rgba(255,255,255,0.5)",
+            color: "var(--fg-faint)",
             textDecoration: "none",
             transition: "all 0.2s",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = "rgba(255,255,255,0.9)";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+            e.currentTarget.style.color = "var(--fg)";
+            e.currentTarget.style.borderColor = "var(--accent-2)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = "rgba(255,255,255,0.5)";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+            e.currentTarget.style.color = "var(--fg-faint)";
+            e.currentTarget.style.borderColor = "var(--line-strong)";
           }}
         >
           All Templates
@@ -110,22 +110,22 @@ export default function PreviewBar() {
             alignItems: "center",
             gap: 6,
             padding: "7px 16px",
-            background: "rgba(255,255,255,0.1)",
-            border: "1px solid rgba(255,255,255,0.15)",
+            background: "var(--accent-soft)",
+            border: "1px solid rgba(124, 92, 252, 0.2)",
             borderRadius: 6,
             fontSize: 12,
             fontWeight: 600,
-            color: "#fff",
+            color: "var(--fg)",
             textDecoration: "none",
             transition: "all 0.2s",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.18)";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
+            e.currentTarget.style.background = "rgba(124, 92, 252, 0.15)";
+            e.currentTarget.style.borderColor = "rgba(124, 92, 252, 0.35)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+            e.currentTarget.style.background = "var(--accent-soft)";
+            e.currentTarget.style.borderColor = "rgba(124, 92, 252, 0.2)";
           }}
         >
           ← Exit Preview

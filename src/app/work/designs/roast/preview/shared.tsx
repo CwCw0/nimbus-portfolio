@@ -79,7 +79,7 @@ export function RoastNav({ current }: { current: string }) {
     <nav
       style={{
         position: "fixed",
-        top: 0,
+        top: 44,
         left: 0,
         right: 0,
         zIndex: 200,
@@ -163,7 +163,7 @@ export function RoastNav({ current }: { current: string }) {
         <div
           style={{
             position: "fixed",
-            top: 56,
+            top: 100,
             left: 0,
             right: 0,
             bottom: 0,

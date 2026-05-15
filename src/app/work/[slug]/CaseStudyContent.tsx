@@ -1,564 +1,582 @@
-"use client";
+'use client';
 
-import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
-import CustomCursor from "../../../components/CustomCursor";
-import SmoothScroll from "../../../components/SmoothScroll";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SplitType from "split-type";
-import type { CaseStudy } from "../../../data/caseStudies";
+import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import Header from '../../../components/Header';
+import Footer from '../../../components/Footer';
+import CustomCursor from '../../../components/CustomCursor';
+import SmoothScroll from '../../../components/SmoothScroll';
+import RevealLine from '../../../components/ui/RevealLine';
+import FadeIn from '../../../components/ui/FadeIn';
+import { projects } from '../../../data/projects';
+import type { CaseStudy } from '../../../data/caseStudies';
 
-gsap.registerPlugin(ScrollTrigger);
+const toneGradients: Record<string, string> = {
+  violet: 'linear-gradient(135deg, rgba(124,92,252,0.15), rgba(124,92,252,0.04))',
+  deep: 'linear-gradient(135deg, rgba(90,63,204,0.18), rgba(90,63,204,0.04))',
+  ember: 'linear-gradient(135deg, rgba(252,140,60,0.15), rgba(252,140,60,0.04))',
+  ink: 'linear-gradient(135deg, rgba(245,240,230,0.06), rgba(245,240,230,0.02))',
+};
 
-/** Split a text field on \n\n to get individual paragraphs */
 function toParagraphs(text: string): string[] {
   return text.split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
 }
 
-const defaultStudy = {
-  tags: ["UI/UX Design", "Dashboard", "React"],
-  title: "Project Coming Soon",
-  heroDesc: "This case study is currently being written.",
-  challenge: "Details coming soon.",
-  challengePoints: undefined as string[] | undefined,
-  solution: "Details coming soon.",
-  solutionHighlights: undefined as string[] | undefined,
-  results: [] as { value: string; label: string; color: string }[],
-};
-
 export default function CaseStudyContent({
   caseStudy,
   nextProject,
+  prevProject,
 }: {
   caseStudy: CaseStudy | null;
   nextProject: { title: string; slug: string };
+  prevProject: { title: string; slug: string } | null;
 }) {
-  const study = caseStudy || defaultStudy;
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const heroRef = useRef<HTMLElement>(null);
-  const heroImgRef = useRef<HTMLDivElement>(null);
-  const overviewRef = useRef<HTMLElement>(null);
-  const resultsRef = useRef<HTMLElement>(null);
-  const galleryRef = useRef<HTMLElement>(null);
+  // Find matching project data for stats/tone
+  const project = caseStudy
+    ? projects.find((p) => p.slug === caseStudy.slug)
+    : null;
 
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+  if (!caseStudy) {
+    return (
+      <>
+        <CustomCursor />
+        <div className="flex w-full flex-col overflow-x-hidden">
+          <Header />
+          <section className="container" style={{ padding: '200px 0', textAlign: 'center' }}>
+            <h1 className="display-lg" style={{ color: 'var(--fg)' }}>Project not found</h1>
+            <Link href="/work" className="body" style={{ color: 'var(--accent)', marginTop: 'var(--sp-6)', display: 'inline-block' }}>
+              Back to Work
+            </Link>
+          </section>
+          <Footer />
+        </div>
+      </>
+    );
+  }
 
-    const cleanups: (() => void)[] = [];
-
-    // Hero heading split
-    const heading = headingRef.current;
-    if (heading) {
-      const split = new SplitType(heading, { types: "chars" });
-      if (prefersReducedMotion) {
-        gsap.set(split.chars || [], { opacity: 1, y: 0 });
-      } else {
-        gsap.set(split.chars || [], { opacity: 0, y: 40 });
-        gsap.to(split.chars || [], {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.02,
-          ease: "power3.out",
-          delay: 0.3,
-        });
-      }
-      cleanups.push(() => split.revert());
-    }
-
-    // Hero subtext fade
-    const hero = heroRef.current;
-    if (hero && !prefersReducedMotion) {
-      const subs = hero.querySelectorAll(".hero-fade");
-      gsap.set(subs, { opacity: 0, y: 30 });
-      gsap.to(subs, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        delay: 0.5,
-      });
-    }
-
-    // Hero image — scale down on scroll entrance for cinematic feel
-    const heroImg = heroImgRef.current;
-    if (heroImg && !prefersReducedMotion) {
-      gsap.fromTo(
-        heroImg,
-        { scale: 1.08 },
-        {
-          scale: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: heroImg,
-            start: "top 80%",
-            end: "bottom 30%",
-            scrub: true,
-          },
-        }
-      );
-    }
-
-    // Overview reveal
-    const overview = overviewRef.current;
-    if (overview && !prefersReducedMotion) {
-      const ctx = gsap.context(() => {
-        const cols = overview.querySelectorAll(".overview-col");
-        gsap.set(cols, { opacity: 0, y: 40 });
-        gsap.to(cols, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: overview,
-            start: "top 75%",
-            once: true,
-          },
-        });
-      }, overview);
-      cleanups.push(() => ctx.revert());
-    }
-
-    // Results count-up
-    const results = resultsRef.current;
-    if (results && !prefersReducedMotion) {
-      const ctx = gsap.context(() => {
-        const cards = results.querySelectorAll(".result-card");
-        gsap.set(cards, { opacity: 0, y: 40 });
-        gsap.to(cards, {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: results,
-            start: "top 80%",
-            once: true,
-          },
-        });
-
-        // Count-up
-        const stats = results.querySelectorAll(".count-up");
-        stats.forEach((stat) => {
-          const el = stat as HTMLElement;
-          const target = el.dataset.target || "0";
-          const isPlus = target.startsWith("+");
-          const isPercent = target.includes("%");
-          const num = parseInt(target.replace(/[^0-9]/g, ""), 10);
-
-          gsap.fromTo(
-            { val: 0 },
-            { val: 0 },
-            {
-              val: num,
-              duration: 1.5,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: el,
-                start: "top 85%",
-                once: true,
-              },
-              onUpdate: function () {
-                const current = Math.round(this.targets()[0].val);
-                el.textContent = (isPlus ? "+" : "") + current + (isPercent ? "%" : "");
-              },
-            }
-          );
-        });
-      }, results);
-      cleanups.push(() => ctx.revert());
-    }
-
-    // Gallery reveal
-    const gallery = galleryRef.current;
-    if (gallery && !prefersReducedMotion) {
-      const ctx = gsap.context(() => {
-        const items = gallery.querySelectorAll(".gallery-item");
-        items.forEach((item) => {
-          gsap.fromTo(
-            item,
-            { opacity: 0, scale: 0.96 },
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.8,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: item,
-                start: "top 85%",
-                once: true,
-              },
-            }
-          );
-        });
-      }, gallery);
-      cleanups.push(() => ctx.revert());
-    }
-
-    return () => cleanups.forEach((fn) => fn());
-  }, [study.title]);
-
-  const challengeParas = toParagraphs(study.challenge);
-  const solutionParas = toParagraphs(study.solution);
+  const challengeParas = toParagraphs(caseStudy.challenge);
+  const solutionParas = toParagraphs(caseStudy.solution);
+  const tone = project?.tone || 'violet';
+  const gradient = toneGradients[tone] || toneGradients.violet;
 
   return (
     <>
       <CustomCursor />
       <SmoothScroll>
-        <main
-          id="main-content"
-          className="flex w-full flex-col overflow-x-hidden bg-[var(--color-bg-primary)]"
-        >
+        <main className="flex w-full flex-col overflow-x-hidden">
           <Header />
 
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-2 px-16 pt-28 max-md:px-6 max-md:pt-24">
-            <Link
-              href="/work"
-              className="flex items-center gap-2 font-body text-sm text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text-primary)]"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Work
-            </Link>
-          </div>
+          {/* ── Hero ── */}
+          <section className="container" style={{ paddingTop: 'clamp(140px, 18vh, 200px)', paddingBottom: 'var(--sp-12)' }}>
+            {/* Back link */}
+            <FadeIn>
+              <Link
+                href="/work"
+                className="body-sm"
+                style={{
+                  color: 'var(--fg-dim)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 'var(--sp-2)',
+                  textDecoration: 'none',
+                  marginBottom: 'var(--sp-12)',
+                }}
+              >
+                <ArrowLeft style={{ width: 16, height: 16 }} />
+                All projects
+              </Link>
+            </FadeIn>
 
-          {/* Hero */}
-          <section
-            ref={heroRef}
-            className="relative flex w-full flex-col items-center justify-center px-16 pt-14 pb-10 max-md:px-6 max-md:pt-10"
-          >
-            <div className="flex flex-col items-center gap-5 text-center max-w-[960px]">
-              <div className="hero-fade flex gap-2 flex-wrap items-center justify-center">
-                {caseStudy?.status === "in-development" && (
-                  <span className="bg-amber-500/15 border border-amber-500/25 px-3 py-1 font-body text-[11px] font-semibold tracking-[1px] text-amber-400">
-                    IN DEVELOPMENT
+            {/* Title */}
+            <RevealLine>
+              <h1 className="display-xxl" style={{ color: 'var(--fg)' }}>
+                {caseStudy.shortTitle}
+              </h1>
+            </RevealLine>
+
+            {/* Meta row */}
+            <FadeIn delay={200}>
+              <div
+                className="mono"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--sp-4)',
+                  flexWrap: 'wrap',
+                  marginTop: 'var(--sp-8)',
+                }}
+              >
+                {project && (
+                  <>
+                    <span style={{ color: 'var(--fg-dim)' }}>{project.type}</span>
+                    <span style={{ color: 'var(--fg-faint)' }}>&middot;</span>
+                    <span style={{ color: 'var(--fg-dim)' }}>{project.stack}</span>
+                    <span style={{ color: 'var(--fg-faint)' }}>&middot;</span>
+                    <span style={{ color: 'var(--fg-dim)' }}>{project.year}</span>
+                  </>
+                )}
+                {caseStudy.status && (
+                  <span
+                    style={{
+                      padding: '4px 14px',
+                      borderRadius: 'var(--r-pill)',
+                      border: caseStudy.status === 'in-development'
+                        ? '1px solid rgba(245,158,11,0.3)'
+                        : '1px solid var(--line-strong)',
+                      color: caseStudy.status === 'in-development' ? '#fbbf24' : 'var(--fg-dim)',
+                      fontSize: 'var(--t-mono)',
+                    }}
+                  >
+                    {caseStudy.status === 'in-development' ? 'IN DEV' : caseStudy.status === 'live' ? 'LIVE' : caseStudy.status.toUpperCase()}
                   </span>
                 )}
-                {study.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="bg-[var(--color-accent-subtle)] px-3 py-1 font-body text-[11px] font-medium text-[var(--color-accent)]"
-                  >
-                    {tag}
-                  </span>
-                ))}
               </div>
-              <h1
-                ref={headingRef}
-                className="font-display tracking-[-2px] text-[var(--color-text-primary)]"
-                style={{ fontSize: "clamp(32px, 5.5vw, 76px)", lineHeight: 1.1 }}
-              >
-                {study.title}
-              </h1>
-              <p className="hero-fade max-w-[580px] font-body text-[17px] leading-[1.75] text-[var(--color-text-dim)] max-md:text-base">
-                {study.heroDesc}
-              </p>
-            </div>
+            </FadeIn>
           </section>
 
-          {/* In Development Banner */}
-          {caseStudy?.status === "in-development" && (
-            <section className="w-full px-16 pb-6 max-md:px-6">
-              <div className="mx-auto max-w-[1000px] flex items-center gap-3 border border-amber-500/20 bg-amber-500/5 px-5 py-3">
-                <span className="h-2 w-2 shrink-0 rounded-full bg-amber-400 animate-pulse" />
-                <p className="font-body text-sm text-amber-300/90">
-                  This project is actively in progress — features and design are being built and improved continuously.
-                </p>
-              </div>
-            </section>
-          )}
-
-          {/* Hero Image */}
-          <section className="w-full px-16 pb-20 max-md:px-6 max-md:pb-12">
-            <div className="mx-auto max-w-[1200px] relative w-full overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-card)]">
-              {caseStudy?.heroImage ? (
-                <div
-                  ref={heroImgRef}
-                  className="relative"
-                  style={{ height: "clamp(260px, 48vh, 540px)" }}
-                >
+          {/* ── Large mockup area ── */}
+          <section className="container" style={{ paddingBottom: 'var(--sp-16)' }}>
+            <FadeIn delay={300}>
+              <div
+                style={{
+                  width: '100%',
+                  aspectRatio: '16 / 9',
+                  background: gradient,
+                  border: '1px solid var(--line)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  overflow: 'hidden',
+                  position: 'relative',
+                }}
+              >
+                {caseStudy.heroImage ? (
                   <Image
                     src={caseStudy.heroImage}
-                    alt={study.title}
+                    alt={caseStudy.title}
                     fill
-                    className="object-cover object-top"
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'top',
+                    }}
+                    sizes="100vw"
+                    priority
                   />
-                </div>
-              ) : (
+                ) : (
+                  <span className="mono" style={{ color: 'var(--fg-faint)' }}>
+                    PROJECT MOCKUP
+                  </span>
+                )}
+                {caseStudy.liveUrl && (
+                  <a
+                    href={caseStudy.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="body-sm"
+                    style={{
+                      position: 'absolute',
+                      bottom: 'var(--sp-4)',
+                      right: 'var(--sp-4)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 'var(--sp-2)',
+                      padding: '10px 20px',
+                      background: 'rgba(10,10,15,0.85)',
+                      backdropFilter: 'blur(12px)',
+                      border: '1px solid var(--line-strong)',
+                      color: 'var(--accent)',
+                      textDecoration: 'none',
+                      borderRadius: 'var(--r-md)',
+                      transition: 'background 0.3s var(--ease-out)',
+                    }}
+                  >
+                    View Live
+                    <ArrowRight style={{ width: 14, height: 14 }} />
+                  </a>
+                )}
+              </div>
+            </FadeIn>
+          </section>
+
+          {/* ── Tagline ── */}
+          <section className="container" style={{ paddingBottom: 'var(--sp-16)' }}>
+            <FadeIn delay={100}>
+              <p
+                style={{
+                  fontFamily: 'var(--f-serif)',
+                  fontStyle: 'italic',
+                  fontSize: 'clamp(20px, 2.5vw, 28px)',
+                  lineHeight: 1.5,
+                  color: 'var(--fg-dim)',
+                  maxWidth: '720px',
+                }}
+              >
+                {caseStudy.heroDesc}
+              </p>
+            </FadeIn>
+          </section>
+
+          {/* ── Stats row ── */}
+          {project && project.stats.length > 0 && (
+            <section className="container" style={{ paddingBottom: 'var(--section-gap)' }}>
+              <FadeIn delay={150}>
                 <div
-                  className="flex w-full items-center justify-center bg-gradient-to-br from-[#7C5CFC12] to-[#7C5CFC06]"
-                  style={{ height: "clamp(260px, 48vh, 540px)" }}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${project.stats.length}, 1fr)`,
+                    gap: 'var(--sp-4)',
+                  }}
                 >
-                  <span className="font-body text-sm tracking-[2px] text-[var(--color-text-subtle)]">
-                    PROJECT IMAGE
-                  </span>
-                </div>
-              )}
-              {caseStudy?.liveUrl && (
-                <a
-                  href={caseStudy.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute bottom-4 right-4 flex items-center gap-2 border border-[var(--color-accent-border)] bg-[var(--color-bg-primary)]/90 backdrop-blur-sm px-5 py-2.5 font-body text-[13px] font-medium text-[var(--color-accent)] transition-all hover:bg-[var(--color-accent-subtle)]"
-                >
-                  View Live Site
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              )}
-            </div>
-          </section>
-
-          {/* Overview — Challenge / Solution */}
-          <section
-            ref={overviewRef}
-            className="w-full bg-[#0D0C14] px-16 py-24 max-md:px-6 max-md:py-16"
-          >
-            <div className="mx-auto flex max-w-[1000px] gap-16 max-lg:gap-12 max-md:flex-col max-md:gap-14">
-              {/* Challenge */}
-              <div className="overview-col flex flex-1 flex-col gap-6">
-                <span className="font-body text-[11px] font-semibold tracking-[3px] text-[var(--color-accent)]">
-                  THE CHALLENGE
-                </span>
-
-                {/* Lead paragraph — slightly larger */}
-                {challengeParas[0] && (
-                  <p className="font-body text-[17px] font-medium leading-[1.75] text-[var(--color-text-primary)] max-md:text-base">
-                    {challengeParas[0]}
-                  </p>
-                )}
-
-                {/* Remaining paragraphs */}
-                {challengeParas.slice(1).map((para, i) => (
-                  <p
-                    key={i}
-                    className="font-body text-[15px] leading-[1.8] text-[var(--color-text-dim)]"
-                  >
-                    {para}
-                  </p>
-                ))}
-
-                {/* Optional bullet points */}
-                {study.challengePoints && study.challengePoints.length > 0 && (
-                  <ul className="mt-2 flex flex-col gap-3 border-t border-[var(--color-border)] pt-5">
-                    {study.challengePoints.map((point, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-3 font-body text-[13px] leading-[1.6] text-[var(--color-text-dim)]"
-                      >
-                        <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)] opacity-60" />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-
-              {/* Divider — vertical on desktop, horizontal on mobile */}
-              <div className="shrink-0 max-md:hidden w-px bg-[var(--color-border)]" />
-              <div className="hidden max-md:block h-px w-full bg-[var(--color-border)]" />
-
-              {/* Solution */}
-              <div className="overview-col flex flex-1 flex-col gap-6">
-                <span className="font-body text-[11px] font-semibold tracking-[3px] text-[var(--color-accent)]">
-                  THE SOLUTION
-                </span>
-
-                {/* Lead paragraph */}
-                {solutionParas[0] && (
-                  <p className="font-body text-[17px] font-medium leading-[1.75] text-[var(--color-text-primary)] max-md:text-base">
-                    {solutionParas[0]}
-                  </p>
-                )}
-
-                {/* Remaining paragraphs */}
-                {solutionParas.slice(1).map((para, i) => (
-                  <p
-                    key={i}
-                    className="font-body text-[15px] leading-[1.8] text-[var(--color-text-dim)]"
-                  >
-                    {para}
-                  </p>
-                ))}
-
-                {/* Optional bullet highlights */}
-                {study.solutionHighlights && study.solutionHighlights.length > 0 && (
-                  <ul className="mt-2 flex flex-col gap-3 border-t border-[var(--color-border)] pt-5">
-                    {study.solutionHighlights.map((point, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-3 font-body text-[13px] leading-[1.6] text-[var(--color-text-dim)]"
-                      >
-                        <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)]" />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-          </section>
-
-          {/* Results */}
-          {study.results.length > 0 && (
-            <section
-              ref={resultsRef}
-              className="w-full px-16 py-24 max-md:px-6 max-md:py-16"
-            >
-              <div className="mx-auto max-w-[1000px]">
-                <div className="mb-10 flex flex-col gap-2">
-                  <span className="font-body text-[11px] font-semibold tracking-[3px] text-[var(--color-accent)]">
-                    RESULTS
-                  </span>
-                  <h2
-                    className="font-display tracking-[-1px] text-[var(--color-text-primary)]"
-                    style={{ fontSize: "clamp(22px, 2.8vw, 34px)" }}
-                  >
-                    The impact
-                  </h2>
-                </div>
-                <div className="grid gap-5 max-md:grid-cols-2"
-                  style={{ gridTemplateColumns: `repeat(${Math.min(study.results.length, 4)}, minmax(0, 1fr))` }}
-                >
-                  {study.results.map((r) => (
+                  {project.stats.map(([label, value]) => (
                     <div
-                      key={r.label}
-                      className="result-card flex flex-col gap-2 border border-[var(--color-border)] bg-[var(--color-bg-card)] p-7 max-md:p-5"
+                      key={label}
+                      style={{
+                        padding: 'var(--sp-8)',
+                        border: '1px solid var(--line)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 'var(--sp-2)',
+                      }}
                     >
-                      <span
-                        className={`count-up font-display tracking-[-1px] ${r.color}`}
-                        data-target={r.value}
-                        style={{ fontSize: "clamp(28px, 3.5vw, 48px)" }}
-                      >
-                        {r.value.startsWith("+") ? "+0" : isNaN(Number(r.value.replace(/[^0-9]/g, ""))) ? r.value : "0"}
+                      <span className="mono" style={{ color: 'var(--fg-faint)' }}>
+                        {label}
                       </span>
-                      <span className="font-body text-sm text-[var(--color-text-dim)]">
-                        {r.label}
+                      <span className="display-md" style={{ color: 'var(--fg)' }}>
+                        {value}
                       </span>
                     </div>
                   ))}
                 </div>
+
+                <style jsx>{`
+                  @media (max-width: 640px) {
+                    div[style*="grid-template-columns: repeat"] {
+                      grid-template-columns: 1fr !important;
+                    }
+                  }
+                `}</style>
+              </FadeIn>
+            </section>
+          )}
+
+          {/* ── Project details: Challenge + Solution ── */}
+          {(challengeParas.length > 0 || solutionParas.length > 0) && (
+            <section
+              style={{
+                borderTop: '1px solid var(--line)',
+                borderBottom: '1px solid var(--line)',
+                padding: 'var(--section-gap) 0',
+              }}
+            >
+              <div className="container">
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: 'var(--sp-16)',
+                    maxWidth: '1100px',
+                  }}
+                >
+                  {/* Challenge */}
+                  <FadeIn>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-6)' }}>
+                      <span className="mono" style={{ color: 'var(--accent)' }}>
+                        THE CHALLENGE
+                      </span>
+                      {challengeParas.map((para, i) => (
+                        <p
+                          key={i}
+                          style={{
+                            fontFamily: i === 0 ? 'var(--f-body)' : 'var(--f-body)',
+                            fontSize: i === 0 ? '17px' : 'var(--t-body-sm)',
+                            fontWeight: i === 0 ? 500 : 400,
+                            lineHeight: 1.7,
+                            color: i === 0 ? 'var(--fg)' : 'var(--fg-dim)',
+                          }}
+                        >
+                          {para}
+                        </p>
+                      ))}
+                      {caseStudy.challengePoints && caseStudy.challengePoints.length > 0 && (
+                        <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)', borderTop: '1px solid var(--line)', paddingTop: 'var(--sp-5)' }}>
+                          {caseStudy.challengePoints.map((point, i) => (
+                            <li
+                              key={i}
+                              className="body-sm"
+                              style={{
+                                display: 'flex',
+                                alignItems: 'flex-start',
+                                gap: 'var(--sp-3)',
+                                color: 'var(--fg-dim)',
+                              }}
+                            >
+                              <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', opacity: 0.6, flexShrink: 0, marginTop: 7 }} />
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </FadeIn>
+
+                  {/* Solution */}
+                  <FadeIn delay={150}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-6)' }}>
+                      <span className="mono" style={{ color: 'var(--accent)' }}>
+                        THE APPROACH
+                      </span>
+                      {solutionParas.map((para, i) => (
+                        <p
+                          key={i}
+                          style={{
+                            fontFamily: 'var(--f-body)',
+                            fontSize: i === 0 ? '17px' : 'var(--t-body-sm)',
+                            fontWeight: i === 0 ? 500 : 400,
+                            lineHeight: 1.7,
+                            color: i === 0 ? 'var(--fg)' : 'var(--fg-dim)',
+                          }}
+                        >
+                          {para}
+                        </p>
+                      ))}
+                      {caseStudy.solutionHighlights && caseStudy.solutionHighlights.length > 0 && (
+                        <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-3)', borderTop: '1px solid var(--line)', paddingTop: 'var(--sp-5)' }}>
+                          {caseStudy.solutionHighlights.map((point, i) => (
+                            <li
+                              key={i}
+                              className="body-sm"
+                              style={{
+                                display: 'flex',
+                                alignItems: 'flex-start',
+                                gap: 'var(--sp-3)',
+                                color: 'var(--fg-dim)',
+                              }}
+                            >
+                              <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0, marginTop: 7 }} />
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </FadeIn>
+                </div>
+
+                <style jsx>{`
+                  @media (max-width: 768px) {
+                    div[style*="grid-template-columns: 1fr 1fr"] {
+                      grid-template-columns: 1fr !important;
+                    }
+                  }
+                `}</style>
               </div>
             </section>
           )}
 
-          {/* Gallery */}
-          <section
-            ref={galleryRef}
-            className="w-full px-16 pb-24 max-md:px-6 max-md:pb-12"
-          >
-            <div className="mx-auto max-w-[1200px]">
-              {caseStudy?.gallery && caseStudy.gallery.length > 0 ? (
-                <div className="flex flex-col gap-5">
-                  <div className="flex gap-5 max-md:flex-col">
-                    {caseStudy.gallery.slice(0, 2).map((src, i) => (
-                      <div
-                        key={i}
-                        className="gallery-item relative flex-1 overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-card)]"
-                        style={{ height: "clamp(220px, 33vh, 380px)" }}
-                      >
-                        <Image
-                          src={src}
-                          alt={`${study.title} screenshot ${i + 1}`}
-                          fill
-                          className="object-cover object-top"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  {caseStudy.gallery.length > 2 && (
-                    <div className="flex gap-5 max-md:flex-col">
-                      {caseStudy.gallery.slice(2, 4).map((src, i) => (
-                        <div
-                          key={i}
-                          className="gallery-item relative flex-1 overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-card)]"
-                          style={{ height: "clamp(220px, 33vh, 380px)" }}
-                        >
-                          <Image
-                            src={src}
-                            alt={`${study.title} screenshot ${i + 3}`}
-                            fill
-                            className="object-cover object-top"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {caseStudy.gallery.length > 4 && (
-                    <div className="flex gap-5 max-md:flex-col">
-                      {caseStudy.gallery.slice(4).map((src, i) => (
-                        <div
-                          key={i}
-                          className={`gallery-item relative overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-card)] ${
-                            caseStudy.gallery!.slice(4).length === 1
-                              ? "w-full"
-                              : "flex-1"
-                          }`}
-                          style={{ height: "clamp(220px, 33vh, 380px)" }}
-                        >
-                          <Image
-                            src={src}
-                            alt={`${study.title} screenshot ${i + 5}`}
-                            fill
-                            className="object-cover object-top"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="flex gap-5 max-md:flex-col">
-                  <div
-                    className="gallery-item flex flex-1 items-center justify-center bg-gradient-to-br from-[#7C5CFC10] to-[#7C5CFC05] border border-[var(--color-border)]"
-                    style={{ height: "clamp(220px, 33vh, 380px)" }}
-                  >
-                    <span className="font-body text-sm tracking-[2px] text-[var(--color-text-subtle)]">
-                      GALLERY 1
+          {/* ── Tech stack chips ── */}
+          {caseStudy.tags.length > 0 && (
+            <section className="container" style={{ padding: 'var(--sp-16) 0' }}>
+              <FadeIn>
+                <span className="mono" style={{ color: 'var(--fg-faint)', display: 'block', marginBottom: 'var(--sp-6)' }}>
+                  TECH STACK
+                </span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sp-2)' }}>
+                  {caseStudy.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="body-sm"
+                      style={{
+                        padding: '8px 18px',
+                        border: '1px solid var(--line-strong)',
+                        borderRadius: 'var(--r-pill)',
+                        color: 'var(--fg-dim)',
+                      }}
+                    >
+                      {tag}
                     </span>
-                  </div>
-                  <div
-                    className="gallery-item flex flex-1 items-center justify-center bg-gradient-to-br from-[#7C5CFC10] to-[#7C5CFC05] border border-[var(--color-border)]"
-                    style={{ height: "clamp(220px, 33vh, 380px)" }}
-                  >
-                    <span className="font-body text-sm tracking-[2px] text-[var(--color-text-subtle)]">
-                      GALLERY 2
-                    </span>
-                  </div>
+                  ))}
                 </div>
-              )}
-            </div>
-          </section>
+              </FadeIn>
+            </section>
+          )}
 
-          {/* Next Project */}
-          <section className="w-full border-t border-[var(--color-border)] bg-[#0D0C14] px-16 py-20 max-md:px-6 max-md:py-12">
-            <Link
-              href={`/work/${nextProject.slug}`}
-              className="group mx-auto flex max-w-[1000px] items-center justify-between gap-8"
+          {/* ── Results ── */}
+          {caseStudy.results.length > 0 && (
+            <section
+              style={{
+                borderTop: '1px solid var(--line)',
+                padding: 'var(--section-gap) 0',
+              }}
             >
-              <div className="flex flex-col gap-2">
-                <span className="font-body text-[11px] font-medium tracking-[3px] text-[var(--color-text-muted)]">
+              <div className="container">
+                <FadeIn>
+                  <span className="mono" style={{ color: 'var(--accent)', display: 'block', marginBottom: 'var(--sp-4)' }}>
+                    RESULTS
+                  </span>
+                  <h2 className="display-md" style={{ color: 'var(--fg)', marginBottom: 'var(--sp-12)' }}>
+                    The impact
+                  </h2>
+                </FadeIn>
+
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${Math.min(caseStudy.results.length, 4)}, 1fr)`,
+                    gap: 'var(--sp-4)',
+                  }}
+                >
+                  {caseStudy.results.map((r, i) => (
+                    <FadeIn key={r.label} delay={i * 100}>
+                      <div
+                        style={{
+                          padding: 'var(--sp-8)',
+                          border: '1px solid var(--line)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 'var(--sp-2)',
+                        }}
+                      >
+                        <span
+                          className={`display-md ${r.color}`}
+                          style={{ letterSpacing: '-0.02em' }}
+                        >
+                          {r.value}
+                        </span>
+                        <span className="body-sm" style={{ color: 'var(--fg-dim)' }}>
+                          {r.label}
+                        </span>
+                      </div>
+                    </FadeIn>
+                  ))}
+                </div>
+
+                <style jsx>{`
+                  @media (max-width: 640px) {
+                    div[style*="grid-template-columns: repeat"] {
+                      grid-template-columns: 1fr 1fr !important;
+                    }
+                  }
+                `}</style>
+              </div>
+            </section>
+          )}
+
+          {/* ── Navigation: prev / next ── */}
+          <section
+            style={{
+              borderTop: '1px solid var(--line)',
+              padding: 'var(--sp-16) 0',
+            }}
+          >
+            <div
+              className="container"
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              {prevProject ? (
+                <Link
+                  href={`/work/${prevProject.slug}`}
+                  className="group"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 'var(--sp-2)',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <span className="mono" style={{ color: 'var(--fg-faint)' }}>
+                    PREVIOUS
+                  </span>
+                  <span
+                    className="display-sm"
+                    style={{
+                      color: 'var(--fg)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 'var(--sp-3)',
+                      transition: 'color 0.3s var(--ease-out)',
+                    }}
+                  >
+                    <ArrowLeft
+                      className="transition-transform duration-300 group-hover:-translate-x-1"
+                      style={{ width: 20, height: 20 }}
+                    />
+                    <span className="group-hover:text-(--accent) transition-colors duration-300">
+                      {prevProject.title}
+                    </span>
+                  </span>
+                </Link>
+              ) : (
+                <div />
+              )}
+
+              <Link
+                href={`/work/${nextProject.slug}`}
+                className="group"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  gap: 'var(--sp-2)',
+                  textDecoration: 'none',
+                }}
+              >
+                <span className="mono" style={{ color: 'var(--fg-faint)' }}>
                   NEXT PROJECT
                 </span>
                 <span
-                  className="font-display tracking-[-1px] text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)]"
-                  style={{ fontSize: "clamp(24px, 3.5vw, 44px)" }}
+                  className="display-sm"
+                  style={{
+                    color: 'var(--fg)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 'var(--sp-3)',
+                    transition: 'color 0.3s var(--ease-out)',
+                  }}
                 >
-                  {nextProject.title}
+                  <span className="group-hover:text-(--accent) transition-colors duration-300">
+                    {nextProject.title}
+                  </span>
+                  <ArrowRight
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                    style={{ width: 20, height: 20 }}
+                  />
                 </span>
-              </div>
-              <ArrowRight className="h-7 w-7 shrink-0 text-[var(--color-text-muted)] transition-all group-hover:translate-x-2 group-hover:text-[var(--color-accent)]" />
-            </Link>
+              </Link>
+            </div>
+          </section>
+
+          {/* ── CTA ── */}
+          <section
+            style={{
+              borderTop: '1px solid var(--line)',
+              padding: 'var(--sp-24) 0',
+              textAlign: 'center',
+            }}
+          >
+            <div className="container">
+              <FadeIn>
+                <p
+                  style={{
+                    fontFamily: 'var(--f-serif)',
+                    fontStyle: 'italic',
+                    fontSize: 'clamp(22px, 3vw, 32px)',
+                    lineHeight: 1.4,
+                    color: 'var(--fg-dim)',
+                    marginBottom: 'var(--sp-8)',
+                  }}
+                >
+                  Have a similar project?
+                </p>
+                <Link href="/contact" className="btn">
+                  Let&apos;s talk
+                </Link>
+              </FadeIn>
+            </div>
           </section>
 
           <Footer />

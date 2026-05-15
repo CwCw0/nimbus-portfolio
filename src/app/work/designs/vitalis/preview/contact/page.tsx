@@ -14,7 +14,10 @@
 
 import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { VitalisLayout, V, FH, FB, useIsMobile } from "../shared";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function VitalisContactPage() {
   const mainRef = useRef<HTMLDivElement>(null);

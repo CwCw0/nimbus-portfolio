@@ -105,7 +105,7 @@ export function MonoNav() {
     <nav
       style={{
         position: "fixed",
-        top: 0,
+        top: 44,
         left: 0,
         right: 0,
         zIndex: 100,
@@ -219,7 +219,7 @@ export function MonoLayout({ children }: { children: ReactNode }) {
       <style>{`@import url('${FONT_LINK}');`}</style>
       <PreviewBar />
       <MonoNav />
-      <main style={{ paddingTop: 80 }}>{children}</main>
+      <main style={{ paddingTop: 124 }}>{children}</main>
       <MonoFooter />
     </div>
   );

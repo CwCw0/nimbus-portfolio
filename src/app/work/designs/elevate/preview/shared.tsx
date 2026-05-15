@@ -44,7 +44,7 @@ export function ElevateNav() {
     <nav
       style={{
         position: "fixed",
-        top: 0,
+        top: 44,
         left: 0,
         right: 0,
         zIndex: 100,
@@ -188,7 +188,7 @@ export function ElevateNav() {
         <div
           style={{
             position: "fixed",
-            top: 59,
+            top: 103,
             left: 0,
             right: 0,
             bottom: 0,
@@ -340,7 +340,7 @@ export function ElevateLayout({ children }: { children: React.ReactNode }) {
     >
       <PreviewBar />
       <ElevateNav />
-      <main style={{ paddingTop: 60 }}>{children}</main>
+      <main style={{ paddingTop: 104 }}>{children}</main>
       <ElevateFooter />
     </div>
   );

@@ -50,15 +50,20 @@ export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
   const caseStudy = getCaseStudyBySlug(slug);
   const nextProject = getNextProject(slug);
+  const idx = allCaseStudies.findIndex((s) => s.slug === slug);
+  const prevProject = idx > 0
+    ? { title: allCaseStudies[idx - 1].shortTitle, slug: allCaseStudies[idx - 1].slug }
+    : null;
 
   if (!caseStudy) {
     return (
       <CaseStudyContent
         caseStudy={null}
         nextProject={{ title: "Omnifood", slug: "omnifood" }}
+        prevProject={null}
       />
     );
   }
 
-  return <CaseStudyContent caseStudy={caseStudy} nextProject={nextProject} />;
+  return <CaseStudyContent caseStudy={caseStudy} nextProject={nextProject} prevProject={prevProject} />;
 }

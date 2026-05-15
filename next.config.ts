@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   redirects: async () => [
     { source: "/products", destination: "/vault", permanent: true },
     { source: "/products/:slug", destination: "/vault/:slug", permanent: true },
-    { source: "/lab", destination: "/work", permanent: false },
+    { source: "/lab", destination: "/work", permanent: true },
   ],
   images: {
     formats: ["image/avif", "image/webp"],
@@ -33,9 +33,9 @@ const nextConfig: NextConfig = {
           value: [
             "default-src 'self'",
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://va.vercel-scripts.com",
-            "style-src 'self' 'unsafe-inline'",
+            "style-src 'self' 'unsafe-inline' https://api.fontshare.com",
             "img-src 'self' https: data: blob:",
-            "font-src 'self' https://fonts.gstatic.com",
+            "font-src 'self' https://fonts.gstatic.com https://api.fontshare.com",
             "connect-src 'self' https://formspree.io https://va.vercel-scripts.com https://vercel.live wss://ws-us3.pusher.com",
             "frame-ancestors 'none'",
             "base-uri 'self'",

@@ -23,10 +23,10 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     if (prefersReducedMotion || isMobile) return;
 
     const lenis = new Lenis({
-      lerp: 0.082,
-      duration: 1.2,
+      lerp: 0.1,
+      duration: 1.0,
       smoothWheel: true,
-      touchMultiplier: 0,
+      touchMultiplier: 1.5,
     });
 
     lenisRef.current = lenis;

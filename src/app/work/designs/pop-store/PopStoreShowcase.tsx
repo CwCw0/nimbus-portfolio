@@ -1,11 +1,8 @@
 "use client";
 
-import Header from "../../../../components/Header";
-import Footer from "../../../../components/Footer";
+import Image from "next/image";
 import PackageSection from "../PackageSection";
 import TemplateNav from "../TemplateNav";
-import CustomCursor from "../../../../components/CustomCursor";
-import SmoothScroll from "../../../../components/SmoothScroll";
 import { ArrowLeft, ArrowUpRight, Check, X } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect } from "react";
@@ -13,8 +10,6 @@ import { gsap } from "gsap";
 import SplitType from "split-type";
 
 const GUMROAD_URL = "";
-const PRICE = "RM 399";
-const PRICE_USD = "$89 USD";
 
 const designChoices = [
   { num: "01", title: "Neo-Brutalist Language", body: "3px solid borders. Hard box shadows (4px offset, no blur). Zero border-radius. Raw, honest, impossible to ignore. In a sea of rounded corners and soft shadows, hard edges stop the scroll. Tony's Chocolonely pioneered this for e-commerce." },
@@ -74,63 +69,93 @@ export default function PopStoreShowcase() {
   }, []);
 
   return (
-    <>
-      <CustomCursor />
-      <SmoothScroll>
-        <div className="flex w-full flex-col overflow-x-hidden bg-(--color-bg-primary)">
-          <Header />
+        <div className="flex w-full flex-col overflow-x-hidden bg-(--ink-0)">
           <div className="flex items-center gap-2 px-16 pt-28 max-md:px-6 max-md:pt-24">
-            <Link href="/work?view=lab" className="flex items-center gap-2 font-body text-sm text-(--color-text-muted) transition-colors hover:text-(--color-text-primary)">
+            <Link href="/work?view=lab" className="flex items-center gap-2 font-body text-sm text-(--fg-faint) transition-colors hover:text-(--fg)">
               <ArrowLeft className="h-4 w-4" /> Design Lab
             </Link>
-            <span className="font-body text-xs text-(--color-text-muted)">/</span>
-            <span className="font-body text-xs text-(--color-text-dim)">Pop Store</span>
+            <span className="font-body text-xs text-(--fg-faint)">/</span>
+            <span className="font-body text-xs text-(--fg-dim)">Pop Store</span>
           </div>
 
           <section ref={heroRef} className="w-full px-16 pt-12 pb-16 max-md:px-6">
             <div className="mx-auto max-w-250">
               <div className="flex items-center gap-3 mb-6">
-                <span className="showcase-fade bg-(--color-accent-subtle) px-3 py-1 font-body text-[10px] font-medium tracking-[2px] text-(--color-accent)">TEMPLATE</span>
-                <span className="showcase-fade font-body text-[11px] text-(--color-text-muted)">Fun E-Commerce</span>
+                <span className="showcase-fade bg-(--accent-soft) px-3 py-1 font-body text-[10px] font-medium tracking-[2px] text-(--accent)">TEMPLATE</span>
+                <span className="showcase-fade font-body text-[11px] text-(--fg-faint)">Fun E-Commerce</span>
               </div>
-              <h1 ref={headingRef} className="font-display tracking-[-3px] text-(--color-text-primary)" style={{ fontSize: "clamp(40px, 6vw, 88px)", lineHeight: 1.02 }}>Pop Store</h1>
-              <p className="showcase-fade mt-6 max-w-160 font-body text-lg leading-[1.75] text-(--color-text-dim) max-md:text-base">
+              <h1 ref={headingRef} className="font-display tracking-[-3px] text-(--fg)" style={{ fontSize: "clamp(40px, 6vw, 88px)", lineHeight: 1.02 }}>Pop Store</h1>
+              <p className="showcase-fade mt-6 max-w-160 font-body text-lg leading-[1.75] text-(--fg-dim) max-md:text-base" style={{ textWrap: 'balance' } as React.CSSProperties}>
                 A bold, personality-driven e-commerce template for brands that refuse to be boring. Neo-brutalist grid, per-product colour theming, chunky type, and attitude in every pixel.
               </p>
               <div className="showcase-fade mt-8 flex flex-wrap items-center gap-6">
                 {["Next.js", "GSAP", "Tailwind"].map((t) => (
-                  <span key={t} className="border border-(--color-border) px-3 py-1 font-body text-[11px] text-(--color-text-muted)">{t}</span>
+                  <span key={t} className="border border-(--line) px-3 py-1 font-body text-[11px] text-(--fg-faint)">{t}</span>
                 ))}
-                <span className="font-body text-[13px] text-(--color-text-muted)">|</span>
-                <span className="font-body text-[13px] font-medium text-(--color-text-primary)">{PRICE}</span>
-                <span className="font-body text-[12px] text-(--color-text-muted)">{PRICE_USD}</span>
               </div>
               <div className="showcase-fade mt-10 flex items-center gap-4">
                 {GUMROAD_URL ? (
-                  <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-(--color-accent) px-8 py-4 font-body text-sm font-semibold text-white transition-all hover:scale-[1.03]">Get This Template <ArrowUpRight className="h-4 w-4" /></a>
+                  <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-(--accent) px-8 py-4 font-body text-sm font-semibold text-white transition-all hover:scale-[1.03]">Get This Template <ArrowUpRight className="h-4 w-4" /></a>
                 ) : (
-                  <span className="flex items-center gap-2 bg-(--color-accent)/20 border border-(--color-accent)/30 px-8 py-4 font-body text-sm font-medium text-(--color-accent)">Coming Soon</span>
+                  <span className="flex items-center gap-2 bg-(--accent)/20 border border-(--accent)/30 px-8 py-4 font-body text-sm font-medium text-(--accent)">Coming Soon</span>
                 )}
-                <Link href="/work/designs/pop-store/preview" className="flex items-center gap-2 border border-(--color-border) px-8 py-4 font-body text-sm font-medium text-(--color-text-secondary) transition-all hover:border-(--color-accent-border)">Live Preview →</Link>
+                <Link href="/work/designs/pop-store/preview" className="flex items-center gap-2 border border-(--line) px-8 py-4 font-body text-sm font-medium text-(--fg-dim) transition-all hover:border-(--accent-2)">Live Preview →</Link>
               </div>
             </div>
           </section>
 
-          <div className="h-px w-full max-w-250 mx-auto bg-(--color-border)" />
+          {/* Screenshot Gallery */}
+          <section className="w-full px-16 pb-16 max-md:px-6">
+            <div className="mx-auto max-w-250 flex flex-col gap-4">
+              {/* Hero screenshot — full width */}
+              <div className="overflow-hidden rounded-xl border border-(--line)">
+                <Image
+                  src="/images/templates/pop-store/hero.png"
+                  alt="Pop Store homepage"
+                  width={2000}
+                  height={1200}
+                  className="w-full object-cover"
+                />
+              </div>
+              {/* Two-column row: inner page (wider) + mobile (narrower) */}
+              <div className="grid gap-4" style={{ gridTemplateColumns: "2fr 1fr" }}>
+                <div className="overflow-hidden rounded-xl border border-(--line)">
+                  <Image
+                    src="/images/templates/pop-store/inner.png"
+                    alt="Pop Store inner page"
+                    width={1400}
+                    height={900}
+                    className="w-full object-cover"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-xl border border-(--line)">
+                  <Image
+                    src="/images/templates/pop-store/mobile.png"
+                    alt="Pop Store mobile view"
+                    width={600}
+                    height={900}
+                    className="w-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div className="h-px w-full max-w-250 mx-auto bg-(--line)" />
 
           <section className="w-full px-16 py-24 max-md:px-6 max-md:py-16">
             <div className="mx-auto max-w-250">
               <div className="mb-16 flex items-center gap-4">
-                <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-accent)">DESIGN CHOICES</span>
-                <div className="h-px flex-1 bg-(--color-border)" />
+                <span className="font-body text-[10px] font-medium tracking-[4px] text-(--accent)">DESIGN CHOICES</span>
+                <div className="h-px flex-1 bg-(--line)" />
               </div>
               <div className="flex flex-col gap-0">
                 {designChoices.map((c) => (
-                  <div key={c.num} className="flex gap-12 border-b border-(--color-border) py-10 max-md:flex-col max-md:gap-4">
-                    <span className="font-display text-(--color-accent) opacity-15 shrink-0" style={{ fontSize: 56, lineHeight: 1 }}>{c.num}</span>
+                  <div key={c.num} className="flex gap-12 border-b border-(--line) py-10 max-md:flex-col max-md:gap-4">
+                    <span className="font-display text-(--accent) opacity-15 shrink-0" style={{ fontSize: 56, lineHeight: 1 }}>{c.num}</span>
                     <div className="flex-1">
-                      <h3 className="font-display text-[22px] tracking-[-0.5px] text-(--color-text-primary) mb-3">{c.title}</h3>
-                      <p className="font-body text-[15px] leading-[1.75] text-(--color-text-dim) max-w-160">{c.body}</p>
+                      <h3 className="font-display text-[22px] tracking-[-0.5px] text-(--fg) mb-3">{c.title}</h3>
+                      <p className="font-body text-[15px] leading-[1.75] text-(--fg-dim) max-w-160">{c.body}</p>
                     </div>
                   </div>
                 ))}
@@ -141,14 +166,14 @@ export default function PopStoreShowcase() {
           <section className="w-full px-16 py-24 max-md:px-6 max-md:py-16" style={{ background: "#0D0C14" }}>
             <div className="mx-auto max-w-250">
               <div className="mb-16 flex items-center gap-4">
-                <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-accent)">UX DECISIONS</span>
-                <div className="h-px flex-1 bg-(--color-border)" />
+                <span className="font-body text-[10px] font-medium tracking-[4px] text-(--accent)">UX DECISIONS</span>
+                <div className="h-px flex-1 bg-(--line)" />
               </div>
               <div className="grid grid-cols-3 gap-8 max-md:grid-cols-1">
                 {uxDecisions.map((ux) => (
-                  <div key={ux.title} className="flex flex-col gap-4 border border-(--color-border) p-8">
-                    <h3 className="font-display text-lg text-(--color-text-primary)">{ux.title}</h3>
-                    <p className="font-body text-[14px] leading-[1.7] text-(--color-text-dim)">{ux.body}</p>
+                  <div key={ux.title} className="flex flex-col gap-4 border border-(--line) p-8">
+                    <h3 className="font-display text-lg text-(--fg)">{ux.title}</h3>
+                    <p className="font-body text-[14px] leading-[1.7] text-(--fg-dim)">{ux.body}</p>
                   </div>
                 ))}
               </div>
@@ -159,28 +184,28 @@ export default function PopStoreShowcase() {
             <div className="mx-auto max-w-250 grid grid-cols-2 gap-16 max-md:grid-cols-1">
               <div>
                 <div className="mb-10 flex items-center gap-4">
-                  <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-accent)">WHAT&apos;S INCLUDED</span>
-                  <div className="h-px flex-1 bg-(--color-border)" />
+                  <span className="font-body text-[10px] font-medium tracking-[4px] text-(--accent)">WHAT&apos;S INCLUDED</span>
+                  <div className="h-px flex-1 bg-(--line)" />
                 </div>
                 <div className="flex flex-col gap-4">
                   {included.map((item) => (
                     <div key={item} className="flex items-start gap-3">
-                      <Check className="h-4 w-4 shrink-0 text-(--color-accent) mt-0.5" />
-                      <span className="font-body text-[14px] leading-[1.6] text-(--color-text-secondary)">{item}</span>
+                      <Check className="h-4 w-4 shrink-0 text-(--accent) mt-0.5" />
+                      <span className="font-body text-[14px] leading-[1.6] text-(--fg-dim)">{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
               <div>
                 <div className="mb-10 flex items-center gap-4">
-                  <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-text-muted)">DELIBERATELY EXCLUDED</span>
-                  <div className="h-px flex-1 bg-(--color-border)" />
+                  <span className="font-body text-[10px] font-medium tracking-[4px] text-(--fg-faint)">DELIBERATELY EXCLUDED</span>
+                  <div className="h-px flex-1 bg-(--line)" />
                 </div>
                 <div className="flex flex-col gap-4">
                   {excluded.map((item) => (
                     <div key={item} className="flex items-start gap-3">
-                      <X className="h-4 w-4 shrink-0 text-(--color-text-muted) mt-0.5" />
-                      <span className="font-body text-[14px] leading-[1.6] text-(--color-text-dim)">{item}</span>
+                      <X className="h-4 w-4 shrink-0 text-(--fg-faint) mt-0.5" />
+                      <span className="font-body text-[14px] leading-[1.6] text-(--fg-dim)">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -190,8 +215,8 @@ export default function PopStoreShowcase() {
 
           <section className="w-full px-16 py-16 max-md:px-6 max-md:py-10" style={{ background: "#0D0C14" }}>
             <div className="mx-auto max-w-250 text-center">
-              <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-accent) mb-6 block">WHO THIS IS FOR</span>
-              <p className="mx-auto max-w-160 font-body text-lg leading-[1.75] text-(--color-text-dim)">
+              <span className="font-body text-[10px] font-medium tracking-[4px] text-(--accent) mb-6 block">WHO THIS IS FOR</span>
+              <p className="mx-auto max-w-160 font-body text-lg leading-[1.75] text-(--fg-dim)" style={{ textWrap: 'balance' } as React.CSSProperties}>
                 DTC brands, food & beverage, lifestyle products, streetwear, indie cosmetics, pet brands, craft goods — any brand with personality that wants their store to feel like their brand, not a Shopify default.
               </p>
             </div>
@@ -199,10 +224,10 @@ export default function PopStoreShowcase() {
 
           <section className="w-full px-16 py-16 max-md:px-6">
             <div className="mx-auto max-w-250">
-              <span className="font-body text-[10px] font-medium tracking-[4px] text-(--color-text-muted) mb-8 block">DESIGN REFERENCES</span>
+              <span className="font-body text-[10px] font-medium tracking-[4px] text-(--fg-faint) mb-8 block">DESIGN REFERENCES</span>
               <div className="flex flex-wrap gap-4">
                 {["tonyschocolonely.com", "simplychocolate.com", "liquiddeath.com", "graza.co", "snif.co"].map((ref) => (
-                  <span key={ref} className="border border-(--color-border) px-4 py-2 font-body text-[13px] text-(--color-text-muted)">{ref}</span>
+                  <span key={ref} className="border border-(--line) px-4 py-2 font-body text-[13px] text-(--fg-faint)">{ref}</span>
                 ))}
               </div>
             </div>
@@ -210,28 +235,20 @@ export default function PopStoreShowcase() {
 
           <section className="w-full px-16 py-24 max-md:px-6 max-md:py-16" style={{ background: "#0D0C14" }}>
             <div className="mx-auto max-w-200 text-center flex flex-col items-center gap-8">
-              <h2 className="font-display tracking-[-2px] text-(--color-text-primary)" style={{ fontSize: "clamp(32px, 4vw, 56px)" }}>Get Pop Store.</h2>
-              <p className="max-w-125 font-body text-[15px] leading-[1.75] text-(--color-text-dim)">Source code for an e-commerce template with more personality than most brands.</p>
-              <div className="flex items-center gap-6">
-                <span className="font-display text-[32px] text-(--color-text-primary)">{PRICE}</span>
-                <span className="font-body text-sm text-(--color-text-muted)">{PRICE_USD}</span>
-              </div>
+              <h2 className="font-display tracking-[-2px] text-(--fg)" style={{ fontSize: "clamp(32px, 4vw, 56px)" }}>Get Pop Store.</h2>
+              <p className="max-w-125 font-body text-[15px] leading-[1.75] text-(--fg-dim)" style={{ textWrap: 'balance' } as React.CSSProperties}>Source code for an e-commerce template with more personality than most brands.</p>
               {GUMROAD_URL ? (
-                <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-(--color-accent) px-10 py-4 font-body text-base font-semibold text-white transition-all hover:scale-[1.03]">Buy on Gumroad <ArrowUpRight className="h-4 w-4" /></a>
+                <a href={GUMROAD_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-(--accent) px-10 py-4 font-body text-base font-semibold text-white transition-all hover:scale-[1.03]">Get This Template <ArrowUpRight className="h-4 w-4" /></a>
               ) : (
-                <span className="flex items-center gap-2 bg-(--color-accent)/20 border border-(--color-accent)/30 px-10 py-4 font-body text-base font-medium text-(--color-accent)">Coming Soon</span>
+                <span className="flex items-center gap-2 bg-(--accent)/20 border border-(--accent)/30 px-10 py-4 font-body text-base font-medium text-(--accent)">Coming Soon</span>
               )}
-              <p className="font-body text-[12px] text-(--color-text-muted)">Or <Link href="/contact" className="text-(--color-accent) underline">hire me to customise it</Link> for your brand.</p>
+              <p className="font-body text-[12px] text-(--fg-faint)">Or <Link href="/contact" className="text-(--accent) underline">hire me to customise it</Link> for your brand.</p>
             </div>
           </section>
 
-          <PackageSection price={PRICE} priceUsd={PRICE_USD} />
+          <PackageSection />
 
           <TemplateNav current="pop-store" />
-
-          <Footer />
         </div>
-      </SmoothScroll>
-    </>
   );
 }

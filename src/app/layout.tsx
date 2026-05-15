@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Outfit } from "next/font/google";
+import { Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import PageLoader from "../components/PageLoader";
-import ScrollProgress from "../components/ScrollProgress";
-import GrainOverlay from "../components/GrainOverlay";
-import TabTitle from "../components/TabTitle";
+import AmbientWaves from "@/components/AmbientWaves";
+import Cursor from "@/components/ui/Cursor";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-display",
+const newsreader = Newsreader({
+  variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
-});
-
-const outfit = Outfit({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
+  style: ["italic"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbusformastudio.com";
@@ -83,6 +78,12 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
 
+        {/* Fontshare fonts: Cabinet Grotesk, Switzer, Fragment Mono */}
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@100,200,300,400,500,600,700,800,900&f[]=switzer@100,200,300,400,500,600,700,800,900&f[]=fragment-mono@300,400,500,700&display=swap"
+        />
+
         {/* Geo targeting — Malaysia primary, global reach */}
         <meta name="geo.region" content="MY" />
         <meta name="geo.placename" content="Kuala Lumpur" />
@@ -93,7 +94,7 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="en" href={siteUrl} />
         <link rel="alternate" hrefLang="x-default" href={siteUrl} />
 
-        {/* Google Search Console verification — replace content value after setup */}
+        {/* Google Search Console verification */}
         {process.env.NEXT_PUBLIC_GSC_VERIFICATION && (
           <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GSC_VERIFICATION} />
         )}
@@ -128,7 +129,6 @@ export default function RootLayout({
                   description: "Creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
                   url: siteUrl,
                   email: "heyitsnimbus@gmail.com",
-                  telephone: "+60128890318",
                   priceRange: "$$",
                   areaServed: [
                     { "@type": "Country", name: "Malaysia" },
@@ -154,16 +154,27 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${instrumentSerif.variable} ${outfit.variable} h-full antialiased font-body`}
+        data-theme="dark"
+        data-strings="on"
+        data-grain="true"
+        className={`${newsreader.variable} h-full antialiased`}
       >
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:bg-[var(--color-accent)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-999 focus:bg-(--accent) focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:rounded-sm"
+        >
           Skip to content
         </a>
-        <PageLoader />
-        <ScrollProgress />
-        <GrainOverlay />
-        <TabTitle />
-        {children}
+
+        <AmbientWaves lineCount={18} />
+        <Cursor />
+        <SmoothScroll>
+          <Nav />
+          <main id="main-content" style={{ position: 'relative', zIndex: 1 }}>
+            {children}
+          </main>
+          <Footer />
+        </SmoothScroll>
         <Analytics />
       </body>
     </html>

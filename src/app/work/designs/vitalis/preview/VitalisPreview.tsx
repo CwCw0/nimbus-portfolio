@@ -145,7 +145,7 @@ export default function VitalisPreview() {
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');`}</style>
 
       {/* NAV — pill-shaped floating on desktop, simple bar on mobile */}
-      <nav style={{ position: "fixed", top: isMobile ? 0 : 16, left: isMobile ? 0 : "50%", right: isMobile ? 0 : "auto", transform: isMobile ? "none" : "translateX(-50%)", zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", gap: isMobile ? 0 : 32, padding: isMobile ? "12px 20px" : "12px 32px", background: "rgba(250,250,247,0.9)", backdropFilter: "blur(20px)", borderRadius: isMobile ? 0 : 100, border: isMobile ? "none" : `1px solid ${V.border}`, borderBottom: isMobile ? `1px solid ${V.border}` : undefined, boxShadow: isMobile ? "none" : "0 4px 24px rgba(0,0,0,0.04)" }}>
+      <nav style={{ position: "fixed", top: isMobile ? 44 : 60, left: isMobile ? 0 : "50%", right: isMobile ? 0 : "auto", transform: isMobile ? "none" : "translateX(-50%)", zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", gap: isMobile ? 0 : 32, padding: isMobile ? "12px 20px" : "12px 32px", background: "rgba(250,250,247,0.9)", backdropFilter: "blur(20px)", borderRadius: isMobile ? 0 : 100, border: isMobile ? "none" : `1px solid ${V.border}`, borderBottom: isMobile ? `1px solid ${V.border}` : undefined, boxShadow: isMobile ? "none" : "0 4px 24px rgba(0,0,0,0.04)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <div style={{ width: 28, height: 28, borderRadius: "50%", background: V.accent, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: 7, height: 7, borderRadius: "50%", background: V.white }} />
@@ -169,10 +169,10 @@ export default function VitalisPreview() {
       </nav>
 
       {/* HERO — split, warm, with floating badge */}
-      <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", alignItems: "center", padding: "100px 48px 60px", gap: 48 }}>
+      <section style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", alignItems: "center", padding: "140px 48px 60px", gap: 48 }}>
         <div>
           <span className="vt-anim" style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.accent, letterSpacing: 2, textTransform: "uppercase", display: "block", marginBottom: 20 }}>WELLNESS CLINIC</span>
-          <h1 className="vt-anim" style={{ fontFamily: FH, fontSize: "clamp(42px, 5.5vw, 72px)", fontWeight: 400, lineHeight: 1.12 }}>
+          <h1 className="vt-anim" style={{ fontFamily: FH, fontSize: "clamp(42px, 5.5vw, 72px)", fontWeight: 400, lineHeight: 1.1, textWrap: "balance" as any }}>
             Your body deserves
             <br /><em style={{ fontStyle: "italic", color: V.accent }}>better care.</em>
           </h1>
@@ -219,7 +219,7 @@ export default function VitalisPreview() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div className="vt-rev" style={{ textAlign: "center", marginBottom: 56 }}>
             <span style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.accent, letterSpacing: 2, textTransform: "uppercase" }}>Our Services</span>
-            <h2 style={{ fontFamily: FH, fontSize: "clamp(32px, 4vw, 50px)", fontWeight: 400, marginTop: 10 }}>Comprehensive care, <em style={{ fontStyle: "italic" }}>personalised.</em></h2>
+            <h2 style={{ fontFamily: FH, fontSize: "clamp(32px, 4vw, 50px)", fontWeight: 400, marginTop: 10, textWrap: "balance" as any }}>Comprehensive care, <em style={{ fontStyle: "italic" }}>personalised.</em></h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 18 }}>
             {services.map((svc) => (
@@ -242,7 +242,7 @@ export default function VitalisPreview() {
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 72, alignItems: "center" }}>
           <div>
             <span className="vt-rev" style={{ fontFamily: FB, fontSize: 13, fontWeight: 600, color: V.warm, letterSpacing: 2 }}>WHY VITALIS</span>
-            <h2 className="vt-rev" style={{ fontFamily: FH, fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 400, color: V.white, marginTop: 14, lineHeight: 1.15 }}>
+            <h2 className="vt-rev" style={{ fontFamily: FH, fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 400, color: V.white, marginTop: 14, lineHeight: 1.15, textWrap: "balance" as any }}>
               We treat people,<br /><em style={{ fontStyle: "italic", color: V.warm }}>not conditions.</em>
             </h2>
             <p className="vt-rev" style={{ fontFamily: FB, fontSize: 16, color: "rgba(255,255,255,0.55)", lineHeight: 1.8, marginTop: 20, maxWidth: 420 }}>

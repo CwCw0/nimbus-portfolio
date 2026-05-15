@@ -36,11 +36,11 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "I'm going to tell you something that the AI industry doesn't want you to hear: you can build real, production-grade AI products for zero dollars. Not a toy. Not a demo. An actual product that people use.",
+        text: "You can build real, production-grade AI products for zero dollars. Not a toy. Not a demo. An actual product that people use.",
       },
       {
         type: "p",
-        text: "I know this because I'm doing it. Right now. I built an AI chatbot for my portfolio site using Google's Gemini API — free tier. I'm building an operations hub with AI-powered document generation — free tier. No credit card. No enterprise plan. No VC funding. Just a developer who reads the documentation.",
+        text: "I know because I'm doing it right now. Built an AI chatbot for my portfolio using Google's Gemini API — free tier. Building an operations hub with AI-powered document generation — free tier. No credit card. No enterprise plan. No VC funding. Just a developer who actually reads the documentation.",
       },
       {
         type: "h2",
@@ -48,11 +48,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The AI hype machine wants you to believe that building anything with AI requires a $200/month API subscription, a team of ML engineers, and a GPU cluster in a server room somewhere. That narrative benefits exactly two types of people: companies selling expensive AI tools, and consultants charging $500/hour to tell you which expensive AI tools to buy.",
+        text: "The AI hype machine wants you believing you need a $200/month API subscription, a team of ML engineers, and a GPU cluster somewhere. That narrative benefits exactly two types of people: companies selling expensive AI tools, and consultants charging $500/hour to tell you which expensive AI tools to buy.",
       },
       {
         type: "p",
-        text: "The truth? The best AI models in the world are either free or nearly free for individual developers. And the gap between the free tier and the paid tier is smaller than anyone wants to admit.",
+        text: "The best AI models in the world are either free or nearly free for individual developers. And the gap between free tier and paid tier is smaller than anyone wants to admit.",
       },
       {
         type: "h2",
@@ -75,7 +75,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Read that list again. These aren't limited previews or 14-day trials. These are production-ready APIs with generous limits that most solo developers will never exceed. Google is giving you a million tokens a day. Do you know how much conversation that is? More than you'll ever need for a portfolio chatbot, a client-facing assistant, or an internal tool.",
+        text: "These aren't limited previews or 14-day trials. These are production-ready APIs with limits most solo developers will never hit. Google is giving you a million tokens a day. That's more than you'll ever need for a portfolio chatbot, a client-facing assistant, or an internal tool.",
       },
       {
         type: "h2",
@@ -122,15 +122,15 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Here's what I want you to take from this: you have everything you need. Right now. A laptop, an internet connection, and a free API key. That's it. That's the entire startup cost of becoming an AI developer in 2026.",
+        text: "You have everything you need. Right now. A laptop, an internet connection, and a free API key. That's the entire startup cost of becoming an AI developer in 2026.",
       },
       {
         type: "p",
-        text: "You don't need a computer science degree. You don't need a $10,000 GPU. You don't need to be employed at a FAANG company. You need to open Google AI Studio, grab your free Gemini key, and build something. Anything. A chatbot. A tool. A stupid experiment that makes you laugh. Just build it.",
+        text: "No CS degree required. No $10,000 GPU. No FAANG job. Open Google AI Studio, grab your free Gemini key, and build something. A chatbot. A tool. A stupid experiment that makes you laugh. Just build it.",
       },
       {
         type: "p",
-        text: "The people who will win in the AI era aren't the ones with the biggest budgets. They're the ones who started building while everyone else was still debating whether to start. Be that person.",
+        text: "The people who win in the AI era aren't the ones with the biggest budgets. They're the ones who started building while everyone else was still debating whether to start.",
       },
     ],
     relatedSlugs: [
@@ -159,7 +159,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "I want to talk to the person reading this who has an idea for something. A website. An app. A business. A game. Whatever. You've been thinking about it for weeks, maybe months. You've bookmarked 47 tutorials. You've made a Notion board with colour-coded categories. You've watched three YouTube videos about the 'best tech stack for 2026.'",
+        text: "This is for the person who has an idea. A website. An app. A business. A game. Whatever. You've been thinking about it for weeks, maybe months. You've bookmarked 47 tutorials. You've made a Notion board with colour-coded categories. You've watched three YouTube videos about the 'best tech stack for 2026.'",
       },
       {
         type: "p",
@@ -167,7 +167,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "I know because I was you. For longer than I want to admit.",
+        text: "I was you. For longer than I want to admit.",
       },
       {
         type: "h2",
@@ -195,7 +195,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "I registered my company — Nimbus Forma Studio — in April 2026. You know what I had at that point? A portfolio website and one client. Not a business plan. Not a pitch deck. Not a five-year projection. A website and a client. That was enough to start. Everything else, I figured out after I started building.",
+        text: "I registered Nimbus Forma Studio in April 2026. You know what I had at that point? A portfolio site and one client. No business plan. No pitch deck. No five-year projection. A website and one person willing to pay me. That was enough to start. Everything else I figured out after.",
       },
       {
         type: "h2",
@@ -247,7 +247,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "6 min read",
     title: "I'm 26 and I Just Registered a Company. Here's What Nobody Prepared Me For.",
     excerpt:
-      "I registered Nimbus Forma Studio at 22 with one client and a lot of audacity. Here's what the first month actually looked like.",
+      "I registered Nimbus Forma Studio at 26 with one client and a lot of audacity. Here's what the first month actually looked like.",
     image:
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80",
     tocItems: [
@@ -260,11 +260,11 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "On April 2026, I walked into SSM, filled out some forms, paid a fee, and became the founder of Nimbus Forma Studio. I was 26. I had one paying client. And I had absolutely no idea what I was doing.",
+        text: "In April 2026, I walked into SSM, filled out some forms, paid a fee, and walked out a founder. I was 26. One paying client. Absolutely no idea what I was doing.",
       },
       {
         type: "p",
-        text: "This isn't a success story. Not yet. It's too early for that. This is a 'here's what it actually looks like when you decide to stop being an employee in your head and start being a builder' story.",
+        text: "This isn't a success story. Not yet — it's too early for that. This is what it actually looks like when you stop making excuses and register the damn thing.",
       },
       {
         type: "h2",
@@ -272,11 +272,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "I didn't have a grand plan. I didn't wait until I had enough savings or enough clients or enough confidence. I waited until the discomfort of NOT doing it was worse than the fear of doing it. That's the real tipping point — not some motivational moment, just a quiet Tuesday where I thought 'if I don't do this now, I'll be making excuses next year too.'",
+        text: "No grand plan. I didn't wait until I had enough savings or clients or confidence. I waited until not doing it felt worse than doing it. There was no motivational moment — just a quiet evening where I thought 'if I don't do this now, I'll still be making the same excuses next year.'",
       },
       {
         type: "p",
-        text: "So I did it. Nimbus Forma Studio. A name that sounds way more established than a 26-year-old working from his room. But that's kind of the point — build the thing you want to grow into, not the thing that matches where you are right now.",
+        text: "So I did it. Nimbus Forma Studio. A name that sounds way more established than someone working from his bedroom. That's kind of the point — build the thing you want to grow into, not the thing that matches where you are right now.",
       },
       {
         type: "h2",
@@ -290,7 +290,7 @@ export const blogPosts: BlogPost[] = [
         type: "ol",
         text: "",
         items: [
-          "One client — a badminton equipment shop that needed a website. My cousin connected us.",
+          "One client — a badminton equipment shop that needed a website.",
           "A portfolio website I built myself — dark theme, GSAP animations, editorial design. This was my proof of work.",
           "A laptop, VS Code, Claude Code, and an internet connection.",
           "Zero savings earmarked for the business.",
@@ -299,7 +299,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "That's it. That's the whole company. A registered name, a portfolio, and one person willing to pay me to build something. In the movies, founders have pitch decks and investor meetings. In real life, it starts with someone saying 'yeah, I need a website, can you do it?' and you saying 'yes' before you figure out how.",
+        text: "That's it. A registered name, a portfolio, and one person willing to pay me to build something. In the movies, founders have pitch decks and investor meetings. In real life, it starts with someone saying 'yeah, I need a website, can you do it?' and you saying yes before you've fully figured out how.",
       },
       {
         type: "h2",
@@ -343,15 +343,15 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "One month in, Nimbus Forma Studio is still a one-person operation. But the pipeline is real. I'm building a website for a badminton shop. I'm pitching a health-tech company on a full system — website, operations hub, AI chatbot. I'm building my own products on the side. I'm building an internal operating system called Forge that manages my entire business through AI.",
+        text: "One month in, it's still just me. But the pipeline is real. I'm building a website for a badminton shop. I'm talking to a health-tech company about a full system — website, ops hub, AI chatbot. I'm building my own products on the side. I'm building Forge, an internal operating system that manages my entire business through AI.",
       },
       {
         type: "p",
-        text: "Am I overwhelmed? Constantly. Am I making it up as I go? Obviously. Am I glad I registered instead of waiting another year? Every single day.",
+        text: "Overwhelmed? Constantly. Making it up as I go? Obviously. Glad I registered instead of waiting another year? Every single day.",
       },
       {
         type: "p",
-        text: "If you're sitting where I was — thinking about it, researching it, 'almost ready' — hear me out: the company doesn't care if you're ready. The SSM form doesn't ask 'are you sure about this?' It just asks for a name and a fee. Give it one.",
+        text: "If you're still 'almost ready' — the SSM form doesn't ask if you're sure. It just asks for a name and a fee.",
       },
     ],
     relatedSlugs: [
@@ -380,11 +380,11 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "If you've been paying attention to tech Twitter — or LinkedIn, or Reddit, or basically anywhere people argue on the internet — you've probably seen some version of this take: AI is going to replace developers. It's over. Learn prompt engineering or start looking for a new career.",
+        text: "Somewhere on tech Twitter right now, someone is saying AI is going to replace developers. It's over. Learn prompt engineering or find a new career. You've seen the take.",
       },
       {
         type: "p",
-        text: "I need to tell you something you probably don't want to hear — and it's not that. The truth is both more nuanced and more useful than the doomer takes or the hype. AI isn't replacing developers. But it is reshaping what we do, how we do it, and which skills matter most. And if you understand that shift, you're in a better position than 90% of the people panicking right now.",
+        text: "Here's what's actually happening: AI isn't replacing developers. It's reshaping what we do, how we do it, and which skills matter most. If you understand that shift, you're ahead of 90% of the people currently panicking.",
       },
       {
         type: "h2",
@@ -454,7 +454,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "So no — AI is not taking your job. But it is changing what your job looks like. And the developers who see that as an opportunity, not a threat, are the ones who will build what comes next.",
+        text: "AI is not taking your job. But it is changing what that job looks like. The developers who treat that as an opportunity — not a threat — are the ones who'll build what comes next.",
       },
     ],
     relatedSlugs: [
@@ -483,11 +483,11 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "One of the first things I realised when I started building for real clients in Malaysia is that payments are a completely different world here. You can't just slap Stripe on everything and call it a day — not because Stripe is bad, but because the way Malaysians pay for things online is fundamentally different from the US or Europe.",
+        text: "When I started building for real clients in Malaysia, I realised fast that payments are a completely different world here. You can't just slap Stripe on everything — not because Stripe is bad, but because the way Malaysians pay online is fundamentally different from the US or Europe.",
       },
       {
         type: "p",
-        text: "This is the kind of local knowledge that doesn't show up in tutorials. Most coding content is written from a Western perspective — Stripe, PayPal, maybe Square. But if you're building for a Malaysian market, you need to understand FPX, DuitNow, e-wallets, and the local gateway ecosystem. So let me break it down.",
+        text: "This is the local knowledge that doesn't show up in tutorials. Most coding content is written from a Western perspective — Stripe, PayPal, maybe Square. Build for a Malaysian market and you need to understand FPX, DuitNow, e-wallets, and the local gateway ecosystem.",
       },
       {
         type: "h2",
@@ -545,7 +545,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The broader lesson here isn't really about payment gateways. It's about understanding the market you're building for. The best technical solution means nothing if it doesn't fit how your users actually behave. And that's something no framework or AI tool can tell you — you have to learn it by building in the real world.",
+        text: "The lesson isn't really about payment gateways. It's about knowing the market you're building for. The best technical solution means nothing if it doesn't fit how your users actually pay. No framework or AI tool can teach you that — you learn it by building in the real world.",
       },
     ],
     relatedSlugs: [
@@ -574,7 +574,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "When people think about the global tech scene, they think San Francisco, London, maybe Berlin. Southeast Asia barely gets a mention — and honestly, that's fine by me. Because while everyone's looking the other way, something massive is happening here.",
+        text: "When people think about the global tech scene, they think San Francisco, London, maybe Berlin. Southeast Asia barely gets a mention. Honestly, that's fine by me. While everyone's looking the other way, something real is happening here.",
       },
       {
         type: "h2",
@@ -639,11 +639,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "I could chase the idea of moving to a \"bigger\" tech hub. A lot of developers here think about it. But I genuinely believe that Southeast Asia — and Malaysia specifically — is one of the most interesting places to be a developer right now. The growth is real, the opportunities are expanding, and there's a sense of possibility that you don't get in markets that are already saturated.",
+        text: "I could move to a 'bigger' tech hub. A lot of developers here think about it. But I genuinely think Malaysia is one of the most interesting places to be a developer right now. The growth is real. The opportunities are there. And there's a sense of possibility you don't find in markets that are already saturated.",
       },
       {
         type: "p",
-        text: "The developers who build here, who understand this market, who create products and services for this region — they're going to be the ones who shape what comes next. And I want to be part of that.",
+        text: "The developers who understand this market, who build for this region — they're the ones who'll shape what comes next here. I want to be one of them.",
       },
     ],
     relatedSlugs: [
@@ -672,7 +672,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "There's a difference between someone who writes code and someone who builds products. Both can make a button work. But one of them understands why the button should exist in the first place, where it should go, and what happens when 10,000 people click it at the same time. The gap between those two isn't technical skill — it's thinking.",
+        text: "There's a difference between writing code and building products. Both can make a button work. But one of them understands why the button should exist, where it should go, and what happens when 10,000 people click it. That gap isn't technical skill — it's thinking.",
       },
       {
         type: "h2",
@@ -680,11 +680,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "I know that sounds like a controversial take, especially if you're in the middle of learning and everything feels impossibly hard. But hear me out. Code is learnable. There are tutorials, documentation, Stack Overflow answers, and now AI tools that can help you write nearly anything. The mechanics of coding are a solved problem — you just need time and practice.",
+        text: "I know that sounds like a lot if you're still learning and everything feels hard. But hear me out. Code is learnable. There are tutorials, docs, Stack Overflow, and now AI that can help you write nearly anything. The mechanics of coding are a solved problem — you just need time.",
       },
       {
         type: "p",
-        text: "What's not easily taught is how to think about what you're building. How to make decisions under uncertainty. How to design systems that serve people, not just pass tests. How to look at a problem and see the solution that nobody else is seeing. That's the real skill — and it doesn't come from learning another framework.",
+        text: "What's harder to teach: how to think about what you're building. How to make decisions under uncertainty. How to design systems that serve people, not just pass tests. That doesn't come from learning another framework.",
       },
       {
         type: "h2",
@@ -741,11 +741,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "I study companies, not just codebases. I read about how Apple approaches product launches, how Netflix structures their engineering teams, how Stripe designs their API documentation. I study design systems, marketing psychology, business models. Not because I'm trying to become a CEO — but because all of these things make me a better builder.",
+        text: "I study companies, not just codebases. How Apple approaches product launches. How Netflix structures engineering teams. How Stripe designs API documentation. Design systems, marketing psychology, business models. Not because I want to be a CEO — because all of it makes me a better builder.",
       },
       {
         type: "p",
-        text: "Code is the tool. Thinking is the skill. And in a world where AI is getting better at the tool part every day, the developers who invest in the thinking part are the ones who will be impossible to replace.",
+        text: "Code is the tool. Thinking is the skill. AI is getting better at the tool part every day. The developers who invest in thinking are the ones who'll be hardest to replace.",
       },
     ],
     relatedSlugs: [
@@ -774,7 +774,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "When I decided to start freelancing as a developer, I thought the hard part would be the technical work. Build the thing, deliver the thing, get paid for the thing. Straightforward, right? It took about two weeks of actual client work to realise that the code is maybe 40% of what you actually do. The rest is communication, scope management, pricing, invoicing, and all the unglamorous business stuff that nobody teaches you in a tutorial.",
+        text: "When I started freelancing, I thought the hard part would be the technical work. Build the thing, deliver the thing, get paid. Straightforward, right? Two weeks of actual client work later, I realised the code is maybe 40% of what you actually do. The rest is communication, scope management, pricing, invoicing — all the unglamorous stuff nobody teaches you in a tutorial.",
       },
       {
         type: "h2",
@@ -824,11 +824,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The first client is the hardest. Not because the work is difficult — but because you have no proof yet. No portfolio of paid work, no testimonials, no track record. Here's what worked for me: building projects that demonstrated my skills, being visible in communities where potential clients hang out, and treating every interaction as a chance to show that I'm reliable, thoughtful, and easy to work with.",
+        text: "The first client is the hardest. Not because the work is hard — because you have no proof yet. No paid portfolio, no testimonials, no track record. What worked for me: building projects that showed what I could do, being visible where potential clients hang out, and treating every interaction like a chance to prove I'm reliable and easy to work with.",
       },
       {
         type: "p",
-        text: "Your portfolio doesn't need ten projects. It needs two or three that are polished, well-presented, and clearly show what you can do. Quality over quantity — always. And once you land that first client and deliver well, the second one comes easier. And the third even easier than that.",
+        text: "Your portfolio doesn't need ten projects. It needs two or three that are polished and show exactly what you can do. Quality over quantity, always. Land the first client, deliver well — the second comes easier. The third easier still.",
       },
       {
         type: "h2",
@@ -840,7 +840,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Starting a dev business isn't just a career move. It's a crash course in everything they don't teach you in tutorials — communication, negotiation, time management, and self-belief. The technical skills got me in the door. But the business skills are what keep it open.",
+        text: "Starting a dev business is a crash course in everything no tutorial covers — communication, negotiation, time management, self-belief. The technical skills got me in the door. The business skills are what keep it open.",
       },
     ],
     relatedSlugs: [
@@ -869,7 +869,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "For years, my life revolved around music. I was a music teacher — not the kind who just ran through theory books, but the kind who genuinely believed that music could bring people together and change how they see the world. And it did. I watched students find confidence, express themselves, and connect with each other through something we built together.",
+        text: "For years, a big part of my life was music. I taught — not just theory books, but the kind of teaching where you genuinely believe music can change how people see the world. I watched students find confidence, express themselves, connect with each other. It mattered.",
       },
       {
         type: "h2",
@@ -877,11 +877,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Teaching music taught me more than I expected. It taught me patience — real patience, the kind where you watch someone struggle with the same chord for weeks and you find a new way to explain it every single time. It taught me how to break complex ideas into digestible pieces. And it taught me that the best results come when people feel supported enough to fail.",
+        text: "Teaching music taught me more than I expected. Real patience — the kind where you watch someone struggle with the same chord for weeks and find a new way to explain it every single time. How to break complex ideas down. How the best results come when people feel safe enough to fail.",
       },
       {
         type: "p",
-        text: "But over time, I felt the pull to do something different. Not because I fell out of love with music, but because I started feeling like I had more to give in a different way.",
+        text: "But I started feeling the pull toward something different. Not because I fell out of love with music — I just had something else I needed to build.",
       },
       {
         type: "h2",
@@ -889,7 +889,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "When I transitioned out of teaching, I didn't have a grand plan. I didn't enrol in a bootcamp or map out a career path. I was honestly just bored — and curious. I started tinkering with HTML and CSS, building little pages that did nothing useful but felt magical. A few lines of code and suddenly something appeared on screen. That was enough to hook me.",
+        text: "I didn't have a grand plan. No bootcamp, no mapped-out path. I was bored and curious. Started tinkering with HTML and CSS, building little pages that did nothing useful but felt magical. A few lines of code and something appeared on screen. That was enough to hook me.",
       },
       {
         type: "h2",
@@ -905,7 +905,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "I went from HTML to CSS to JavaScript, then React, then Next.js. Each step felt like learning a new instrument — awkward at first, then gradually more expressive. The learning never stopped, and that was the point. I wasn't just learning to code. I was learning to build.",
+        text: "HTML to CSS to JavaScript, then React, then Next.js. Each step felt like picking up a new instrument — awkward at first, then gradually more expressive. The learning never stopped. That was the point. I wasn't learning to code. I was learning to build.",
       },
       {
         type: "h2",
@@ -930,11 +930,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Today I'm building across multiple projects — from healthtech to productivity apps to gaming. I study not just code, but design, product thinking, marketing, and business. Because I don't just want to be a developer who writes code. I want to be a builder who creates things that matter.",
+        text: "Now I'm building across multiple fronts — healthtech, client sites, my own products. I study code, but also design, product thinking, marketing, business. Because I don't want to be a developer who writes code. I want to be a builder who creates things that matter.",
       },
       {
         type: "p",
-        text: "The music teacher in me never really left. I still want to bring people together, help them grow, and create things that make life a little better. I just do it with code now.",
+        text: "The music teacher in me never really left. I still want to help people, create things that stick, make something that matters. I just do it with code now.",
       },
     ],
     relatedSlugs: [
@@ -1010,11 +1010,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The biggest thing that changed after building my first real project wasn't my skill level — it was my confidence. I went from \"I'm learning to code\" to \"I can build things.\" That shift changes everything. It changes what you attempt, how you talk about yourself, and what you believe is possible.",
+        text: "The biggest thing that changed after my first real project wasn't my skill level — it was my confidence. I went from 'I'm learning to code' to 'I can build things.' That shift changes what you attempt, how you talk about yourself, and what you believe is possible.",
       },
       {
         type: "p",
-        text: "If you're stuck in tutorial mode, my advice is simple: close the tutorial, open a blank file, and build something. It doesn't have to be good. It has to be yours.",
+        text: "If you're stuck in tutorial mode: close it, open a blank file, and build something. It doesn't have to be good. It has to be yours.",
       },
     ],
     relatedSlugs: [
@@ -1041,7 +1041,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "When most people learn to code, they focus entirely on the technical side. Master React. Learn TypeScript. Understand databases. And those are important — but they're only part of the picture.",
+        text: "Most people who learn to code focus entirely on the technical side. Master React. Learn TypeScript. Understand databases. Those things are important — but they're only part of the picture.",
       },
       {
         type: "h2",
@@ -1091,7 +1091,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "I'm not saying you need to master everything. But if you only learn code, you'll always need someone else to tell you what to build and how it should look. And if you want to be a builder — a real one — that's not enough.",
+        text: "You don't need to master everything. But if you only learn code, you'll always need someone else to tell you what to build and how it should look. If you want to be a real builder, that's not enough.",
       },
     ],
     relatedSlugs: [
@@ -1118,7 +1118,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "When you're self-taught, the hardest part isn't the learning — it's knowing what to learn. There are thousands of tutorials, courses, and YouTube channels all telling you different things. It's overwhelming, and most of it is noise.",
+        text: "When you're self-taught, the hardest part isn't the learning. It's knowing what to learn. Thousands of tutorials, courses, YouTube channels all telling you different things. Most of it is noise.",
       },
       {
         type: "h2",
@@ -1196,7 +1196,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "There's a weird divide in tech where developers and designers are treated like separate species. Developers build things. Designers make them look good. But in reality, the best products come from people who can do both — or at least understand both.",
+        text: "There's a weird divide in tech where developers and designers are treated like separate species. Developers build things. Designers make them look good. The best products come from people who can do both — or at least understand both.",
       },
       {
         type: "h2",
@@ -1234,11 +1234,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Study websites you admire. Don't just look at them — analyse them. Why does this layout work? How much spacing is between elements? What's the font size hierarchy? Screenshot pages you like and annotate what makes them effective.",
+        text: "Study sites you admire. Don't just look — analyse. Why does this layout work? How much spacing is between elements? What's the font hierarchy? Screenshot pages you like and pull them apart.",
       },
       {
         type: "p",
-        text: "Rebuild things you find beautiful. Take a landing page you love and try to recreate it pixel by pixel. You'll learn more about design in that exercise than in any course.",
+        text: "Then rebuild what you find beautiful. Take a landing page you love and recreate it pixel by pixel. You'll learn more about design in that one exercise than in any course.",
       },
       {
         type: "h2",
@@ -1277,7 +1277,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "For the longest time, I wouldn't show anyone my work until it was \"done.\" I'd tweak, refactor, redesign, and polish until I felt like it was ready. But here's the thing — it was never ready. Because perfection doesn't exist, and waiting for it is just a fancy way of hiding.",
+        text: "For a long time, I wouldn't show anyone my work until it was 'done.' Tweak, refactor, redesign, polish. But it was never ready. Because perfection doesn't exist, and waiting for it is just a fancy way of hiding.",
       },
       {
         type: "h2",
@@ -1344,7 +1344,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "Every week there's a new headline about AI. It's either going to automate every job on the planet or it's a glorified autocomplete that can't be trusted. The discourse is loud, polarised, and honestly — exhausting. But if you step back from the noise, both sides are making valid points that are worth understanding.",
+        text: "Every week there's a new headline about AI. Either it's going to automate every job on the planet, or it's a glorified autocomplete that can't be trusted. The discourse is loud, polarised, and exhausting. But both sides are making valid points — and it's worth actually understanding them.",
       },
       {
         type: "h2",
@@ -1396,7 +1396,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The developers, creators, and thinkers who will navigate this era best are the ones who engage with the nuance instead of the noise. Understand the technology. Understand the concerns. And make your own informed decisions about how you use it and what role it plays in your work.",
+        text: "The people who'll navigate this era best are the ones who engage with the nuance instead of the noise. Understand the technology. Understand the concerns. Make your own informed decisions about what role AI plays in your work.",
       },
     ],
     relatedSlugs: [
@@ -1423,7 +1423,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "If you started learning to code ten years ago, your options were textbooks, Stack Overflow, and maybe a few early YouTube tutorials. Today, you've got interactive platforms, AI pair programmers, thousands of free courses, and communities on every platform imaginable. The landscape is unrecognisable — but is learning actually easier?",
+        text: "Ten years ago, learning to code meant textbooks, Stack Overflow, and maybe a few early YouTube tutorials. Now you've got interactive platforms, AI pair programmers, thousands of free courses, and communities everywhere. The landscape is unrecognisable. But is it actually easier to learn?",
       },
       {
         type: "h2",
@@ -1465,7 +1465,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "In fact, the abundance of resources has created a new problem: analysis paralysis. There's so much available that people spend more time choosing what to learn than actually learning. The paradox of choice is real, and it's slowing people down.",
+        text: "The abundance of resources has created a new problem: analysis paralysis. So much available that people spend more time choosing what to learn than actually learning. The paradox of choice is real.",
       },
       {
         type: "h2",
@@ -1473,7 +1473,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Learning to code is more accessible than ever, and that's genuinely wonderful. But accessibility doesn't mean easy. The hard parts — the thinking, the debugging, the persistence — are the same as they've always been. Use the new tools, absolutely. But don't mistake access to information for understanding. Understanding only comes from doing the work.",
+        text: "Learning to code is more accessible than ever. That's genuinely great. But accessible doesn't mean easy. The hard parts — the thinking, the debugging, the persistence — haven't changed. Use the new tools. But don't mistake access to information for understanding. Understanding only comes from doing the work.",
       },
     ],
     relatedSlugs: [
@@ -1500,7 +1500,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "If you've been paying attention to the tech world, you've probably noticed that the ground is shifting. The tools we use, the way teams are structured, the expectations placed on developers — all of it is evolving fast. Whether you're just starting out or you've been building for years, understanding the current landscape helps you make better decisions about where to invest your time.",
+        text: "The tools we use, how teams are structured, what's expected of developers — all of it is shifting fast. Whether you're just starting or you've been building for years, understanding what's actually changed helps you make better decisions about where to put your time.",
       },
       {
         type: "h2",
@@ -1542,11 +1542,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "It's easy to feel overwhelmed by how fast things change. A new framework drops every month. AI capabilities double every quarter. The temptation is to chase everything or freeze and chase nothing. Neither works.",
+        text: "A new framework drops every month. AI capabilities double every quarter. It's easy to feel like you're always behind. The temptation is to chase everything — or freeze and chase nothing. Neither works.",
       },
       {
         type: "p",
-        text: "The better approach is to build a solid foundation — understand JavaScript deeply, learn how the web works, get comfortable with one modern framework — and then stay curious about what's emerging. You don't need to adopt everything. You need to know enough to make informed decisions about what's worth your time.",
+        text: "Build a solid foundation first. Understand JavaScript deeply. Learn how the web works. Get comfortable with one modern framework. Then stay curious. You don't need to adopt everything — just know enough to make informed decisions about what's worth your time.",
       },
     ],
     relatedSlugs: [
@@ -1574,7 +1574,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "One of the best and worst things about learning to code in 2025 is that almost everything is free. Best, because you don't need money to get started. Worst, because the sheer volume of options makes it nearly impossible to know what's actually good. I've wasted hours on resources that taught me nothing. Here are the ones that didn't waste my time.",
+        text: "Almost everything about learning to code is free now. That's brilliant and also a problem — the volume of options makes it nearly impossible to know what's actually good. I've burned hours on resources that taught me nothing. Here are the ones that didn't.",
       },
       {
         type: "h2",
@@ -1638,7 +1638,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Don't try to use all of these at once. Pick one primary learning resource, supplement it with documentation when you get stuck, and build projects alongside your learning. The resources are the map — but the projects are the territory. You have to walk the territory to actually learn.",
+        text: "Don't use all of these at once. Pick one, supplement with docs when you're stuck, and build projects alongside your learning. The resources are the map. Projects are the territory. You have to walk the territory to actually learn.",
       },
     ],
     relatedSlugs: [
@@ -1665,7 +1665,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "When I started in tech, I obsessed over making my resume look good. The right keywords, the right format, the right buzzwords. But the more I talked to people who were actually doing interesting work, the more I realised: nobody cares about your resume as much as they care about what you've built.",
+        text: "When I started in tech, I obsessed over my resume. Right keywords, right format, right buzzwords. Then I kept talking to people actually doing interesting work, and I realised: nobody cares about your resume as much as they care about what you've built.",
       },
       {
         type: "h2",
@@ -1784,11 +1784,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "I keep a mental \"awareness list\" of things that are emerging. I read about them, understand what they do, and note why people are excited. But I don't adopt anything until I have a real reason to. My stack is solid, I know it well, and I'd rather build great things with tools I understand than mediocre things with tools I barely know.",
+        text: "I keep a mental 'awareness list' of things emerging. I read about them, understand what they do, note why people are excited. But I don't adopt anything until I have a real reason to. My stack is solid, I know it well, and I'd rather build great things with tools I understand than mediocre things with tools I barely know.",
       },
       {
         type: "p",
-        text: "Stay aware. Stay curious. But don't let the hype cycle drive your learning. You're building a career, not collecting badges.",
+        text: "Stay aware. Stay curious. But don't let the hype cycle drive your learning. You're building a career — not collecting badges.",
       },
     ],
     relatedSlugs: [
@@ -1815,7 +1815,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "One of the most common questions I get asked is whether you need a degree or a bootcamp to get into tech. It's a fair question — especially when job listings ask for \"bachelor's degree in computer science or equivalent.\" But the answer isn't as simple as yes or no.",
+        text: "One of the most common questions: do you need a degree or bootcamp to get into tech? Fair question — especially when job listings say 'bachelor's degree in CS or equivalent.' But the answer isn't yes or no.",
       },
       {
         type: "h2",
@@ -1867,11 +1867,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The best path depends on your situation, your learning style, and your goals. A degree is valuable if you can afford the time and money. A bootcamp is valuable if you need structured intensity. Self-teaching is valuable if you're disciplined and relentlessly curious. None of these paths is inherently better — they're just different routes to the same destination.",
+        text: "The best path depends on your situation and learning style. A degree is valuable if you can afford the time and money. A bootcamp works if you need structured intensity. Self-teaching works if you're disciplined and relentlessly curious. None of these is inherently better — just different routes to the same place.",
       },
       {
         type: "p",
-        text: "But if I had to bet on one quality that separates the developers who thrive from those who stall, it's curiosity. Not credentials, not job titles, not years of experience. Curiosity — the kind that makes you open a new tab and start learning something just because you wanted to know how it works. That's the real edge.",
+        text: "But if I had to bet on one thing that separates developers who thrive from those who stall, it's curiosity. Not credentials, not job titles, not years of experience. Curiosity — the kind that makes you open a new tab just because you wanted to know how something works. That's the real edge.",
       },
     ],
     relatedSlugs: [
@@ -1898,7 +1898,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "There's a difference between someone who writes code and someone who builds things. Both might use the same languages, the same frameworks, the same tools. But the way they think about their work is fundamentally different. And that difference shows up in everything they create.",
+        text: "There's a difference between writing code and building things. Same languages, same frameworks, same tools — but the way they think about the work is completely different. That difference shows up in everything they create.",
       },
       {
         type: "h2",
@@ -1948,11 +1948,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The builder's mindset isn't a switch you flip. It's a practice you develop over time by consistently asking better questions, thinking about the user, and caring about the outcome — not just the code. Every project is a chance to practice. Every decision is a chance to think like a builder instead of just a coder.",
+        text: "The builder's mindset isn't a switch you flip. It's a practice — asking better questions, thinking about the user, caring about the outcome and not just the code. Every project is a chance to practice. Every decision is a chance to think like a builder.",
       },
       {
         type: "p",
-        text: "I'm not interested in just writing code. I want to build things that matter, that people use, that make a difference — however small. That's the mindset. And it starts with caring about more than just the technology.",
+        text: "I don't want to just write code. I want to build things that matter, that people actually use. That starts with caring about more than the technology.",
       },
     ],
     relatedSlugs: [
@@ -1979,7 +1979,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "When I switched careers and started learning to code, I felt like I was behind everyone. People around me seemed to pick things up faster, understand concepts quicker, and build things more easily. It took me a while to realise that the difference wasn't talent — it was approach. The way you learn matters more than how long you spend learning.",
+        text: "When I started learning to code, I felt like I was behind everyone. People around me seemed to pick things up faster, understand concepts quicker, build things more easily. It took a while to realise: the difference wasn't talent. It was approach. How you learn matters more than how long you spend learning.",
       },
       {
         type: "h2",
@@ -2025,11 +2025,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Learning faster isn't about cramming more hours in. It's about making each hour count more. Over time, this compounds dramatically. Someone who learns actively for 2 hours will outpace someone who learns passively for 6 hours — every single time. The gap widens with every passing month.",
+        text: "Learning faster isn't about cramming more hours in. It's about making each hour count more. Someone who learns actively for 2 hours will outpace someone learning passively for 6 — every single time. The gap widens every month.",
       },
       {
         type: "p",
-        text: "You don't need to be smarter. You need to be more strategic. Learn actively, build constantly, teach generously, and connect everything. That's the framework. It works for coding, and it works for everything else too.",
+        text: "You don't need to be smarter. You need to be more strategic. Learn actively, build constantly, teach what you know, connect everything. That's the framework. Works for code, works for everything.",
       },
     ],
     relatedSlugs: [
@@ -2056,7 +2056,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "I used to think tools didn't matter much — that a good developer could build great things with anything. And that's partly true. But partly isn't fully. The right tools don't just make you faster — they change how you think about building. They remove friction in places you didn't even know had friction.",
+        text: "I used to think tools didn't matter much — that a good developer could build great things with anything. Partly true. But the right tools don't just make you faster. They change how you think about building. They remove friction in places you didn't even know had friction.",
       },
       {
         type: "h2",
@@ -2099,7 +2099,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "My tools might not be your tools. What matters is that you invest time in finding and mastering the tools that fit you. Don't just use what everyone else uses — use what makes you most effective. Experiment, try new things, and when something clicks, commit to learning it deeply. Your tools are an extension of how you think. Choose them wisely.",
+        text: "My tools might not be your tools. What matters is investing time in finding and mastering the ones that fit you. Don't just use what everyone uses — use what makes you most effective. Experiment. When something clicks, go deep. Your tools are an extension of how you think.",
       },
     ],
     relatedSlugs: [
@@ -2126,7 +2126,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "This post is for the person who has watched 47 YouTube tutorials, bookmarked 23 articles, started 5 different courses, and still doesn't feel ready to build something. I know you're out there because I was you. And I need to tell you something you probably don't want to hear: you're not learning. You're hiding.",
+        text: "This is for the person who has watched 47 YouTube tutorials, bookmarked 23 articles, started 5 different courses, and still doesn't feel ready to build something. I was you. And what you're doing isn't learning. It's hiding.",
       },
       {
         type: "h2",
@@ -2206,7 +2206,7 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "Every \"learn to code\" guide talks about syntax, frameworks, and projects. Very few talk about the emotional experience of learning to code — the frustration, the self-doubt, the imposter syndrome, and the days where you want to quit entirely. But this is the stuff that actually determines whether you'll make it.",
+        text: "Every 'learn to code' guide covers syntax, frameworks, and projects. Almost none of them talk about the emotional side — the frustration, the self-doubt, the imposter syndrome, the days you want to quit entirely. But that's the stuff that actually determines whether you'll make it.",
       },
       {
         type: "h2",
@@ -2252,11 +2252,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "If you're learning to code right now and feeling behind, frustrated, or overwhelmed — I want you to know that's part of the process, not a sign that something's wrong. Every developer who's ever shipped anything started where you are. The only difference between them and someone who gave up is that they kept going through the hard days.",
+        text: "If you're learning right now and feeling behind, frustrated, or overwhelmed — that's part of the process. Not a sign something's wrong. Every developer who's ever shipped anything started where you are. The only difference between them and someone who gave up is that they kept going through the hard days.",
       },
       {
         type: "p",
-        text: "You're not behind. You're not too old. You're not too late. You're exactly where you need to be. Just keep building.",
+        text: "You're not behind. You're not too old. You're not too late. Keep building.",
       },
     ],
     relatedSlugs: [

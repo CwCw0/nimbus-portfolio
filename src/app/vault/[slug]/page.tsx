@@ -1,47 +1,34 @@
-import { getProductBySlug, getNextProduct, products } from "../../../data/products";
-import ProductDetailContent from "./ProductDetailContent";
-import type { Metadata } from "next";
-import { redirect } from "next/navigation";
-
-// While the storefront is being built, individual product pages redirect to
-// the locked /products screen. Flip this off when PRODUCTS_LOCKED in
-// ProductsContent.tsx is also flipped off.
-const PRODUCT_DETAILS_LOCKED = false;
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { vaultProducts } from '@/data/vault';
+import ProductShowcase from './ProductShowcase';
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+  return vaultProducts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  if (PRODUCT_DETAILS_LOCKED) {
-    return {
-      title: "The Nimbus Vault — Still forming",
-      description:
-        "The Nimbus storefront is being built. Drop your email and we'll let you know the moment the vault opens.",
-    };
-  }
   const { slug } = await params;
-  const product = getProductBySlug(slug);
-  if (!product) return { title: "Product Not Found" };
+  const product = vaultProducts.find((p) => p.slug === slug);
+  if (!product) return { title: 'Product Not Found' };
   return {
     title: `${product.name} — ${product.tagline}`,
-    description: product.cardDescription,
+    description: product.description.slice(0, 160),
     openGraph: {
-      title: `${product.name} — Nimbus`,
-      description: product.cardDescription,
+      title: `${product.name} — Nimbus Forma Studio`,
+      description: product.tagline,
     },
   };
 }
 
 export default async function ProductPage({ params }: Props) {
-  if (PRODUCT_DETAILS_LOCKED) {
-    redirect("/vault");
-  }
   const { slug } = await params;
-  const product = getProductBySlug(slug);
-  const next = product ? getNextProduct(slug) : { name: "Kōji", slug: "koji" };
+  const product = vaultProducts.find((p) => p.slug === slug);
+  if (!product) notFound();
 
-  return <ProductDetailContent product={product ?? null} next={next} />;
+  const otherProducts = vaultProducts.filter((p) => p.slug !== slug);
+
+  return <ProductShowcase product={product} others={otherProducts} />;
 }

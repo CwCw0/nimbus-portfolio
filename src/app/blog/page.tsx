@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import BlogContent from "./BlogContent";
+import BlogPageContent from "./BlogPageContent";
 
 export const metadata: Metadata = {
   title: "Blog — Web Design, AI & Building in Malaysia",
@@ -13,5 +13,5 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  return <BlogContent />;
+  return <BlogPageContent />;
 }

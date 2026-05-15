@@ -150,7 +150,7 @@ export default function PopStorePreview() {
   return (
     <div ref={mainRef} style={{ background: P.bg, color: P.text, minHeight: "100vh", overflowX: "hidden" }}>
       {/* NAV — thick borders, animated cart */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 40px", background: P.bg, borderBottom: P.border }}>
+      <nav style={{ position: "fixed", top: 44, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 40px", background: P.bg, borderBottom: P.border }}>
         <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 26, fontWeight: 700 }}>POP<span style={{ color: P.coral }}>.</span></span>
         <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
           {[
@@ -173,7 +173,7 @@ export default function PopStorePreview() {
       </nav>
 
       {/* HERO */}
-      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "120px 40px 80px", position: "relative", overflow: "hidden" }}>
+      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", padding: "160px 40px 80px", position: "relative", overflow: "hidden" }}>
         <div className="ps-float" style={{ position: "absolute", top: "10%", left: "5%", fontSize: 90, opacity: 0.12 }}>🍋</div>
         <div className="ps-float" style={{ position: "absolute", bottom: "15%", right: "7%", fontSize: 90, opacity: 0.12 }}>🧃</div>
         <div className="ps-float" style={{ position: "absolute", top: "55%", left: "82%", fontSize: 65, opacity: 0.08 }}>🌶️</div>
@@ -182,7 +182,7 @@ export default function PopStorePreview() {
           NOT YOUR AVERAGE BRAND
         </div>
 
-        <h1 className="ps-hero-anim" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(56px, 11vw, 140px)", fontWeight: 700, lineHeight: 0.88, letterSpacing: "-0.03em" }}>
+        <h1 className="ps-hero-anim" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(56px, 11vw, 140px)", fontWeight: 700, lineHeight: 0.88, letterSpacing: "-0.03em", textWrap: "balance" as any }}>
           GOOD STUFF.
           <br />
           <span style={{ color: P.coral, fontStyle: "italic" }}>NO FLUFF.</span>
@@ -298,7 +298,7 @@ export default function PopStorePreview() {
       <section style={{ padding: "100px 40px", background: P.coral, textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div className="ps-float" style={{ position: "absolute", top: -30, left: "8%", fontSize: 130, opacity: 0.12 }}>🎉</div>
         <div className="ps-float" style={{ position: "absolute", bottom: -30, right: "8%", fontSize: 130, opacity: 0.12 }}>🚀</div>
-        <h2 className="ps-cta-heading" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(44px, 8vw, 88px)", fontWeight: 700, color: P.textLight, lineHeight: 0.92, position: "relative", zIndex: 1 }}>
+        <h2 className="ps-cta-heading" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(44px, 8vw, 88px)", fontWeight: 700, color: P.textLight, lineHeight: 0.92, position: "relative", zIndex: 1, textWrap: "balance" as any }}>
           STOP SCROLLING.<br />START SHOPPING.
         </h2>
         <p style={{ fontFamily: "Inter, sans-serif", fontSize: 17, color: "rgba(255,255,255,0.8)", marginTop: 20, maxWidth: 400, marginLeft: "auto", marginRight: "auto", lineHeight: 1.7, position: "relative", zIndex: 1 }}>Free shipping over $50. No minimum. No subscriptions.</p>

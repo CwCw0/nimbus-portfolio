@@ -62,7 +62,7 @@ export function VitalisNav() {
     <nav
       style={{
         position: "fixed",
-        top: isMobile ? 0 : 16,
+        top: isMobile ? 44 : 60,
         left: isMobile ? 0 : "50%",
         right: isMobile ? 0 : "auto",
         transform: isMobile ? "none" : "translateX(-50%)",
@@ -208,7 +208,7 @@ export function VitalisNav() {
         <div
           style={{
             position: "fixed",
-            top: 50,
+            top: 94,
             left: 0,
             right: 0,
             bottom: 0,
@@ -359,7 +359,7 @@ export function VitalisLayout({ children }: { children: React.ReactNode }) {
       <VitalisFonts />
       <PreviewBar />
       <VitalisNav />
-      <main style={{ paddingTop: 80 }}>{children}</main>
+      <main style={{ paddingTop: 124 }}>{children}</main>
       <VitalisFooter />
     </div>
   );
