@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { Sun, Moon } from 'lucide-react';
 import Magnetic from '@/components/ui/Magnetic';
 
@@ -20,6 +20,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const slashRef = useRef<SVGLineElement>(null);
 
   /* ── Theme from localStorage ── */
   useEffect(() => {
@@ -28,6 +29,14 @@ export default function Nav() {
       setTheme(saved);
       document.body.setAttribute('data-theme', saved);
     }
+  }, []);
+
+  /* ── Auto-slash on load ── */
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      slashRef.current?.classList.add('slashed');
+    }, 1200);
+    return () => clearTimeout(timer);
   }, []);
 
   const toggleTheme = useCallback(() => {
@@ -76,8 +85,8 @@ export default function Nav() {
           <Link href="/" className="nav-brand" aria-label="Nimbus Forma Studio — Home">
             <span className="nav-brand-wordmark">
               <span className="nav-brand-text">NIMBUS</span>
-              <svg className="nav-brand-line" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">
-                <line x1="0" y1="18" x2="100" y2="2" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="120" strokeDashoffset="120" />
+              <svg className="nav-brand-line" viewBox="0 0 100 14" preserveAspectRatio="none" aria-hidden="true">
+                <line ref={slashRef} x1="0" y1="12" x2="100" y2="3" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeDasharray="102" strokeDashoffset="102" />
               </svg>
             </span>
             <span className="nav-brand-sub">Forma Studio</span>

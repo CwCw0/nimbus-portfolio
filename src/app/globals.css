@@ -941,6 +941,8 @@ main, footer, nav, header {
   gap: 2px;
   text-decoration: none;
   flex-shrink: 0;
+  padding: 8px 4px;
+  margin: -8px -4px;
 }
 
 .nav-brand-wordmark {
@@ -968,10 +970,10 @@ main, footer, nav, header {
 
 .nav-brand-line line {
   transition: stroke-dashoffset 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  filter: drop-shadow(0 0 6px var(--accent-glow));
 }
 
-.nav-brand:hover .nav-brand-line line {
+.nav-brand:hover .nav-brand-line line,
+.nav-brand-line line.slashed {
   stroke-dashoffset: 0;
 }
 
@@ -1635,12 +1637,7 @@ body.preview-active footer:not(.footer-root) {
   }
 }
 
-/* ── Nav: hide theme toggle on very small screens, keep burger ── */
-@media (max-width: 479px) {
-  .nav-theme-toggle {
-    display: none !important;
-  }
-}
+/* Theme toggle stays visible on all screen sizes */
 
 /* ── Nav right: reduce gap on mobile ── */
 @media (max-width: 979px) {

@@ -132,7 +132,7 @@ export default function Footer() {
                 <span className="status-dot" />
                 <span>Available &middot; Remote worldwide</span>
               </p>
-              <p className="footer-status-line">Kuala Lumpur &middot; Remote worldwide</p>
+              <p className="footer-status-line">Kuala Lumpur, Malaysia</p>
               <p className="footer-status-line footer-status-dim">3.14&deg;N &middot; 101.69&deg;E</p>
             </div>
           </div>
