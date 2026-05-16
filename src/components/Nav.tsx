@@ -20,7 +20,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const slashRef = useRef<SVGLineElement>(null);
+  const slashRef = useRef<HTMLSpanElement>(null);
 
   /* ── Theme from localStorage ── */
   useEffect(() => {
@@ -31,12 +31,15 @@ export default function Nav() {
     }
   }, []);
 
-  /* ── Auto-slash on load ── */
+  /* ── Auto-slash on load: show then retreat ── */
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const show = setTimeout(() => {
       slashRef.current?.classList.add('slashed');
     }, 1200);
-    return () => clearTimeout(timer);
+    const hide = setTimeout(() => {
+      slashRef.current?.classList.remove('slashed');
+    }, 3000);
+    return () => { clearTimeout(show); clearTimeout(hide); };
   }, []);
 
   const toggleTheme = useCallback(() => {
@@ -85,9 +88,9 @@ export default function Nav() {
           <Link href="/" className="nav-brand" aria-label="Nimbus Forma Studio — Home">
             <span className="nav-brand-wordmark">
               <span className="nav-brand-text">NIMBUS</span>
-              <svg className="nav-brand-line" viewBox="0 0 100 14" preserveAspectRatio="none" aria-hidden="true">
-                <line ref={slashRef} x1="0" y1="12" x2="100" y2="3" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeDasharray="102" strokeDashoffset="102" />
-              </svg>
+              <span className="nav-brand-slash" aria-hidden="true">
+                <span ref={slashRef} className="nav-brand-slash-inner" />
+              </span>
             </span>
             <span className="nav-brand-sub">Forma Studio</span>
           </Link>
