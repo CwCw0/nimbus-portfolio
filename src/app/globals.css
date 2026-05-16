@@ -972,24 +972,24 @@ main, footer, nav, header {
 .nav-brand-slash-inner {
   position: absolute;
   top: 50%;
-  left: 50%;
-  width: 20px;
+  left: 0;
+  width: 100%;
   height: 1.5px;
   background: var(--accent);
   border-radius: 1px;
-  transform: translate(-50%, -50%) rotate(-65deg) scaleX(0);
-  transform-origin: center center;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: rotate(-12deg) scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (hover: hover) {
   .nav-brand:hover .nav-brand-slash-inner {
-    transform: translate(-50%, -50%) rotate(-65deg) scaleX(1);
+    transform: rotate(-12deg) scaleX(0.75);
   }
 }
 
 .nav-brand-slash-inner.slashed {
-  transform: translate(-50%, -50%) rotate(-65deg) scaleX(1);
+  transform: rotate(-12deg) scaleX(0.75);
 }
 
 .nav-brand-sub {
