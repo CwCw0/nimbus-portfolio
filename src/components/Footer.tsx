@@ -224,8 +224,8 @@ export default function Footer() {
 
       {/* ═══ 5. Legal row ═══ */}
       <div className="footer-legal container">
-        <span>&copy; 2026 Nimbus Forma Studio &middot; All rights reserved</span>
-        <span>Built with intention</span>
+        <span>&copy; 2026 Nimbus Forma Studio</span>
+        <span>One project at a time.</span>
       </div>
     </footer>
   );

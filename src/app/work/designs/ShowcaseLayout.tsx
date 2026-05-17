@@ -98,18 +98,6 @@ export default function ShowcaseLayout({ data }: { data: ShowcaseData }) {
             {description}
           </p>
 
-          {/* Tech pills */}
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            {techStack.map((t) => (
-              <span
-                key={t}
-                className="border border-(--line) px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.08em] text-(--fg-faint)"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-
           {/* CTA */}
           <div className="mt-12 flex items-center gap-4 max-md:flex-col max-md:items-start">
             {gumroadUrl ? (
