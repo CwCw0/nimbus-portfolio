@@ -95,22 +95,24 @@ export default function About() {
                   color: 'var(--fg)',
                 }}
               >
-                I build websites, business tools, and AI automation. The real
-                thing I do is take the messy way a business runs and turn it
-                into one system that works.
+                3+ years shipping production systems across agency,
+                in-house, and AI startup environments. Full-stack development,
+                product ownership, systems architecture.
               </p>
 
               <p style={{ color: 'var(--fg-dim)', lineHeight: 1.7 }}>
-                Nimbus Forma Studio is a one-person practice based in Kuala Lumpur.
-                I design in code — no Figma handoff, no translation layer. What you
-                review is what ships. Every project gets the same stack, the same
-                security standards, and the same level of care.
+                I&apos;ve built fintech platforms, e-commerce systems, POS integrations
+                for national logistics, and internal tools for complex operations. Currently
+                an FDE and Product Owner at an AI startup, where I architect systems, run PRDs,
+                manage QA, and ship production code.
               </p>
 
               <p style={{ color: 'var(--fg-dim)', lineHeight: 1.7 }}>
-                Before starting Nimbus, I spent years learning by building — not by
-                watching. Every project you see here was designed, built, and deployed
-                by one person. That focus is the product.
+                Before tech: retail, property, F&amp;B, competitive MMA.
+                I&apos;ve worked inside the businesses I now build for. When I design a
+                stock system, it&apos;s because I&apos;ve counted inventory at closing.
+                When I build a booking flow, it&apos;s because I&apos;ve managed walk-ins
+                during a lunch rush. That context is the product.
               </p>
 
               {/* Tools chip row */}

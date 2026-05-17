@@ -22,19 +22,24 @@ const stack = [
 
 const journey = [
   {
+    year: '2023',
+    title: 'In-house dev house',
+    body: 'First production environment. Built internal tools, learned how real teams ship code, understood the gap between tutorials and production.',
+  },
+  {
     year: '2024',
-    title: 'Started building',
-    body: 'Picked up code out of curiosity. Built Omnifood — a high-converting landing page that scored 98 on Lighthouse. The project that taught me more than any tutorial ever could.',
+    title: 'Agency work',
+    body: 'Client-facing development at scale. Worked on POS integrations for national logistics, fintech platforms, and e-commerce systems. Learned to scope, estimate, and deliver under pressure.',
   },
   {
     year: '2025',
-    title: 'Launched products',
-    body: 'Shipped Kōji (productivity OS) and Pulse (healthtech dashboard). Refined the craft across frontend, backend, design, and AI. Started building Voidframe.',
+    title: 'AI startup (current)',
+    body: 'FDE and Product Owner. Architecting systems, running PRD pipelines, managing QA, overseeing client projects end to end. Leading a junior developer. Making the decisions that shape what ships.',
   },
   {
     year: '2026',
-    title: 'Registered Nimbus Forma Studio',
-    body: 'Made it official. First paying client — 88 Badminton House. Now building for clients and shipping products under one roof.',
+    title: 'Nimbus Forma Studio',
+    body: 'Registered. First client signed and in build. Now applying everything from agency, in-house, and startup to build independently for businesses that need the full picture.',
   },
 ];
 
@@ -82,29 +87,32 @@ export default function AboutPageContent() {
                     color: 'var(--accent)',
                   }}
                 >
-                  I study the full picture, not just how to write code, but
-                  what makes a product good, a website effective, and a business
-                  system actually run.
+                  3+ years in production. Agency, in-house, AI startup.
+                  Full-stack engineering, product ownership, systems architecture.
+                  Now I build independently for businesses that need the whole picture.
                 </p>
 
                 <p style={{ color: 'var(--fg-dim)', lineHeight: 1.8 }}>
-                  I picked up coding out of pure curiosity, and it clicked. What
-                  started as tinkering with HTML and CSS turned into a deep obsession
-                  with building things. Frontend, backend, UI/UX, marketing,
-                  business. Building something great takes all of it.
+                  I&apos;ve shipped fintech platforms, e-commerce systems, POS integrations
+                  for national logistics, and internal tools for complex operations.
+                  Currently an FDE and Product Owner at an AI startup, where I architect
+                  systems, manage PRD pipelines, run QA, and make the decisions that
+                  shape what gets built.
                 </p>
 
                 <p style={{ color: 'var(--fg-dim)', lineHeight: 1.8 }}>
-                  Now I build for clients and ship my own products. From healthtech
-                  to productivity apps to gaming platforms — and the internal systems
-                  that tie a business together. Always reading, always shipping,
-                  always learning. One project at a time, full attention, no compromises.
+                  Before tech: retail floors, property sales, F&amp;B kitchens,
+                  competitive MMA, music teaching. I&apos;ve worked inside the businesses
+                  I now build for. When I design a stock system, it&apos;s because
+                  I&apos;ve counted inventory at closing. When I build a lead pipeline,
+                  it&apos;s because I&apos;ve cold-called prospects. That context isn&apos;t
+                  something you learn from a tutorial.
                 </p>
 
                 <p style={{ color: 'var(--fg-dim)', lineHeight: 1.8 }}>
-                  I design in code. What you see in the browser is the final
-                  product. No Figma handoff, no design-to-dev translation gap.
-                  What you review is what ships.
+                  I design in code. What you see in the browser is the final product.
+                  No Figma handoff, no translation gap. What you review is what ships.
+                  One project at a time, full attention, no compromises.
                 </p>
               </div>
             </FadeIn>
@@ -172,10 +180,10 @@ export default function AboutPageContent() {
 
                 {/* Data rows */}
                 {[
-                  ['Role', 'Full-Stack Dev & Designer'],
+                  ['Role', 'Full-Stack Engineer · Product Owner'],
+                  ['Background', 'Agency · In-House · AI Startup'],
                   ['Location', 'Kuala Lumpur, Malaysia'],
-                  ['Stack', 'Next.js · TypeScript · Tailwind'],
-                  ['Status', 'Open to projects'],
+                  ['Status', 'Accepting projects'],
                 ].map(([label, value]) => (
                   <div
                     key={label}
@@ -265,7 +273,7 @@ export default function AboutPageContent() {
         <div className="container">
           <div className="section-head">
             <span className="section-index">02 / Journey</span>
-            <span className="section-label">2024 &ndash; Present</span>
+            <span className="section-label">2023 &ndash; Present</span>
           </div>
 
           <RevealLine>
