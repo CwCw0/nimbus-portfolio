@@ -938,7 +938,7 @@ main, footer, nav, header {
 .nav-brand {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   text-decoration: none;
   flex-shrink: 0;
   padding: 12px 8px;
@@ -948,7 +948,7 @@ main, footer, nav, header {
   -webkit-tap-highlight-color: transparent;
 }
 
-.nav-brand-wordmark {
+.nav-brand-nimbus {
   position: relative;
   display: inline-block;
 }

@@ -86,7 +86,7 @@ export default function Nav() {
         <div className="nav-inner container">
           {/* ── Brand ── */}
           <Link href="/" className="nav-brand" aria-label="Nimbus Forma Studio — Home">
-            <span className="nav-brand-wordmark">
+            <span className="nav-brand-nimbus">
               <span className="nav-brand-text">NIMBUS</span>
               <svg className="nav-brand-slash" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                 <line
