@@ -966,33 +966,24 @@ main, footer, nav, header {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  overflow: hidden;
 }
 
-.nav-brand-slash-inner {
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 1.5px;
-  background: var(--accent);
-  border-radius: 1px;
-  transform: rotate(-8deg) scaleX(0);
-  transform-origin: left bottom;
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+.nav-brand-slash line {
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (hover: hover) {
-  .nav-brand:hover .nav-brand-slash-inner {
-    transform: rotate(-8deg) scaleX(0.75);
+  .nav-brand:hover .nav-brand-slash line,
+  .nav-brand-slash line.slashed {
+    stroke-dashoffset: 0;
   }
 }
 
-.nav-brand-slash-inner.slashed {
-  transform: rotate(-8deg) scaleX(0.75);
+.nav-brand-slash line.slashed {
+  stroke-dashoffset: 0;
 }
 
 .nav-brand-sub {

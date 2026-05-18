@@ -20,7 +20,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const slashRef = useRef<HTMLSpanElement>(null);
+  const slashRef = useRef<SVGLineElement>(null);
 
   /* ── Theme from localStorage ── */
   useEffect(() => {
@@ -88,9 +88,17 @@ export default function Nav() {
           <Link href="/" className="nav-brand" aria-label="Nimbus Forma Studio — Home">
             <span className="nav-brand-wordmark">
               <span className="nav-brand-text">NIMBUS</span>
-              <span className="nav-brand-slash" aria-hidden="true">
-                <span ref={slashRef} className="nav-brand-slash-inner" />
-              </span>
+              <svg className="nav-brand-slash" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <line
+                  ref={slashRef}
+                  x1="0" y1="100" x2="100" y2="0"
+                  stroke="var(--accent)"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeDasharray="142"
+                  strokeDashoffset="142"
+                />
+              </svg>
             </span>
             <span className="nav-brand-sub">Forma Studio</span>
           </Link>
