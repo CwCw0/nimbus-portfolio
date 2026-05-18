@@ -3,6 +3,7 @@ import { Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import AmbientWaves from "@/components/AmbientWaves";
 import Cursor from "@/components/ui/Cursor";
+import PageLoader from "@/components/PageLoader";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -166,6 +167,7 @@ export default function RootLayout({
           Skip to content
         </a>
 
+        <PageLoader />
         <AmbientWaves lineCount={18} />
         <Cursor />
         <SmoothScroll>

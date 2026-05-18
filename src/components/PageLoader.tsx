@@ -22,7 +22,8 @@ export default function PageLoader() {
   const flashRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sessionStorage.getItem("nfs-intro-v9")) {
+    const isMobile = window.innerWidth < 769;
+    if (!isMobile && !sessionStorage.getItem("nfs-intro-v10")) {
       setVisible(true);
     }
   }, []);
@@ -47,7 +48,7 @@ export default function PageLoader() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
     if (prefersReducedMotion) {
-      sessionStorage.setItem("nfs-intro-v9", "1");
+      sessionStorage.setItem("nfs-intro-v10", "1");
       setVisible(false);
       return;
     }
@@ -80,7 +81,7 @@ export default function PageLoader() {
 
     const onDone = () => {
       document.body.style.overflow = "";
-      sessionStorage.setItem("nfs-intro-v9", "1");
+      sessionStorage.setItem("nfs-intro-v10", "1");
       setVisible(false);
     };
 
@@ -90,25 +91,25 @@ export default function PageLoader() {
     tl.to(dot, {
       scale: 1,
       autoAlpha: 1,
-      duration: 0.15,
+      duration: 0.12,
       ease: "back.out(3)",
-    }, 0.2);
+    }, 0.1);
 
     // 2 ▸ NIMBUS chars slide up from below baseline
     tl.to(split.chars || [], {
       y: "0%",
       autoAlpha: 1,
-      duration: 0.4,
-      stagger: 0.035,
+      duration: 0.3,
+      stagger: 0.025,
       ease: "power3.out",
-    }, 0.35);
+    }, 0.2);
 
     // 3 ▸ Blade draws across center
     tl.to(line, {
       scaleX: 1,
-      duration: 0.25,
+      duration: 0.2,
       ease: "power2.inOut",
-    }, "-=0.1");
+    }, "-=0.08");
 
     // ── STRIKE ──────────────────────────────────────
 
@@ -132,31 +133,31 @@ export default function PageLoader() {
     tl.to(dot, { scale: 1, duration: 0.4, ease: "elastic.out(1, 0.4)" }, "strike+=0.05");
 
     // Halves split
-    tl.to(topHalf, { y: -splitDist, duration: 0.3, ease: "power3.inOut" }, "strike");
-    tl.to(bottomHalf, { y: splitDist, duration: 0.3, ease: "power3.inOut" }, "strike");
+    tl.to(topHalf, { y: -splitDist, duration: 0.22, ease: "power3.inOut" }, "strike");
+    tl.to(bottomHalf, { y: splitDist, duration: 0.22, ease: "power3.inOut" }, "strike");
 
     // Blade fades
-    tl.to(line, { autoAlpha: 0, duration: 0.15 }, "strike+=0.06");
+    tl.to(line, { autoAlpha: 0, duration: 0.1 }, "strike+=0.05");
 
     // Halves dim
-    tl.to([topHalf, bottomHalf], { autoAlpha: 0.3, duration: 0.25 }, "strike+=0.12");
+    tl.to([topHalf, bottomHalf], { autoAlpha: 0.3, duration: 0.18 }, "strike+=0.08");
 
     // 4 ▸ FORMA STUDIO — rises with letter-spacing expanding
     tl.to(sub, {
       autoAlpha: 1,
       y: 0,
       letterSpacing: "5.5px",
-      duration: 0.3,
+      duration: 0.22,
       ease: "power2.out",
-    }, "strike+=0.18");
+    }, "strike+=0.1");
 
     // 5 ▸ Overlay lifts — fast, decisive exit
     tl.to(overlay, {
       yPercent: -100,
-      duration: 0.6,
+      duration: 0.5,
       ease: "expo.inOut",
       onComplete: onDone,
-    }, "+=0.3");
+    }, "+=0.15");
 
     return () => {
       split.revert();
