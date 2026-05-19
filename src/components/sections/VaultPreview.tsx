@@ -39,7 +39,7 @@ export default function VaultPreview() {
         {/* Intro */}
         <FadeIn>
           <p style={{ color: 'var(--fg-dim)', maxWidth: 640, lineHeight: 1.7, marginBottom: 'var(--sp-12)' }}>
-            Nimbus isn&apos;t only a service. I ship products under this name — tools
+            Nimbus isn&apos;t only a service. I ship products under this name: tools
             I use every day, released for anyone who wants the same. Built in the open.
           </p>
         </FadeIn>

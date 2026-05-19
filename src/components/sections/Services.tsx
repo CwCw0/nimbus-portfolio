@@ -41,7 +41,7 @@ export default function Services() {
           >
             Websites, business tools, AI systems, and internal operations.
             One builder, end to end. Every engagement starts with a real
-            conversation — no hidden discovery fees, no vague proposals.
+            conversation. No hidden discovery fees, no vague proposals.
           </p>
         </FadeIn>
 

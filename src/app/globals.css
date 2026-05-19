@@ -65,7 +65,7 @@
   /* Foreground — warm eggshell for premium feel */
   --fg: #F5F0E6;
   --fg-dim: #948BBC;
-  --fg-faint: #7A7590;
+  --fg-faint: #9590A8;
 
   /* Lines */
   --line: rgba(245, 240, 230, 0.06);
@@ -1079,8 +1079,8 @@ main, footer, nav, header {
 /* ── Burger (mobile only) ── */
 .nav-burger {
   display: none;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid var(--line-strong);
   background: transparent;
@@ -1105,11 +1105,11 @@ main, footer, nav, header {
 }
 
 .nav-burger-line-1 {
-  top: 15px;
+  top: 17px;
 }
 
 .nav-burger-line-2 {
-  top: 23px;
+  top: 25px;
 }
 
 .nav-burger-line-1.open {

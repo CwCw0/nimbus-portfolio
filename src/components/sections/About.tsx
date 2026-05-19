@@ -62,7 +62,7 @@ export default function About() {
 
               <p style={{ color: 'var(--fg-dim)', lineHeight: 1.7 }}>
                 I don&apos;t split attention across a dozen clients. When you work with me,
-                you get one developer&apos;s full focus — from strategy to deploy.
+                you get one developer&apos;s full focus, from strategy to deploy.
                 No project managers in between, no handoff gaps.
               </p>
 

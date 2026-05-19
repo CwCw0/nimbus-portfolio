@@ -190,9 +190,9 @@ export default function ShowcaseLayout({ data }: { data: ShowcaseData }) {
                   {choice.num}
                 </span>
                 <div className="flex-1">
-                  <h3 className="display-sm mb-3" style={{ fontSize: "clamp(18px, 2vw, 22px)" }}>
+                  <h2 className="display-sm mb-3" style={{ fontSize: "clamp(18px, 2vw, 22px)" }}>
                     {choice.title}
-                  </h3>
+                  </h2>
                   <p className="max-w-150 font-body text-[15px] leading-[1.75] text-(--fg-dim)">
                     {choice.body}
                   </p>
@@ -219,9 +219,9 @@ export default function ShowcaseLayout({ data }: { data: ShowcaseData }) {
                 key={ux.title}
                 className="flex flex-col gap-4 border border-(--line) p-8 transition-colors hover:border-(--accent)/30"
               >
-                <h3 className="font-display text-lg tracking-[-0.5px] text-(--fg)">
+                <h2 className="font-display text-lg tracking-[-0.5px] text-(--fg)">
                   {ux.title}
-                </h3>
+                </h2>
                 <p className="font-body text-[14px] leading-[1.7] text-(--fg-dim)">
                   {ux.body}
                 </p>
