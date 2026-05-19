@@ -948,41 +948,25 @@ main, footer, nav, header {
   -webkit-tap-highlight-color: transparent;
 }
 
-.nav-brand-nimbus {
-  position: relative;
-  display: inline-block;
+.nav-brand-mark {
+  display: block;
+  width: auto;
+  height: 14px;
 }
 
-.nav-brand-text {
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  color: var(--fg);
-  line-height: 1;
-}
-
-.nav-brand-slash {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.nav-brand-slash line {
-  transition: stroke-dashoffset 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+.nav-brand-mark line {
+  transition: stroke-dashoffset 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: drop-shadow(0 0 4px var(--accent-glow));
 }
 
 @media (hover: hover) {
-  .nav-brand:hover .nav-brand-slash line,
-  .nav-brand-slash line.slashed {
+  .nav-brand:hover .nav-brand-mark line,
+  .nav-brand-mark line.slashed {
     stroke-dashoffset: 0;
   }
 }
 
-.nav-brand-slash line.slashed {
+.nav-brand-mark line.slashed {
   stroke-dashoffset: 0;
 }
 

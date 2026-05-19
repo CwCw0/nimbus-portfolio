@@ -86,20 +86,33 @@ export default function Nav() {
         <div className="nav-inner container">
           {/* ── Brand ── */}
           <Link href="/" className="nav-brand" aria-label="Nimbus Forma Studio — Home">
-            <span className="nav-brand-nimbus">
-              <span className="nav-brand-text">NIMBUS</span>
-              <svg className="nav-brand-slash" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <line
-                  ref={slashRef}
-                  x1="0" y1="100" x2="100" y2="0"
-                  stroke="var(--accent)"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeDasharray="142"
-                  strokeDashoffset="142"
-                />
-              </svg>
-            </span>
+            <svg className="nav-brand-mark" viewBox="0 0 520 80" fill="none" aria-hidden="true">
+              <text
+                x="0"
+                y="58"
+                fill="var(--fg)"
+                style={{
+                  fontFamily: 'var(--f-display)',
+                  fontSize: '62px',
+                  fontWeight: 700,
+                  letterSpacing: '0.04em',
+                }}
+              >
+                NIMBUS
+              </text>
+              <line
+                ref={slashRef}
+                x1="10"
+                y1="62"
+                x2="500"
+                y2="6"
+                stroke="var(--accent)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeDasharray="520"
+                strokeDashoffset="520"
+              />
+            </svg>
             <span className="nav-brand-sub">Forma Studio</span>
           </Link>
 
