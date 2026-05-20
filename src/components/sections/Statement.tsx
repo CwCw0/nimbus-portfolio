@@ -3,11 +3,11 @@
 import RevealLine from '@/components/ui/RevealLine';
 
 const lines = [
-  { text: 'We study the problem.', serif: false },
-  { text: 'We design the system.', serif: true },
-  { text: 'We build the solution.', serif: false },
-  { text: 'We measure the result.', serif: true },
-  { text: 'Every pixel earns its place.', serif: false },
+  { text: 'We build for clients.', serif: false },
+  { text: 'We ship our own products.', serif: true },
+  { text: 'We use what we build.', serif: false },
+  { text: 'Then we build it for you.', serif: true },
+  { text: 'Every system earns its place.', serif: false },
 ];
 
 export default function Statement() {

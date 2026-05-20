@@ -50,9 +50,9 @@ export default function Hero() {
         <div className="hero-meta">
           <FadeIn delay={300}>
             <p style={{ color: 'var(--fg-dim)', maxWidth: 520, lineHeight: 1.7 }}>
-              Nimbus Forma Studio is a one-person design and engineering practice.
-              From strategy and branding through design, development, and deployment.
-              Websites, business tools, AI systems, and the operations that connect them.
+              Nimbus Forma Studio builds for clients and ships its own products.
+              Websites, business systems, AI automation. From strategy to deployment.
+              If I build it for you, I&apos;ve already built it for myself first.
             </p>
           </FadeIn>
           <FadeIn delay={450}>
