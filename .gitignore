@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Internal tooling
+.claude/
+.mcp.json
+CLAUDE.md
+AGENTS.md
+_bmad/
+_bmad-output/
+design-artifacts/
+
+# Project management (internal)
+PROJECT_TRACKER.md
+PRODUCT.md
+DESIGN.md
