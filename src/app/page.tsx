@@ -7,6 +7,7 @@ import About from "@/components/sections/About";
 import Process from "@/components/sections/Process";
 import VaultPreview from "@/components/sections/VaultPreview";
 import BlogPreview from "@/components/sections/BlogPreview";
+import ChangelogPreview from "@/components/sections/ChangelogPreview";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function HomePage() {
@@ -21,6 +22,7 @@ export default function HomePage() {
       <MarqueeAttention />
       <Process />
       <VaultPreview />
+      <ChangelogPreview />
       <BlogPreview />
       <ContactSection />
     </>
