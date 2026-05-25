@@ -183,62 +183,35 @@ const sections = [
   },
   {
     id: "third-parties",
-    title: "5. Third-Party Services",
+    title: "5. Third-Party Data Sharing",
     content: (
       <>
         <p>
-          We share personal data only with the following service providers, each
-          necessary for the operation of this website:
+          We <strong>never sell</strong> your personal data. We only share your
+          information with trusted third parties where necessary to operate this
+          website:
         </p>
-        <div className="privacy-table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Service</th>
-                <th>Purpose</th>
-                <th>Data Shared</th>
-                <th>Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Formspree</td>
-                <td>Form processing</td>
-                <td>Form submissions (name, email, message)</td>
-                <td>United States</td>
-              </tr>
-              <tr>
-                <td>Vercel</td>
-                <td>Hosting &amp; analytics</td>
-                <td>Anonymised usage data</td>
-                <td>United States</td>
-              </tr>
-              <tr>
-                <td>Fontshare</td>
-                <td>Font delivery</td>
-                <td>IP address (standard HTTP)</td>
-                <td>India</td>
-              </tr>
-              <tr>
-                <td>Google Fonts</td>
-                <td>Font delivery</td>
-                <td>IP address (standard HTTP)</td>
-                <td>United States</td>
-              </tr>
-              <tr>
-                <td>Calendly</td>
-                <td>Meeting scheduling</td>
-                <td>As provided by you during booking</td>
-                <td>United States</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ul>
+          <li>
+            <strong>Form processing service</strong> — to receive and deliver
+            your contact enquiries and waitlist signups to us
+          </li>
+          <li>
+            <strong>Website hosting &amp; analytics</strong> — to serve this
+            website and collect anonymised, aggregated performance data
+          </li>
+          <li>
+            <strong>Scheduling service</strong> — if you book a strategy call,
+            you are redirected to a third-party scheduling platform. Any data
+            you provide during booking is governed by that platform&apos;s own
+            privacy policy.
+          </li>
+        </ul>
         <p>
-          As these services are located outside of Malaysia, your data may be
-          transferred internationally. Each provider maintains their own privacy
-          and security standards. We have assessed these providers and believe
-          they maintain adequate safeguards for the protection of your data.
+          Some of these services may process your data outside of Malaysia. We
+          have assessed each provider and believe they maintain adequate
+          safeguards for the protection of your data in accordance with the
+          PDPA.
         </p>
       </>
     ),
@@ -367,19 +340,6 @@ const sections = [
           <a href="mailto:heyitsnimbus@gmail.com" className="link-underline">
             heyitsnimbus@gmail.com
           </a>
-        </p>
-        <p>
-          If you are unsatisfied with our response, you may lodge a complaint
-          with the{" "}
-          <a
-            href="https://www.pdp.gov.my"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-underline"
-          >
-            Jabatan Perlindungan Data Peribadi (JPDP)
-          </a>
-          , the Personal Data Protection Department of Malaysia.
         </p>
       </>
     ),
