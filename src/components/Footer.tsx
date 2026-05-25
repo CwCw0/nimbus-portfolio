@@ -224,7 +224,13 @@ export default function Footer() {
 
       {/* ═══ 5. Legal row ═══ */}
       <div className="footer-legal container">
-        <span>&copy; 2026 Nimbus Forma Studio &middot; SSM 202603095969</span>
+        <span>
+          &copy; 2026 Nimbus Forma Studio &middot; SSM 202603095969
+          &nbsp;&middot;&nbsp;
+          <Link href="/privacy" className="link-underline" style={{ color: 'inherit' }}>
+            Privacy
+          </Link>
+        </span>
         <span>One project at a time.</span>
       </div>
     </footer>
