@@ -7,7 +7,7 @@ export const claudeSeriesPosts: BlogPost[] = [
   {
     slug: "i-built-a-business-os-before-my-first-client",
     tag: "Development",
-    date: "May 27, 2026",
+    date: "Apr 28, 2026",
     readTime: "12 min read",
     title: "I Built a Business OS Before I Took My First Client.",
     excerpt:
@@ -161,7 +161,7 @@ export const claudeSeriesPosts: BlogPost[] = [
   {
     slug: "shipping-ecommerce-as-solo-developer",
     tag: "Development",
-    date: "Jun 3, 2026",
+    date: "May 5, 2026",
     readTime: "14 min read",
     title: "Shipping a Full E-Commerce System as a Solo Developer.",
     excerpt:
@@ -320,7 +320,7 @@ export const claudeSeriesPosts: BlogPost[] = [
   {
     slug: "14-repos-741-leaked-files",
     tag: "Development",
-    date: "Jun 10, 2026",
+    date: "May 12, 2026",
     readTime: "10 min read",
     title: "14 Repositories, 741 Leaked Files, and Why Developer Hygiene Matters.",
     excerpt:
@@ -462,7 +462,7 @@ export const claudeSeriesPosts: BlogPost[] = [
   {
     slug: "security-isnt-a-feature-its-the-baseline",
     tag: "Development",
-    date: "Jun 17, 2026",
+    date: "May 19, 2026",
     readTime: "11 min read",
     title: "Security Isn't a Feature. It's the Baseline.",
     excerpt:
@@ -608,7 +608,7 @@ export const claudeSeriesPosts: BlogPost[] = [
   {
     slug: "the-difference-between-vibe-coding-and-building",
     tag: "Process",
-    date: "Jun 24, 2026",
+    date: "May 23, 2026",
     readTime: "13 min read",
     title: "The Difference Between Vibe Coding and Building.",
     excerpt:
@@ -778,7 +778,7 @@ export const claudeSeriesPosts: BlogPost[] = [
   {
     slug: "what-anthropic-got-right-with-claude-code",
     tag: "Development",
-    date: "Jul 1, 2026",
+    date: "May 27, 2026",
     readTime: "12 min read",
     title: "What Anthropic Got Right with Claude Code.",
     excerpt:
