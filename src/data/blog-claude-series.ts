@@ -899,7 +899,7 @@ export const claudeSeriesPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "I also write more documentation than I used to. Not because I enjoy it — because Claude Code is significantly better when it has documentation to work from. Writing a clear architecture document before implementation isn't just good practice anymore. It's a direct input to better AI output. The incentives aligned: good process produces good AI output produces good software. The developers who resisted documentation now have a selfish reason to write it.",
+        text: "I also write more documentation than I used to. Partly because I genuinely enjoy writing documentation — structuring knowledge, making complex systems legible, creating artifacts that make the next person's job easier. But Claude Code turned that preference into a superpower. The documentation I write isn't just for future maintainers anymore — it's a direct input to better AI output. An architecture document I'd have written anyway now also serves as context that makes Claude produce dramatically better code. The incentives aligned perfectly: good process produces good AI output produces good software. For developers who've always resisted documentation, Claude Code gives them a selfish reason to start. For me, it validated something I was already doing.",
       },
       {
         type: "p",
