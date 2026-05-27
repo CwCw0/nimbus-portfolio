@@ -15,9 +15,14 @@ export default function BlogPageContent() {
     return ['All Posts', ...tags];
   }, []);
 
-  const filtered = active === 'All Posts'
+  const baseFiltered = active === 'All Posts'
     ? blogPosts
     : blogPosts.filter((p) => p.tag === active);
+
+  // Pinned posts always first, then the rest in original order
+  const pinned = baseFiltered.filter((p) => p.pinned);
+  const unpinned = baseFiltered.filter((p) => !p.pinned);
+  const filtered = [...pinned, ...unpinned];
 
   return (
     <>
@@ -73,8 +78,23 @@ export default function BlogPageContent() {
                   <div className="blog-row-date flex flex-col gap-(--sp-3)">
                     <span
                       className="mono"
-                      style={{ color: 'var(--fg-faint)' }}
+                      style={{ color: 'var(--fg-faint)', display: 'flex', alignItems: 'center', gap: '8px' }}
                     >
+                      {post.pinned && (
+                        <span
+                          className="mono"
+                          style={{
+                            fontSize: '10px',
+                            letterSpacing: '0.08em',
+                            padding: '2px 8px',
+                            borderRadius: 'var(--r-pill)',
+                            border: '1px solid var(--accent)',
+                            color: 'var(--accent)',
+                          }}
+                        >
+                          PINNED
+                        </span>
+                      )}
                       {post.date}
                     </span>
                     <span

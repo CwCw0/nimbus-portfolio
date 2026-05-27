@@ -610,6 +610,7 @@ export const claudeSeriesPosts: BlogPost[] = [
     tag: "Process",
     date: "May 23, 2026",
     readTime: "13 min read",
+    pinned: true,
     title: "The Difference Between Vibe Coding and Building.",
     excerpt:
       "Vibe coding is asking AI to build something and hoping it works. Building is knowing what you want, understanding why, and using AI to get there faster. The gap between them is everything.",
@@ -780,6 +781,7 @@ export const claudeSeriesPosts: BlogPost[] = [
     tag: "Development",
     date: "May 27, 2026",
     readTime: "12 min read",
+    pinned: true,
     title: "What Anthropic Got Right with Claude Code.",
     excerpt:
       "An honest review from a developer who built an entire business on it. What works, what I've learned, where it struggles, and why the MCP ecosystem changes everything.",

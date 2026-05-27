@@ -13,6 +13,7 @@ export type BlogPost = {
     items?: string[];
   }[];
   relatedSlugs: string[];
+  pinned?: boolean;
 };
 
 import { claudeSeriesPosts } from "./blog-claude-series";
