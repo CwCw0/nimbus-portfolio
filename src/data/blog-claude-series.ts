@@ -13,7 +13,7 @@ export const claudeSeriesPosts: BlogPost[] = [
     excerpt:
       "Most freelancers cobble together 8 SaaS tools and pray they talk to each other. I built Forge — a system that runs my entire operation — before I signed a single contract.",
     image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+      "/opengraph-image",
     tocItems: [
       "The Problem with Duct Tape",
       "Designing the Architecture First",
@@ -167,7 +167,7 @@ export const claudeSeriesPosts: BlogPost[] = [
     excerpt:
       "A real client. Real money. Real deadlines. How one developer ships what normally takes a team — not by letting AI do everything, but by knowing what to delegate and what to own.",
     image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
+      "/opengraph-image",
     tocItems: [
       "The Brief",
       "The Scope Nobody Warns You About",
@@ -326,7 +326,7 @@ export const claudeSeriesPosts: BlogPost[] = [
     excerpt:
       "I was building fast. Shipping fast. Then I checked what was actually public on GitHub and found my entire internal process exposed across 14 repositories.",
     image:
-      "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&q=80",
+      "/opengraph-image",
     tocItems: [
       "Building Fast, Forgetting Fundamentals",
       "The Audit",
@@ -468,7 +468,7 @@ export const claudeSeriesPosts: BlogPost[] = [
     excerpt:
       "Every week I see another vibe-coded app with no rate limiting, no CSP headers, and env files committed to GitHub. Security isn't Phase 2. It's line one.",
     image:
-      "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&q=80",
+      "/opengraph-image",
     tocItems: [
       "The Vibe Coding Problem",
       "What I Ship by Default",
@@ -615,7 +615,7 @@ export const claudeSeriesPosts: BlogPost[] = [
     excerpt:
       "Vibe coding is asking AI to build something and hoping it works. Building is knowing what you want, understanding why, and using AI to get there faster. The gap between them is everything.",
     image:
-      "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&q=80",
+      "/opengraph-image",
     tocItems: [
       "What Vibe Coding Looks Like",
       "What Building Looks Like",
@@ -786,7 +786,7 @@ export const claudeSeriesPosts: BlogPost[] = [
     excerpt:
       "An honest review from a developer who built an entire business on it. What works, what I've learned, where it struggles, and why the MCP ecosystem changes everything.",
     image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+      "/opengraph-image",
     tocItems: [
       "The Context",
       "What Works Brilliantly",
