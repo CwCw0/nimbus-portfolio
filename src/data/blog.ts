@@ -15,7 +15,10 @@ export type BlogPost = {
   relatedSlugs: string[];
 };
 
+import { claudeSeriesPosts } from "./blog-claude-series";
+
 export const blogPosts: BlogPost[] = [
+  ...claudeSeriesPosts,
   {
     slug: "you-dont-need-thousands-to-build-with-ai",
     tag: "Development",
