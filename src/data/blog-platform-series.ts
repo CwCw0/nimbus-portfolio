@@ -350,7 +350,7 @@ export const platformSeriesPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "My portfolio site scores 90+ on Lighthouse for performance, accessibility, best practices, and SEO. Not because I spent weeks optimising — because Next.js makes the defaults good. Image optimisation with next/image. Automatic code splitting per route. Font optimisation with next/font. Static generation for pages that don't need dynamic data. These are framework-level decisions that benefit every page without per-page effort.",
+        text: "My portfolio site scores 100 on Lighthouse for Best Practices and SEO, with strong accessibility scores. Performance on mobile sits around 70 — honest cost of heavy GSAP animations and client-side JavaScript on an animation-driven showcase site. The non-animated pages (blog, privacy, changelog) score higher because they ship less JavaScript. Next.js makes the defaults good: image optimisation with next/image, automatic code splitting per route, font optimisation with next/font, static generation for pages that don't need dynamic data. These are framework-level decisions that benefit every page without per-page effort.",
       },
       {
         type: "p",
