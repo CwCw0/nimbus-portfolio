@@ -16,6 +16,8 @@ const toneGradients: Record<string, string> = {
 };
 
 export default function Work() {
+  const featured = projects.slice(0, 2);
+
   return (
     <section
       id="work"
@@ -28,43 +30,34 @@ export default function Work() {
           <span className="section-label">Case studies · 2024–2026</span>
         </div>
 
-        {/* Heading */}
-        <RevealLine>
-          <h2 className="display-lg">Case Studies.</h2>
-        </RevealLine>
-
-        {/* Pill grid */}
+        {/* Heading + CTA */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'baseline',
+            marginBottom: 'var(--sp-12)',
+            flexWrap: 'wrap',
             gap: 'var(--sp-4)',
-            marginTop: 'var(--sp-12)',
-            marginBottom: 'var(--sp-16)',
           }}
-          className="work-pill-grid"
         >
-          {projects.map((p) => (
-            <PillCard key={p.id} project={p} />
-          ))}
+          <RevealLine>
+            <h2 className="display-lg">Case Studies.</h2>
+          </RevealLine>
+          <Link
+            href="/work"
+            className="link-underline"
+            style={{ color: 'var(--accent)', fontFamily: 'var(--f-body)', fontSize: 'var(--t-body-sm)' }}
+          >
+            View all projects →
+          </Link>
         </div>
 
-        {/* Stacked case studies */}
-        {projects.map((p, idx) => (
-          <CaseStudyRow key={p.id} project={p} index={idx} total={projects.length} />
+        {/* Featured case studies only */}
+        {featured.map((p, idx) => (
+          <CaseStudyRow key={p.id} project={p} index={idx} total={featured.length} />
         ))}
-
-        {/* Bottom CTA */}
-        <FadeIn>
-          <div style={{ marginTop: 'var(--sp-16)', display: 'flex', justifyContent: 'center' }}>
-            <Link href="/work" className="btn ghost">
-              View all projects <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
-        </FadeIn>
       </div>
-
-      {/* responsive styles in globals.css under .work-pill-grid and .case-study-row */}
     </section>
   );
 }
@@ -135,7 +128,7 @@ function CaseStudyRow({
     <div
       className="case-study-row"
       style={{
-        minHeight: 'var(--case-study-min-height, 100vh)',
+        minHeight: 'auto',
         display: 'grid',
         gridTemplateColumns: even ? '1fr 1fr' : '1fr 1fr',
         gap: 'var(--sp-12)',
