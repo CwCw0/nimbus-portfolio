@@ -79,10 +79,25 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
 
-        {/* Fontshare fonts: Cabinet Grotesk, Switzer, Fragment Mono */}
+        {/* Fontshare fonts: Cabinet Grotesk, Switzer, Fragment Mono — preloaded, reduced weights */}
+        <link
+          rel="preconnect"
+          href="https://api.fontshare.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://cdn.fontshare.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="style"
+          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,600,700&f[]=switzer@400,500&f[]=fragment-mono@400&display=swap"
+        />
         <link
           rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@100,200,300,400,500,600,700,800,900&f[]=switzer@100,200,300,400,500,600,700,800,900&f[]=fragment-mono@300,400,500,700&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,600,700&f[]=switzer@400,500&f[]=fragment-mono@400&display=swap"
         />
 
         {/* Geo targeting — Malaysia primary, global reach */}

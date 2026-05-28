@@ -1,13 +1,11 @@
 import Hero from "@/components/sections/Hero";
 import Statement from "@/components/sections/Statement";
-import { MarqueeDesign, MarqueeAttention } from "@/components/sections/MarqueeStrip";
+import { MarqueeDesign } from "@/components/sections/MarqueeStrip";
 import Services from "@/components/sections/Services";
 import Work from "@/components/sections/Work";
-import About from "@/components/sections/About";
-import Process from "@/components/sections/Process";
-import VaultPreview from "@/components/sections/VaultPreview";
-import BlogPreview from "@/components/sections/BlogPreview";
 import ChangelogPreview from "@/components/sections/ChangelogPreview";
+import VaultPreview from "@/components/sections/VaultPreview";
+import About from "@/components/sections/About";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function HomePage() {
@@ -18,12 +16,9 @@ export default function HomePage() {
       <MarqueeDesign />
       <Services />
       <Work />
-      <About />
-      <MarqueeAttention />
-      <Process />
-      <VaultPreview />
       <ChangelogPreview />
-      <BlogPreview />
+      <VaultPreview />
+      <About />
       <ContactSection />
     </>
   );
