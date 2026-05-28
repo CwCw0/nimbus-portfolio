@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import AmbientWaves from "@/components/AmbientWaves";
-import Cursor from "@/components/ui/Cursor";
-import PageLoader from "@/components/PageLoader";
+import ClientShell from "@/components/ClientShell";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -182,16 +179,13 @@ export default function RootLayout({
           Skip to content
         </a>
 
-        <PageLoader />
-        <AmbientWaves lineCount={18} />
-        <Cursor />
-        <SmoothScroll>
+        <ClientShell>
           <Nav />
           <main id="main-content" style={{ position: 'relative', zIndex: 1 }}>
             {children}
           </main>
           <Footer />
-        </SmoothScroll>
+        </ClientShell>
         <Analytics />
       </body>
     </html>
