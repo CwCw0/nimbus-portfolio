@@ -17,8 +17,10 @@ export type BlogPost = {
 };
 
 import { claudeSeriesPosts } from "./blog-claude-series";
+import { platformSeriesPosts } from "./blog-platform-series";
 
 export const blogPosts: BlogPost[] = [
+  ...platformSeriesPosts,
   ...claudeSeriesPosts,
   {
     slug: "you-dont-need-thousands-to-build-with-ai",
