@@ -18,8 +18,10 @@ export type BlogPost = {
 
 import { claudeSeriesPosts } from "./blog-claude-series";
 import { platformSeriesPosts } from "./blog-platform-series";
+import { langchainPost } from "./blog-langchain-post";
 
 export const blogPosts: BlogPost[] = [
+  ...langchainPost,
   ...platformSeriesPosts,
   ...claudeSeriesPosts,
   {
