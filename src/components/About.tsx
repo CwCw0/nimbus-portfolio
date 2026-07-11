@@ -280,7 +280,7 @@ export default function About() {
                   WHAT THAT MEANS
                 </span>
                 <div className="mt-4 flex flex-col gap-3">
-                  {["Direct communication, no middlemen", "Weekly progress you can see", "Code you own, fully documented"].map((point) => (
+                  {["Direct communication, no middlemen", "Weekly progress you can see", "Code you own, fully documented", "Available for remote contract work"].map((point) => (
                     <div key={point} className="flex items-center gap-3">
                       <div className="h-1 w-1 rounded-full bg-(--color-accent) shrink-0" />
                       <span className="font-body text-sm text-(--color-text-dim)">{point}</span>
@@ -312,21 +312,23 @@ export default function About() {
           {/* Right column — wider, body text (60%) */}
           <div className="about-text-col flex flex-1 flex-col gap-8">
             <p className="about-para font-body text-lg leading-[1.8] text-(--color-text-dim)">
-              Developer, designer, and founder of Nimbus Forma Studio. I
-              study the systems, the design, the business, and the user
-              before writing a single line of code.
+              I build the digital systems that run businesses — website,
+              operations layer, and the AI that ties them together. Based
+              in KL. Fully remote.
             </p>
 
             <p className="about-para font-body text-base leading-[1.8] text-(--color-text-dim)">
-              Every project gets obsessive attention: performance tuning,
-              design that communicates, and code built to outlast its
-              framework. I work directly with founders and small teams who
-              want a partner, not a vendor.
+              Every project starts with the business, not the brief. I
+              map how the operation actually runs, then build the system
+              that replaces the spreadsheets and group chats. The result
+              is code that outlasts its framework and a site that's part
+              of how the business works — not just how it looks.
             </p>
 
             <p className="about-para font-body text-base leading-[1.8] text-(--color-text-dim)">
-              One project at a time. Full attention. No split focus,
-              no account managers, no handoffs.
+              I work directly with business owners who want a builder, not
+              an agency. One project at a time. No account managers, no
+              handoffs.
             </p>
 
             {/* Tech pills */}
