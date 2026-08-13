@@ -352,38 +352,6 @@ export default function AboutPageContent() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section
-        style={{ padding: "var(--section-gap) 0", background: "transparent" }}
-      >
-        <div className="container" style={{ textAlign: "center" }}>
-          <FadeIn>
-            <RevealLine>
-              <h2 className="display-lg">
-                Let&apos;s build something together.
-              </h2>
-            </RevealLine>
-            <p
-              style={{
-                color: "var(--fg-dim)",
-                marginTop: "var(--sp-6)",
-                marginBottom: "var(--sp-10)",
-                maxWidth: 500,
-                marginInline: "auto",
-                lineHeight: 1.7,
-              }}
-            >
-              Always open to collaborating on interesting projects and new
-              opportunities.
-            </p>
-            <Magnetic>
-              <Link href="/contact" className="btn">
-                Start a conversation &rarr;
-              </Link>
-            </Magnetic>
-          </FadeIn>
-        </div>
-      </section>
     </>
   );
 }

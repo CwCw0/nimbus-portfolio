@@ -968,35 +968,6 @@ export default function CaseStudyContent({
 
           <PrevNextNav nextProject={nextProject} prevProject={prevProject} />
 
-          {/* ── CTA ── */}
-          <section
-            style={{
-              borderTop: '1px solid var(--line)',
-              padding: 'var(--sp-24) 0',
-              textAlign: 'center',
-            }}
-          >
-            <div className="container">
-              <FadeIn>
-                <p
-                  style={{
-                    fontFamily: 'var(--f-serif)',
-                    fontStyle: 'italic',
-                    fontSize: 'clamp(22px, 3vw, 32px)',
-                    lineHeight: 1.4,
-                    color: 'var(--fg-dim)',
-                    marginBottom: 'var(--sp-8)',
-                  }}
-                >
-                  Have a similar project?
-                </p>
-                <Link href="/contact" className="btn">
-                  Let&apos;s talk
-                </Link>
-              </FadeIn>
-            </div>
-          </section>
-
     </div>
   );
 }
