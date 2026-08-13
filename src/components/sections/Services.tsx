@@ -154,6 +154,36 @@ export default function Services() {
           })}
         </div>
 
+        {/* Inside every build — breadth without re-shelving */}
+        <FadeIn>
+          <div
+            style={{
+              marginTop: 'var(--sp-10)',
+              paddingTop: 'var(--sp-6)',
+              borderTop: '1px solid var(--line)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'baseline',
+              gap: 'var(--sp-3) var(--sp-4)',
+            }}
+          >
+            <span className="mono" style={{ color: 'var(--accent)' }}>
+              INSIDE EVERY BUILD —
+            </span>
+            <span
+              className="body-sm"
+              style={{
+                fontFamily: 'var(--f-serif)',
+                fontStyle: 'italic',
+                color: 'var(--fg-dim)',
+              }}
+            >
+              interface design &middot; UI/UX &middot; performance &middot; SEO-sound
+              structure &middot; security hardening &middot; documentation you own
+            </span>
+          </div>
+        </FadeIn>
+
         {/* Bottom CTA */}
         <FadeIn>
           <div style={{ marginTop: 'var(--sp-10)', display: 'flex', justifyContent: 'center' }}>
