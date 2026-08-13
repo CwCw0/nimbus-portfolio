@@ -70,8 +70,7 @@ export const bh88: CaseStudy = {
 
   closing: {
     body: "88 Badminton House is in final launch prep. The build is done and audited — what's left is on the client's side: payment gateway credentials and a domain. No live URL yet, and nothing above is live traffic or revenue.",
-    priceLine: "Projects like this start from RM 20,000.",
-    ctaLabel: "Start with a build plan",
+    ctaLabel: "Send a project brief",
     ctaHref: "/contact",
   },
 };

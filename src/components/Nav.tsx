@@ -10,7 +10,7 @@ import Magnetic from '@/components/ui/Magnetic';
 const NAV_LINKS = [
   { href: '/services', label: 'Services', sub: 'What I build' },
   { href: '/work', label: 'Work', sub: 'Projects & design lab' },
-  { href: '/vault', label: 'Vault', sub: 'Products we\'re building' },
+  { href: '/vault', label: 'Vault', sub: 'Products I\'m building' },
   { href: '/about', label: 'About', sub: 'The builder behind Nimbus' },
   { href: '/blog', label: 'Blog', sub: 'Thoughts on building' },
 ] as const;

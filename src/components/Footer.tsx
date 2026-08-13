@@ -19,6 +19,7 @@ const NAV_LINKS = [
 
 /* ── External links ── */
 const ELSEWHERE_LINKS = [
+  { href: 'https://www.upwork.com/freelancers/~018e3e05f351d165d4', label: 'Upwork' },
   { href: 'https://github.com/CwCw0', label: 'GitHub' },
   { href: '/contact', label: 'Send a project brief' },
 ];
@@ -107,18 +108,26 @@ export default function Footer() {
           <div className="footer-col">
             <span className="footer-col-title">Elsewhere</span>
             <ul className="footer-col-list">
-              {ELSEWHERE_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="footer-col-link link-underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {link.label} <span aria-hidden="true">↗</span>
-                  </a>
-                </li>
-              ))}
+              {ELSEWHERE_LINKS.map((link) =>
+                link.href.startsWith('http') ? (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      className="footer-col-link link-underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.label} <span aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ) : (
+                  <li key={link.href}>
+                    <Link href={link.href} className="footer-col-link link-underline">
+                      {link.label}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
           </div>
 

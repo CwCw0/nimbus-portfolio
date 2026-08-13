@@ -20,7 +20,7 @@ export const forge: CaseStudy = {
 
   heroImage: "/images/forge/dashboard.jpg",
   heroCaption:
-    "The daily command centre — today's three highest-priority sends, ranked and ready to act on. Client names and figures are anonymized for privacy; the interface and every number here are real, live output.",
+    "The daily command centre — today's three highest-priority sends, ranked and ready to act on. Client names and figures are anonymized for privacy; the interface and the workflow are real, in daily use.",
 
   story:
     "Forge exists because running a solo studio means the ball drops between client work, outreach, documents, and remembering what was promised to whom — and no off-the-shelf project tool talks to the others or knows the business. So Forge does both: one assistant with 60 tools across the whole operation, a knowledge graph that links every client, project, and decision, and a system prompt that refuses to invent a number it can't source from a tool call. It's not a product for sale — it's the system Nimbus runs on, and the same discipline goes into every client build.",
@@ -66,7 +66,7 @@ export const forge: CaseStudy = {
 
   closing: {
     body: "Forge isn't for sale — it's proof of how I build. If your business runs on spreadsheets and group chats and you want the same discipline in your own system:",
-    ctaLabel: "Start with a build plan",
+    ctaLabel: "Send a project brief",
     ctaHref: "/contact",
   },
 };

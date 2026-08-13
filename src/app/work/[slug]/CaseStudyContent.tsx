@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import RevealLine from '../../../components/ui/RevealLine';
 import FadeIn from '../../../components/ui/FadeIn';
 import { projects } from '../../../data/projects';
+import { UPWORK_PROFILE_URL } from '../../../data/site';
 import type { CaseStudy } from '../../../data/caseStudies';
 
 const toneGradients: Record<string, string> = {
@@ -420,10 +421,37 @@ function ProofCaseStudy({
                   {caseStudy.closing.priceLine}
                 </p>
               )}
-              <div style={{ marginTop: 'var(--sp-10)' }}>
-                <Link href={caseStudy.closing.ctaHref} className="btn">
-                  {caseStudy.closing.ctaLabel}
-                  <ArrowRight style={{ width: 15, height: 15, marginLeft: 8, display: 'inline' }} />
+              <div
+                style={{
+                  marginTop: 'var(--sp-10)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--sp-6)',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <a
+                  href={UPWORK_PROFILE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn"
+                >
+                  Hire me on Upwork
+                  <ArrowUpRight style={{ width: 15, height: 15, marginLeft: 8, display: 'inline' }} />
+                </a>
+                <Link
+                  href={caseStudy.closing.ctaHref}
+                  className="body-sm group"
+                  style={{
+                    color: 'var(--fg-dim)',
+                    textDecoration: 'none',
+                    borderBottom: '1px solid var(--line-strong)',
+                    paddingBottom: 2,
+                  }}
+                >
+                  <span className="group-hover:text-(--accent-2) transition-colors duration-300">
+                    Or {caseStudy.closing.ctaLabel.toLowerCase()} →
+                  </span>
                 </Link>
               </div>
             </FadeIn>

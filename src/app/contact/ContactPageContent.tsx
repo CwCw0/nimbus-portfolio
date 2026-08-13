@@ -235,8 +235,8 @@ export default function ContactPageContent() {
 
                   {/* 01 Name */}
                   <div className="float-field">
-                    <input type="text" name="name" placeholder=" " required />
-                    <label>
+                    <input type="text" id="cf-name" name="name" placeholder=" " required />
+                    <label htmlFor="cf-name">
                       <span className="mono" style={{ color: 'var(--fg-faint)', marginRight: 8 }}>
                         01
                       </span>
@@ -246,8 +246,8 @@ export default function ContactPageContent() {
 
                   {/* 02 Email */}
                   <div className="float-field">
-                    <input type="email" name="email" placeholder=" " required />
-                    <label>
+                    <input type="email" id="cf-email" name="email" placeholder=" " required />
+                    <label htmlFor="cf-email">
                       <span className="mono" style={{ color: 'var(--fg-faint)', marginRight: 8 }}>
                         02
                       </span>
@@ -257,7 +257,7 @@ export default function ContactPageContent() {
 
                   {/* 03 Project type */}
                   <div className="float-field">
-                    <select name="projectType" defaultValue="" required>
+                    <select id="cf-type" name="projectType" defaultValue="" required>
                       <option value="" disabled>
                         Select a type
                       </option>
@@ -267,7 +267,7 @@ export default function ContactPageContent() {
                         </option>
                       ))}
                     </select>
-                    <label>
+                    <label htmlFor="cf-type">
                       <span className="mono" style={{ color: 'var(--fg-faint)', marginRight: 8 }}>
                         03
                       </span>
@@ -277,7 +277,7 @@ export default function ContactPageContent() {
 
                   {/* 04 Budget */}
                   <div className="float-field">
-                    <select name="budget" defaultValue="" required>
+                    <select id="cf-budget" name="budget" defaultValue="" required>
                       <option value="" disabled>
                         Select a range
                       </option>
@@ -287,7 +287,7 @@ export default function ContactPageContent() {
                         </option>
                       ))}
                     </select>
-                    <label>
+                    <label htmlFor="cf-budget">
                       <span className="mono" style={{ color: 'var(--fg-faint)', marginRight: 8 }}>
                         04
                       </span>
@@ -297,8 +297,8 @@ export default function ContactPageContent() {
 
                   {/* 05 Details */}
                   <div className="float-field">
-                    <textarea name="details" placeholder=" " rows={4} required />
-                    <label>
+                    <textarea id="cf-details" name="details" placeholder=" " rows={4} required />
+                    <label htmlFor="cf-details">
                       <span className="mono" style={{ color: 'var(--fg-faint)', marginRight: 8 }}>
                         05
                       </span>
@@ -312,9 +312,10 @@ export default function ContactPageContent() {
                       type="submit"
                       className="btn"
                       style={{ width: '100%', justifyContent: 'center' }}
-                      disabled={submitState !== 'idle'}
+                      disabled={submitState === 'sending' || submitState === 'sent'}
                     >
-                      {submitState === 'idle' && 'Send message \u2197'}
+                      {(submitState === 'idle' || submitState === 'error') &&
+                        'Send message \u2197'}
                       {submitState === 'sending' && (
                         <span
                           className="submit-spinner"
@@ -329,9 +330,28 @@ export default function ContactPageContent() {
                         />
                       )}
                       {submitState === 'sent' && 'Sent \u00b7 thank you'}
-                      {submitState === 'error' && 'Something went wrong. Try again'}
                     </button>
                   </Magnetic>
+
+                  {/* Status announcement \u2014 visible + screen-reader */}
+                  <p
+                    role="status"
+                    aria-live="polite"
+                    className="body-sm"
+                    style={{
+                      margin: 0,
+                      minHeight: '1.4em',
+                      color:
+                        submitState === 'error'
+                          ? '#fbbf24'
+                          : 'var(--fg-dim)',
+                    }}
+                  >
+                    {submitState === 'sent' &&
+                      'Sent. You\u2019ll have a written build plan within 48 hours.'}
+                    {submitState === 'error' &&
+                      'That didn\u2019t send \u2014 nothing was lost. Check your connection and press Send again.'}
+                  </p>
                 </form>
               </div>
             </FadeIn>

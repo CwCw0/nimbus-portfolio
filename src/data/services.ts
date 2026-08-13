@@ -58,11 +58,11 @@ export const services: Service[] = [
 export const faqItems = [
   {
     q: 'How much does a project cost?',
-    a: 'It depends on what you need. A website starts around RM 6,000. A website with a business system behind it — inventory, orders, dashboards, AI — starts at RM 18,000 and usually lands between RM 20,000 and RM 40,000. Larger multi-module builds go higher. Message me with what is slowing your business down and I will send a detailed quote within 48 hours. No call required.',
+    a: 'It depends on what you need. Dashboards start from $2,000, AI assistants and workflow automation from $1,500 — matching my published Upwork catalog. Multi-module systems are quoted individually, from $12,000. In Malaysia? See /malaysia for RM pricing. Message me with what is slowing your business down and I will send a written build plan within 48 hours. No call required.',
   },
   {
     q: 'Do you work with international clients?',
-    a: 'Yes. Based in KL, available worldwide. I communicate in English, adapt to your timezone, and price in your local currency. Malaysian clients pay in RM, international clients in USD.',
+    a: 'Yes. Based in KL, available worldwide. I communicate in English and adapt to your timezone. International clients pay in USD; Malaysian clients pay in RM (see /malaysia).',
   },
   {
     q: 'What tech stack do you use?',
@@ -78,7 +78,7 @@ export const faqItems = [
   },
   {
     q: 'What happens after launch?',
-    a: 'I offer ongoing care starting from RM 800/month. Security updates, performance monitoring, content changes, priority support. Your site doesn\'t get abandoned after launch.',
+    a: 'I offer ongoing care plans from $300/month, matching my Upwork catalog add-ons (Malaysian clients: see /malaysia). Security updates, performance monitoring, content changes, priority support. Your system doesn\'t get abandoned after launch.',
   },
   {
     q: 'Can you help with my existing website?',
