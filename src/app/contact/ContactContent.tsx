@@ -232,14 +232,15 @@ export default function ContactPage() {
                 <div className="relative">
                   <select id="contact-budget" name="budget" className="h-12 w-full appearance-none border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-body text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none transition-all">
                     <option>Select range...</option>
-                    <option>RM 1,000 – RM 3,000</option>
-                    <option>RM 3,000 – RM 6,000</option>
-                    <option>RM 6,000 – RM 12,000</option>
-                    <option>RM 12,000+</option>
-                    <option>$1k – $3k (USD)</option>
-                    <option>$3k – $5k (USD)</option>
-                    <option>$5k – $10k (USD)</option>
-                    <option>$10k+ (USD)</option>
+                    <option>RM 6,000 – RM 10,000</option>
+                    <option>RM 10,000 – RM 18,000</option>
+                    <option>RM 18,000 – RM 40,000</option>
+                    <option>RM 40,000+</option>
+                    <option>$1,500 – $3,500 (USD)</option>
+                    <option>$3,500 – $7,000 (USD)</option>
+                    <option>$7,000 – $12,000 (USD)</option>
+                    <option>$12,000+ (USD)</option>
+                    <option>Not sure yet</option>
                   </select>
                   <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--color-text-subtle)]" />
                 </div>

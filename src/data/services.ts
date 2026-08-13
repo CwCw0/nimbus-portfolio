@@ -87,7 +87,7 @@ export const services: Service[] = [
 export const faqItems = [
   {
     q: 'How much does a project cost?',
-    a: 'It depends on what you need. A website starts around RM 6,000. A full business system with admin dashboard and AI can go up to RM 60,000. Book a free 30-minute call, tell me what you need, and I\'ll send a detailed quote within 48 hours. No pressure, no obligation.',
+    a: 'It depends on what you need. A website starts around RM 6,000. A website with a business system behind it — inventory, orders, dashboards, AI — starts at RM 18,000 and usually lands between RM 20,000 and RM 40,000. Larger multi-module builds go higher. Message me with what is slowing your business down and I will send a detailed quote within 48 hours. No call required.',
   },
   {
     q: 'Do you work with international clients?',
@@ -107,7 +107,7 @@ export const faqItems = [
   },
   {
     q: 'What happens after launch?',
-    a: 'I offer ongoing maintenance starting from RM 500/month. Security updates, performance monitoring, content changes, priority support. Your site doesn\'t get abandoned after launch.',
+    a: 'I offer ongoing care starting from RM 800/month. Security updates, performance monitoring, content changes, priority support. Your site doesn\'t get abandoned after launch.',
   },
   {
     q: 'Can you help with my existing website?',
