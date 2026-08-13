@@ -8,9 +8,9 @@ export interface ProcessStep {
 export const processSteps: ProcessStep[] = [
   {
     n: '01',
-    kicker: '48hr turnaround · 1 call · No questionnaire',
+    kicker: '48hr turnaround · Fully async · No questionnaire',
     title: 'Five questions, not fifty.',
-    body: "I send you 5 targeted questions about your business, your customers, and what success looks like. We do one 30-minute call. You leave knowing exactly what you're getting, what it costs, and when it ships.",
+    body: "You send me what you're trying to run. I send back 5 targeted questions and, within 48 hours, a written build plan: exactly what you're getting, what it costs, and when it ships. No call required — unless you want one.",
   },
   {
     n: '02',

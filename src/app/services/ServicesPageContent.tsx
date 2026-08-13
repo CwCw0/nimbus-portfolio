@@ -35,9 +35,9 @@ export default function ServicesPageContent() {
                 fontSize: 'var(--t-body)',
               }}
             >
-              Websites, business tools, AI systems, and internal operations.
-              One builder, end to end. Each delivered with the same obsessive
-              attention to craft.
+              Internal dashboards, AI assistants, and workflow automation.
+              Custom apps and the websites that go with them. One builder,
+              end to end, with the same obsessive attention to craft.
             </p>
           </FadeIn>
         </div>
@@ -48,7 +48,7 @@ export default function ServicesPageContent() {
         <div className="container">
           <div className="section-head">
             <span className="section-index">01 / Services</span>
-            <span className="section-label">Five things &middot; done properly</span>
+            <span className="section-label">Three things &middot; done properly</span>
           </div>
 
           <div style={{ borderTop: '1px solid var(--line)' }}>
