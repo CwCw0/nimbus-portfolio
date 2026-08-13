@@ -6,18 +6,18 @@ import FadeIn from "@/components/ui/FadeIn";
 import Magnetic from "@/components/ui/Magnetic";
 
 const stack = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Tailwind CSS",
-  "Supabase",
-  "GSAP",
-  "Node.js",
-  "Python",
-  "Claude",
-  "Gemini",
-  "Vercel",
-  "Git",
+  { name: "Next.js", role: "Every site and system ships on it" },
+  { name: "React", role: "The component model under it all" },
+  { name: "TypeScript", role: "Strict mode, always" },
+  { name: "Tailwind CSS", role: "v4, tokens in CSS" },
+  { name: "Supabase", role: "Postgres, auth, RLS on every table" },
+  { name: "GSAP", role: "Scroll, reveal, and motion work" },
+  { name: "Node.js", role: "APIs, scripts, tooling" },
+  { name: "Python", role: "Automation and data work" },
+  { name: "Claude", role: "Pair-builder on every project" },
+  { name: "Gemini", role: "Runs Forge's assistant" },
+  { name: "Vercel", role: "Deploys, edge, previews" },
+  { name: "Git", role: "Small commits, honest history" },
 ];
 
 const journey = [
@@ -253,36 +253,125 @@ export default function AboutPageContent() {
             </h2>
           </RevealLine>
 
-          <FadeIn>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "var(--sp-3)",
-              }}
-            >
-              {stack.map((tech) => (
-                <span
-                  key={tech}
-                  style={{
-                    fontFamily: "var(--f-mono)",
-                    fontSize: "var(--t-mono)",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    padding: "8px 20px",
-                    borderRadius: "var(--r-pill)",
-                    border: "1px solid var(--line-strong)",
-                    color: "var(--fg-dim)",
-                    transition:
-                      "border-color 0.3s var(--ease-out), color 0.3s var(--ease-out)",
-                  }}
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </FadeIn>
+          <div className="stack-grid">
+            {stack.map((tech, i) => (
+              <FadeIn key={tech.name} delay={i * 50}>
+                <div className={`stack-cell ${i % 2 === 0 ? "acc-block" : "acc-serif"}`}>
+                  <span className="stack-index">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="stack-name">{tech.name}</span>
+                  <span className="stack-role">{tech.role}</span>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
+
+        <style jsx>{`
+          .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+          }
+          .stack-grid :global(> *) {
+            background: var(--bg, #0a0a0f);
+          }
+          .stack-cell {
+            background: transparent;
+            padding: var(--sp-8) var(--sp-6);
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp-2);
+            min-height: 128px;
+            cursor: default;
+            transition: background 0.4s var(--ease-out);
+          }
+          .stack-index {
+            font-family: var(--f-mono);
+            font-size: var(--t-mono);
+            letter-spacing: 0.14em;
+            color: var(--fg-faint);
+            transition: color 0.3s var(--ease-out);
+          }
+          .stack-name {
+            font-family: var(--f-display);
+            font-weight: 700;
+            font-size: clamp(18px, 1.8vw, 24px);
+            letter-spacing: -0.01em;
+            color: var(--fg-dim);
+            transition: color 0.3s var(--ease-out);
+            width: fit-content;
+            padding: 0 2px;
+          }
+          .stack-role {
+            font-family: var(--f-serif);
+            font-style: italic;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--fg-dim);
+            opacity: 0;
+            transform: translateY(5px);
+            transition:
+              opacity 0.35s var(--ease-out),
+              transform 0.35s var(--ease-out);
+            margin-top: auto;
+          }
+          .stack-cell:hover {
+            background: var(--accent-soft);
+          }
+          .stack-cell:hover .stack-index {
+            color: var(--accent);
+          }
+          .stack-cell:hover .stack-role {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          /* Two accent treatments, alternating — same system as the slides */
+          .acc-block:hover .stack-name {
+            color: var(--fg);
+            background: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent);
+          }
+          .acc-serif:hover .stack-name {
+            font-family: var(--f-serif);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--accent-2);
+          }
+          @media (max-width: 1000px) {
+            .stack-grid {
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
+          @media (max-width: 640px) {
+            .stack-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+            .stack-cell {
+              min-height: 104px;
+              padding: var(--sp-6) var(--sp-5);
+            }
+            .stack-role {
+              opacity: 1;
+              transform: none;
+            }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .stack-cell,
+            .stack-index,
+            .stack-name,
+            .stack-role {
+              transition: none;
+            }
+            .stack-role {
+              opacity: 1;
+              transform: none;
+            }
+          }
+        `}</style>
       </section>
 
       {/* ── Journey ── */}
