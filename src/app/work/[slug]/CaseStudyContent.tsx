@@ -91,7 +91,29 @@ function ProofCaseStudy({
         </FadeIn>
 
         <FadeIn>
-          <div style={{ marginBottom: 'var(--sp-4)' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--sp-5)',
+              flexWrap: 'wrap',
+              marginBottom: 'var(--sp-4)',
+            }}
+          >
+            {caseStudy.clientLogo && (
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>
+                <span className="mono" style={{ color: 'var(--fg-faint)', letterSpacing: '0.12em' }}>
+                  FOR
+                </span>
+                <Image
+                  src={caseStudy.clientLogo.src}
+                  alt={caseStudy.clientLogo.alt}
+                  width={Math.round(34 * (caseStudy.clientLogo.width / caseStudy.clientLogo.height))}
+                  height={34}
+                  style={{ opacity: 0.92 }}
+                />
+              </span>
+            )}
             <StatusChip caseStudy={caseStudy} />
           </div>
         </FadeIn>

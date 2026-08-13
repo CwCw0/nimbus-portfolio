@@ -4,6 +4,12 @@ export const bh88: CaseStudy = {
   slug: "88bh",
   status: "in-development",
   statusLabel: "IN FINAL LAUNCH PREP",
+  clientLogo: {
+    src: "/images/88bh/client-logo.png",
+    alt: "88 Badminton House",
+    width: 600,
+    height: 243,
+  },
   category: "Retail System",
   tags: ["Next.js 16", "Prisma 7", "Supabase Postgres", "Revenue Monster", "Resend"],
   title: "88 Badminton House — Retail Operating System",

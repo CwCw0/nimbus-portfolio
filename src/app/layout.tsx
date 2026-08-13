@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   description:
     "Nimbus Forma Studio is a creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
-  keywords: ["web design Malaysia", "freelance web developer KL", "website designer Kuala Lumpur", "Next.js developer Malaysia", "branding agency Malaysia", "UI/UX design", "AI tools", "web development", "React developer", "creative studio Malaysia", "Nimbus Forma Studio"],
+  keywords: ["internal ops dashboard", "AI knowledge assistant", "AI workflow automation", "business system builder Malaysia", "custom dashboard developer", "Next.js developer Malaysia", "freelance web developer KL", "web development", "AI integration", "Nimbus Forma Studio"],
   authors: [{ name: "Nimbus Forma Studio" }],
   creator: "Nimbus Forma Studio",
   metadataBase: new URL(siteUrl),
@@ -125,7 +125,7 @@ export default function RootLayout({
                   email: "heyitsnimbus@gmail.com",
                   sameAs: ["https://github.com/CwCw0"],
                   jobTitle: "Founder, Nimbus Forma Studio",
-                  knowsAbout: ["Web Development", "UI/UX Design", "Brand Identity", "AI Tools", "Next.js", "React", "TypeScript", "Tailwind CSS"],
+                  knowsAbout: ["Internal Ops Dashboards", "AI Knowledge Assistants", "AI Workflow Automation", "Web Development", "Next.js", "React", "TypeScript", "Supabase"],
                 },
                 {
                   "@type": "WebSite",
@@ -157,7 +157,7 @@ export default function RootLayout({
                     latitude: 3.1390,
                     longitude: 101.6869,
                   },
-                  serviceType: ["Web Design", "Web Development", "Brand Identity", "UI/UX Design", "AI Tools & Automation", "SEO", "Branding"],
+                  serviceType: ["Internal Ops Dashboard", "AI Knowledge Assistant", "AI Workflow Automation", "Web Development"],
                   founder: { "@id": `${siteUrl}/#person` },
                   sameAs: ["https://github.com/CwCw0"],
                 },

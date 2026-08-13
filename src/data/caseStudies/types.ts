@@ -30,6 +30,8 @@ export type CaseStudy = {
   status?: ProjectStatus;
   /** Overrides the status chip text when present (e.g. "IN FINAL LAUNCH PREP") */
   statusLabel?: string;
+  /** Client attribution rendered as "FOR {logo}" in the proof-format hero */
+  clientLogo?: { src: string; alt: string; width: number; height: number };
   /** Hero meta row — when present the template reads these instead of projects.ts */
   meta?: { type: string; stack: string; year: string };
   /** Single-paragraph story. Presence switches the page to the proof-format layout. */

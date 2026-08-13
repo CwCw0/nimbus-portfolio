@@ -19,7 +19,6 @@ const NAV_LINKS = [
 /* ── External links ── */
 const ELSEWHERE_LINKS = [
   { href: 'https://github.com/CwCw0', label: 'GitHub' },
-  { href: 'mailto:heyitsnimbus@gmail.com', label: 'Email' },
   { href: '/contact', label: 'Send a project brief' },
 ];
 
@@ -68,12 +67,10 @@ export default function Footer() {
         <FadeIn delay={360}>
           <Magnetic strength={0.2}>
             <a
-              href="https://calendly.com/heyitsnimbus/30min"
+              href="/contact"
               className="btn footer-cta-btn"
-              target="_blank"
-              rel="noopener noreferrer"
             >
-              Start a conversation <span aria-hidden="true">↗</span>
+              Start a conversation <span aria-hidden="true">→</span>
             </a>
           </Magnetic>
         </FadeIn>

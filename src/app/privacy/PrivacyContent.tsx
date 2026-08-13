@@ -60,29 +60,6 @@ const sections = [
           form.
         </p>
 
-        <h4>Booking</h4>
-        <p>
-          If you schedule a strategy call, you are redirected to{" "}
-          <a
-            href="https://calendly.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-underline"
-          >
-            Calendly
-          </a>
-          , a third-party scheduling service. Any data you provide during
-          booking is governed by{" "}
-          <a
-            href="https://calendly.com/privacy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-underline"
-          >
-            Calendly&apos;s Privacy Policy
-          </a>
-          .
-        </p>
       </>
     ),
   },
@@ -199,12 +176,6 @@ const sections = [
           <li>
             <strong>Website hosting &amp; analytics</strong> — to serve this
             website and collect anonymised, aggregated performance data
-          </li>
-          <li>
-            <strong>Scheduling service</strong> — if you book a strategy call,
-            you are redirected to a third-party scheduling platform. Any data
-            you provide during booking is governed by that platform&apos;s own
-            privacy policy.
           </li>
         </ul>
         <p>

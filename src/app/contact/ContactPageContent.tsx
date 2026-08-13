@@ -24,10 +24,9 @@ const projectTypes = [
 ];
 
 const budgetRanges = [
-  'Under $2,500',
-  '$2,500 – $5,000',
-  '$5,000 – $10,000',
-  '$10,000+',
+  'Under $5,000',
+  '$5,000 – $15,000',
+  '$15,000+',
   'Not sure yet',
 ];
 
@@ -137,18 +136,16 @@ export default function ContactPageContent() {
                 >
                   <span className="display-sm">Have a project in mind?</span>
                   <p style={{ color: 'var(--fg-dim)', lineHeight: 1.7 }}>
-                    Book a free 30-minute call and we&apos;ll figure out exactly
-                    what you need. No pitch, no pressure.
+                    Send me what you&apos;re trying to run and I&apos;ll send back
+                    a build plan within 48 hours. No call required.
                   </p>
                   <Magnetic>
                     <a
-                      href="https://calendly.com/heyitsnimbus/30min"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="#contact-form"
                       className="btn"
                       style={{ alignSelf: 'flex-start', marginTop: 'var(--sp-2)' }}
                     >
-                      Book a free strategy call <span aria-hidden="true">↗</span>
+                      Send a project brief <span aria-hidden="true">↓</span>
                     </a>
                   </Magnetic>
                 </div>
@@ -219,6 +216,7 @@ export default function ContactPageContent() {
                 }}
               >
                 <form
+                  id="contact-form"
                   onSubmit={handleSubmit}
                   style={{
                     display: 'flex',
@@ -356,7 +354,7 @@ export default function ContactPageContent() {
               How it works
             </span>
             {[
-              'Free 30-minute call. No obligation.',
+              'A written build plan within 48 hours. No call required.',
               'You don\u2019t pay the balance until you approve the design.',
               '2 revision rounds included at every milestone.',
               'Weekly updates every Friday \u2014 you always know where things stand.',
