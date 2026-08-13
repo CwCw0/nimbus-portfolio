@@ -14,6 +14,42 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: '00',
+    slug: '88bh',
+    title: '88 Badminton House',
+    type: 'Retail System',
+    stack: 'Next.js 16 · Prisma 7 · Supabase',
+    year: '2026',
+    status: 'Final launch prep',
+    tagline:
+      'A full retail operating system for a badminton specialty shop — live inventory with a stock ledger, a unified stringing queue, and an admin dashboard built around how the shop actually runs.',
+    stats: [
+      ['API routes', '41'],
+      ['Stock moves', 'Ledgered'],
+      ['Audit', '7 criticals closed'],
+    ],
+    tone: 'violet',
+    image: '/images/88bh/dashboard-low-stock.jpg',
+  },
+  {
+    id: '0F',
+    slug: 'forge',
+    title: 'Forge',
+    type: 'Internal Tool',
+    stack: 'Next.js 16 · Supabase · Gemini',
+    year: '2026',
+    status: 'Internal · active daily',
+    tagline:
+      'The AI-powered operations platform I built to run my own studio — 60 tools, a knowledge graph, and a client pipeline, used daily. Not a demo.',
+    stats: [
+      ['AI tools', '60'],
+      ['API routes', '27'],
+      ['In use', 'Daily'],
+    ],
+    tone: 'deep',
+    image: '/images/forge/dashboard.jpg',
+  },
+  {
     id: '01',
     slug: 'omnifood',
     title: 'Omnifood',

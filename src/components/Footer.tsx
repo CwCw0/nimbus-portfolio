@@ -20,7 +20,7 @@ const NAV_LINKS = [
 const ELSEWHERE_LINKS = [
   { href: 'https://github.com/CwCw0', label: 'GitHub' },
   { href: 'mailto:heyitsnimbus@gmail.com', label: 'Email' },
-  { href: 'https://calendly.com/heyitsnimbus/30min', label: 'Book a free strategy call' },
+  { href: '/contact', label: 'Send a project brief' },
 ];
 
 export default function Footer() {

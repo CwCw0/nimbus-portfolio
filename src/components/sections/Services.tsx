@@ -20,7 +20,7 @@ export default function Services() {
         {/* Section head */}
         <div className="section-head">
           <span className="section-index">02 / Services</span>
-          <span className="section-label">Five things · done properly</span>
+          <span className="section-label">Three things · done properly</span>
         </div>
 
         {/* Heading */}
@@ -39,9 +39,9 @@ export default function Services() {
               lineHeight: 1.7,
             }}
           >
-            Websites, business tools, AI systems, and internal operations.
-            One builder, end to end. Every engagement starts with a real
-            conversation. No hidden discovery fees, no vague proposals.
+            Internal dashboards, AI assistants, and workflow automation.
+            One builder, end to end. No hidden discovery fees, no vague
+            proposals.
           </p>
         </FadeIn>
 

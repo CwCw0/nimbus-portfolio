@@ -23,7 +23,7 @@ export default function VaultPreview() {
         {/* Section head */}
         <div className="section-head">
           <span className="section-index">06 / Vault</span>
-          <span className="section-label">Products we&apos;re building</span>
+          <span className="section-label">Products I&apos;m building</span>
         </div>
 
         {/* Heading */}

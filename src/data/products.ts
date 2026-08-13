@@ -382,7 +382,7 @@ export const products: Product[] = [
   {
     slug: "aurora",
     name: "Aurora",
-    tagline: "Coming soon. We're not telling you what it is yet.",
+    tagline: "Coming soon. I'm not telling you what it is yet.",
     status: "coming-soon",
     price: { kind: "tbd" },
     cta: {
@@ -400,11 +400,11 @@ export const products: Product[] = [
       device: "poster",
     },
     cardDescription:
-      "Something we're not ready to talk about yet. Sign up to be first when it lands.",
+      "Something I'm not ready to talk about yet. Sign up to be first when it lands.",
     longDescription:
-      "Aurora is the project we're holding close until it's ready. We don't believe in announcing things just to have something to announce. When Aurora is ready to be talked about, you'll hear about it — and the people on the notify list will hear about it first.\n\nIf you want a hint: it's the kind of thing that doesn't fit any of the other categories on this page.",
+      "Aurora is the project I'm holding close until it's ready. I don't believe in announcing things just to have something to announce. When Aurora is ready to be talked about, you'll hear about it — and the people on the notify list will hear about it first.\n\nIf you want a hint: it's the kind of thing that doesn't fit any of the other categories on this page.",
     features: [
-      "We'll tell you when it's time",
+      "I'll tell you when it's time",
     ],
     category: "Unannounced",
     releaseDate: "When it's ready",

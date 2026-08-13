@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import RevealLine from '../../../components/ui/RevealLine';
 import FadeIn from '../../../components/ui/FadeIn';
 import { projects } from '../../../data/projects';
@@ -15,8 +15,503 @@ const toneGradients: Record<string, string> = {
   ink: 'linear-gradient(135deg, rgba(245,240,230,0.06), rgba(245,240,230,0.02))',
 };
 
-function toParagraphs(text: string): string[] {
+function toParagraphs(text?: string): string[] {
+  if (!text) return [];
   return text.split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
+}
+
+function StatusChip({ caseStudy }: { caseStudy: CaseStudy }) {
+  if (!caseStudy.status && !caseStudy.statusLabel) return null;
+  const inProgress = caseStudy.status === 'in-development';
+  const internal = Boolean(caseStudy.statusLabel) && caseStudy.status === 'live';
+  const label =
+    caseStudy.statusLabel ??
+    (caseStudy.status === 'in-development'
+      ? 'IN DEV'
+      : caseStudy.status === 'live'
+        ? 'LIVE'
+        : caseStudy.status?.toUpperCase());
+  return (
+    <span
+      className="mono"
+      style={{
+        padding: '5px 14px',
+        borderRadius: 'var(--r-pill)',
+        border: inProgress
+          ? '1px solid rgba(245,158,11,0.3)'
+          : internal
+            ? '1px solid rgba(124,92,252,0.35)'
+            : '1px solid var(--line-strong)',
+        color: inProgress ? '#fbbf24' : internal ? 'var(--accent-2)' : 'var(--fg-dim)',
+        fontSize: 'var(--t-mono)',
+        letterSpacing: '0.08em',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      {label}
+    </span>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────
+   Proof format — 6 sections, screenshots carry the page.
+   Activated when caseStudy.story is present.
+   ──────────────────────────────────────────────────────────── */
+function ProofCaseStudy({
+  caseStudy,
+  meta,
+  nextProject,
+  prevProject,
+}: {
+  caseStudy: CaseStudy;
+  meta: { type: string; stack: string; year: string } | null;
+  nextProject: { title: string; slug: string };
+  prevProject: { title: string; slug: string } | null;
+}) {
+  return (
+    <div className="flex w-full flex-col overflow-x-hidden">
+      {/* ── 1+2. Hero: title, dek, meta, image — one continuous block ── */}
+      <section className="container" style={{ paddingTop: 'clamp(120px, 15vh, 170px)', paddingBottom: 'var(--sp-16)' }}>
+        <FadeIn>
+          <Link
+            href="/work"
+            className="body-sm"
+            style={{
+              color: 'var(--fg-dim)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 'var(--sp-2)',
+              textDecoration: 'none',
+              marginBottom: 'var(--sp-10)',
+            }}
+          >
+            <ArrowLeft style={{ width: 16, height: 16 }} />
+            All projects
+          </Link>
+        </FadeIn>
+
+        <FadeIn>
+          <div style={{ marginBottom: 'var(--sp-4)' }}>
+            <StatusChip caseStudy={caseStudy} />
+          </div>
+        </FadeIn>
+
+        <RevealLine>
+          <h1 className="display-lg" style={{ color: 'var(--fg)', maxWidth: '16ch' }}>
+            {caseStudy.shortTitle}
+          </h1>
+        </RevealLine>
+
+        {/* Dek — replaces the old standalone tagline section */}
+        <FadeIn delay={150}>
+          <p
+            style={{
+              fontFamily: 'var(--f-serif)',
+              fontStyle: 'italic',
+              fontSize: 'clamp(19px, 2.2vw, 26px)',
+              lineHeight: 1.55,
+              color: 'var(--fg-dim)',
+              maxWidth: '58ch',
+              marginTop: 'var(--sp-6)',
+            }}
+          >
+            {caseStudy.heroDesc}
+          </p>
+        </FadeIn>
+
+        {/* Meta row — from caseStudy.meta, single mono line */}
+        {meta && (
+          <FadeIn delay={250}>
+            <div
+              className="mono"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                columnGap: 'var(--sp-4)',
+                rowGap: 'var(--sp-2)',
+                flexWrap: 'wrap',
+                marginTop: 'var(--sp-8)',
+                color: 'var(--fg-dim)',
+              }}
+            >
+              <span>{meta.type}</span>
+              <span style={{ color: 'var(--fg-faint)' }}>&middot;</span>
+              <span>{meta.stack}</span>
+              <span style={{ color: 'var(--fg-faint)' }}>&middot;</span>
+              <span>{meta.year}</span>
+            </div>
+          </FadeIn>
+        )}
+
+        {/* Hero screenshot — same block, no separate scroll stop */}
+        {caseStudy.heroImage && (
+          <FadeIn delay={300}>
+            <div style={{ marginTop: 'var(--sp-12)' }}>
+              <div
+                style={{
+                  width: '100%',
+                  aspectRatio: '16 / 10',
+                  border: '1px solid var(--line)',
+                  overflow: 'hidden',
+                  position: 'relative',
+                  background: 'var(--ink-1)',
+                }}
+              >
+                <Image
+                  src={caseStudy.heroImage}
+                  alt={caseStudy.title}
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: 'top' }}
+                  sizes="100vw"
+                  priority
+                />
+              </div>
+              {caseStudy.heroCaption && (
+                <p
+                  className="body-sm"
+                  style={{
+                    color: 'var(--fg-faint)',
+                    marginTop: 'var(--sp-3)',
+                    maxWidth: '80ch',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {caseStudy.heroCaption}
+                </p>
+              )}
+            </div>
+          </FadeIn>
+        )}
+      </section>
+
+      {/* ── 3. The story — one paragraph, no essay ── */}
+      {caseStudy.story && (
+        <section
+          style={{
+            borderTop: '1px solid var(--line)',
+            padding: 'var(--sp-20) 0',
+          }}
+        >
+          <div className="container">
+            <FadeIn>
+              <span className="mono" style={{ color: 'var(--accent)', display: 'block', marginBottom: 'var(--sp-6)' }}>
+                THE STORY
+              </span>
+              <p
+                style={{
+                  fontFamily: 'var(--f-body)',
+                  fontSize: 'clamp(17px, 1.4vw, 19px)',
+                  fontWeight: 450,
+                  lineHeight: 1.75,
+                  color: 'var(--fg)',
+                  maxWidth: '68ch',
+                }}
+              >
+                {caseStudy.story}
+              </p>
+            </FadeIn>
+          </div>
+        </section>
+      )}
+
+      {/* ── 4. Proof grid — screenshots ARE the content ── */}
+      {caseStudy.proofGrid && caseStudy.proofGrid.length > 0 && (
+        <section
+          style={{
+            borderTop: '1px solid var(--line)',
+            padding: 'var(--sp-20) 0',
+          }}
+        >
+          <div className="container">
+            <FadeIn>
+              <span className="mono" style={{ color: 'var(--accent)', display: 'block', marginBottom: 'var(--sp-3)' }}>
+                THE SYSTEM, ON SCREEN
+              </span>
+              {caseStudy.proofDisclosure && (
+                <p
+                  className="body-sm"
+                  style={{
+                    fontFamily: 'var(--f-serif)',
+                    fontStyle: 'italic',
+                    color: 'var(--fg-dim)',
+                    marginBottom: 'var(--sp-8)',
+                    maxWidth: '70ch',
+                  }}
+                >
+                  {caseStudy.proofDisclosure}
+                </p>
+              )}
+            </FadeIn>
+
+            <div
+              className="proof-grid"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: 'var(--sp-8)',
+                marginTop: caseStudy.proofDisclosure ? 0 : 'var(--sp-6)',
+              }}
+            >
+              {caseStudy.proofGrid.map((tile, i) => (
+                <FadeIn key={tile.src} delay={i * 100}>
+                  <a
+                    href={tile.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group"
+                    style={{ display: 'block', textDecoration: 'none' }}
+                    aria-label={`${tile.alt} — open full size`}
+                  >
+                    <div
+                      style={{
+                        width: '100%',
+                        aspectRatio: '3 / 2',
+                        border: '1px solid var(--line)',
+                        overflow: 'hidden',
+                        position: 'relative',
+                        background: 'var(--ink-1)',
+                        transition: 'border-color 0.4s var(--ease-out)',
+                      }}
+                      className="group-hover:border-(--line-strong)"
+                    >
+                      <Image
+                        src={tile.src}
+                        alt={tile.alt}
+                        fill
+                        className="transition-transform duration-700 group-hover:scale-[1.015]"
+                        style={{ objectFit: 'cover', objectPosition: 'top left' }}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                    <p
+                      className="body-sm"
+                      style={{
+                        color: 'var(--fg-dim)',
+                        marginTop: 'var(--sp-3)',
+                        lineHeight: 1.6,
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: 'var(--sp-2)',
+                      }}
+                    >
+                      <ArrowUpRight
+                        className="shrink-0 opacity-40 transition-opacity duration-300 group-hover:opacity-100"
+                        style={{ width: 14, height: 14, marginTop: 3, color: 'var(--accent-2)' }}
+                      />
+                      {tile.caption}
+                    </p>
+                  </a>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+
+          <style jsx>{`
+            @media (max-width: 768px) {
+              :global(.proof-grid) {
+                grid-template-columns: 1fr !important;
+              }
+            }
+          `}</style>
+        </section>
+      )}
+
+      {/* ── 5. What's actually under it — facts, not narrative ── */}
+      {caseStudy.underIt && caseStudy.underIt.length > 0 && (
+        <section
+          style={{
+            borderTop: '1px solid var(--line)',
+            padding: 'var(--sp-20) 0',
+          }}
+        >
+          <div className="container">
+            <FadeIn>
+              <span className="mono" style={{ color: 'var(--accent)', display: 'block', marginBottom: 'var(--sp-8)' }}>
+                WHAT&apos;S ACTUALLY UNDER IT
+              </span>
+            </FadeIn>
+            <ul style={{ display: 'flex', flexDirection: 'column', maxWidth: '82ch' }}>
+              {caseStudy.underIt.map((point, i) => (
+                <FadeIn key={i} delay={i * 60}>
+                  <li
+                    className="body"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: 'var(--sp-4)',
+                      color: 'var(--fg-dim)',
+                      lineHeight: 1.65,
+                      padding: 'var(--sp-4) 0',
+                      borderTop: i === 0 ? 'none' : '1px solid var(--line)',
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 6,
+                        height: 6,
+                        borderRadius: '50%',
+                        background: 'var(--accent)',
+                        opacity: 0.7,
+                        flexShrink: 0,
+                        marginTop: 9,
+                      }}
+                    />
+                    {point}
+                  </li>
+                </FadeIn>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* ── 6. Status + price + CTA — one closing block ── */}
+      {caseStudy.closing && (
+        <section
+          style={{
+            borderTop: '1px solid var(--line)',
+            padding: 'var(--sp-24) 0',
+          }}
+        >
+          <div className="container">
+            <FadeIn>
+              <p
+                className="body"
+                style={{
+                  color: 'var(--fg-dim)',
+                  lineHeight: 1.7,
+                  maxWidth: '68ch',
+                }}
+              >
+                {caseStudy.closing.body}
+              </p>
+              {caseStudy.closing.priceLine && (
+                <p
+                  style={{
+                    fontFamily: 'var(--f-serif)',
+                    fontStyle: 'italic',
+                    fontSize: 'clamp(20px, 2.4vw, 28px)',
+                    color: 'var(--fg)',
+                    marginTop: 'var(--sp-8)',
+                  }}
+                >
+                  {caseStudy.closing.priceLine}
+                </p>
+              )}
+              <div style={{ marginTop: 'var(--sp-10)' }}>
+                <Link href={caseStudy.closing.ctaHref} className="btn">
+                  {caseStudy.closing.ctaLabel}
+                  <ArrowRight style={{ width: 15, height: 15, marginLeft: 8, display: 'inline' }} />
+                </Link>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+      )}
+
+      <PrevNextNav nextProject={nextProject} prevProject={prevProject} />
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────
+   Prev / next — shared by both formats
+   ──────────────────────────────────────────────────────────── */
+function PrevNextNav({
+  nextProject,
+  prevProject,
+}: {
+  nextProject: { title: string; slug: string };
+  prevProject: { title: string; slug: string } | null;
+}) {
+  return (
+    <section
+      style={{
+        borderTop: '1px solid var(--line)',
+        padding: 'var(--sp-16) 0',
+      }}
+    >
+      <div
+        className="container"
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        {prevProject ? (
+          <Link
+            href={`/work/${prevProject.slug}`}
+            className="group"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 'var(--sp-2)',
+              textDecoration: 'none',
+            }}
+          >
+            <span className="mono" style={{ color: 'var(--fg-faint)' }}>
+              PREVIOUS
+            </span>
+            <span
+              className="display-sm"
+              style={{
+                color: 'var(--fg)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'var(--sp-3)',
+                transition: 'color 0.3s var(--ease-out)',
+              }}
+            >
+              <ArrowLeft
+                className="transition-transform duration-300 group-hover:-translate-x-1"
+                style={{ width: 20, height: 20 }}
+              />
+              <span className="group-hover:text-(--accent) transition-colors duration-300">
+                {prevProject.title}
+              </span>
+            </span>
+          </Link>
+        ) : (
+          <div />
+        )}
+
+        <Link
+          href={`/work/${nextProject.slug}`}
+          className="group"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+            gap: 'var(--sp-2)',
+            textDecoration: 'none',
+          }}
+        >
+          <span className="mono" style={{ color: 'var(--fg-faint)' }}>
+            NEXT PROJECT
+          </span>
+          <span
+            className="display-sm"
+            style={{
+              color: 'var(--fg)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--sp-3)',
+              transition: 'color 0.3s var(--ease-out)',
+            }}
+          >
+            <span className="group-hover:text-(--accent) transition-colors duration-300">
+              {nextProject.title}
+            </span>
+            <ArrowRight
+              className="transition-transform duration-300 group-hover:translate-x-1"
+              style={{ width: 20, height: 20 }}
+            />
+          </span>
+        </Link>
+      </div>
+    </section>
+  );
 }
 
 export default function CaseStudyContent({
@@ -28,7 +523,7 @@ export default function CaseStudyContent({
   nextProject: { title: string; slug: string };
   prevProject: { title: string; slug: string } | null;
 }) {
-  // Find matching project data for stats/tone
+  // Find matching project data for stats/tone (legacy format)
   const project = caseStudy
     ? projects.find((p) => p.slug === caseStudy.slug)
     : null;
@@ -44,10 +539,26 @@ export default function CaseStudyContent({
     );
   }
 
+  // Proof format: story present → 6-section screenshot-led layout
+  if (caseStudy.story) {
+    const meta =
+      caseStudy.meta ??
+      (project ? { type: project.type, stack: project.stack, year: project.year } : null);
+    return (
+      <ProofCaseStudy
+        caseStudy={caseStudy}
+        meta={meta}
+        nextProject={nextProject}
+        prevProject={prevProject}
+      />
+    );
+  }
+
   const challengeParas = toParagraphs(caseStudy.challenge);
   const solutionParas = toParagraphs(caseStudy.solution);
   const tone = project?.tone || 'violet';
   const gradient = toneGradients[tone] || toneGradients.violet;
+  const results = caseStudy.results ?? [];
 
   return (
     <div className="flex w-full flex-col overflow-x-hidden">
@@ -101,21 +612,7 @@ export default function CaseStudyContent({
                     <span style={{ color: 'var(--fg-dim)' }}>{project.year}</span>
                   </>
                 )}
-                {caseStudy.status && (
-                  <span
-                    style={{
-                      padding: '4px 14px',
-                      borderRadius: 'var(--r-pill)',
-                      border: caseStudy.status === 'in-development'
-                        ? '1px solid rgba(245,158,11,0.3)'
-                        : '1px solid var(--line-strong)',
-                      color: caseStudy.status === 'in-development' ? '#fbbf24' : 'var(--fg-dim)',
-                      fontSize: 'var(--t-mono)',
-                    }}
-                  >
-                    {caseStudy.status === 'in-development' ? 'IN DEV' : caseStudy.status === 'live' ? 'LIVE' : caseStudy.status.toUpperCase()}
-                  </span>
-                )}
+                <StatusChip caseStudy={caseStudy} />
               </div>
             </FadeIn>
           </section>
@@ -387,7 +884,7 @@ export default function CaseStudyContent({
           )}
 
           {/* ── Results ── */}
-          {caseStudy.results.length > 0 && (
+          {results.length > 0 && (
             <section
               style={{
                 borderTop: '1px solid var(--line)',
@@ -407,11 +904,11 @@ export default function CaseStudyContent({
                 <div
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: `repeat(${Math.min(caseStudy.results.length, 4)}, 1fr)`,
+                    gridTemplateColumns: `repeat(${Math.min(results.length, 4)}, 1fr)`,
                     gap: 'var(--sp-4)',
                   }}
                 >
-                  {caseStudy.results.map((r, i) => (
+                  {results.map((r, i) => (
                     <FadeIn key={r.label} delay={i * 100}>
                       <div
                         style={{
@@ -447,93 +944,7 @@ export default function CaseStudyContent({
             </section>
           )}
 
-          {/* ── Navigation: prev / next ── */}
-          <section
-            style={{
-              borderTop: '1px solid var(--line)',
-              padding: 'var(--sp-16) 0',
-            }}
-          >
-            <div
-              className="container"
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              {prevProject ? (
-                <Link
-                  href={`/work/${prevProject.slug}`}
-                  className="group"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 'var(--sp-2)',
-                    textDecoration: 'none',
-                  }}
-                >
-                  <span className="mono" style={{ color: 'var(--fg-faint)' }}>
-                    PREVIOUS
-                  </span>
-                  <span
-                    className="display-sm"
-                    style={{
-                      color: 'var(--fg)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 'var(--sp-3)',
-                      transition: 'color 0.3s var(--ease-out)',
-                    }}
-                  >
-                    <ArrowLeft
-                      className="transition-transform duration-300 group-hover:-translate-x-1"
-                      style={{ width: 20, height: 20 }}
-                    />
-                    <span className="group-hover:text-(--accent) transition-colors duration-300">
-                      {prevProject.title}
-                    </span>
-                  </span>
-                </Link>
-              ) : (
-                <div />
-              )}
-
-              <Link
-                href={`/work/${nextProject.slug}`}
-                className="group"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-end',
-                  gap: 'var(--sp-2)',
-                  textDecoration: 'none',
-                }}
-              >
-                <span className="mono" style={{ color: 'var(--fg-faint)' }}>
-                  NEXT PROJECT
-                </span>
-                <span
-                  className="display-sm"
-                  style={{
-                    color: 'var(--fg)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 'var(--sp-3)',
-                    transition: 'color 0.3s var(--ease-out)',
-                  }}
-                >
-                  <span className="group-hover:text-(--accent) transition-colors duration-300">
-                    {nextProject.title}
-                  </span>
-                  <ArrowRight
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ width: 20, height: 20 }}
-                  />
-                </span>
-              </Link>
-            </div>
-          </section>
+          <PrevNextNav nextProject={nextProject} prevProject={prevProject} />
 
           {/* ── CTA ── */}
           <section

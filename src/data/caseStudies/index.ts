@@ -1,16 +1,20 @@
-export type { CaseStudy } from "./types";
+export type { CaseStudy, ProofTile } from "./types";
+export { bh88 } from "./88bh";
+export { forge } from "./forge";
 export { omnifood } from "./omnifood";
 export { pulse } from "./pulse";
 export { koji } from "./koji";
 export { voidframe } from "./voidframe";
 
+import { bh88 } from "./88bh";
+import { forge } from "./forge";
 import { omnifood } from "./omnifood";
 import { pulse } from "./pulse";
 import { koji } from "./koji";
 import { voidframe } from "./voidframe";
 import { CaseStudy } from "./types";
 
-export const allCaseStudies: CaseStudy[] = [omnifood, pulse, koji, voidframe];
+export const allCaseStudies: CaseStudy[] = [bh88, forge, omnifood, pulse, koji, voidframe];
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
   return allCaseStudies.find((s) => s.slug === slug);

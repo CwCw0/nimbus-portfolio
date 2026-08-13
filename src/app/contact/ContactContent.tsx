@@ -215,10 +215,10 @@ export default function ContactPage() {
                 <div className="relative">
                   <select id="contact-subject" name="subject" className="h-12 w-full appearance-none border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 font-body text-sm text-[var(--color-text-subtle)] focus:border-[var(--color-accent-border)] focus:outline-none transition-all">
                     <option>Select a subject...</option>
-                    <option>Website Design & Development</option>
-                    <option>Visual Design</option>
-                    <option>AI, LLMs & Agents</option>
-                    <option>SEO & Growth</option>
+                    <option>Internal Ops Dashboard</option>
+                    <option>AI Knowledge Assistant</option>
+                    <option>AI Workflow Automation</option>
+                    <option>Website</option>
                     <option>Other</option>
                   </select>
                   <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--color-text-subtle)]" />

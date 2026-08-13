@@ -3,10 +3,10 @@
 import RevealLine from '@/components/ui/RevealLine';
 
 const lines = [
-  { text: 'We build for clients.', serif: false },
-  { text: 'We ship our own products.', serif: true },
-  { text: 'We use what we build.', serif: false },
-  { text: 'Then we build it for you.', serif: true },
+  { text: 'I build for clients.', serif: false },
+  { text: 'I ship my own products.', serif: true },
+  { text: 'I use what I build.', serif: false },
+  { text: 'Then I build it for you.', serif: true },
   { text: 'Every system earns its place.', serif: false },
 ];
 
