@@ -22,6 +22,7 @@ const ELSEWHERE_LINKS = [
   { href: 'https://www.upwork.com/freelancers/~018e3e05f351d165d4', label: 'Upwork' },
   { href: 'https://github.com/CwCw0', label: 'GitHub' },
   { href: 'https://www.instagram.com/_bynimbus_/', label: 'Instagram' },
+  { href: 'https://www.linkedin.com/in/darren-ng-chi-weng/', label: 'LinkedIn' },
   { href: '/contact', label: 'Send a project brief' },
 ];
 
