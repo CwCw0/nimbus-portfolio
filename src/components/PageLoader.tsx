@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import SplitType from "split-type";
 
@@ -10,6 +11,7 @@ import SplitType from "split-type";
  * FORMA STUDIO → overlay lifts. No gimmicks, pure confidence.
  */
 export default function PageLoader() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLSpanElement>(null);
@@ -23,7 +25,9 @@ export default function PageLoader() {
 
   useEffect(() => {
     const isMobile = window.innerWidth < 769;
-    if (!isMobile && !sessionStorage.getItem("nfs-intro-v10")) {
+    // Brand intro belongs to the homepage. A buyer deep-linking a case study
+    // gets the proof immediately, not a 2s title card.
+    if (pathname === "/" && !isMobile && !sessionStorage.getItem("nfs-intro-v10")) {
       setVisible(true);
     }
   }, []);

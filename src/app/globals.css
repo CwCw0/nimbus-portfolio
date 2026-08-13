@@ -1350,6 +1350,9 @@ main, footer, nav, header {
 }
 
 .footer-col-link {
+  display: inline-block;
+  padding-block: 6px;
+  margin-block: -6px;
   font-family: var(--f-body);
   font-size: var(--t-body-sm);
   color: var(--fg-dim);
@@ -1633,7 +1636,9 @@ body.preview-active footer:not(.footer-root) {
 /* ── Prevent ALL horizontal overflow ── */
 @media (max-width: 768px) {
   html, body {
-    overflow-x: hidden;
+    /* clip, not hidden: hidden creates a propagated scroll container that kills
+       window.scrollY (fixed-nav background + reading bar depended on it) */
+    overflow-x: clip;
     max-width: 100vw;
   }
 

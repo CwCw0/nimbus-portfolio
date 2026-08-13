@@ -6,6 +6,12 @@ type Props = { params: Promise<{ slug: string }> };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbusformastudio.com";
 
+// Dedicated 1200x630 share cards for the proof pages (raw screenshots are ~3:2 and crop badly)
+const ogOverrides: Record<string, string> = {
+  "88bh": "/og/og-88bh.jpg",
+  forge: "/og/og-forge.jpg",
+};
+
 export async function generateStaticParams() {
   return allCaseStudies.map((s) => ({ slug: s.slug }));
 }
@@ -33,15 +39,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url,
       title: `${study.title} — Nimbus Forma Studio`,
       description,
-      images: study.heroImage
-        ? [{ url: `${siteUrl}${study.heroImage}`, width: 1200, height: 630, alt: study.title }]
+      images: ogOverrides[slug]
+        ? [{ url: `${siteUrl}${ogOverrides[slug]}`, width: 1200, height: 630, alt: study.title }]
         : [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: study.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: `${study.title} — Nimbus Forma Studio`,
       description,
-      images: study.heroImage ? [`${siteUrl}${study.heroImage}`] : [`${siteUrl}/opengraph-image`],
+      images: ogOverrides[slug] ? [`${siteUrl}${ogOverrides[slug]}`] : [`${siteUrl}/opengraph-image`],
     },
   };
 }

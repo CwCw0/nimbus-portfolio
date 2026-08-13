@@ -21,6 +21,7 @@ const NAV_LINKS = [
 const ELSEWHERE_LINKS = [
   { href: 'https://www.upwork.com/freelancers/~018e3e05f351d165d4', label: 'Upwork' },
   { href: 'https://github.com/CwCw0', label: 'GitHub' },
+  { href: 'https://www.instagram.com/_bynimbus_/', label: 'Instagram' },
   { href: '/contact', label: 'Send a project brief' },
 ];
 

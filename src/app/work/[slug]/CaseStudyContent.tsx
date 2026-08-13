@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import RevealLine from '../../../components/ui/RevealLine';
 import FadeIn from '../../../components/ui/FadeIn';
 import { projects } from '../../../data/projects';
-import { UPWORK_PROFILE_URL } from '../../../data/site';
+import { UPWORK_PROFILE_URL, SCREENSHOT_BLUR } from '../../../data/site';
 import type { CaseStudy } from '../../../data/caseStudies';
 
 const toneGradients: Record<string, string> = {
@@ -185,8 +185,10 @@ function ProofCaseStudy({
                   alt={caseStudy.title}
                   fill
                   style={{ objectFit: 'cover', objectPosition: 'top' }}
-                  sizes="100vw"
+                  sizes="(max-width: 1640px) 100vw, 1528px"
                   priority
+                  placeholder="blur"
+                  blurDataURL={SCREENSHOT_BLUR}
                 />
               </div>
               {caseStudy.heroCaption && (
@@ -217,9 +219,9 @@ function ProofCaseStudy({
         >
           <div className="container">
             <FadeIn>
-              <span className="mono" style={{ color: 'var(--accent)', display: 'block', marginBottom: 'var(--sp-6)' }}>
+              <h2 className="mono" style={{ color: 'var(--accent)', display: 'block', margin: '0 0 var(--sp-6)', fontSize: 'var(--t-mono)' }}>
                 THE STORY
-              </span>
+              </h2>
               <p
                 style={{
                   fontFamily: 'var(--f-body)',
@@ -247,9 +249,9 @@ function ProofCaseStudy({
         >
           <div className="container">
             <FadeIn>
-              <span className="mono" style={{ color: 'var(--accent)', display: 'block', marginBottom: 'var(--sp-3)' }}>
+              <h2 className="mono" style={{ color: 'var(--accent)', display: 'block', margin: '0 0 var(--sp-3)', fontSize: 'var(--t-mono)' }}>
                 THE SYSTEM, ON SCREEN
-              </span>
+              </h2>
               {caseStudy.proofDisclosure && (
                 <p
                   className="body-sm"
@@ -304,6 +306,8 @@ function ProofCaseStudy({
                         className="transition-transform duration-700 group-hover:scale-[1.015]"
                         style={{ objectFit: 'cover', objectPosition: 'top left' }}
                         sizes="(max-width: 768px) 100vw, 50vw"
+                        placeholder="blur"
+                        blurDataURL={SCREENSHOT_BLUR}
                       />
                     </div>
                     <p
@@ -349,9 +353,9 @@ function ProofCaseStudy({
         >
           <div className="container">
             <FadeIn>
-              <span className="mono" style={{ color: 'var(--accent)', display: 'block', marginBottom: 'var(--sp-8)' }}>
+              <h2 className="mono" style={{ color: 'var(--accent)', display: 'block', margin: '0 0 var(--sp-8)', fontSize: 'var(--t-mono)' }}>
                 WHAT&apos;S ACTUALLY UNDER IT
-              </span>
+              </h2>
             </FadeIn>
             <ul style={{ display: 'flex', flexDirection: 'column', maxWidth: '82ch' }}>
               {caseStudy.underIt.map((point, i) => (

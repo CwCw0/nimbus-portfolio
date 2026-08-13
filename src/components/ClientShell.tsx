@@ -22,7 +22,8 @@ export default function ClientShell({ children }: { children: ReactNode }) {
       <PageLoader />
       <AmbientWaves lineCount={18} />
       <Cursor />
-      <SmoothScroll>{children}</SmoothScroll>
+      <SmoothScroll />
+      {children}
     </>
   );
 }

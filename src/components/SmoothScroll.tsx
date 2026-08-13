@@ -7,11 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface SmoothScrollProps {
-  children: ReactNode;
-}
-
-export default function SmoothScroll({ children }: SmoothScrollProps) {
+export default function SmoothScroll({ children }: { children?: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
@@ -56,6 +52,10 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       if (el) {
         e.preventDefault();
         lenis.scrollTo(el as HTMLElement, { offset: -80, duration: 1.4 });
+        // Keyboard users: move focus with the scroll (skip links, form anchors)
+        const focusable = el as HTMLElement;
+        if (!focusable.hasAttribute("tabindex")) focusable.setAttribute("tabindex", "-1");
+        focusable.focus({ preventScroll: true });
       }
     };
 
@@ -70,5 +70,5 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     };
   }, []);
 
-  return <>{children}</>;
+  return children ? <>{children}</> : null;
 }

@@ -1,7 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-export const alt = "Nimbus — Creative Studio";
+export const alt = "Nimbus Forma Studio — I build the AI-powered system that runs your operation.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -22,7 +21,6 @@ export default async function Image() {
           fontFamily: "sans-serif",
         }}
       >
-        {/* Grid overlay */}
         <div
           style={{
             position: "absolute",
@@ -32,8 +30,6 @@ export default async function Image() {
             backgroundSize: "60px 60px",
           }}
         />
-
-        {/* Glow */}
         <div
           style={{
             position: "absolute",
@@ -58,52 +54,34 @@ export default async function Image() {
           }}
         >
           <div
-            style={{
-              width: "8px",
-              height: "8px",
-              borderRadius: "50%",
-              background: "#7C5CFC",
-            }}
+            style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#7C5CFC" }}
           />
           <span
-            style={{
-              color: "#7C5CFC",
-              fontSize: "13px",
-              letterSpacing: "3px",
-              fontWeight: 600,
-            }}
+            style={{ color: "#7C5CFC", fontSize: "13px", letterSpacing: "3px", fontWeight: 600 }}
           >
-            NIMBUS STUDIO
+            NIMBUS FORMA STUDIO
           </span>
         </div>
 
         {/* Main content */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", zIndex: 1 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <div
             style={{
-              fontSize: "80px",
+              display: "flex",
+              flexDirection: "column",
+              fontSize: "62px",
               fontWeight: 700,
-              color: "#EEEDF5",
-              lineHeight: 1.05,
+              color: "#F5F0E6",
+              lineHeight: 1.12,
               letterSpacing: "-2px",
             }}
           >
-            Websites.
-            <br />
-            <span style={{ color: "#7C5CFC" }}>Branding.</span>
-            <br />
-            Results.
+            <div style={{ display: "flex" }}>I build the AI-powered</div>
+            <div style={{ display: "flex", color: "#7C5CFC" }}>system that runs</div>
+            <div style={{ display: "flex" }}>your operation.</div>
           </div>
-
-          <p
-            style={{
-              fontSize: "22px",
-              color: "#6B6880",
-              marginTop: "8px",
-              fontWeight: 400,
-            }}
-          >
-            End-to-end web design, development & AI tools.
+          <p style={{ fontSize: "22px", color: "#948BBC", marginTop: "8px", fontWeight: 400 }}>
+            Dashboards · custom apps · assistants trained on your own data. Yours to own.
           </p>
         </div>
 
@@ -115,13 +93,12 @@ export default async function Image() {
             right: "80px",
             display: "flex",
             alignItems: "center",
-            gap: "8px",
             border: "1px solid rgba(124,92,252,0.3)",
             padding: "10px 20px",
           }}
         >
           <span style={{ color: "#7C5CFC", fontSize: "14px", fontWeight: 600 }}>
-            heyitsnimbus@gmail.com
+            NIMBUSFORMASTUDIO.COM
           </span>
         </div>
       </div>

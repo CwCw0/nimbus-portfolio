@@ -63,9 +63,16 @@ export default function Nav() {
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setMobileOpen(false);
+      };
+      document.addEventListener('keydown', onKey);
+      return () => {
+        document.removeEventListener('keydown', onKey);
+        document.body.style.overflow = '';
+      };
     }
+    document.body.style.overflow = '';
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 

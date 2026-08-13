@@ -111,7 +111,8 @@ export default function ServicesPageContent() {
                     style={{
                       display: 'grid',
                       gridTemplateRows: isOpen ? '1fr' : '0fr',
-                      transition: 'grid-template-rows 0.5s var(--ease-out)',
+                      visibility: isOpen ? 'visible' : 'hidden',
+                      transition: 'grid-template-rows 0.5s var(--ease-out), visibility 0.5s',
                     }}
                   >
                     <div style={{ overflow: 'hidden' }}>
@@ -442,7 +443,8 @@ export default function ServicesPageContent() {
                     style={{
                       display: 'grid',
                       gridTemplateRows: isOpen ? '1fr' : '0fr',
-                      transition: 'grid-template-rows 0.5s var(--ease-out)',
+                      visibility: isOpen ? 'visible' : 'hidden',
+                      transition: 'grid-template-rows 0.5s var(--ease-out), visibility 0.5s',
                     }}
                   >
                     <div style={{ overflow: 'hidden' }}>
