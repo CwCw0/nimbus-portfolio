@@ -49,9 +49,9 @@ export default function Hero() {
         <div className="hero-meta">
           <FadeIn delay={300}>
             <p style={{ color: 'var(--fg-dim)', maxWidth: 520, lineHeight: 1.7 }}>
-              Internal dashboards, workflow automation, and assistants trained on
-              your own data. Custom-coded — not templates, not a subscription.
-              Deployed, documented, and yours to own.
+              Internal dashboards, custom apps, workflow automation, and
+              assistants trained on your own data. Custom-coded — not templates,
+              not a subscription. Deployed, documented, and yours to own.
             </p>
           </FadeIn>
           <FadeIn delay={450}>
