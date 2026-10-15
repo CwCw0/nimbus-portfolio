@@ -57,7 +57,7 @@ export type Product = {
   // Optional wordmark that renders as the "logo" over the product preview.
   // When set, the mockup shows this wordmark by default and crossfades to
   // the real screenshot on card hover. Perfect for products whose own
-  // display font IS their brand (Kōji, Sumi, etc).
+  // display font IS their brand (Koji, Sumi, etc).
   wordmark?: {
     label: string;
     style: "italic" | "sans";
@@ -108,11 +108,11 @@ export const products: Product[] = [
     status: "live",
     price: { kind: "free" },
     cta: {
-      label: "Open Kōji",
+      label: "Open Koji",
       href: "https://koji-seven.vercel.app/",
       external: true,
     },
-    // Kōji's identity is monochrome editorial — paper + ink. The accent
+    // Koji's identity is monochrome editorial — paper + ink. The accent
     // is a subtle cool off-white that reads almost-black on the card.
     accent: {
       hex: "#F3F3F5",
@@ -120,7 +120,7 @@ export const products: Product[] = [
       border: "#F3F3F533",
       glow: "#F3F3F51C",
     },
-    // Kōji's "logo" IS its wordmark — the same Instrument Serif italic face
+    // Koji's "logo" IS its wordmark — the same Instrument Serif italic face
     // used for every heading inside the app. The mockup renders the wordmark
     // by default and crossfades to a real screenshot on card hover.
     wordmark: {
@@ -135,7 +135,7 @@ export const products: Product[] = [
     cardDescription:
       "Three views, forty shortcuts, one place to think. Built because every other tool tried to organise me.",
     longDescription:
-      "Kōji is the productivity tool I built because no other one fit how my brain actually works. I think in bursts — a thought at 2am, a task mid-conversation, a half-formed idea I need to dump before it disappears. Kōji is built around that. Brain Dump captures raw thoughts in a full-screen overlay. Today turns them into things to do. Board shows the bigger picture. Notes hold the longer-form thinking in markdown.\n\nEverything is keyboard-driven. Cmd+K opens the command palette. 40+ shortcuts let you live in the app without ever touching the trackpad. The visual design is intentionally monochrome — no color, no decoration, no AI assistant trying to summarise your life. Just a tool that gets out of the way.\n\nKōji is local-first. Your tasks, notes, brain dumps, and focus stats live on your device — nothing is sent to a server, no account is required, no login wall. Open the tab and keep going.",
+      "Koji is the productivity tool I built because no other one fit how my brain actually works. I think in bursts — a thought at 2am, a task mid-conversation, a half-formed idea I need to dump before it disappears. Koji is built around that. Brain Dump captures raw thoughts in a full-screen overlay. Today turns them into things to do. Board shows the bigger picture. Notes hold the longer-form thinking in markdown.\n\nEverything is keyboard-driven. Cmd+K opens the command palette. 40+ shortcuts let you live in the app without ever touching the trackpad. The visual design is intentionally monochrome — no color, no decoration, no AI assistant trying to summarise your life. Just a tool that gets out of the way.\n\nKoji is local-first. Your tasks, notes, brain dumps, and focus stats live on your device — nothing is sent to a server, no account is required, no login wall. Open the tab and keep going.",
     features: [
       "Brain Dump — full-screen capture overlay with a gliding typing caret",
       "Three core views: Today, Board, Notes",

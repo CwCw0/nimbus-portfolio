@@ -233,7 +233,7 @@ export default function VaultPageContent() {
                         gap: 'var(--sp-2)',
                       }}
                     >
-                      {product.features.map((f) => (
+                      {product.features.slice(0, 3).map((f) => (
                         <li
                           key={f}
                           style={{
@@ -250,25 +250,6 @@ export default function VaultPageContent() {
                       ))}
                     </ul>
 
-                    {/* Tech stack chips */}
-                    <div style={{ display: 'flex', gap: 'var(--sp-2)', flexWrap: 'wrap' }}>
-                      {product.stack.map((tech) => (
-                        <span
-                          key={tech}
-                          style={{
-                            fontFamily: 'var(--f-mono)',
-                            fontSize: 'var(--t-mono)',
-                            letterSpacing: '0.08em',
-                            padding: '4px 12px',
-                            borderRadius: 'var(--r-pill)',
-                            border: '1px solid var(--line-strong)',
-                            color: 'var(--fg-dim)',
-                          }}
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
 
                     {/* CTA — differentiated by tier */}
                     <div style={{ display: 'flex', gap: 'var(--sp-3)', marginTop: 'var(--sp-4)', flexWrap: 'wrap' }}>

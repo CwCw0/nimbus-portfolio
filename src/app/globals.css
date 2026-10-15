@@ -872,7 +872,7 @@ main, footer, nav, header {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 [data-theme="light"] .nav-bar::after {
-  background: linear-gradient(to bottom, var(--bg), transparent);
+  background: linear-gradient(to bottom, var(--ink-0), transparent);
 }
 
 .nav-inner {

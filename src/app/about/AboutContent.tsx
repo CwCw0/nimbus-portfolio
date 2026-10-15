@@ -567,7 +567,7 @@ export default function AboutPage() {
                         {(i + 1).toString().padStart(2, "0")}
                       </span>
                       <span
-                        className="font-display italic tracking-[-1.5px] text-(--color-text-primary) transition-colors duration-500 max-md:text-[44px]"
+                        className="font-display tracking-[-1.5px] text-(--color-text-primary) transition-colors duration-500 max-md:text-[44px]"
                         style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.95 }}
                       >
                         <span

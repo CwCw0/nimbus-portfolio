@@ -20,7 +20,7 @@ export interface VaultProduct {
 export const vaultProducts: VaultProduct[] = [
   {
     slug: 'koji',
-    name: 'Kōji',
+    name: 'Koji',
     kind: 'Productivity OS',
     status: 'Live · v0.8',
     statusColor: 'live',
@@ -28,7 +28,7 @@ export const vaultProducts: VaultProduct[] = [
     tagline:
       'Fast capture, three views, 40+ shortcuts. No cloud, no bloat. The task manager I always wanted.',
     description:
-      "Kōji is a productivity platform built around how I actually think. Not another Notion clone or a Trello board with a different skin — it's a system designed for fast capture, multiple views of the same data, and keyboard-first operation. Everything runs locally. Zero cloud dependency means your data is yours and it's fast.",
+      "Koji is a productivity platform built around how I actually think. Not another Notion clone or a Trello board with a different skin — it's a system designed for fast capture, multiple views of the same data, and keyboard-first operation. Everything runs locally. Zero cloud dependency means your data is yours and it's fast.",
     features: [
       'Three view modes: list, board, and timeline',
       '40+ keyboard shortcuts for zero-mouse operation',
@@ -39,7 +39,7 @@ export const vaultProducts: VaultProduct[] = [
     ],
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'IndexedDB'],
     links: [
-      { label: 'Try Kōji', href: 'https://koji-seven.vercel.app/', external: true },
+      { label: 'Try Koji', href: 'https://koji-seven.vercel.app/', external: true },
     ],
     image: '/images/koji/homepage.png',
   },

@@ -88,7 +88,7 @@ export const projects: Project[] = [
   {
     id: '03',
     slug: 'koji',
-    title: 'Kōji',
+    title: 'Koji',
     type: 'SaaS',
     stack: 'Next.js',
     year: '2025',
