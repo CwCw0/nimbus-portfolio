@@ -268,7 +268,7 @@ export default function ContactPage() {
                     ? "bg-emerald-500"
                     : submitState === "error"
                     ? "bg-red-500"
-                    : "bg-gradient-to-b from-[var(--color-accent)] to-[#5B3FCC] hover:scale-[1.02] hover:shadow-[0_0_24px_#F5F0E420]"
+                    : "bg-gradient-to-b from-[var(--color-accent)] to-[#C9BFA6] hover:scale-[1.02] hover:shadow-[0_0_24px_#F5F0E420]"
                 } disabled:cursor-not-allowed`}
               >
                 {submitState === "idle" && (

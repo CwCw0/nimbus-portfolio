@@ -8,8 +8,8 @@ import FadeIn from '@/components/ui/FadeIn';
 import { vaultProducts } from '@/data/vault';
 
 const toneGradients: Record<string, string> = {
-  violet: 'linear-gradient(135deg, rgba(245, 240, 228, 0.22), rgba(42, 26, 85, 0.35))',
-  deep: 'linear-gradient(135deg, rgba(140, 140, 140, 0.22), rgba(26, 18, 51, 0.35))',
+  violet: 'linear-gradient(135deg, rgba(245, 240, 228, 0.22), rgba(40, 36, 28, 0.35))',
+  deep: 'linear-gradient(135deg, rgba(140, 140, 140, 0.22), rgba(32, 29, 24, 0.35))',
   ember: 'linear-gradient(135deg, rgba(252, 140, 92, 0.22), rgba(85, 42, 26, 0.35))',
 };
 

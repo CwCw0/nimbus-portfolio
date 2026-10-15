@@ -14,7 +14,7 @@ export default function Loading() {
       <style>{`
         .csk-root { min-height: 100vh; }
         .csk {
-          background: #14121F;
+          background: #191713;
           border: 1px solid rgba(245, 240, 230, 0.07);
           animation: csk-pulse 1.6s ease-in-out infinite;
         }

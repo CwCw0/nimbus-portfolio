@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Category accent colors — each project type has its own visual identity
 const categoryAccents: Record<string, string> = {
-  Website: "#5EEAD4",    // teal
+  Website: "#CBB35C",    // teal
   "Web App": "#F5F0E4",  // purple
   SaaS: "#F59E0B",       // amber
   Platform: "#EC4899",   // pink

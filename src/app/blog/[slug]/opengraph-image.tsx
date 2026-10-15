@@ -32,7 +32,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(rgba(124,92,252,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(124,92,252,0.04) 1px, transparent 1px)",
+              "linear-gradient(rgba(245,240,228,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245,240,228,0.04) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />
@@ -47,7 +47,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             height: "500px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(124,92,252,0.15) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(245,240,228,0.15) 0%, transparent 70%)",
           }}
         />
 
@@ -89,7 +89,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
           >
             <span
               style={{
-                color: "#6B6880",
+                color: "#8E8A7F",
                 fontSize: "13px",
                 letterSpacing: "2px",
                 fontWeight: 500,
@@ -100,7 +100,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             {readTime && (
               <span
                 style={{
-                  color: "#4A4860",
+                  color: "#6E6A63",
                   fontSize: "13px",
                   letterSpacing: "1px",
                 }}
@@ -145,7 +145,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
         >
           <span
             style={{
-              color: "#4A4860",
+              color: "#6E6A63",
               fontSize: "14px",
               letterSpacing: "1px",
             }}
@@ -157,7 +157,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              border: "1px solid rgba(124,92,252,0.3)",
+              border: "1px solid rgba(245,240,228,0.3)",
               padding: "8px 16px",
             }}
           >

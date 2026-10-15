@@ -209,10 +209,10 @@ export const products: Product[] = [
       href: "/contact?product=sumi",
     },
     accent: {
-      hex: "#94A3B8",
-      soft: "#94A3B814",
-      border: "#94A3B840",
-      glow: "#94A3B822",
+      hex: "#A8A49A",
+      soft: "#A8A49A14",
+      border: "#A8A49A40",
+      glow: "#A8A49A22",
     },
     mockup: {
       type: "concept",
@@ -355,10 +355,10 @@ export const products: Product[] = [
       external: true,
     },
     accent: {
-      hex: "#5EEAD4",
-      soft: "#5EEAD414",
-      border: "#5EEAD440",
-      glow: "#5EEAD422",
+      hex: "#CBB35C",
+      soft: "#CBB35C14",
+      border: "#CBB35C40",
+      glow: "#CBB35C22",
     },
     mockup: {
       type: "concept",

@@ -10,8 +10,8 @@ import { UPWORK_PROFILE_URL, SCREENSHOT_BLUR } from '../../../data/site';
 import type { CaseStudy } from '../../../data/caseStudies';
 
 const toneGradients: Record<string, string> = {
-  violet: 'linear-gradient(135deg, rgba(124,92,252,0.15), rgba(124,92,252,0.04))',
-  deep: 'linear-gradient(135deg, rgba(90,63,204,0.18), rgba(90,63,204,0.04))',
+  violet: 'linear-gradient(135deg, rgba(245,240,228,0.15), rgba(245,240,228,0.04))',
+  deep: 'linear-gradient(135deg, rgba(166,160,146,0.18), rgba(166,160,146,0.04))',
   ember: 'linear-gradient(135deg, rgba(252,140,60,0.15), rgba(252,140,60,0.04))',
   ink: 'linear-gradient(135deg, rgba(245,240,230,0.06), rgba(245,240,230,0.02))',
 };
@@ -41,7 +41,7 @@ function StatusChip({ caseStudy }: { caseStudy: CaseStudy }) {
         border: inProgress
           ? '1px solid rgba(245,158,11,0.3)'
           : internal
-            ? '1px solid rgba(124,92,252,0.35)'
+            ? '1px solid rgba(245,240,228,0.35)'
             : '1px solid var(--line-strong)',
         color: inProgress ? '#fbbf24' : internal ? 'var(--accent-2)' : 'var(--fg-dim)',
         fontSize: 'var(--t-mono)',

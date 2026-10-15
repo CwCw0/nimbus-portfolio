@@ -6,7 +6,7 @@ import { changelog, type ChangeType } from "@/data/changelog";
 
 const TYPE_COLOR: Record<ChangeType, string> = {
   feature: "var(--accent)",
-  improvement: "#4EC9B0",
+  improvement: "#CBB35C",
   fix: "#D4A054",
   breaking: "#E05252",
 };

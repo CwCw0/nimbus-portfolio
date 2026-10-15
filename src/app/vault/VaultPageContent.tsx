@@ -8,8 +8,8 @@ import Magnetic from '@/components/ui/Magnetic';
 import { vaultProducts } from '@/data/vault';
 
 const toneGradients: Record<string, string> = {
-  violet: 'linear-gradient(135deg, rgba(245, 240, 228, 0.15), rgba(42, 26, 85, 0.08))',
-  deep: 'linear-gradient(135deg, rgba(140, 140, 140, 0.15), rgba(26, 18, 51, 0.08))',
+  violet: 'linear-gradient(135deg, rgba(245, 240, 228, 0.15), rgba(40, 36, 28, 0.08))',
+  deep: 'linear-gradient(135deg, rgba(140, 140, 140, 0.15), rgba(32, 29, 24, 0.08))',
   ember: 'linear-gradient(135deg, rgba(252, 140, 92, 0.12), rgba(85, 42, 26, 0.08))',
 };
 
@@ -126,7 +126,7 @@ export default function VaultPageContent() {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          background: 'rgba(10, 10, 15, 0.45)',
+                          background: 'rgba(14, 13, 11, 0.45)',
                           backdropFilter: 'blur(2px)',
                         }}
                       >

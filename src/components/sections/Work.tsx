@@ -9,10 +9,10 @@ import FadeIn from '@/components/ui/FadeIn';
 import { projects } from '@/data/projects';
 
 const toneGradients: Record<string, string> = {
-  violet: 'linear-gradient(135deg, rgba(245, 240, 228, 0.18), rgba(42, 26, 85, 0.30))',
-  deep: 'linear-gradient(135deg, rgba(140, 140, 140, 0.18), rgba(26, 18, 51, 0.30))',
+  violet: 'linear-gradient(135deg, rgba(245, 240, 228, 0.18), rgba(40, 36, 28, 0.30))',
+  deep: 'linear-gradient(135deg, rgba(140, 140, 140, 0.18), rgba(32, 29, 24, 0.30))',
   ember: 'linear-gradient(135deg, rgba(252, 140, 92, 0.18), rgba(85, 42, 26, 0.30))',
-  ink: 'linear-gradient(135deg, rgba(84, 80, 108, 0.18), rgba(20, 18, 31, 0.30))',
+  ink: 'linear-gradient(135deg, rgba(166, 160, 146, 0.18), rgba(25, 23, 19, 0.30))',
 };
 
 export default function Work() {
@@ -163,7 +163,7 @@ function CaseStudyRow({
               position: 'absolute',
               inset: 0,
               background:
-                'linear-gradient(180deg, transparent 60%, rgba(10, 10, 15, 0.6))',
+                'linear-gradient(180deg, transparent 60%, rgba(14, 13, 11, 0.6))',
             }}
           />
         </div>

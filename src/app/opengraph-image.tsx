@@ -26,7 +26,7 @@ export default async function Image() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(rgba(124,92,252,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(124,92,252,0.04) 1px, transparent 1px)",
+              "linear-gradient(rgba(245,240,228,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245,240,228,0.04) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />
@@ -38,7 +38,7 @@ export default async function Image() {
             width: "500px",
             height: "500px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(124,92,252,0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(245,240,228,0.15) 0%, transparent 70%)",
           }}
         />
 
@@ -80,7 +80,7 @@ export default async function Image() {
             <div style={{ display: "flex", color: "#F5F0E4" }}>system that runs</div>
             <div style={{ display: "flex" }}>your operation.</div>
           </div>
-          <p style={{ fontSize: "22px", color: "#948BBC", marginTop: "8px", fontWeight: 400 }}>
+          <p style={{ fontSize: "22px", color: "#A8A49A", marginTop: "8px", fontWeight: 400 }}>
             Dashboards · custom apps · assistants trained on your own data. Yours to own.
           </p>
         </div>
@@ -93,7 +93,7 @@ export default async function Image() {
             right: "80px",
             display: "flex",
             alignItems: "center",
-            border: "1px solid rgba(124,92,252,0.3)",
+            border: "1px solid rgba(245,240,228,0.3)",
             padding: "10px 20px",
           }}
         >

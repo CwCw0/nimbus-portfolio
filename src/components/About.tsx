@@ -346,7 +346,7 @@ export default function About() {
               ].map((tool) => (
                 <span
                   key={tool}
-                  className="tech-pill border border-(--color-border) px-3 py-1.5 font-body text-[12px] text-(--color-text-muted) transition-all duration-300 hover:border-(--color-accent-secondary) hover:text-(--color-accent-secondary) hover:shadow-[0_0_12px_rgba(94,234,212,0.08)]"
+                  className="tech-pill border border-(--color-border) px-3 py-1.5 font-body text-[12px] text-(--color-text-muted) transition-all duration-300 hover:border-(--color-accent-secondary) hover:text-(--color-accent-secondary) hover:shadow-[0_0_12px_rgba(245,240,228,0.08)]"
                 >
                   {tool}
                 </span>

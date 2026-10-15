@@ -222,7 +222,7 @@ export default function Process() {
               className="process-dot absolute left-1/2 -translate-x-1/2 h-3 w-3 rounded-full border-2 border-(--color-accent) bg-(--color-bg-primary)"
               style={{
                 top: `${(i / (steps.length - 1)) * 100}%`,
-                boxShadow: "0 0 8px rgba(124,92,252,0.3)",
+                boxShadow: "0 0 8px rgba(245,240,228,0.3)",
               }}
             />
           ))}

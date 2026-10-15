@@ -90,7 +90,7 @@ function ScrambleLink({
 
 const navItems = [
   { label: "Services", href: "/services", desc: "What we build" },
-  { label: "Work", href: "/work", desc: "Projects & design lab" },
+  { label: "Work", href: "/work", desc: "Selected projects" },
   { label: "Vault", href: "/vault", desc: "Products we're building" },
   { label: "About", href: "/about", desc: "The builder behind Nimbus" },
   { label: "Blog", href: "/blog", desc: "Thoughts on building" },

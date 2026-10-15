@@ -4,14 +4,6 @@ import { projects } from "../data/projects";
 import { vaultProducts } from "../data/vault";
 import { changelog } from "../data/changelog";
 
-const designTemplates = [
-  "studio-noir",
-  "elevate",
-  "pop-store",
-  "vitalis",
-  "roast",
-  "mono",
-];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbusformastudio.com";
@@ -37,12 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const designRoutes = designTemplates.map((slug) => ({
-    url: `${baseUrl}/work/designs/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
 
   return [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
@@ -64,6 +50,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogRoutes,
     ...workRoutes,
     ...vaultRoutes,
-    ...designRoutes,
   ];
 }

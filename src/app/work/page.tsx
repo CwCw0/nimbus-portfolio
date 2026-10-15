@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import WorkPageContent from './WorkPageContent';
 
 export const metadata: Metadata = {
-  title: 'Work — Projects & Design Lab',
+  title: 'Work — Selected Projects',
   description:
-    'Selected projects and case studies spanning web apps, SaaS platforms, health dashboards, and productivity tools. Plus a design lab of 6 web design templates.',
+    'Selected projects and case studies spanning web apps, SaaS platforms, health dashboards, and productivity tools.',
   alternates: { canonical: '/work' },
   openGraph: {
-    title: 'Nimbus Work — Projects & Design Lab',
+    title: 'Nimbus Work — Selected Projects',
     description:
-      'Case studies spanning web apps, SaaS platforms, and more. Plus 6 web design templates.',
+      'Case studies spanning web apps, SaaS platforms, and more.',
     url: '/work',
   },
 };

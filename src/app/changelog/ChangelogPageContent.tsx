@@ -13,7 +13,7 @@ import {
 
 const TYPE_META: Record<ChangeType, { label: string; color: string }> = {
   feature: { label: "NEW", color: "var(--accent)" },
-  improvement: { label: "IMPROVED", color: "#4EC9B0" },
+  improvement: { label: "IMPROVED", color: "#CBB35C" },
   fix: { label: "FIX", color: "#D4A054" },
   breaking: { label: "BREAKING", color: "#E05252" },
 };

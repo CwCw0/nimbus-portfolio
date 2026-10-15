@@ -494,7 +494,7 @@ export default function AboutPage() {
           {/* ── Studio Catalogue (unchanged) ──────────────────────────── */}
           <section
             ref={productsRef}
-            className="relative w-full overflow-hidden bg-[#0B0A14] px-16 py-32 max-md:px-6 max-md:py-20"
+            className="relative w-full overflow-hidden bg-[#0E0D0B] px-16 py-32 max-md:px-6 max-md:py-20"
           >
             <span
               aria-hidden

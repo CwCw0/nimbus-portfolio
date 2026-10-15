@@ -197,7 +197,7 @@ export default function Services() {
                 className="pointer-events-none absolute inset-0 transition-opacity duration-300"
                 style={{
                   opacity: isHovered ? 1 : 0,
-                  background: "radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124,92,252,0.06), transparent 60%)",
+                  background: "radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245,240,228,0.06), transparent 60%)",
                 }}
               />
 
@@ -206,7 +206,7 @@ export default function Services() {
                 className="absolute inset-0 rounded-none transition-opacity duration-300"
                 style={{
                   opacity: isHovered ? 1 : 0,
-                  background: `linear-gradient(135deg, rgba(124,92,252,0.15), rgba(94,234,212,0.1))`,
+                  background: `linear-gradient(135deg, rgba(245,240,228,0.15), rgba(245,240,228,0.1))`,
                   mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                   maskComposite: "exclude",
                   WebkitMaskComposite: "xor",
@@ -218,7 +218,7 @@ export default function Services() {
               <div
                 className="relative flex h-full flex-col gap-5 border border-(--color-border) bg-(--color-bg-card) p-8 transition-all duration-300 max-md:p-6"
                 style={{
-                  borderColor: isHovered ? "rgba(124,92,252,0.2)" : undefined,
+                  borderColor: isHovered ? "rgba(245,240,228,0.2)" : undefined,
                 }}
                 onMouseMove={(e) => {
                   const rect = e.currentTarget.parentElement?.getBoundingClientRect();
@@ -236,7 +236,7 @@ export default function Services() {
                     className="svc-icon flex h-12 w-12 items-center justify-center border border-(--color-border) transition-all duration-300"
                     style={{
                       borderColor: isHovered ? "var(--color-accent)" : undefined,
-                      boxShadow: isHovered ? "0 0 20px rgba(124,92,252,0.15)" : "none",
+                      boxShadow: isHovered ? "0 0 20px rgba(245,240,228,0.15)" : "none",
                     }}
                   >
                     <Icon
@@ -279,7 +279,7 @@ export default function Services() {
                       key={tag}
                       className="font-body text-[11px] tracking-[0.5px] px-2.5 py-1 border border-(--color-border) text-(--color-text-muted) transition-all duration-300"
                       style={{
-                        borderColor: isHovered ? "rgba(124,92,252,0.15)" : undefined,
+                        borderColor: isHovered ? "rgba(245,240,228,0.15)" : undefined,
                         color: isHovered ? "var(--color-accent-secondary)" : undefined,
                       }}
                     >

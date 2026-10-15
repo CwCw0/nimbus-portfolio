@@ -16,7 +16,7 @@ export default function Loading() {
       <style>{`
         .gsk-root { min-height: 100vh; }
         .gsk {
-          background: #14121F;
+          background: #191713;
           border: 1px solid rgba(245, 240, 230, 0.07);
           animation: gsk-pulse 1.6s ease-in-out infinite;
         }

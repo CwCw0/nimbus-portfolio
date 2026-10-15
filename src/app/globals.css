@@ -637,7 +637,7 @@ body[data-strings="on"] footer {
 
 .glitch-text { animation: glitch 3s ease-in-out infinite; }
 .glitch-r { position: absolute; inset: 0; color: #FF3333; animation: glitchR 3s ease-in-out infinite; }
-.glitch-b { position: absolute; inset: 0; color: #3333FF; animation: glitchB 3s ease-in-out infinite; }
+.glitch-b { position: absolute; inset: 0; color: #8E8A7F; animation: glitchB 3s ease-in-out infinite; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    READING PROGRESS BAR (carried over)

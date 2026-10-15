@@ -299,7 +299,7 @@ export default function Hero() {
           width: "clamp(300px, 40vw, 600px)",
           height: "clamp(300px, 40vw, 600px)",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(124,92,252,0.12) 0%, rgba(94,234,212,0.04) 50%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(245,240,228,0.12) 0%, rgba(245,240,228,0.04) 50%, transparent 70%)",
           filter: "blur(60px)",
           willChange: "transform, opacity",
         }}

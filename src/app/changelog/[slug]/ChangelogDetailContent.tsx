@@ -10,7 +10,7 @@ const TYPE_META: Record<
   { label: string; icon: string; color: string }
 > = {
   feature: { label: "New Features", icon: "✦", color: "var(--accent)" },
-  improvement: { label: "Improvements", icon: "↑", color: "#4EC9B0" },
+  improvement: { label: "Improvements", icon: "↑", color: "#CBB35C" },
   fix: { label: "Bug Fixes", icon: "⚑", color: "#D4A054" },
   breaking: { label: "Breaking Changes", icon: "⚠", color: "#E05252" },
 };
