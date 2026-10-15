@@ -20,7 +20,7 @@ export default function ServicesPageContent() {
   return (
     <>
       {/* ── Hero ── */}
-      <section style={{ padding: 'clamp(120px, 16vw, 240px) 0 var(--section-gap)', background: 'transparent' }}>
+      <section style={{ padding: 'clamp(120px, 16vw, 240px) 0 clamp(60px, 8vw, 120px)', background: 'transparent' }}>
         <div className="container">
           <RevealLine>
             <h1 className="display-xl">What I build.</h1>

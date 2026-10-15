@@ -31,7 +31,7 @@ export default function VaultPageContent() {
       {/* ── Hero ── */}
       <section
         style={{
-          padding: 'clamp(120px, 16vw, 240px) 0 var(--section-gap)',
+          padding: 'clamp(120px, 16vw, 240px) 0 clamp(60px, 8vw, 120px)',
           background: 'transparent',
         }}
       >
@@ -67,7 +67,7 @@ export default function VaultPageContent() {
           <section
             key={product.slug}
             style={{
-              padding: 'var(--section-gap) 0',
+              padding: '0 0 var(--section-gap)',
               background: 'transparent',
               opacity: isComingSoon ? 0.72 : 1,
               transition: 'opacity 0.3s ease',
@@ -342,7 +342,7 @@ export default function VaultPageContent() {
       })}
 
       {/* ── Bottom CTA ── */}
-      <section style={{ padding: 'var(--section-gap) 0', background: 'transparent' }}>
+      <section style={{ padding: '0 0 var(--section-gap)', background: 'transparent' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <FadeIn>
             <RevealLine>

@@ -49,7 +49,7 @@ export default function AboutPageContent() {
       {/* ── Hero ── */}
       <section
         style={{
-          padding: "clamp(120px, 16vw, 240px) 0 var(--section-gap)",
+          padding: "clamp(120px, 16vw, 240px) 0 clamp(60px, 8vw, 120px)",
           background: "transparent",
         }}
       >
