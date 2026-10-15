@@ -58,7 +58,7 @@
 
   /* Accent */
   --accent: #F5F0E4;
-  --aurora: #5EEAD4;
+  --aurora: #F5F0E4; /* accent color TBD — mono until Dee picks; mint vetoed 2026-10-16 */
   --accent-2: #FFFFFF;
   --accent-deep: #D8D4CC;
   --accent-glow: rgba(245, 240, 228, 0.22);
@@ -146,7 +146,7 @@
   --fg-dim: #5A5A5A;
   --fg-faint: #6E6A63;
   --accent: #101010;
-  --aurora: #0D9488;
+  --aurora: #101010; /* mono (light) until accent decided */
   --accent-2: #2A2A2A;
   --accent-glow: rgba(16, 16, 16, 0.16);
   --accent-deep: #000000;
