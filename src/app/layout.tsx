@@ -73,8 +73,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.svg?v=nmbs2" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/favicon.svg?v=nmbs2" />
 
         {/* Geo targeting — Malaysia primary, global reach */}
         <meta name="geo.region" content="MY" />
