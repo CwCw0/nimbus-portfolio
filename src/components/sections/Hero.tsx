@@ -91,6 +91,7 @@ export default function Hero() {
         }
         .hero-dot {
           display: inline-block;
+          color: var(--aurora);
           animation: hero-dot-land 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.95s both;
           transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
