@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Source_Serif_4 } from "next/font/google";
+import { Wix_Madefor_Text } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import ClientShell from "@/components/ClientShell";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-const sourceSerif = Source_Serif_4({
-  variable: "--font-source-serif",
+const madefor = Wix_Madefor_Text({
+  variable: "--font-madefor",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
-  axes: ["opsz"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbusformastudio.com";
@@ -149,7 +149,7 @@ export default function RootLayout({
         data-theme="dark"
         data-strings="on"
         data-grain="true"
-        className={`${sourceSerif.variable} h-full antialiased`}
+        className={`${madefor.variable} h-full antialiased`}
       >
         <a
           href="#main-content"

@@ -33,14 +33,18 @@ export default function Hero() {
         {/* Title — the loader's dot lands as the headline's full stop */}
         <h1>
           <RevealLine>
-            <span className="display-xl">I build the AI-powered system</span>
+            <span className="display-xl">I build the system</span>
           </RevealLine>
           <RevealLine delay={120}>
             <span className="display-xl">
-              that runs your operation<span className="hero-dot" aria-hidden="true">.</span>
+              that runs your business<span className="hero-dot" aria-hidden="true">.</span>
             </span>
           </RevealLine>
         </h1>
+
+        <FadeIn delay={240}>
+          <p className="hero-kicker">(The website&rsquo;s included.)</p>
+        </FadeIn>
 
         {/* Meta area — 2 col */}
         <div className="hero-meta">
@@ -76,6 +80,14 @@ export default function Hero() {
           grid-template-columns: 1fr 1fr;
           gap: var(--sp-10);
           align-items: start;
+        }
+        .hero-kicker {
+          display: block;
+          margin-top: -14px;
+          font-size: clamp(19px, 2.6vw, 30px);
+          font-weight: 500;
+          letter-spacing: -0.01em;
+          color: var(--fg-dim);
         }
         .hero-dot {
           display: inline-block;
