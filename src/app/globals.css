@@ -363,6 +363,7 @@
 
 /* Reveal Line — mask reveal (padding-bottom prevents descender clipping on g, y, p, j, q) */
 .reveal-line {
+  display: block;
   overflow: hidden;
   padding-bottom: 0.15em;
   margin-bottom: -0.15em;
@@ -1341,7 +1342,7 @@ main, footer, nav, header {
 
 /* ── Giant wordmark ── */
 .footer-wordmark {
-  padding: var(--sp-16) 0;
+  padding-block: var(--sp-16);
   overflow: visible;
   background: none;
   border: none;
