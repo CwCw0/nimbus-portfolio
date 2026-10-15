@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Nimbus Forma Studio",
   },
   description:
-    "I build the AI-powered system that runs your operation — internal dashboards, custom apps, workflow automation, and assistants trained on your own data. Custom-coded by Nimbus Forma Studio, Kuala Lumpur. Built with intention.",
+    "I make businesses run smoother — custom operations systems, internal dashboards, workflow automation, and AI assistants trained on your own data. Custom-coded by Nimbus Forma Studio, Kuala Lumpur. Built with intention.",
   keywords: ["internal ops dashboard", "AI knowledge assistant", "AI workflow automation", "business system builder Malaysia", "custom dashboard developer", "Next.js developer Malaysia", "freelance web developer KL", "web development", "AI integration", "Nimbus Forma Studio"],
   authors: [{ name: "Nimbus Forma Studio" }],
   creator: "Nimbus Forma Studio",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "Nimbus Forma Studio",
     title: "Nimbus Forma Studio — Built with intention.",
     description:
-      "I build the AI-powered system that runs your operation — internal dashboards, custom apps, workflow automation, and assistants trained on your own data. Custom-coded by Nimbus Forma Studio, Kuala Lumpur. Built with intention.",
+      "I make businesses run smoother — custom operations systems, internal dashboards, workflow automation, and AI assistants trained on your own data. Custom-coded by Nimbus Forma Studio, Kuala Lumpur. Built with intention.",
     images: [
       {
         url: `${siteUrl}/opengraph-image`,
