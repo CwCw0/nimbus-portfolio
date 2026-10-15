@@ -16,7 +16,7 @@ export default function Hero() {
         justifyContent: 'center',
         padding: 'var(--section-gap) 0',
         background:
-          'radial-gradient(1200px 700px at 0% 100%, rgba(245, 243, 239, 0.04), transparent 65%)',
+          'radial-gradient(1200px 700px at 0% 100%, rgba(245, 240, 228, 0.04), transparent 65%)',
       }}
     >
       <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-12)' }}>
@@ -33,17 +33,17 @@ export default function Hero() {
         {/* Title — the loader's dot lands as the headline's full stop */}
         <h1>
           <RevealLine>
-            <span className="display-xl">I build the system</span>
+            <span className="display-xl">I make businesses</span>
           </RevealLine>
           <RevealLine delay={120}>
             <span className="display-xl">
-              that runs your business<span className="hero-dot" aria-hidden="true">.</span>
+              run smoother<span className="hero-dot" aria-hidden="true">.</span>
             </span>
           </RevealLine>
         </h1>
 
         <FadeIn delay={240}>
-          <p className="hero-kicker">(The website&rsquo;s included.)</p>
+          <p className="hero-domains mono">Business development &middot; Operations systems &middot; AI &amp; agents</p>
         </FadeIn>
 
         {/* Meta area — 2 col */}
@@ -81,12 +81,12 @@ export default function Hero() {
           gap: var(--sp-10);
           align-items: start;
         }
-        .hero-kicker {
+        .hero-domains {
           display: block;
-          margin-top: -14px;
-          font-size: clamp(19px, 2.6vw, 30px);
-          font-weight: 500;
-          letter-spacing: -0.01em;
+          margin-top: -8px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          font-size: clamp(11px, 1.3vw, 13px);
           color: var(--fg-dim);
         }
         .hero-dot {

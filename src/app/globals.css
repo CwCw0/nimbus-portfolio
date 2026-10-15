@@ -57,21 +57,21 @@
   --violet-3: #2E2E2E;
 
   /* Accent */
-  --accent: #F5F3EF;
+  --accent: #F5F0E4;
   --aurora: #5EEAD4;
   --accent-2: #FFFFFF;
   --accent-deep: #D8D4CC;
-  --accent-glow: rgba(245, 243, 239, 0.22);
-  --accent-soft: rgba(245, 243, 239, 0.07);
+  --accent-glow: rgba(245, 240, 228, 0.22);
+  --accent-soft: rgba(245, 240, 228, 0.07);
 
   /* Foreground — warm eggshell for premium feel */
-  --fg: #F5F3EF;
+  --fg: #F5F0E4;
   --fg-dim: #A3A3A3;
   --fg-faint: #8C8C8C;
 
   /* Lines */
-  --line: rgba(245, 243, 239, 0.06);
-  --line-strong: rgba(245, 243, 239, 0.14);
+  --line: rgba(245, 240, 228, 0.06);
+  --line-strong: rgba(245, 240, 228, 0.14);
 
   /* ── Typography ── */
   --f-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
@@ -134,10 +134,10 @@
    LIGHT THEME
    ═══════════════════════════════════════════════════════════════════════════ */
 [data-theme="light"] {
-  --ink-0: #F5F3EF;
-  --ink-1: #ECEAE4;
-  --ink-2: #E2E0D8;
-  --ink-3: #D5D2C9;
+  --ink-0: #F5F0E4;
+  --ink-1: #EBE5D6;
+  --ink-2: #E0DACA;
+  --ink-3: #D3CCBA;
   --ink-4: #C6C3BA;
   --violet-1: #E4E2DC;
   --violet-2: #CBC8C0;
@@ -151,9 +151,9 @@
   --accent-glow: rgba(16, 16, 16, 0.16);
   --accent-deep: #000000;
   --accent-soft: rgba(16, 16, 16, 0.05);
-  --glass-bg: rgba(245, 243, 239, 0.65);
-  --glass-bg-strong: rgba(245, 243, 239, 0.82);
-  --glass-bg-nav: rgba(245, 243, 239, 0.92);
+  --glass-bg: rgba(245, 240, 228, 0.65);
+  --glass-bg-strong: rgba(245, 240, 228, 0.82);
+  --glass-bg-nav: rgba(245, 240, 228, 0.92);
   --line: rgba(16, 16, 16, 0.10);
   --line-strong: rgba(16, 16, 16, 0.22);
   --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.08);
@@ -1472,8 +1472,8 @@ main, footer, nav, header {
   transition: border-color 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out), transform 0.3s var(--ease-out);
 }
 .card-highlight:hover {
-  border-color: rgba(245, 243, 239, 0.3);
-  box-shadow: 0 8px 32px -8px rgba(245, 243, 239, 0.12);
+  border-color: rgba(245, 240, 228, 0.3);
+  box-shadow: 0 8px 32px -8px rgba(245, 240, 228, 0.12);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -1486,11 +1486,11 @@ main, footer, nav, header {
               box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .design-lab-card:hover {
-  border-color: rgba(245, 243, 239, 0.5) !important;
+  border-color: rgba(245, 240, 228, 0.5) !important;
   transform: translateY(-6px) scale(1.01);
   box-shadow:
-    0 20px 60px -15px rgba(245, 243, 239, 0.25),
-    0 0 0 1px rgba(245, 243, 239, 0.1);
+    0 20px 60px -15px rgba(245, 240, 228, 0.25),
+    0 0 0 1px rgba(245, 240, 228, 0.1);
 }
 .design-lab-card:hover .design-lab-card-img {
   transform: scale(1.05);

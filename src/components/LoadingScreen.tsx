@@ -116,7 +116,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             height: 600,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, #F5F3EF08 0%, transparent 70%)",
+              "radial-gradient(circle, #F5F0E408 0%, transparent 70%)",
           }}
         />
       </div>
@@ -150,7 +150,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
           style={{
             width: 14,
             height: 14,
-            backgroundColor: "#F5F3EF",
+            backgroundColor: "#F5F0E4",
           }}
         />
         {"nmbs.".split("").map((char, i) => (

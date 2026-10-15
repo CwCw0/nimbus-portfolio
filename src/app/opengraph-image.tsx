@@ -54,10 +54,10 @@ export default async function Image() {
           }}
         >
           <div
-            style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#F5F3EF" }}
+            style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#F5F0E4" }}
           />
           <span
-            style={{ color: "#F5F3EF", fontSize: "13px", letterSpacing: "3px", fontWeight: 600 }}
+            style={{ color: "#F5F0E4", fontSize: "13px", letterSpacing: "3px", fontWeight: 600 }}
           >
             NIMBUS FORMA STUDIO
           </span>
@@ -77,7 +77,7 @@ export default async function Image() {
             }}
           >
             <div style={{ display: "flex" }}>I build the AI-powered</div>
-            <div style={{ display: "flex", color: "#F5F3EF" }}>system that runs</div>
+            <div style={{ display: "flex", color: "#F5F0E4" }}>system that runs</div>
             <div style={{ display: "flex" }}>your operation.</div>
           </div>
           <p style={{ fontSize: "22px", color: "#948BBC", marginTop: "8px", fontWeight: 400 }}>
@@ -97,7 +97,7 @@ export default async function Image() {
             padding: "10px 20px",
           }}
         >
-          <span style={{ color: "#F5F3EF", fontSize: "14px", fontWeight: 600 }}>
+          <span style={{ color: "#F5F0E4", fontSize: "14px", fontWeight: 600 }}>
             NIMBUSFORMASTUDIO.COM
           </span>
         </div>

@@ -123,7 +123,7 @@ export default function PageLoader() {
           fontWeight: 620,
           letterSpacing: "-0.015em",
           lineHeight: 1,
-          color: "#F5F3EF",
+          color: "#F5F0E4",
           willChange: "transform",
         }}
       >

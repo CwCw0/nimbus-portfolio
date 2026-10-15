@@ -64,7 +64,7 @@ export default function MarqueeStrip() {
       className="relative flex w-full flex-col gap-3 overflow-hidden py-12 max-md:py-6 max-md:gap-1"
       style={{
         background:
-          "linear-gradient(180deg, #F5F3EF08 0%, transparent 50%, #F5F3EF05 100%)",
+          "linear-gradient(180deg, #F5F0E408 0%, transparent 50%, #F5F0E405 100%)",
       }}
     >
       {/* Top row — filled text, scrolls left */}

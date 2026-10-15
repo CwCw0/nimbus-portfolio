@@ -284,7 +284,7 @@ export default function Header() {
                 marginTop: "-1px",
                 height: "1.5px",
                 background:
-                  "linear-gradient(90deg, #F5F3EF 0%, #FFFFFF 50%, #F5F3EF 100%)",
+                  "linear-gradient(90deg, #F5F0E4 0%, #FFFFFF 50%, #F5F0E4 100%)",
                 opacity: 0.65,
                 transformOrigin: "left center",
                 transform: "scaleX(0)",

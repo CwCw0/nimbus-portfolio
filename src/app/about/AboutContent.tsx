@@ -617,7 +617,7 @@ export default function AboutPage() {
           >
             <div
               className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-100 w-150 rounded-full"
-              style={{ background: "radial-gradient(circle, #F5F3EF10 0%, transparent 100%)" }}
+              style={{ background: "radial-gradient(circle, #F5F0E410 0%, transparent 100%)" }}
             />
             <div className="relative z-10 flex flex-col items-center gap-8">
               <h2
@@ -634,7 +634,7 @@ export default function AboutPage() {
                 href="https://calendly.com/heyitsnimbus/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 bg-linear-to-br from-(--color-accent) to-(--color-accent-light) px-9 py-4.5 font-body text-base font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#F5F3EF20]"
+                className="flex items-center gap-2.5 bg-linear-to-br from-(--color-accent) to-(--color-accent-light) px-9 py-4.5 font-body text-base font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_24px_#F5F0E420]"
               >
                 Get in Touch
                 <ArrowUpRight className="h-4.5 w-4.5" />

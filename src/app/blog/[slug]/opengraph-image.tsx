@@ -66,12 +66,12 @@ export default async function Image({ params }: { params: { slug: string } }) {
                 width: "8px",
                 height: "8px",
                 borderRadius: "50%",
-                background: "#F5F3EF",
+                background: "#F5F0E4",
               }}
             />
             <span
               style={{
-                color: "#F5F3EF",
+                color: "#F5F0E4",
                 fontSize: "13px",
                 letterSpacing: "3px",
                 fontWeight: 600,
@@ -163,7 +163,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
           >
             <span
               style={{
-                color: "#F5F3EF",
+                color: "#F5F0E4",
                 fontSize: "13px",
                 fontWeight: 600,
               }}
