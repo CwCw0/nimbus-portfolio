@@ -30,7 +30,7 @@ export default function ChangelogPageContent() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="container" style={{ padding: 'clamp(120px, 16vw, 240px) 0 clamp(60px, 8vw, 120px)' }}>
+      <section className="container" style={{ paddingTop: 'clamp(120px, 16vw, 240px)', paddingBottom: 'clamp(60px, 8vw, 120px)' }}>
         <RevealLine>
           <h1 className="display-xl">Dev Log.</h1>
         </RevealLine>
