@@ -134,12 +134,12 @@ export default function AmbientWaves({ lineCount = 18, className }: AmbientWaves
         // Colour
         let r: number, g: number, b: number;
         if (l.colourRole === 'violet') {
-          r = isLight ? 19 : 245; g = isLight ? 19 : 240; b = isLight ? 31 : 228;
+          r = isLight ? 22 : 245; g = isLight ? 20 : 240; b = isLight ? 17 : 228;
         } else if (l.colourRole === 'light') {
-          r = isLight ? 19 : 255; g = isLight ? 19 : 252; b = isLight ? 31 : 240;
+          r = isLight ? 22 : 255; g = isLight ? 20 : 252; b = isLight ? 17 : 240;
         } else {
           // neutral — iris midtone (dark) / iris ink (light)
-          r = isLight ? 42 : 168; g = isLight ? 42 : 165; b = isLight ? 58 : 184;
+          r = isLight ? 45 : 180; g = isLight ? 42 : 175; b = isLight ? 38 : 164;
         }
 
         let alpha = l.baseAlpha + l.edgeFactor * 0.08;
@@ -178,9 +178,9 @@ export default function AmbientWaves({ lineCount = 18, className }: AmbientWaves
         const l = lines[i];
         const baseY = l.edgeBias * h;
         let r: number, g: number, b: number;
-        if (l.colourRole === 'violet') { r = isLight ? 19 : 245; g = isLight ? 19 : 240; b = isLight ? 31 : 228; }
-        else if (l.colourRole === 'light') { r = isLight ? 19 : 255; g = isLight ? 19 : 252; b = isLight ? 31 : 240; }
-        else { r = isLight ? 42 : 168; g = isLight ? 42 : 165; b = isLight ? 58 : 184; }
+        if (l.colourRole === 'violet') { r = isLight ? 22 : 245; g = isLight ? 20 : 240; b = isLight ? 17 : 228; }
+        else if (l.colourRole === 'light') { r = isLight ? 22 : 255; g = isLight ? 20 : 252; b = isLight ? 17 : 240; }
+        else { r = isLight ? 45 : 180; g = isLight ? 42 : 175; b = isLight ? 38 : 164; }
         const alpha = l.baseAlpha + l.edgeFactor * 0.08;
         ctx!.beginPath();
         for (let s = 0; s <= samples; s++) {

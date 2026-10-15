@@ -7,17 +7,17 @@ import PreviewBar from "../../PreviewBar";
 /* ── Palette & Constants ────────────────────────────────────────────── */
 export const P = {
   bg: "#FFF8F0",
-  text: "#1B1B29",
+  text: "#1D1B16",
   textLight: "#FFF8F0",
   muted: "#6B6B6B",
   coral: "#FF6B35",
   purple: "#8B5CF6",
   green: "#22C55E",
   yellow: "#FBBF24",
-  border: "3px solid #1B1B29",
-  borderThin: "2px solid #1B1B29",
-  shadow: "4px 4px 0 #1B1B29",
-  shadowHover: "8px 8px 0 #1B1B29",
+  border: "3px solid #1D1B16",
+  borderThin: "2px solid #1D1B16",
+  shadow: "4px 4px 0 #1D1B16",
+  shadowHover: "8px 8px 0 #1D1B16",
 };
 
 export const BASE = "/work/designs/pop-store/preview";
@@ -106,7 +106,7 @@ export function PopNav({ cartCount = 0 }: { cartCount?: number }) {
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = "translate(-2px, -2px)";
-            e.currentTarget.style.boxShadow = "6px 6px 0 #1B1B29";
+            e.currentTarget.style.boxShadow = "6px 6px 0 #1D1B16";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = "translate(0, 0)";
@@ -124,7 +124,7 @@ export function PopNav({ cartCount = 0 }: { cartCount?: number }) {
                 height: 20,
                 borderRadius: "50%",
                 background: P.coral,
-                border: "2px solid #1B1B29",
+                border: "2px solid #1D1B16",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -210,7 +210,7 @@ export function BreakdownFab() {
           fontWeight: 700,
           textDecoration: "none",
           border: P.borderThin,
-          boxShadow: "3px 3px 0 #1B1B29",
+          boxShadow: "3px 3px 0 #1D1B16",
         }}
       >
         ← BREAKDOWN

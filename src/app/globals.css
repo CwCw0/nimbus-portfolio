@@ -45,16 +45,16 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
   /* Ink scale — backgrounds */
-  --ink-0: #0C0C15;
-  --ink-1: #11111C;
-  --ink-2: #171725;
-  --ink-3: #1D1D2C;
-  --ink-4: #252538;
+  --ink-0: #0E0D0B;
+  --ink-1: #13110E;
+  --ink-2: #191713;
+  --ink-3: #201D18;
+  --ink-4: #28251F;
 
   /* Violet scale */
-  --violet-1: #1B1B29;
-  --violet-2: #232331;
-  --violet-3: #2F2F40;
+  --violet-1: #1D1B16;
+  --violet-2: #232019;
+  --violet-3: #302C24;
 
   /* Accent */
   --accent: #F5F0E4;
@@ -66,8 +66,8 @@
 
   /* Foreground — warm eggshell for premium feel */
   --fg: #F5F0E4;
-  --fg-dim: #A8A5B8;
-  --fg-faint: #8D8A9C;
+  --fg-dim: #A8A49A;
+  --fg-faint: #8E8A7F;
 
   /* Lines */
   --line: rgba(245, 240, 228, 0.06);
@@ -120,9 +120,9 @@
   --container-px: clamp(20px, 4vw, 56px);
 
   /* ── Glass backgrounds ── */
-  --glass-bg: rgba(12, 12, 21, 0.55);
-  --glass-bg-strong: rgba(12, 12, 21, 0.72);
-  --glass-bg-nav: rgba(12, 12, 21, 0.88);
+  --glass-bg: rgba(14, 13, 11, 0.55);
+  --glass-bg-strong: rgba(14, 13, 11, 0.72);
+  --glass-bg-nav: rgba(14, 13, 11, 0.88);
 
   /* ── Shadows ── */
   --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.4);
@@ -142,20 +142,20 @@
   --violet-1: #E4E2DC;
   --violet-2: #CBC8C0;
   --violet-3: #8F8B82;
-  --fg: #13131F;
-  --fg-dim: #504D62;
-  --fg-faint: #6B6878;
-  --accent: #13131F;
-  --aurora: #13131F; /* mono (light) until accent decided */
+  --fg: #161411;
+  --fg-dim: #55514A;
+  --fg-faint: #6E6A63;
+  --accent: #161411;
+  --aurora: #161411; /* mono (light) until accent decided */
   --accent-2: #2A2A2A;
-  --accent-glow: rgba(19, 19, 31, 0.16);
-  --accent-deep: #0B0B14;
-  --accent-soft: rgba(19, 19, 31, 0.05);
+  --accent-glow: rgba(22, 20, 17, 0.16);
+  --accent-deep: #0B0A08;
+  --accent-soft: rgba(22, 20, 17, 0.05);
   --glass-bg: rgba(245, 240, 228, 0.65);
   --glass-bg-strong: rgba(245, 240, 228, 0.82);
   --glass-bg-nav: rgba(245, 240, 228, 0.92);
-  --line: rgba(19, 19, 31, 0.10);
-  --line-strong: rgba(19, 19, 31, 0.22);
+  --line: rgba(22, 20, 17, 0.10);
+  --line-strong: rgba(22, 20, 17, 0.22);
   --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.08);
   --shadow-elevated: 0 12px 48px -8px rgba(0, 0, 0, 0.12);
   --shadow-glow: 0 0 40px -8px var(--accent-glow);

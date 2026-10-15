@@ -46,29 +46,34 @@ export default function Hero() {
           <p className="hero-domains mono">Business development &middot; Operations systems &middot; AI &amp; agents</p>
         </FadeIn>
 
-        {/* Meta area — 2 col */}
+        {/* Meta — editorial row under a hairline */}
         <div className="hero-meta">
           <FadeIn delay={300}>
-            <p style={{ color: 'var(--fg-dim)', maxWidth: 520, lineHeight: 1.7 }}>
-              Internal dashboards, custom apps, workflow automation, and
-              assistants trained on your own data. Custom-coded — not templates,
-              not a subscription. Deployed, documented, and yours to own.
-            </p>
+            <div className="hero-desc">
+              <span className="mono hero-meta-label">What I do</span>
+              <p>
+                Internal dashboards, custom apps, workflow automation, and
+                assistants trained on your own data. Custom-coded, not templates,
+                not a subscription. Deployed, documented, and yours to own.
+              </p>
+            </div>
           </FadeIn>
-          <FadeIn delay={450}>
-            <div style={{ display: 'flex', gap: 'var(--sp-4)', flexWrap: 'wrap' }}>
+          <FadeIn delay={430}>
+            <div className="hero-cta">
               <Magnetic>
                 <Link href="/work" className="btn">
                   See the work <span aria-hidden="true">↗</span>
                 </Link>
               </Magnetic>
+              <Link href="/services" className="hero-cta-sub link-underline">
+                What I build, in detail
+              </Link>
             </div>
           </FadeIn>
         </div>
 
-        {/* Byline */}
-        <FadeIn delay={600}>
-          <span className="mono" style={{ color: 'var(--fg-faint)' }}>
+        <FadeIn delay={560}>
+          <span className="mono hero-byline">
             Dee — solo builder, Kuala Lumpur. Nimbus Forma Studio (SSM 202603095969).
           </span>
         </FadeIn>
@@ -77,10 +82,34 @@ export default function Hero() {
       <style jsx>{`
         .hero-meta {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: minmax(0, 1fr) auto;
+          align-items: end;
           gap: var(--sp-10);
+          border-top: 1px solid var(--line);
+          padding-top: var(--sp-8);
+        }
+        .hero-desc {
+          display: grid;
+          grid-template-columns: 140px minmax(0, 52ch);
+          gap: var(--sp-6);
           align-items: start;
         }
+        .hero-meta-label {
+          color: var(--fg-faint);
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          font-size: 11px;
+          padding-top: 5px;
+        }
+        .hero-desc p { color: var(--fg-dim); line-height: 1.7; }
+        .hero-cta {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: var(--sp-4);
+        }
+        .hero-cta-sub { font-size: 14px; color: var(--fg-dim); }
+        .hero-byline { color: var(--fg-faint); display: block; margin-top: var(--sp-6); }
         .hero-domains {
           display: block;
           margin-top: -8px;
@@ -114,10 +143,9 @@ export default function Hero() {
           }
         }
         @media (max-width: 900px) {
-          .hero-meta {
-            grid-template-columns: 1fr;
-            gap: var(--sp-6);
-          }
+          .hero-meta { grid-template-columns: 1fr; gap: var(--sp-6); }
+          .hero-desc { grid-template-columns: 1fr; gap: var(--sp-2); }
+          .hero-cta { flex-direction: row; align-items: center; }
         }
       `}</style>
     </section>
