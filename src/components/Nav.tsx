@@ -20,7 +20,6 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const slashRef = useRef<SVGLineElement>(null);
 
   /* ── Theme from localStorage ── */
   useEffect(() => {
@@ -29,17 +28,6 @@ export default function Nav() {
       setTheme(saved);
       document.body.setAttribute('data-theme', saved);
     }
-  }, []);
-
-  /* ── Auto-slash on load: show then retreat ── */
-  useEffect(() => {
-    const show = setTimeout(() => {
-      slashRef.current?.classList.add('slashed');
-    }, 1200);
-    const hide = setTimeout(() => {
-      slashRef.current?.classList.remove('slashed');
-    }, 3000);
-    return () => { clearTimeout(show); clearTimeout(hide); };
   }, []);
 
   const toggleTheme = useCallback(() => {
@@ -93,34 +81,7 @@ export default function Nav() {
         <div className="nav-inner container">
           {/* ── Brand ── */}
           <Link href="/" className="nav-brand" aria-label="Nimbus Forma Studio — Home">
-            <svg className="nav-brand-mark" viewBox="0 0 250 80" fill="none" aria-hidden="true">
-              <text
-                x="0"
-                y="60"
-                fill="var(--fg)"
-                style={{
-                  fontFamily: 'var(--f-display)',
-                  fontSize: '68px',
-                  fontWeight: 700,
-                  letterSpacing: '-0.01em',
-                }}
-              >
-                nmbs.
-              </text>
-              <line
-                ref={slashRef}
-                x1="6"
-                y1="64"
-                x2="238"
-                y2="10"
-                stroke="var(--accent)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeDasharray="250"
-                strokeDashoffset="250"
-              />
-            </svg>
-            <span className="nav-brand-sub">Nimbus Forma Studio</span>
+            <span className="nav-brand-word font-display">nmbs<span className="nav-brand-dot">.</span></span>
           </Link>
 
           {/* ── Desktop links ── */}

@@ -12,16 +12,12 @@ const PageLoader = dynamic(() => import("@/components/PageLoader"), {
 const AmbientWaves = dynamic(() => import("@/components/AmbientWaves"), {
   ssr: false,
 });
-const Cursor = dynamic(() => import("@/components/ui/Cursor"), {
-  ssr: false,
-});
 
 export default function ClientShell({ children }: { children: ReactNode }) {
   return (
     <>
       <PageLoader />
       <AmbientWaves lineCount={18} />
-      <Cursor />
       <SmoothScroll />
       {children}
     </>

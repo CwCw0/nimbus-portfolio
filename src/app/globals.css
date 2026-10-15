@@ -72,10 +72,10 @@
   --line-strong: rgba(245, 243, 239, 0.14);
 
   /* ── Typography ── */
-  --f-display: 'Cabinet Grotesk', system-ui, sans-serif;
-  --f-serif: 'Newsreader', 'Times New Roman', serif;
-  --f-body: 'Switzer', system-ui, sans-serif;
-  --f-mono: 'Fragment Mono', ui-monospace, monospace;
+  --f-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
+  --f-serif: var(--font-source-serif), Georgia, serif;
+  --f-body: var(--font-source-serif), Georgia, serif;
+  --f-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* ── Type Scale (responsive clamp) ── */
   --t-display-xxl: clamp(80px, 16vw, 280px);
@@ -456,76 +456,6 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   CUSTOM CURSOR
-   ═══════════════════════════════════════════════════════════════════════════ */
-/* Cursor: triangle pointer + glow */
-#custom-cursor-dot,
-#custom-cursor-ring {
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  will-change: transform;
-}
-
-/* Figma-style pointer — clean arrow, tip at origin */
-#custom-cursor-dot {
-  width: 14px;
-  height: 20px;
-  margin-left: 0;
-  margin-top: 0;
-  filter: drop-shadow(0 0 6px rgba(245, 243, 239, 0.5)) drop-shadow(0 0 14px rgba(245, 243, 239, 0.25));
-  transition: filter 200ms var(--ease-out), opacity 150ms ease;
-}
-
-/* Glow ring — subtle trailing aura */
-#custom-cursor-ring {
-  width: 32px;
-  height: 32px;
-  margin-left: -16px;
-  margin-top: -16px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(245, 243, 239, 0.08) 0%, transparent 70%);
-  transition: transform 90ms linear, width 300ms var(--ease-out), height 300ms var(--ease-out),
-    background 300ms var(--ease-out);
-}
-
-/* Hover: pointer shrinks, ring becomes visible accent circle */
-#custom-cursor-dot.hovering {
-  opacity: 0.6;
-  filter: drop-shadow(0 0 8px rgba(245, 243, 239, 0.8)) drop-shadow(0 0 16px rgba(245, 243, 239, 0.4));
-}
-#custom-cursor-ring.hovering {
-  width: 52px;
-  height: 52px;
-  margin-left: -26px;
-  margin-top: -26px;
-  background: radial-gradient(circle, rgba(245, 243, 239, 0.18) 0%, rgba(245, 243, 239, 0.06) 60%, transparent 80%);
-  border: 1.5px solid rgba(245, 243, 239, 0.45);
-  box-shadow: 0 0 24px rgba(245, 243, 239, 0.25), inset 0 0 12px rgba(245, 243, 239, 0.08);
-}
-
-/* Click: glow intensifies */
-#custom-cursor-dot.clicking {
-  filter: drop-shadow(0 0 10px rgba(245, 243, 239, 0.8)) drop-shadow(0 0 20px rgba(245, 243, 239, 0.4));
-}
-
-body.cursor-ready,
-body.cursor-ready *,
-body.cursor-ready *::before,
-body.cursor-ready *::after {
-  cursor: none;
-}
-
-/* Restore cursor for select elements */
-body.cursor-ready select,
-body.cursor-ready select *,
-body.cursor-ready option {
-  cursor: pointer;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
    CUSTOM SCROLLBAR
    ═══════════════════════════════════════════════════════════════════════════ */
 ::-webkit-scrollbar {
@@ -631,10 +561,6 @@ body[data-strings="on"] footer {
   *::before,
   *::after {
     cursor: auto !important;
-  }
-  #custom-cursor-dot,
-  #custom-cursor-ring {
-    display: none !important;
   }
 }
 
@@ -967,26 +893,23 @@ main, footer, nav, header {
   -webkit-tap-highlight-color: transparent;
 }
 
-.nav-brand-mark {
-  display: block;
-  width: auto;
-  height: 14px;
+.nav-brand-word {
+  font-size: 26px;
+  font-weight: 620;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+  line-height: 1;
+  transition: opacity 0.25s var(--ease-out);
 }
 
-.nav-brand-mark line {
-  transition: stroke-dashoffset 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  filter: drop-shadow(0 0 4px var(--accent-glow));
+.nav-brand-dot {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @media (hover: hover) {
-  .nav-brand:hover .nav-brand-mark line,
-  .nav-brand-mark line.slashed {
-    stroke-dashoffset: 0;
-  }
-}
-
-.nav-brand-mark line.slashed {
-  stroke-dashoffset: 0;
+  .nav-brand:hover .nav-brand-word { opacity: 0.85; }
+  .nav-brand:hover .nav-brand-dot { transform: translateY(-4px); }
 }
 
 .nav-brand-sub {
@@ -1581,8 +1504,6 @@ main, footer, nav, header {
 body.preview-active .nav-bar,
 body.preview-active .nav-drawer,
 body.preview-active .footer-root,
-body.preview-active #custom-cursor-dot,
-body.preview-active #custom-cursor-ring,
 body.preview-active .ambient-waves,
 body.preview-active .grain-overlay {
   display: none !important;

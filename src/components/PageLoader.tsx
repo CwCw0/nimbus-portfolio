@@ -6,28 +6,21 @@ import { gsap } from "gsap";
 import SplitType from "split-type";
 
 /**
- * Fast, sharp page loader. ~2s total.
- * Dot snaps → NIMBUS chars stagger up → hold → blade strike → split →
- * FORMA STUDIO → overlay lifts. No gimmicks, pure confidence.
+ * Minimal intro. ~1.5s total.
+ * nmbs. bounces up letter by letter — the period lands last with a hop —
+ * brief beat, overlay lifts. No slash, no gimmicks.
  */
 export default function PageLoader() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLSpanElement>(null);
-  const topHalfRef = useRef<HTMLSpanElement>(null);
-  const bottomHalfRef = useRef<HTMLSpanElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-  const subRef = useRef<HTMLSpanElement>(null);
-  const dotRef = useRef<HTMLDivElement>(null);
-  const dotFlareRef = useRef<HTMLDivElement>(null);
-  const flashRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const isMobile = window.innerWidth < 769;
     // Brand intro belongs to the homepage. A buyer deep-linking a case study
-    // gets the proof immediately, not a 2s title card.
-    if (pathname === "/" && !isMobile && !sessionStorage.getItem("nfs-intro-v10")) {
+    // gets the proof immediately, not a title card.
+    if (pathname === "/" && !isMobile && !sessionStorage.getItem("nfs-intro-v11")) {
       setVisible(true);
     }
   }, []);
@@ -37,22 +30,13 @@ export default function PageLoader() {
 
     const overlay = overlayRef.current;
     const word = wordRef.current;
-    const topHalf = topHalfRef.current;
-    const bottomHalf = bottomHalfRef.current;
-    const line = lineRef.current;
-    const sub = subRef.current;
-    const dot = dotRef.current;
-    const dotFlare = dotFlareRef.current;
-    const flash = flashRef.current;
-
-    if (!overlay || !word || !topHalf || !bottomHalf || !line || !sub || !dot || !dotFlare || !flash)
-      return;
+    if (!overlay || !word) return;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
     if (prefersReducedMotion) {
-      sessionStorage.setItem("nfs-intro-v10", "1");
+      sessionStorage.setItem("nfs-intro-v11", "1");
       setVisible(false);
       return;
     }
@@ -60,21 +44,12 @@ export default function PageLoader() {
     document.body.style.overflow = "hidden";
 
     const split = new SplitType(word, { types: "chars" });
-    const wordH = word.getBoundingClientRect().height;
-    const splitDist = Math.max(wordH * 0.32, 24);
+    const chars = split.chars || [];
+    const dot = chars[chars.length - 1];
+    const letters = chars.slice(0, -1);
 
-    // Initial states
-    gsap.set(dot, { scale: 0, autoAlpha: 0 });
-    gsap.set(split.chars || [], { y: "100%", autoAlpha: 0 });
-    gsap.set(topHalf, { autoAlpha: 0 });
-    gsap.set(bottomHalf, { autoAlpha: 0 });
-    gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
-    gsap.set(flash, { autoAlpha: 0 });
-    gsap.set(dotFlare, { autoAlpha: 0 });
-    gsap.set(sub, { autoAlpha: 0, xPercent: -50, yPercent: -50, y: 8, letterSpacing: "0px" });
-
-    // Wrap chars in overflow-hidden spans
-    split.chars?.forEach((char) => {
+    // Wrap chars in overflow-hidden spans so they rise from below the baseline
+    chars.forEach((char) => {
       const wrapper = document.createElement("span");
       wrapper.style.display = "inline-block";
       wrapper.style.overflow = "hidden";
@@ -83,85 +58,47 @@ export default function PageLoader() {
       wrapper.appendChild(char);
     });
 
+    gsap.set(chars, { y: "115%" });
+
     const onDone = () => {
       document.body.style.overflow = "";
-      sessionStorage.setItem("nfs-intro-v10", "1");
+      sessionStorage.setItem("nfs-intro-v11", "1");
       setVisible(false);
     };
 
     const tl = gsap.timeline({ defaults: { force3D: true } });
 
-    // 1 ▸ Dot snaps in — fast, decisive
-    tl.to(dot, {
-      scale: 1,
-      autoAlpha: 1,
-      duration: 0.12,
-      ease: "back.out(3)",
-    }, 0.1);
-
-    // 2 ▸ NIMBUS chars slide up from below baseline
-    tl.to(split.chars || [], {
+    // 1 ▸ letters bounce up from below the baseline
+    tl.to(letters, {
       y: "0%",
-      autoAlpha: 1,
-      duration: 0.3,
-      stagger: 0.025,
-      ease: "power3.out",
-    }, 0.2);
+      duration: 0.5,
+      stagger: 0.06,
+      ease: "back.out(1.8)",
+    }, 0.15);
 
-    // 3 ▸ Blade draws across center
-    tl.to(line, {
-      scaleX: 1,
-      duration: 0.2,
-      ease: "power2.inOut",
-    }, "-=0.08");
+    // 2 ▸ the period lands last, harder bounce
+    tl.to(dot, {
+      y: "0%",
+      duration: 0.55,
+      ease: "back.out(3.2)",
+    }, "-=0.25");
 
-    // ── STRIKE ──────────────────────────────────────
-
-    tl.call(() => {
-      gsap.set(word, { visibility: "hidden" });
-      gsap.set([topHalf, bottomHalf], { autoAlpha: 1 });
-    });
-
-    tl.addLabel("strike");
-
-    // Flash
-    tl.to(flash, { autoAlpha: 1, duration: 0.05, ease: "power4.in" }, "strike");
-    tl.to(flash, { autoAlpha: 0, duration: 0.25, ease: "power2.out" }, "strike+=0.05");
-
-    // Dot flare
-    tl.to(dotFlare, { autoAlpha: 1, duration: 0.05, ease: "power4.in" }, "strike");
-    tl.to(dotFlare, { autoAlpha: 0, duration: 0.4, ease: "power2.out" }, "strike+=0.05");
-
-    // Dot pulse
-    tl.to(dot, { scale: 1.5, duration: 0.05, ease: "power4.in" }, "strike");
-    tl.to(dot, { scale: 1, duration: 0.4, ease: "elastic.out(1, 0.4)" }, "strike+=0.05");
-
-    // Halves split
-    tl.to(topHalf, { y: -splitDist, duration: 0.22, ease: "power3.inOut" }, "strike");
-    tl.to(bottomHalf, { y: splitDist, duration: 0.22, ease: "power3.inOut" }, "strike");
-
-    // Blade fades
-    tl.to(line, { autoAlpha: 0, duration: 0.1 }, "strike+=0.05");
-
-    // Halves dim
-    tl.to([topHalf, bottomHalf], { autoAlpha: 0.3, duration: 0.18 }, "strike+=0.08");
-
-    // 4 ▸ FORMA STUDIO — rises with letter-spacing expanding
-    tl.to(sub, {
-      autoAlpha: 1,
-      y: 0,
-      letterSpacing: "5.5px",
-      duration: 0.22,
+    // 3 ▸ ...and does a little hop. fun, then done.
+    tl.to(dot, {
+      y: "-14%",
+      duration: 0.13,
       ease: "power2.out",
-    }, "strike+=0.1");
+      yoyo: true,
+      repeat: 1,
+    }, "+=0.1");
 
-    // 5 ▸ Overlay lifts — fast, decisive exit
+    // 4 ▸ overlay lifts — clean exit
     tl.to(overlay, {
       yPercent: -100,
-      duration: 0.5,
+      duration: 0.55,
       ease: "expo.inOut",
       onComplete: onDone,
-    }, "+=0.15");
+    }, "+=0.2");
 
     return () => {
       split.revert();
@@ -171,120 +108,27 @@ export default function PageLoader() {
 
   if (!visible) return null;
 
-  const wordmarkStyle: React.CSSProperties = {
-    fontSize: "clamp(54px, 9.5vw, 136px)",
-    letterSpacing: "0.13em",
-    lineHeight: 1,
-    display: "block",
-    color: "#FFFFFF",
-    fontWeight: 400,
-    willChange: "transform, opacity",
-  };
-
   return (
     <div
       ref={overlayRef}
       aria-hidden="true"
       className="fixed inset-0 z-200 flex items-center justify-center"
-      style={{ backgroundColor: "#0A0A0F", willChange: "transform" }}
+      style={{ backgroundColor: "#0A0A0A", willChange: "transform" }}
     >
-      {/* Impact flash */}
-      <div
-        ref={flashRef}
-        className="absolute inset-0 pointer-events-none"
+      <span
+        ref={wordRef}
+        className="font-display select-none"
         style={{
-          background:
-            "radial-gradient(circle at 50% 50%, rgba(124,92,252,0.3) 0%, rgba(167,139,250,0.1) 40%, transparent 70%)",
-          willChange: "opacity",
+          fontSize: "clamp(56px, 10vw, 150px)",
+          fontWeight: 620,
+          letterSpacing: "-0.015em",
+          lineHeight: 1,
+          color: "#F5F3EF",
+          willChange: "transform",
         }}
-      />
-
-      <div
-        className="flex flex-col items-center"
-        style={{ gap: "clamp(8px, 1.2vh, 14px)" }}
       >
-        {/* Violet dot */}
-        <div
-          className="relative"
-          style={{
-            width: "clamp(8px, 0.65vw, 10px)",
-            height: "clamp(8px, 0.65vw, 10px)",
-          }}
-        >
-          <div
-            ref={dotRef}
-            className="rounded-full w-full h-full"
-            style={{
-              background: "#F5F3EF",
-              boxShadow:
-                "0 0 14px 5px rgba(124,92,252,0.45), 0 0 32px 12px rgba(124,92,252,0.18)",
-              willChange: "transform, opacity",
-            }}
-          />
-          <div
-            ref={dotFlareRef}
-            className="absolute inset-0 rounded-full"
-            style={{
-              background: "#FFFFFF",
-              boxShadow:
-                "0 0 20px 8px rgba(255,255,255,0.5), 0 0 40px 16px rgba(124,92,252,0.3)",
-              willChange: "opacity",
-            }}
-          />
-        </div>
-
-        {/* NIMBUS */}
-        <div className="relative">
-          <span ref={wordRef} className="font-display select-none" style={wordmarkStyle}>
-            nmbs.
-          </span>
-
-          <span
-            ref={topHalfRef}
-            className="font-display select-none absolute inset-0"
-            style={{ ...wordmarkStyle, clipPath: "inset(0 0 50% 0)", opacity: 0 }}
-          >
-            nmbs.
-          </span>
-
-          <span
-            ref={bottomHalfRef}
-            className="font-display select-none absolute inset-0"
-            style={{ ...wordmarkStyle, clipPath: "inset(50% 0 0 0)", opacity: 0 }}
-          >
-            nmbs.
-          </span>
-
-          <div
-            ref={lineRef}
-            className="absolute left-0 right-0"
-            style={{
-              top: "50%",
-              transform: "translateY(-50%)",
-              height: "1px",
-              background:
-                "linear-gradient(90deg, transparent 0%, #F5F3EF 25%, #FFFFFF 60%, transparent 100%)",
-              willChange: "transform, opacity",
-            }}
-          />
-
-          <span
-            ref={subRef}
-            className="font-body select-none absolute left-1/2"
-            style={{
-              top: "50%",
-              fontSize: "clamp(10px, 1.1vw, 14px)",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              color: "rgba(167,139,250,0.6)",
-              whiteSpace: "nowrap",
-              willChange: "transform, opacity",
-            }}
-          >
-            FORMA STUDIO
-          </span>
-        </div>
-      </div>
+        nmbs.
+      </span>
     </div>
   );
 }

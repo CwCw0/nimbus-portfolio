@@ -16,7 +16,7 @@ export default function Hero() {
         justifyContent: 'center',
         padding: 'var(--section-gap) 0',
         background:
-          'radial-gradient(1400px 800px at 80% 20%, rgba(42, 26, 85, 0.20), transparent 60%), radial-gradient(1200px 700px at 0% 100%, rgba(245, 243, 239, 0.04), transparent 65%)',
+          'radial-gradient(1200px 700px at 0% 100%, rgba(245, 243, 239, 0.04), transparent 65%)',
       }}
     >
       <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-12)' }}>
@@ -25,22 +25,19 @@ export default function Hero() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sp-3)' }}>
             <span className="status-dot" />
             <span className="mono" style={{ color: 'var(--fg-dim)' }}>
-              Currently accepting 1 new project for Q3 2026
+              Currently accepting 1 new project for Q4 2026
             </span>
           </div>
         </FadeIn>
 
-        {/* Title */}
+        {/* Title — the loader's dot lands as the headline's full stop */}
         <h1>
           <RevealLine>
             <span className="display-xl">I build the AI-powered system</span>
           </RevealLine>
           <RevealLine delay={120}>
-            <span
-              className="display-xl"
-              style={{ paddingLeft: 'clamp(40px, 8vw, 180px)', color: 'var(--accent)' }}
-            >
-              that runs your operation.
+            <span className="display-xl">
+              that runs your operation<span className="hero-dot" aria-hidden="true">.</span>
             </span>
           </RevealLine>
         </h1>
@@ -80,13 +77,33 @@ export default function Hero() {
           gap: var(--sp-10);
           align-items: start;
         }
+        .hero-dot {
+          display: inline-block;
+          animation: hero-dot-land 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.95s both;
+          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        h1:hover .hero-dot {
+          transform: translateY(-0.08em);
+        }
+        @keyframes hero-dot-land {
+          from {
+            opacity: 0;
+            transform: translateY(-1.4em) scale(0.6);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-dot {
+            animation: none;
+          }
+        }
         @media (max-width: 900px) {
           .hero-meta {
             grid-template-columns: 1fr;
             gap: var(--sp-6);
-          }
-          h1 .display-xl {
-            padding-left: 0 !important;
           }
         }
       `}</style>

@@ -197,22 +197,7 @@ export default function Footer() {
               nmbs.
             </text>
 
-            {/* Diagonal slash — bottom-left to top-right across NIMBUS */}
-            <line
-              x1="120"
-              y1="195"
-              x2="1520"
-              y2="15"
-              stroke="var(--accent)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeDasharray="1600"
-              strokeDashoffset={(wordmarkHovered || wordmarkVisible) ? '0' : '1600'}
-              style={{
-                transition: 'stroke-dashoffset 0.85s cubic-bezier(0.22, 1, 0.36, 1)',
-                filter: 'drop-shadow(0 0 10px var(--accent-glow))',
-              }}
-            />
+
 
             {/* Forma Studio subscript */}
             <text

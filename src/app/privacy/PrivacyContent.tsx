@@ -88,19 +88,10 @@ const sections = [
 
         <h4>Font Delivery</h4>
         <p>
-          We load typefaces from{" "}
-          <a
-            href="https://www.fontshare.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-underline"
-          >
-            Fontshare
-          </a>{" "}
-          and Google Fonts. When your browser requests these fonts, your IP
-          address and browser information are transmitted to these services as
-          part of standard HTTP requests. No additional tracking occurs through
-          these services.
+          All typefaces are self-hosted and served directly from our own
+          domain. Your browser makes no font requests to third-party services,
+          and no data is transmitted to font providers when you visit this
+          site.
         </p>
 
         <h4>Local Storage</h4>

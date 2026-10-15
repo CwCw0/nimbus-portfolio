@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Newsreader } from "next/font/google";
+import { Source_Serif_4 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import ClientShell from "@/components/ClientShell";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-const newsreader = Newsreader({
-  variable: "--font-serif",
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["italic"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbusformastudio.com";
@@ -75,27 +75,6 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
-
-        {/* Fontshare fonts: Cabinet Grotesk, Switzer, Fragment Mono — preloaded, reduced weights */}
-        <link
-          rel="preconnect"
-          href="https://api.fontshare.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preconnect"
-          href="https://cdn.fontshare.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          as="style"
-          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,600,700&f[]=switzer@400,500&f[]=fragment-mono@400&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,600,700&f[]=switzer@400,500&f[]=fragment-mono@400&display=swap"
-        />
 
         {/* Geo targeting — Malaysia primary, global reach */}
         <meta name="geo.region" content="MY" />
@@ -170,7 +149,7 @@ export default function RootLayout({
         data-theme="dark"
         data-strings="on"
         data-grain="true"
-        className={`${newsreader.variable} h-full antialiased`}
+        className={`${sourceSerif.variable} h-full antialiased`}
       >
         <a
           href="#main-content"
