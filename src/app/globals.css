@@ -297,7 +297,7 @@
   justify-content: center;
   gap: var(--sp-2);
   padding: 14px 32px;
-  border-radius: var(--r-pill);
+  border-radius: var(--r-sm);
   background: var(--accent);
   color: var(--ink-0);
   font-family: var(--f-body);
