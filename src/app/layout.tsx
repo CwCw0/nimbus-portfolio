@@ -17,8 +17,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbusformastudio.c
 
 export const metadata: Metadata = {
   title: {
-    default: "Nimbus Forma Studio — Built with intention.",
-    template: "%s | Nimbus Forma Studio",
+    default: "nmbs. — Nimbus Forma Studio",
+    template: "%s | nmbs.",
   },
   description:
     "I make businesses run smoother — custom operations systems, internal dashboards, workflow automation, and AI assistants trained on your own data. Custom-coded by Nimbus Forma Studio, Kuala Lumpur. Built with intention.",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     locale: "en_MY",
     url: siteUrl,
     siteName: "Nimbus Forma Studio",
-    title: "Nimbus Forma Studio — Built with intention.",
+    title: "nmbs. — Nimbus Forma Studio",
     description:
       "I make businesses run smoother — custom operations systems, internal dashboards, workflow automation, and AI assistants trained on your own data. Custom-coded by Nimbus Forma Studio, Kuala Lumpur. Built with intention.",
     images: [
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nimbus Forma Studio",
+    title: "nmbs. — Nimbus Forma Studio",
     description:
       "Websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
     images: [`${siteUrl}/opengraph-image`],
