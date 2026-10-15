@@ -86,7 +86,7 @@ export default function Footer() {
           {/* Col 1: Brand */}
           <div className="footer-col">
             <p className="footer-col-brand">
-              <span className="footer-col-brand-name">nmbs.</span>
+              <span className="footer-col-brand-name">nmbs<span className="round-dot" aria-hidden="true"></span></span>
               <span className="footer-col-brand-sub">Nimbus Forma Studio &middot; 2026</span>
             </p>
             <p className="footer-col-slogan serif">&ldquo;Built with intention.&rdquo;</p>
@@ -194,8 +194,9 @@ export default function Footer() {
                 letterSpacing: '-0.02em',
               }}
             >
-              nmbs.
+              nmbs
             </text>
+            <circle cx="1148" cy="178" r="20" fill="url(#wordmark-grad)" />
 
 
 

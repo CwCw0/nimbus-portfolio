@@ -37,7 +37,7 @@ export default function Hero() {
           </RevealLine>
           <RevealLine delay={120}>
             <span className="display-xl">
-              run smoother<span className="hero-dot" aria-hidden="true">.</span>
+              run smoother<span className="hero-dot round-dot" aria-hidden="true"></span>
             </span>
           </RevealLine>
         </h1>

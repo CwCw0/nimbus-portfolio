@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <circle cx="32" cy="32" r="32" fill="#161411"/>
-  <text x="32" y="39" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-weight="800" font-size="17" letter-spacing="-0.5" fill="#F5F0E4">nmbs.</text>
+  <text x="29.5" y="39" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-weight="800" font-size="17" letter-spacing="-0.5" fill="#F5F0E4">nmbs</text>
+  <circle cx="51" cy="37" r="2.1" fill="#F5F0E4"/>
 </svg>

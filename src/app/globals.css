@@ -297,7 +297,7 @@
   justify-content: center;
   gap: var(--sp-2);
   padding: 14px 32px;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-pill);
   background: var(--accent);
   color: var(--ink-0);
   font-family: var(--f-body);
@@ -1865,4 +1865,15 @@ body.theme-fade *::after {
     fill 0.45s ease,
     stroke 0.45s ease,
     box-shadow 0.45s ease !important;
+}
+
+
+/* The brand dot — a true circle (SF's period glyph is squarish at heavy weights) */
+.round-dot {
+  display: inline-block;
+  width: 0.14em;
+  height: 0.14em;
+  border-radius: 50%;
+  background: currentColor;
+  margin-left: 0.05em;
 }

@@ -83,7 +83,7 @@ export default function Nav() {
         <div className="nav-inner container">
           {/* ── Brand ── */}
           <Link href="/" className="nav-brand" aria-label="Nimbus Forma Studio — Home">
-            <span className="nav-brand-word font-display">nmbs<span className="nav-brand-dot">.</span></span>
+            <span className="nav-brand-word font-display">nmbs<span className="nav-brand-dot round-dot" aria-hidden="true"></span></span>
           </Link>
 
           {/* ── Desktop links ── */}

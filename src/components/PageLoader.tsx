@@ -15,6 +15,7 @@ export default function PageLoader() {
   const [visible, setVisible] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLSpanElement>(null);
+  const dotRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const isMobile = window.innerWidth < 769;
@@ -30,7 +31,8 @@ export default function PageLoader() {
 
     const overlay = overlayRef.current;
     const word = wordRef.current;
-    if (!overlay || !word) return;
+    const dotEl = dotRef.current;
+    if (!overlay || !word || !dotEl) return;
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -44,12 +46,11 @@ export default function PageLoader() {
     document.body.style.overflow = "hidden";
 
     const split = new SplitType(word, { types: "chars" });
-    const chars = split.chars || [];
-    const dot = chars[chars.length - 1];
-    const letters = chars.slice(0, -1);
+    const letters = split.chars || [];
+    const dot = dotEl;
 
     // Wrap chars in overflow-hidden spans so they rise from below the baseline
-    chars.forEach((char) => {
+    letters.forEach((char) => {
       const wrapper = document.createElement("span");
       wrapper.style.display = "inline-block";
       wrapper.style.overflow = "hidden";
@@ -58,7 +59,8 @@ export default function PageLoader() {
       wrapper.appendChild(char);
     });
 
-    gsap.set(chars, { y: "115%" });
+    gsap.set(letters, { y: "115%" });
+    gsap.set(dot, { y: "180%" });
 
     const onDone = () => {
       document.body.style.overflow = "";
@@ -116,7 +118,6 @@ export default function PageLoader() {
       style={{ backgroundColor: "#0E0D0B", willChange: "transform" }}
     >
       <span
-        ref={wordRef}
         className="font-display select-none"
         style={{
           fontSize: "clamp(56px, 10vw, 150px)",
@@ -124,10 +125,14 @@ export default function PageLoader() {
           letterSpacing: "-0.015em",
           lineHeight: 1,
           color: "#F5F0E4",
-          willChange: "transform",
+          display: "inline-flex",
+          alignItems: "baseline",
         }}
       >
-        nmbs.
+        <span ref={wordRef} style={{ display: "inline-block", willChange: "transform" }}>nmbs</span>
+        <span style={{ display: "inline-block", overflow: "hidden" }}>
+          <span ref={dotRef} className="round-dot" style={{ willChange: "transform" }} />
+        </span>
       </span>
     </div>
   );
