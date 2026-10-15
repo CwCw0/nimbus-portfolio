@@ -265,7 +265,7 @@ export default function AboutPage() {
               <h1
                 ref={headingRef}
                 className="font-display tracking-[-2px] text-(--color-text-primary)"
-                style={{ fontSize: "clamp(40px, 8vw, 120px)", lineHeight: 1.05 }}
+                style={{ fontSize: "clamp(40px, 8vw, 120px)", lineHeight: 1.1 }}
               >
                 Not just code.
               </h1>

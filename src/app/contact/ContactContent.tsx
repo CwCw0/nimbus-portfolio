@@ -159,7 +159,7 @@ export default function ContactPage() {
             <h1
               ref={headingRef}
               className="font-display tracking-[-2px] text-[var(--color-text-primary)]"
-              style={{ fontSize: "clamp(32px, 7vw, 110px)", lineHeight: 1.05 }}
+              style={{ fontSize: "clamp(32px, 7vw, 110px)", lineHeight: 1.1 }}
             >
               Let&apos;s talk.
             </h1>

@@ -201,7 +201,7 @@
   font-family: var(--f-display);
   font-size: var(--t-display-xxl);
   font-weight: 700;
-  line-height: 0.88;
+  line-height: 1.06;
   letter-spacing: -0.03em;
 }
 
@@ -209,7 +209,7 @@
   font-family: var(--f-display);
   font-size: var(--t-display-xl);
   font-weight: 700;
-  line-height: 0.9;
+  line-height: 1.08;
   letter-spacing: -0.03em;
 }
 
@@ -217,7 +217,7 @@
   font-family: var(--f-display);
   font-size: var(--t-display-lg);
   font-weight: 700;
-  line-height: 0.95;
+  line-height: 1.12;
   letter-spacing: -0.02em;
 }
 
@@ -225,7 +225,7 @@
   font-family: var(--f-display);
   font-size: var(--t-display-md);
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1.16;
   letter-spacing: -0.02em;
 }
 

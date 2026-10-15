@@ -130,7 +130,7 @@ export default function BlogPage() {
               <h1
                 ref={headingRef}
                 className="max-w-[820px] font-display tracking-[-2px] text-(--color-text-primary)"
-                style={{ fontSize: "clamp(36px, 5.5vw, 76px)", lineHeight: 1.05 }}
+                style={{ fontSize: "clamp(36px, 5.5vw, 76px)", lineHeight: 1.1 }}
               >
                 Thoughts on building.
               </h1>
