@@ -268,8 +268,8 @@ export default function Header() {
         >
           <div className="h-2 w-2 rounded-full bg-(--color-accent)" />
           <div className="relative">
-            <span className="font-body text-[15px] font-bold tracking-[5px] text-(--color-text-primary)">
-              NIMBUS
+            <span className="font-body text-[15px] font-bold tracking-[3px] text-(--color-text-primary)">
+              nmbs.
             </span>
 
             {/* Strikethrough */}
@@ -284,7 +284,7 @@ export default function Header() {
                 marginTop: "-1px",
                 height: "1.5px",
                 background:
-                  "linear-gradient(90deg, #7C5CFC 0%, #A78BFA 50%, #7C5CFC 100%)",
+                  "linear-gradient(90deg, #F5F3EF 0%, #FFFFFF 50%, #F5F3EF 100%)",
                 opacity: 0.65,
                 transformOrigin: "left center",
                 transform: "scaleX(0)",
@@ -306,7 +306,7 @@ export default function Header() {
                 fontWeight: 600,
                 letterSpacing: "2.5px",
                 textTransform: "uppercase",
-                color: "#A78BFA",
+                color: "#FFFFFF",
                 opacity: 0,
                 marginTop: "4px",
                 pointerEvents: "none",

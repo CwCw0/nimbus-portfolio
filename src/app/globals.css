@@ -44,32 +44,32 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
   /* Ink scale — backgrounds */
-  --ink-0: #0A0A0F;
-  --ink-1: #0F0D18;
-  --ink-2: #14121F;
-  --ink-3: #1A1626;
-  --ink-4: #221C32;
+  --ink-0: #0A0A0A;
+  --ink-1: #101010;
+  --ink-2: #161616;
+  --ink-3: #1C1C1C;
+  --ink-4: #242424;
 
   /* Violet scale */
-  --violet-1: #1A1233;
-  --violet-2: #2A1A55;
-  --violet-3: #3D247E;
+  --violet-1: #1A1A1A;
+  --violet-2: #222222;
+  --violet-3: #2E2E2E;
 
   /* Accent */
-  --accent: #7C5CFC;
-  --accent-2: #A78BFA;
-  --accent-deep: #5A3FCC;
-  --accent-glow: rgba(124, 92, 252, 0.42);
-  --accent-soft: rgba(124, 92, 252, 0.08);
+  --accent: #F5F3EF;
+  --accent-2: #FFFFFF;
+  --accent-deep: #D8D4CC;
+  --accent-glow: rgba(245, 243, 239, 0.22);
+  --accent-soft: rgba(245, 243, 239, 0.07);
 
   /* Foreground — warm eggshell for premium feel */
-  --fg: #F5F0E6;
-  --fg-dim: #948BBC;
-  --fg-faint: #9590A8;
+  --fg: #F5F3EF;
+  --fg-dim: #A3A3A3;
+  --fg-faint: #8C8C8C;
 
   /* Lines */
-  --line: rgba(245, 240, 230, 0.06);
-  --line-strong: rgba(245, 240, 230, 0.14);
+  --line: rgba(245, 243, 239, 0.06);
+  --line-strong: rgba(245, 243, 239, 0.14);
 
   /* ── Typography ── */
   --f-display: 'Cabinet Grotesk', system-ui, sans-serif;
@@ -118,9 +118,9 @@
   --container-px: clamp(20px, 4vw, 56px);
 
   /* ── Glass backgrounds ── */
-  --glass-bg: rgba(10, 10, 15, 0.55);
-  --glass-bg-strong: rgba(10, 10, 15, 0.72);
-  --glass-bg-nav: rgba(10, 10, 15, 0.88);
+  --glass-bg: rgba(10, 10, 10, 0.55);
+  --glass-bg-strong: rgba(10, 10, 10, 0.72);
+  --glass-bg-nav: rgba(10, 10, 10, 0.88);
 
   /* ── Shadows ── */
   --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.4);
@@ -132,27 +132,27 @@
    LIGHT THEME
    ═══════════════════════════════════════════════════════════════════════════ */
 [data-theme="light"] {
-  --ink-0: #F5F2EC;
-  --ink-1: #ECE8DD;
-  --ink-2: #E2DCCC;
-  --ink-3: #D6CFBC;
-  --ink-4: #C8C0A8;
-  --violet-1: #DCD0F4;
-  --violet-2: #BDA4F0;
-  --violet-3: #8E66E8;
-  --fg: #14101F;
-  --fg-dim: #54506C;
-  --fg-faint: #6A6078;
-  --accent: #5A3FCC;
-  --accent-2: #7C5CFC;
-  --accent-glow: rgba(90, 63, 204, 0.32);
-  --accent-deep: #4A2FA8;
-  --accent-soft: rgba(90, 63, 204, 0.08);
-  --glass-bg: rgba(245, 242, 236, 0.65);
-  --glass-bg-strong: rgba(245, 242, 236, 0.82);
-  --glass-bg-nav: rgba(245, 242, 236, 0.92);
-  --line: rgba(20, 16, 31, 0.10);
-  --line-strong: rgba(20, 16, 31, 0.22);
+  --ink-0: #F5F3EF;
+  --ink-1: #ECEAE4;
+  --ink-2: #E2E0D8;
+  --ink-3: #D5D2C9;
+  --ink-4: #C6C3BA;
+  --violet-1: #E4E2DC;
+  --violet-2: #CBC8C0;
+  --violet-3: #8F8B82;
+  --fg: #101010;
+  --fg-dim: #5A5A5A;
+  --fg-faint: #6E6A63;
+  --accent: #101010;
+  --accent-2: #2A2A2A;
+  --accent-glow: rgba(16, 16, 16, 0.16);
+  --accent-deep: #000000;
+  --accent-soft: rgba(16, 16, 16, 0.05);
+  --glass-bg: rgba(245, 243, 239, 0.65);
+  --glass-bg-strong: rgba(245, 243, 239, 0.82);
+  --glass-bg-nav: rgba(245, 243, 239, 0.92);
+  --line: rgba(16, 16, 16, 0.10);
+  --line-strong: rgba(16, 16, 16, 0.22);
   --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.08);
   --shadow-elevated: 0 12px 48px -8px rgba(0, 0, 0, 0.12);
   --shadow-glow: 0 0 40px -8px var(--accent-glow);
@@ -475,7 +475,7 @@
   height: 20px;
   margin-left: 0;
   margin-top: 0;
-  filter: drop-shadow(0 0 6px rgba(124, 92, 252, 0.5)) drop-shadow(0 0 14px rgba(124, 92, 252, 0.25));
+  filter: drop-shadow(0 0 6px rgba(245, 243, 239, 0.5)) drop-shadow(0 0 14px rgba(245, 243, 239, 0.25));
   transition: filter 200ms var(--ease-out), opacity 150ms ease;
 }
 
@@ -486,7 +486,7 @@
   margin-left: -16px;
   margin-top: -16px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(124, 92, 252, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(245, 243, 239, 0.08) 0%, transparent 70%);
   transition: transform 90ms linear, width 300ms var(--ease-out), height 300ms var(--ease-out),
     background 300ms var(--ease-out);
 }
@@ -494,21 +494,21 @@
 /* Hover: pointer shrinks, ring becomes visible accent circle */
 #custom-cursor-dot.hovering {
   opacity: 0.6;
-  filter: drop-shadow(0 0 8px rgba(124, 92, 252, 0.8)) drop-shadow(0 0 16px rgba(124, 92, 252, 0.4));
+  filter: drop-shadow(0 0 8px rgba(245, 243, 239, 0.8)) drop-shadow(0 0 16px rgba(245, 243, 239, 0.4));
 }
 #custom-cursor-ring.hovering {
   width: 52px;
   height: 52px;
   margin-left: -26px;
   margin-top: -26px;
-  background: radial-gradient(circle, rgba(124, 92, 252, 0.18) 0%, rgba(124, 92, 252, 0.06) 60%, transparent 80%);
-  border: 1.5px solid rgba(124, 92, 252, 0.45);
-  box-shadow: 0 0 24px rgba(124, 92, 252, 0.25), inset 0 0 12px rgba(124, 92, 252, 0.08);
+  background: radial-gradient(circle, rgba(245, 243, 239, 0.18) 0%, rgba(245, 243, 239, 0.06) 60%, transparent 80%);
+  border: 1.5px solid rgba(245, 243, 239, 0.45);
+  box-shadow: 0 0 24px rgba(245, 243, 239, 0.25), inset 0 0 12px rgba(245, 243, 239, 0.08);
 }
 
 /* Click: glow intensifies */
 #custom-cursor-dot.clicking {
-  filter: drop-shadow(0 0 10px rgba(124, 92, 252, 0.8)) drop-shadow(0 0 20px rgba(124, 92, 252, 0.4));
+  filter: drop-shadow(0 0 10px rgba(245, 243, 239, 0.8)) drop-shadow(0 0 20px rgba(245, 243, 239, 0.4));
 }
 
 body.cursor-ready,
@@ -1546,8 +1546,8 @@ main, footer, nav, header {
   transition: border-color 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out), transform 0.3s var(--ease-out);
 }
 .card-highlight:hover {
-  border-color: rgba(124, 92, 252, 0.3);
-  box-shadow: 0 8px 32px -8px rgba(124, 92, 252, 0.12);
+  border-color: rgba(245, 243, 239, 0.3);
+  box-shadow: 0 8px 32px -8px rgba(245, 243, 239, 0.12);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -1560,11 +1560,11 @@ main, footer, nav, header {
               box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .design-lab-card:hover {
-  border-color: rgba(124, 92, 252, 0.5) !important;
+  border-color: rgba(245, 243, 239, 0.5) !important;
   transform: translateY(-6px) scale(1.01);
   box-shadow:
-    0 20px 60px -15px rgba(124, 92, 252, 0.25),
-    0 0 0 1px rgba(124, 92, 252, 0.1);
+    0 20px 60px -15px rgba(245, 243, 239, 0.25),
+    0 0 0 1px rgba(245, 243, 239, 0.1);
 }
 .design-lab-card:hover .design-lab-card-img {
   transform: scale(1.05);

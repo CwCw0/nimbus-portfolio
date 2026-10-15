@@ -17,7 +17,7 @@ export default function StudioNoirShowcase() {
           {
             num: "01",
             title: "Two-Color Constraint",
-            body: "Pitch black #050505 + single violet accent #7C5CFC. Every Awwwards SOTY in the studio category uses two colors maximum. When you remove colour variety, typography and spacing become the design. The eye has nowhere to hide.",
+            body: "Pitch black #050505 + single violet accent #F5F3EF. Every Awwwards SOTY in the studio category uses two colors maximum. When you remove colour variety, typography and spacing become the design. The eye has nowhere to hide.",
           },
           {
             num: "02",

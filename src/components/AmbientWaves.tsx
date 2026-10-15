@@ -59,7 +59,7 @@ export default function AmbientWaves({ lineCount = 18, className }: AmbientWaves
 
     // Pre-compute line properties (never changes per line)
     // Opacity tiers: ghost (0.03), subtle (0.06), visible (0.10), accent (0.15)
-    // Colour tiers: neutral-violet, violet (#7C5CFC), light-violet (#A78BFA)
+    // Colour tiers: neutral-violet, violet (#F5F3EF), light-violet (#FFFFFF)
     type LineTier = 'ghost' | 'subtle' | 'mid' | 'accent';
     const TIERS: LineTier[] = [
       'ghost', 'subtle', 'ghost', 'mid', 'subtle',
@@ -134,9 +134,9 @@ export default function AmbientWaves({ lineCount = 18, className }: AmbientWaves
         // Colour
         let r: number, g: number, b: number;
         if (l.colourRole === 'violet') {
-          r = 124; g = 92; b = 252;  // #7C5CFC
+          r = 124; g = 92; b = 252;  // #F5F3EF
         } else if (l.colourRole === 'light') {
-          r = 167; g = 139; b = 250; // #A78BFA
+          r = 167; g = 139; b = 250; // #FFFFFF
         } else {
           // neutral — blue-violet midtone
           r = 148; g = 139; b = 200;

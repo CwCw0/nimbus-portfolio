@@ -116,7 +116,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             height: 600,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, #7C5CFC08 0%, transparent 70%)",
+              "radial-gradient(circle, #F5F3EF08 0%, transparent 70%)",
           }}
         />
       </div>
@@ -150,10 +150,10 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
           style={{
             width: 14,
             height: 14,
-            backgroundColor: "#7C5CFC",
+            backgroundColor: "#F5F3EF",
           }}
         />
-        {"NIMBUS".split("").map((char, i) => (
+        {"nmbs.".split("").map((char, i) => (
           <span
             key={i}
             className="brand-letter font-body text-[var(--color-text-primary)]"

@@ -60,7 +60,7 @@ export default function PreviewBar() {
           style={{
             padding: "3px 10px",
             background: "var(--accent-soft)",
-            border: "1px solid rgba(124, 92, 252, 0.3)",
+            border: "1px solid rgba(245, 243, 239, 0.3)",
             borderRadius: 4,
             fontSize: 11,
             fontWeight: 600,
@@ -111,7 +111,7 @@ export default function PreviewBar() {
             gap: 6,
             padding: "7px 16px",
             background: "var(--accent-soft)",
-            border: "1px solid rgba(124, 92, 252, 0.2)",
+            border: "1px solid rgba(245, 243, 239, 0.2)",
             borderRadius: 6,
             fontSize: 12,
             fontWeight: 600,
@@ -120,12 +120,12 @@ export default function PreviewBar() {
             transition: "all 0.2s",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(124, 92, 252, 0.15)";
-            e.currentTarget.style.borderColor = "rgba(124, 92, 252, 0.35)";
+            e.currentTarget.style.background = "rgba(245, 243, 239, 0.15)";
+            e.currentTarget.style.borderColor = "rgba(245, 243, 239, 0.35)";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = "var(--accent-soft)";
-            e.currentTarget.style.borderColor = "rgba(124, 92, 252, 0.2)";
+            e.currentTarget.style.borderColor = "rgba(245, 243, 239, 0.2)";
           }}
         >
           ← Exit Preview

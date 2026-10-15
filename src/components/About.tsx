@@ -295,7 +295,7 @@ export default function About() {
               <a
                 href="#contact"
                 data-magnetic
-                className="inline-flex items-center gap-2 border border-(--color-border-light) bg-(--color-grid) px-7 py-3.5 font-body text-sm font-semibold text-(--color-text-primary) transition-all duration-300 hover:border-(--color-accent-border) hover:shadow-[0_0_24px_#7C5CFC20]"
+                className="inline-flex items-center gap-2 border border-(--color-border-light) bg-(--color-grid) px-7 py-3.5 font-body text-sm font-semibold text-(--color-text-primary) transition-all duration-300 hover:border-(--color-accent-border) hover:shadow-[0_0_24px_#F5F3EF20]"
               >
                 Work With Me
                 <ArrowUpRight className="h-3.5 w-3.5 text-(--color-accent)" />

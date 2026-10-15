@@ -390,10 +390,10 @@ export const products: Product[] = [
       href: "/contact?product=aurora",
     },
     accent: {
-      hex: "#A78BFA",
-      soft: "#A78BFA14",
-      border: "#A78BFA40",
-      glow: "#A78BFA22",
+      hex: "#FFFFFF",
+      soft: "#FFFFFF14",
+      border: "#FFFFFF40",
+      glow: "#FFFFFF22",
     },
     mockup: {
       type: "concept",

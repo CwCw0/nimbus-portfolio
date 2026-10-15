@@ -224,7 +224,7 @@ export default function WorkContent() {
                   <Link
                     key={study.slug}
                     href={`/work/${study.slug}`}
-                    className="work-card group relative flex flex-col overflow-hidden border border-(--color-border) transition-all duration-300 hover:-translate-y-1 hover:border-(--color-accent-border) hover:shadow-[0_0_30px_#7C5CFC10]"
+                    className="work-card group relative flex flex-col overflow-hidden border border-(--color-border) transition-all duration-300 hover:-translate-y-1 hover:border-(--color-accent-border) hover:shadow-[0_0_30px_#F5F3EF10]"
                     data-cursor="view"
                   >
                     <div
@@ -329,7 +329,7 @@ export default function WorkContent() {
                       <Link
                         key={design.slug}
                         href={design.route}
-                        className="lab-card group relative flex flex-col border border-(--color-border) bg-(--color-bg-card) transition-all duration-500 hover:border-(--color-accent-border) hover:-translate-y-1 hover:shadow-[0_0_40px_#7C5CFC10]"
+                        className="lab-card group relative flex flex-col border border-(--color-border) bg-(--color-bg-card) transition-all duration-500 hover:border-(--color-accent-border) hover:-translate-y-1 hover:shadow-[0_0_40px_#F5F3EF10]"
                       >
                         {/* Preview image */}
                         <div

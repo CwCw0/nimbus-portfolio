@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 // Category accent colors — each project type has its own visual identity
 const categoryAccents: Record<string, string> = {
   Website: "#5EEAD4",    // teal
-  "Web App": "#7C5CFC",  // purple
+  "Web App": "#F5F3EF",  // purple
   SaaS: "#F59E0B",       // amber
   Platform: "#EC4899",   // pink
 };
@@ -26,7 +26,7 @@ const studies = allCaseStudies.map((s) => ({
   image: s.heroImage || "",
   status: s.status,
   category: s.category,
-  accent: categoryAccents[s.category] || "#7C5CFC",
+  accent: categoryAccents[s.category] || "#F5F3EF",
 }));
 
 export default function CaseStudies() {

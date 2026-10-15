@@ -215,7 +215,7 @@ export default function PageLoader() {
             ref={dotRef}
             className="rounded-full w-full h-full"
             style={{
-              background: "#7C5CFC",
+              background: "#F5F3EF",
               boxShadow:
                 "0 0 14px 5px rgba(124,92,252,0.45), 0 0 32px 12px rgba(124,92,252,0.18)",
               willChange: "transform, opacity",
@@ -236,7 +236,7 @@ export default function PageLoader() {
         {/* NIMBUS */}
         <div className="relative">
           <span ref={wordRef} className="font-display select-none" style={wordmarkStyle}>
-            NIMBUS
+            nmbs.
           </span>
 
           <span
@@ -244,7 +244,7 @@ export default function PageLoader() {
             className="font-display select-none absolute inset-0"
             style={{ ...wordmarkStyle, clipPath: "inset(0 0 50% 0)", opacity: 0 }}
           >
-            NIMBUS
+            nmbs.
           </span>
 
           <span
@@ -252,7 +252,7 @@ export default function PageLoader() {
             className="font-display select-none absolute inset-0"
             style={{ ...wordmarkStyle, clipPath: "inset(50% 0 0 0)", opacity: 0 }}
           >
-            NIMBUS
+            nmbs.
           </span>
 
           <div
@@ -263,7 +263,7 @@ export default function PageLoader() {
               transform: "translateY(-50%)",
               height: "1px",
               background:
-                "linear-gradient(90deg, transparent 0%, #7C5CFC 25%, #A78BFA 60%, transparent 100%)",
+                "linear-gradient(90deg, transparent 0%, #F5F3EF 25%, #FFFFFF 60%, transparent 100%)",
               willChange: "transform, opacity",
             }}
           />

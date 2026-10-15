@@ -9,8 +9,8 @@ import FadeIn from '@/components/ui/FadeIn';
 import { projects } from '@/data/projects';
 
 const toneGradients: Record<string, string> = {
-  violet: 'linear-gradient(135deg, rgba(124, 92, 252, 0.18), rgba(42, 26, 85, 0.30))',
-  deep: 'linear-gradient(135deg, rgba(90, 63, 204, 0.18), rgba(26, 18, 51, 0.30))',
+  violet: 'linear-gradient(135deg, rgba(245, 243, 239, 0.18), rgba(42, 26, 85, 0.30))',
+  deep: 'linear-gradient(135deg, rgba(140, 140, 140, 0.18), rgba(26, 18, 51, 0.30))',
   ember: 'linear-gradient(135deg, rgba(252, 140, 92, 0.18), rgba(85, 42, 26, 0.30))',
   ink: 'linear-gradient(135deg, rgba(84, 80, 108, 0.18), rgba(20, 18, 31, 0.30))',
 };

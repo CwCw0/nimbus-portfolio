@@ -268,7 +268,7 @@ export default function ContactPage() {
                     ? "bg-emerald-500"
                     : submitState === "error"
                     ? "bg-red-500"
-                    : "bg-gradient-to-b from-[var(--color-accent)] to-[#5B3FCC] hover:scale-[1.02] hover:shadow-[0_0_24px_#7C5CFC20]"
+                    : "bg-gradient-to-b from-[var(--color-accent)] to-[#5B3FCC] hover:scale-[1.02] hover:shadow-[0_0_24px_#F5F3EF20]"
                 } disabled:cursor-not-allowed`}
               >
                 {submitState === "idle" && (
@@ -298,7 +298,7 @@ export default function ContactPage() {
                     { icon: Clock, label: "Response", value: "Within 24 hours" },
                   ].map((item) => (
                     <div key={item.label} className="flex items-center gap-4">
-                      <div className="flex h-10 w-10 items-center justify-center bg-[#7C5CFC15]">
+                      <div className="flex h-10 w-10 items-center justify-center bg-[#F5F3EF15]">
                         <item.icon className="h-[18px] w-[18px] text-[var(--color-accent)]" />
                       </div>
                       <div className="flex flex-col gap-0.5">

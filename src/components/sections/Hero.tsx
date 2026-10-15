@@ -16,7 +16,7 @@ export default function Hero() {
         justifyContent: 'center',
         padding: 'var(--section-gap) 0',
         background:
-          'radial-gradient(1400px 800px at 80% 20%, rgba(42, 26, 85, 0.20), transparent 60%), radial-gradient(1200px 700px at 0% 100%, rgba(124, 92, 252, 0.04), transparent 65%)',
+          'radial-gradient(1400px 800px at 80% 20%, rgba(42, 26, 85, 0.20), transparent 60%), radial-gradient(1200px 700px at 0% 100%, rgba(245, 243, 239, 0.04), transparent 65%)',
       }}
     >
       <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-12)' }}>

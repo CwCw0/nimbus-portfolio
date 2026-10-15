@@ -8,8 +8,8 @@ import Magnetic from '@/components/ui/Magnetic';
 import type { VaultProduct } from '@/data/vault';
 
 const toneGradients: Record<string, string> = {
-  violet: 'linear-gradient(135deg, rgba(124, 92, 252, 0.15), rgba(42, 26, 85, 0.08))',
-  deep: 'linear-gradient(135deg, rgba(90, 63, 204, 0.15), rgba(26, 18, 51, 0.08))',
+  violet: 'linear-gradient(135deg, rgba(245, 243, 239, 0.15), rgba(42, 26, 85, 0.08))',
+  deep: 'linear-gradient(135deg, rgba(140, 140, 140, 0.15), rgba(26, 18, 51, 0.08))',
   ember: 'linear-gradient(135deg, rgba(252, 140, 92, 0.12), rgba(85, 42, 26, 0.08))',
 };
 

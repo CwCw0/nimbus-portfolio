@@ -21,7 +21,7 @@ const NAV_LINKS = [
 const ELSEWHERE_LINKS = [
   { href: 'https://www.upwork.com/freelancers/~018e3e05f351d165d4', label: 'Upwork' },
   { href: 'https://github.com/CwCw0', label: 'GitHub' },
-  { href: 'https://www.instagram.com/_bynimbus_/', label: 'Instagram' },
+  { href: 'https://www.instagram.com/nmbs.log/', label: 'Instagram' },
   { href: 'https://www.linkedin.com/in/darren-ng-chi-weng/', label: 'LinkedIn' },
   { href: '/contact', label: 'Send a project brief' },
 ];
@@ -86,8 +86,8 @@ export default function Footer() {
           {/* Col 1: Brand */}
           <div className="footer-col">
             <p className="footer-col-brand">
-              <span className="footer-col-brand-name">Nimbus</span>
-              <span className="footer-col-brand-sub">Forma Studio &middot; 2026</span>
+              <span className="footer-col-brand-name">nmbs.</span>
+              <span className="footer-col-brand-sub">Nimbus Forma Studio &middot; 2026</span>
             </p>
             <p className="footer-col-slogan serif">&ldquo;Built with intention.&rdquo;</p>
           </div>
@@ -194,7 +194,7 @@ export default function Footer() {
                 letterSpacing: '-0.02em',
               }}
             >
-              NIMBUS
+              nmbs.
             </text>
 
             {/* Diagonal slash — bottom-left to top-right across NIMBUS */}
@@ -226,7 +226,7 @@ export default function Footer() {
                 fontStyle: 'italic',
               }}
             >
-              Forma Studio
+              Nimbus Forma Studio
             </text>
           </svg>
         </div>
