@@ -27,8 +27,6 @@ const ELSEWHERE_LINKS = [
 ];
 
 export default function Footer() {
-  const [wordmarkHovered, setWordmarkHovered] = useState(false);
-  const [wordmarkVisible, setWordmarkVisible] = useState(false);
   const wordmarkRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,7 +35,6 @@ export default function Footer() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setWordmarkVisible(true);
           observer.disconnect();
         }
       },
@@ -158,64 +155,13 @@ export default function Footer() {
         </div>
       </FadeIn>
 
-      {/* ═══ 4. Giant SVG wordmark ═══ */}
-        <div
-          ref={wordmarkRef}
-          className="footer-wordmark container"
-          onMouseEnter={() => setWordmarkHovered(true)}
-          onMouseLeave={() => setWordmarkHovered(false)}
-        >
-          <svg
-            viewBox="0 0 1640 260"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="footer-wordmark-svg"
-            aria-label="Nimbus"
-            style={{ overflow: 'visible' }}
-          >
-            <defs>
-              <linearGradient id="wordmark-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="var(--accent)" />
-                <stop offset="60%" stopColor="var(--accent)" />
-                <stop offset="100%" stopColor="var(--accent-2)" />
-              </linearGradient>
-            </defs>
-
-            {/* NIMBUS text */}
-            <text
-              x="820"
-              y="190"
-              textAnchor="middle"
-              fill="url(#wordmark-grad)"
-              style={{
-                fontFamily: 'var(--f-display)',
-                fontSize: '320px',
-                fontWeight: 700,
-                letterSpacing: '-0.02em',
-              }}
-            >
-              nmbs
-            </text>
-            <circle cx="1148" cy="178" r="20" fill="url(#wordmark-grad)" />
-
-
-
-            {/* Forma Studio subscript */}
-            <text
-              x="1340"
-              y="250"
-              textAnchor="end"
-              fill="var(--fg-dim)"
-              style={{
-                fontFamily: 'var(--f-serif)',
-                fontSize: '42px',
-                fontStyle: 'italic',
-              }}
-            >
-              Nimbus Forma Studio
-            </text>
-          </svg>
+      {/* ═══ 4. Giant wordmark — HTML, solid bone, round dot ═══ */}
+      <div ref={wordmarkRef} className="footer-wordmark container">
+        <div className="footer-wordmark-text" aria-label="Nimbus Forma Studio">
+          nmbs<span className="round-dot" aria-hidden="true"></span>
         </div>
+        <span className="mono footer-wordmark-sub">Nimbus Forma Studio</span>
+      </div>
 
       {/* ═══ 5. Legal row ═══ */}
       <div className="footer-legal container">
