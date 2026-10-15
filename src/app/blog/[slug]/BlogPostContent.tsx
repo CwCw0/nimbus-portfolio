@@ -14,6 +14,22 @@ function slugify(text: string) {
     .replace(/(^-|-$)/g, '');
 }
 
+/** Renders [text](url) spans inside block text as real links. */
+function renderWithLinks(text: string) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return parts.map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (m) {
+      return (
+        <a key={i} href={m[2]} target="_blank" rel="noopener noreferrer" className="link-underline" style={{ color: 'var(--fg)' }}>
+          {m[1]}
+        </a>
+      );
+    }
+    return part;
+  });
+}
+
 export default function BlogPostContent({ slug }: { slug: string }) {
   const post = getPostBySlug(slug);
   const [progress, setProgress] = useState(0);
@@ -152,7 +168,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                       letterSpacing: '0.01em',
                     }}
                   >
-                    {block.text}
+                    {renderWithLinks(block.text)}
                   </p>
                 );
               }
@@ -265,7 +281,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                         borderLeft: activeSection === i ? '2px solid var(--accent)' : '2px solid transparent',
                       }}
                     >
-                      {item}
+                      {renderWithLinks(item)}
                     </button>
                   );
                 })}
