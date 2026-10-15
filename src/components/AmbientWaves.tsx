@@ -134,18 +134,17 @@ export default function AmbientWaves({ lineCount = 18, className }: AmbientWaves
         // Colour
         let r: number, g: number, b: number;
         if (l.colourRole === 'violet') {
-          r = 124; g = 92; b = 252;  // #F5F0E4
+          r = isLight ? 19 : 245; g = isLight ? 19 : 240; b = isLight ? 31 : 228;
         } else if (l.colourRole === 'light') {
-          r = 167; g = 139; b = 250; // #FFFFFF
+          r = isLight ? 19 : 255; g = isLight ? 19 : 252; b = isLight ? 31 : 240;
         } else {
-          // neutral — blue-violet midtone
-          r = 148; g = 139; b = 200;
+          // neutral — iris midtone (dark) / iris ink (light)
+          r = isLight ? 42 : 168; g = isLight ? 42 : 165; b = isLight ? 58 : 184;
         }
 
         let alpha = l.baseAlpha + l.edgeFactor * 0.08;
         if (isLight) {
-          // In light mode, dampen everything significantly
-          alpha *= 0.5;
+          alpha *= 0.85; // dark strokes on bone need little damping
         }
 
         // Build path
@@ -179,9 +178,9 @@ export default function AmbientWaves({ lineCount = 18, className }: AmbientWaves
         const l = lines[i];
         const baseY = l.edgeBias * h;
         let r: number, g: number, b: number;
-        if (l.colourRole === 'violet') { r = 124; g = 92; b = 252; }
-        else if (l.colourRole === 'light') { r = 167; g = 139; b = 250; }
-        else { r = 148; g = 139; b = 200; }
+        if (l.colourRole === 'violet') { r = isLight ? 19 : 245; g = isLight ? 19 : 240; b = isLight ? 31 : 228; }
+        else if (l.colourRole === 'light') { r = isLight ? 19 : 255; g = isLight ? 19 : 252; b = isLight ? 31 : 240; }
+        else { r = isLight ? 42 : 168; g = isLight ? 42 : 165; b = isLight ? 58 : 184; }
         const alpha = l.baseAlpha + l.edgeFactor * 0.08;
         ctx!.beginPath();
         for (let s = 0; s <= samples; s++) {

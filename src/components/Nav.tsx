@@ -31,6 +31,8 @@ export default function Nav() {
   }, []);
 
   const toggleTheme = useCallback(() => {
+    document.body.classList.add('theme-fade');
+    window.setTimeout(() => document.body.classList.remove('theme-fade'), 650);
     setTheme((prev) => {
       const next = prev === 'dark' ? 'light' : 'dark';
       document.body.setAttribute('data-theme', next);

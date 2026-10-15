@@ -1851,3 +1851,18 @@ body.preview-active footer:not(.footer-root) {
 .privacy-table-wrap tr:last-child td {
   border-bottom: none;
 }
+
+
+/* Smooth light/dark cross-fade (interim until the polar-light veil transition) */
+body.theme-fade,
+body.theme-fade *,
+body.theme-fade *::before,
+body.theme-fade *::after {
+  transition:
+    background-color 0.45s ease,
+    color 0.45s ease,
+    border-color 0.45s ease,
+    fill 0.45s ease,
+    stroke 0.45s ease,
+    box-shadow 0.45s ease !important;
+}
