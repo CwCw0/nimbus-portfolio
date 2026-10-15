@@ -1350,6 +1350,7 @@ main, footer, nav, header {
 }
 
 .footer-wordmark-text {
+  text-align: center;
   font-family: var(--f-display);
   font-weight: 800;
   font-size: clamp(88px, 18.5vw, 300px);
