@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import FadeIn from '@/components/ui/FadeIn';
-import ScrambleText from '@/components/ui/ScrambleText';
 import { blogPosts } from '@/data/blog';
 
 export default function BlogPreview() {
@@ -106,7 +105,7 @@ function BlogRow({
 
         {/* Title */}
         <div className="blog-col-title">
-          <ScrambleText text={post.title} className="display-md" />
+          <span className="display-md">{post.title}</span>
         </div>
 
         {/* Subtitle */}
