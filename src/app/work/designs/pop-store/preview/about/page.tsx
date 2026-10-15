@@ -162,7 +162,7 @@ export default function AboutPage() {
             color: P.textLight,
             fontFamily: "'Space Grotesk', sans-serif",
             fontSize: 12, fontWeight: 700, letterSpacing: 2,
-            border: P.border, boxShadow: "3px 3px 0 #1A1A1A",
+            border: P.border, boxShadow: "3px 3px 0 #1B1B29",
             marginBottom: 28,
           }}>
             THE ORIGIN STORY 📖

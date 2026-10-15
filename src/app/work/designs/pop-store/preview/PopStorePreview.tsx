@@ -25,9 +25,9 @@ import Link from "next/link";
 gsap.registerPlugin(ScrollTrigger);
 
 const P = {
-  bg: "#FFF8F0", text: "#1A1A1A", textLight: "#FFF8F0", muted: "#6B6B6B",
+  bg: "#FFF8F0", text: "#1B1B29", textLight: "#FFF8F0", muted: "#6B6B6B",
   coral: "#FF6B35", purple: "#8B5CF6", green: "#22C55E", yellow: "#FBBF24",
-  border: "3px solid #1A1A1A", borderThin: "2px solid #1A1A1A",
+  border: "3px solid #1B1B29", borderThin: "2px solid #1B1B29",
 };
 
 const products = [
@@ -162,12 +162,12 @@ export default function PopStorePreview() {
               onMouseLeave={(e) => (e.currentTarget.style.color = P.text)}
             >{item.label}</Link>
           ))}
-          <span style={{ padding: isMobile ? "8px 14px" : "10px 24px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? 12 : 14, fontWeight: 700, border: P.border, boxShadow: "4px 4px 0 #1A1A1A", cursor: "pointer", transition: "all 0.12s", position: "relative" }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-2px, -2px)"; e.currentTarget.style.boxShadow = "6px 6px 0 #1A1A1A"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "4px 4px 0 #1A1A1A"; }}
+          <span style={{ padding: isMobile ? "8px 14px" : "10px 24px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? 12 : 14, fontWeight: 700, border: P.border, boxShadow: "4px 4px 0 #1B1B29", cursor: "pointer", transition: "all 0.12s", position: "relative" }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-2px, -2px)"; e.currentTarget.style.boxShadow = "6px 6px 0 #1B1B29"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "4px 4px 0 #1B1B29"; }}
           >
             Cart ({cartCount}) 🛒
-            {cartCount > 0 && <span style={{ position: "absolute", top: -8, right: -8, width: 20, height: 20, borderRadius: "50%", background: P.coral, border: "2px solid #1A1A1A", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, color: "#fff", fontWeight: 800 }}>{cartCount}</span>}
+            {cartCount > 0 && <span style={{ position: "absolute", top: -8, right: -8, width: 20, height: 20, borderRadius: "50%", background: P.coral, border: "2px solid #1B1B29", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, color: "#fff", fontWeight: 800 }}>{cartCount}</span>}
           </span>
         </div>
       </nav>
@@ -178,7 +178,7 @@ export default function PopStorePreview() {
         <div className="ps-float" style={{ position: "absolute", bottom: "15%", right: "7%", fontSize: 90, opacity: 0.12 }}>🧃</div>
         <div className="ps-float" style={{ position: "absolute", top: "55%", left: "82%", fontSize: 65, opacity: 0.08 }}>🌶️</div>
 
-        <div className="ps-badge" style={{ display: "inline-block", padding: "10px 24px", background: P.coral, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 13, fontWeight: 700, letterSpacing: 2, marginBottom: 28, border: P.border, boxShadow: "3px 3px 0 #1A1A1A" }}>
+        <div className="ps-badge" style={{ display: "inline-block", padding: "10px 24px", background: P.coral, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: 13, fontWeight: 700, letterSpacing: 2, marginBottom: 28, border: P.border, boxShadow: "3px 3px 0 #1B1B29" }}>
           NOT YOUR AVERAGE BRAND
         </div>
 
@@ -193,9 +193,9 @@ export default function PopStorePreview() {
         </p>
 
         <div className="ps-hero-anim" style={{ display: "flex", flexDirection: isMobile ? "column" as const : "row" as const, gap: 14, marginTop: 40, width: isMobile ? "100%" : "auto", maxWidth: isMobile ? 320 : "none" }}>
-          <Link href="/work/designs/pop-store/preview/shop" style={{ padding: isMobile ? "14px 32px" : "16px 44px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? 14 : 16, fontWeight: 700, border: P.border, boxShadow: "5px 5px 0 #1A1A1A", cursor: "pointer", transition: "all 0.12s", textDecoration: "none", textAlign: "center" as const }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-3px, -3px)"; e.currentTarget.style.boxShadow = "8px 8px 0 #1A1A1A"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "5px 5px 0 #1A1A1A"; }}
+          <Link href="/work/designs/pop-store/preview/shop" style={{ padding: isMobile ? "14px 32px" : "16px 44px", background: P.text, color: P.textLight, fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? 14 : 16, fontWeight: 700, border: P.border, boxShadow: "5px 5px 0 #1B1B29", cursor: "pointer", transition: "all 0.12s", textDecoration: "none", textAlign: "center" as const }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-3px, -3px)"; e.currentTarget.style.boxShadow = "8px 8px 0 #1B1B29"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "5px 5px 0 #1B1B29"; }}
           >SHOP NOW →</Link>
           <Link href="/work/designs/pop-store/preview/about" style={{ padding: isMobile ? "14px 32px" : "16px 36px", background: "transparent", color: P.text, fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? 14 : 16, fontWeight: 700, border: P.border, cursor: "pointer", transition: "all 0.15s", textDecoration: "none", textAlign: "center" as const }}
             onMouseEnter={(e) => { e.currentTarget.style.background = P.text; e.currentTarget.style.color = P.textLight; }}
@@ -228,7 +228,7 @@ export default function PopStorePreview() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 20 }}>
             {products.map((prod) => (
               <div key={prod.name} className="ps-prod" style={{ background: prod.color + "12", border: P.border, position: "relative", cursor: "pointer", transition: "all 0.15s" }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-5px, -5px)"; e.currentTarget.style.boxShadow = "10px 10px 0 #1A1A1A"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-5px, -5px)"; e.currentTarget.style.boxShadow = "10px 10px 0 #1B1B29"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div style={{ position: "absolute", top: 10, right: 10, padding: "4px 12px", background: prod.color, fontFamily: "'Space Grotesk', sans-serif", fontSize: 9, fontWeight: 700, color: P.textLight, letterSpacing: 1.5, border: P.borderThin }}>{prod.tag}</div>
@@ -281,9 +281,9 @@ export default function PopStorePreview() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 20 }}>
             {reviews.map((r) => (
-              <div key={r.name} className="ps-review" style={{ padding: 28, border: P.border, background: P.bg, boxShadow: "4px 4px 0 #1A1A1A", transition: "all 0.12s" }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-3px, -3px)"; e.currentTarget.style.boxShadow = "7px 7px 0 #1A1A1A"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "4px 4px 0 #1A1A1A"; }}
+              <div key={r.name} className="ps-review" style={{ padding: 28, border: P.border, background: P.bg, boxShadow: "4px 4px 0 #1B1B29", transition: "all 0.12s" }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translate(-3px, -3px)"; e.currentTarget.style.boxShadow = "7px 7px 0 #1B1B29"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "translate(0, 0)"; e.currentTarget.style.boxShadow = "4px 4px 0 #1B1B29"; }}
               >
                 <div style={{ marginBottom: 14, color: P.yellow, fontSize: 18, letterSpacing: 2 }}>★★★★★</div>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>&ldquo;{r.text}&rdquo;</p>
@@ -322,7 +322,7 @@ export default function PopStorePreview() {
       </footer>
 
       <div style={{ position: "fixed", bottom: 24, right: 24, zIndex: 200 }}>
-        <Link href="/work/designs/pop-store" style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 20px", background: P.coral, color: "#fff", fontFamily: "'Space Grotesk', sans-serif", fontSize: 11, fontWeight: 700, textDecoration: "none", border: P.borderThin, boxShadow: "3px 3px 0 #1A1A1A" }}>← BREAKDOWN</Link>
+        <Link href="/work/designs/pop-store" style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 20px", background: P.coral, color: "#fff", fontFamily: "'Space Grotesk', sans-serif", fontSize: 11, fontWeight: 700, textDecoration: "none", border: P.borderThin, boxShadow: "3px 3px 0 #1B1B29" }}>← BREAKDOWN</Link>
       </div>
     </div>
   );

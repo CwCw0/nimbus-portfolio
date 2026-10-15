@@ -187,7 +187,7 @@ export default function ShopPage() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translate(-5px, -5px)";
-                e.currentTarget.style.boxShadow = "10px 10px 0 #1A1A1A";
+                e.currentTarget.style.boxShadow = "10px 10px 0 #1B1B29";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translate(0, 0)";

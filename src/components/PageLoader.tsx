@@ -113,7 +113,7 @@ export default function PageLoader() {
       ref={overlayRef}
       aria-hidden="true"
       className="fixed inset-0 z-200 flex items-center justify-center"
-      style={{ backgroundColor: "#0A0A0A", willChange: "transform" }}
+      style={{ backgroundColor: "#0C0C15", willChange: "transform" }}
     >
       <span
         ref={wordRef}

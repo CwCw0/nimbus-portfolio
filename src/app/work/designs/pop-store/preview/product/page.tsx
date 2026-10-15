@@ -542,7 +542,7 @@ function ProductContent() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translate(-4px, -4px)";
-                  e.currentTarget.style.boxShadow = "8px 8px 0 #1A1A1A";
+                  e.currentTarget.style.boxShadow = "8px 8px 0 #1B1B29";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translate(0, 0)";
