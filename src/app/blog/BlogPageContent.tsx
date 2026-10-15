@@ -27,7 +27,7 @@ export default function BlogPageContent() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="container pt-[clamp(120px,16vw,240px)] pb-[clamp(60px,8vw,120px)]">
+      <section className="container" style={{ padding: 'clamp(120px, 16vw, 240px) 0 clamp(60px, 8vw, 120px)' }}>
         <RevealLine>
           <h1 className="display-xl" style={{ color: 'var(--fg)' }}>
             Latest thoughts.
