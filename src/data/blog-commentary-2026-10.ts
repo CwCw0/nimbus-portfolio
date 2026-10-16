@@ -7,9 +7,191 @@ import type { BlogPost } from "./blog";
  */
 export const commentaryPosts: BlogPost[] = [
   {
+    slug: "grab-published-its-ai-playbook-for-free",
+    tag: "Learning",
+    date: "Oct 16, 2026",
+    readTime: "8 min read",
+    title: "Grab Published Its AI Playbook. For Free. Here Are the Links.",
+    excerpt:
+      "13 AI products launched this year, several live in Malaysia — and an engineering blog that documents exactly how they build. A guided tour of the posts worth your time, and what a small business can copy from each.",
+    image: "/opengraph-image",
+    tocItems: [
+      "What Grab Shipped This Year",
+      "The Engineering Blog Is the Real Gift",
+      "The Reading List, Annotated",
+      "Copy the Pattern, Not the Scale",
+      "The Sarawak Footnote",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "In April, Grab unveiled [13 AI-powered products](https://www.grab.com/my/press/others/grab-unveils-13-ai-powered-experiences-at-grabx-2026-as-southeast-asias-intelligent-everyday-guide/) built on what it calls the Grab Intelligence Layer — trained on insight from more than 20 billion rides and orders. Several are [already live in Malaysia](https://soyacincau.com/2026/04/08/grabx-2026-grab-rolls-out-13-new-ai-powered-features-for-rides-food-and-travel/): the driver AI assistant, Group Ride, GrabMaps for consumers, with more rolling out through the year.",
+      },
+      {
+        type: "p",
+        text: "That's the consumer story. The builder story is better: Grab's engineering team documents how they build this stuff, publicly, for free, at a level of honesty most companies reserve for internal wikis. If you run or build for a business in this region, their blog is the closest thing to borrowing the homework of a company operating in your exact market conditions.",
+      },
+      { type: "h2", text: "What Grab Shipped This Year" },
+      {
+        type: "p",
+        text: "Beyond the consumer features: a partnership with OpenAI to teach [practical AI skills to 30,000 drivers and merchants](https://openai.com/index/grab-openai-ai-skills-southeast-asia/) across the region — Malaysia's turn comes in 2027 — and, this month, a [framework agreement with SoftBank and PETROS](https://group.softbank/en/news/press/20261008) to explore AI and digital infrastructure in Sarawak. One clarification worth making because it gets misreported: Grab's AI Centre of Excellence is in Singapore, not Malaysia — though they do run an R&D centre in KL.",
+      },
+      { type: "h2", text: "The Engineering Blog Is the Real Gift" },
+      {
+        type: "p",
+        text: "Big tech engineering blogs are usually recruitment ads. Grab's reads like working notes — including one post whose URL still carries a typo, which tells you nobody's polishing these for PR. Below are the ones I'd actually assign as reading, each with the thing a smaller business can steal.",
+      },
+      { type: "h2", text: "The Reading List, Annotated" },
+      {
+        type: "ol",
+        text: "",
+        items: [
+          "[Grab AI Gateway](https://engineering.grab.com/grab-ai-gateway) — one door for every AI call in the company: one set of keys, one cost ledger, one place for rate limits, 300+ internal use cases behind it. The SME version is a fifty-line proxy. If your business uses AI in more than one place, build the small version of this first.",
+          "[How Grab builds and runs AI agents at scale](https://engineering.grab.com/how-grab-builds-and-runs-ai-agents-at-scale) — the architecture of agents that actually do work, with the guardrails spelled out.",
+          "[Grab Bench](https://engineering.grab.com/grab-bench-evaluating-ai) — my pick for the most transferable idea of the year: before trusting AI with your work, test it on your real tasks, not demos. Any shop can build a ten-item bench from its own invoices, messages, and reports, and score models against it before betting a workflow on one.",
+          "[Jarvis Pro: route first, answer later](https://engineering.grab.com/jarvis-pro-route-firsr-answer-later) — send each request to the cheapest model that can handle it, escalate only when needed. This is exactly how you keep an AI feature from eating its own margin. (Yes, the typo in the URL is Grab's.)",
+          "[Automated merchant review summaries](https://engineering.grab.com/automated-merchant-review-summary-system-with-integrated-feedback) — reads a flood of customer reviews, produces summaries a busy owner will actually read. A directly sellable feature for any business drowning in Google reviews; they published how it works end to end.",
+          "[How AI is transforming analytics at Grab](https://engineering.grab.com/how-ai-is-transforming-analytics) — natural-language questions over business data, and the honest friction they hit.",
+          "[Price sensitivity profiling using LLMs](https://engineering.grab.com/price-sensitivity-profiling-using-llm) — fresh this month: using models to understand which customers respond to which pricing. Read it for the method, not to copy the use case.",
+          "[GrabMart data for disease outbreak detection](https://engineering.grab.com/grabmart-data-for-faster-disease-outbreak-detection) — the most unexpected one: grocery baskets as an early-warning signal. A reminder that the data you already collect probably answers questions you haven't asked it.",
+        ],
+      },
+      { type: "h2", text: "Copy the Pattern, Not the Scale" },
+      {
+        type: "p",
+        text: "You don't have 20 billion orders. Doesn't matter. The patterns are scale-free: one gateway for AI calls. A bench of your own real tasks before trusting a model. Route to the cheapest capable model. Summarise what nobody has time to read. Every one of those works at five staff the same way it works at five thousand — the fifty-line version just costs a weekend instead of a platform team.",
+      },
+      { type: "h2", text: "The Sarawak Footnote" },
+      {
+        type: "p",
+        text: "The SoftBank-Grab-PETROS agreement is exploratory — framework agreements are intentions, not data centres. But the direction is hard to miss: serious AI infrastructure conversations are happening about Malaysia, not just near it. The companies that will benefit first are the ones whose operations are already systematised enough to plug in. That part — being ready — is a choice available at any size.",
+      },
+    ],
+    relatedSlugs: [
+      "nvidia-96-billion-quarter-your-api-bill",
+      "razer-is-an-ai-company-now",
+    ],
+  },
+  {
+    slug: "razer-is-an-ai-company-now",
+    tag: "Trends",
+    date: "Oct 14, 2026",
+    readTime: "6 min read",
+    title: "Razer Says It's an AI Company Now. The Interesting Part Is How.",
+    excerpt:
+      "The gaming brand with Southeast Asian roots pivoted to AI at CES — with shipping products, not a press release. One of them contains a pattern every small business should steal.",
+    image: "/opengraph-image",
+    tocItems: [
+      "The Pivot, in Products",
+      "The Pattern Worth Stealing",
+      "A Desk Companion With an Agenda",
+      "The Southeast Asia Thread",
+      "What a Shop Owner Should Take From This",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "At CES in January, Razer — the green-snake gaming brand co-founded by Singaporean Min-Liang Tan — announced it was becoming [an AI company](https://www.digitimes.com/news/a20260107PD247/2026-accelerator-ces-2026-gaming-hardware-razer.html), complete with its first edge AI accelerator built on Tenstorrent silicon. This month the CEO told [Fortune](https://fortune.com/2026/10/14/razer-ceo-ai-everyone-gamer/) that AI will make \"everyone a gamer\" and push gaming toward a trillion-dollar industry.",
+      },
+      {
+        type: "p",
+        text: "CEO proclamations are cheap. What caught my attention is that the pivot came with shipping products — and one of them demonstrates a pattern I keep telling clients about.",
+      },
+      { type: "h2", text: "The Pivot, in Products" },
+      {
+        type: "p",
+        text: "At [GDC in March](https://www.razer.com/newsroom/company-news/razer-at-gdc-2026), Razer showed an AI ecosystem for game development: an agentic desk companion called AVA, automated QA tooling, and a haptics-plus-audio immersion runtime they claim integrates in days rather than months. Agree or not with the vision, this is a hardware brand rebuilding itself around software that does labour.",
+      },
+      { type: "h2", text: "The Pattern Worth Stealing" },
+      {
+        type: "p",
+        text: "The product that matters most to non-gamers is the QA Companion: zero-integration, vision-based testing. It watches the game's screen — no SDK, no code changes, no replatforming — and files bugs with reproduction steps. The AI adapts to the software instead of demanding the software adapt to it.",
+      },
+      {
+        type: "p",
+        text: "That's the pattern. Most small businesses I meet think adopting AI means migrating to new platforms — new POS, new CRM, new everything. The better systems go the other way: AI that reads what your staff already see. Documents, dashboards, WhatsApp threads, the screen itself. Razer just proved the zero-integration approach works well enough to sell to game studios, which are pickier about their pipelines than any mamak is about its order book.",
+      },
+      { type: "h2", text: "A Desk Companion With an Agenda" },
+      {
+        type: "p",
+        text: "AVA evolved from an esports coach into a general agentic companion — an animated assistant that watches your screen, learns your patterns, and translates intent into multi-step workflows across apps. Hardware ships later this year. I'm sceptical of animated avatars and bullish on the underlying idea: agents that operate your existing software, rather than replacing it, are where the next few years of practical AI live.",
+      },
+      { type: "h2", text: "The Southeast Asia Thread" },
+      {
+        type: "p",
+        text: "One detail for the local record: Razer's payments arm, Razer Merchant Services, grew out of Malaysia — it began life as MOLPay, which [MOL Global acquired into its group in 2011](https://www.sec.gov/Archives/edgar/data/0001604929/000119312514267730/d676326df1.pdf) before Razer bought it outright in 2018. A Southeast Asian company with Malaysian plumbing just declared itself an AI company. The region isn't watching this wave from the shore.",
+      },
+      { type: "h2", text: "What a Shop Owner Should Take From This" },
+      {
+        type: "p",
+        text: "You don't announce an AI transformation. You pick one workflow that eats real hours — QA for Razer, maybe invoice-chasing or review-replying for you — and you ship one tool that removes it. Then the next one. The press release, if you ever bother with one, writes itself afterwards.",
+      },
+    ],
+    relatedSlugs: [
+      "grab-published-its-ai-playbook-for-free",
+      "voice-ai-cheap-enough-for-your-front-desk",
+    ],
+  },
+  {
+    slug: "nvidia-96-billion-quarter-your-api-bill",
+    tag: "Trends",
+    date: "Oct 11, 2026",
+    readTime: "6 min read",
+    title: "NVIDIA's $96B Quarter Is a Message About Your AI Bill.",
+    excerpt:
+      "Revenue up 106%, margins at 75%, clouds sold out, a trillion dollars of orders. The read for everyone downstream: compute stays expensive — so design systems that spend it like it's expensive.",
+    image: "/opengraph-image",
+    tocItems: [
+      "The Quarter in Four Numbers",
+      "Sold Out Means Something",
+      "The Desktop AI Box Went the Wrong Way",
+      "Design API-Light",
+      "You Are the Margin",
+    ],
+    content: [
+      {
+        type: "p",
+        text: "NVIDIA [reported](https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027) US$96.2 billion in quarterly revenue in late August — up 106 percent year on year — and guided the next quarter to $108 billion. At GTC in March, Jensen Huang told the room they're looking at [around a trillion dollars in orders](https://www.cnbc.com/2026/03/16/nvidia-gtc-2026-ceo-jensen-huang-keynote-blackwell-vera-rubin.html) for their next two chip generations through 2027.",
+      },
+      {
+        type: "p",
+        text: "I don't own NVIDIA stock and this isn't investment commentary. I care about one downstream question: what does this do to the price of the AI calls inside the systems I build?",
+      },
+      { type: "h2", text: "The Quarter in Four Numbers" },
+      {
+        type: "p",
+        text: "Revenue $96.2 billion. Data centre segment $89 billion of it. Gross margin 75 percent. Next-quarter guidance $108 billion. The margin is the number to sit with — three-quarters of every dollar spent on this hardware is profit for the vendor, and every layer above it has to earn that cost back from somewhere. That somewhere eventually includes your API bill.",
+      },
+      { type: "h2", text: "Sold Out Means Something" },
+      {
+        type: "p",
+        text: "On the earnings call, management described cloud GPU capacity as sold out, with even previous-generation chips fully utilised. The next platform, Rubin, ramps in the second half of 2026 — and the demand pipe is already longer than the supply pipe. Translation for the rest of us: serious compute stays scarce and priced for hyperscalers for the foreseeable future. Cheap, abundant inference is not around the corner.",
+      },
+      { type: "h2", text: "The Desktop AI Box Went the Wrong Way" },
+      {
+        type: "p",
+        text: "The counter-argument used to be: fine, run models locally. NVIDIA sells a desktop AI machine for exactly that — and it's moving in the wrong direction. The DGX Spark launched at $3,999; a [new 64GB model now costs $4,999](https://cryptobriefing.com/nvidia-dgx-spark-64gb-launch/) with half the memory of the original, and the 128GB unit lists at $6,950. Blame the memory squeeze I wrote about separately. For a Malaysian SME, that's RM 20,000-plus of depreciating hardware versus pay-per-use APIs. It's not a contest.",
+      },
+      { type: "h2", text: "Design API-Light" },
+      {
+        type: "p",
+        text: "So the architecture answer isn't \"avoid AI\" — it's spend AI calls like they cost money, because they do and they'll keep doing so. In practice, in the systems I ship: cache aggressively so the same question never costs twice. Route routine steps to small, cheap models and reserve the frontier model for the few calls where its judgement earns the premium. Precompute what you can. Let deterministic code do everything deterministic code can do — it runs for free.",
+      },
+      { type: "h2", text: "You Are the Margin" },
+      {
+        type: "p",
+        text: "Seventy-five percent gross margin means every unnecessary AI call in your workflow is a small donation to the most profitable hardware company on earth. A well-designed system is just the discipline of not donating. That discipline is most of what you're paying for when someone builds you one.",
+      },
+    ],
+    relatedSlugs: [
+      "ram-prices-doubled-what-it-means",
+      "grab-published-its-ai-playbook-for-free",
+    ],
+  },
+  {
     slug: "voice-ai-cheap-enough-for-your-front-desk",
     tag: "Trends",
-    date: "Oct 16, 2026",
+    date: "Oct 9, 2026",
     readTime: "7 min read",
     title: "Voice AI Just Got Cheap Enough for Your Front Desk.",
     excerpt:
@@ -85,7 +267,7 @@ export const commentaryPosts: BlogPost[] = [
   {
     slug: "ram-prices-doubled-what-it-means",
     tag: "Trends",
-    date: "Oct 16, 2026",
+    date: "Oct 4, 2026",
     readTime: "6 min read",
     title: "RAM Prices Doubled. Your Next System Should Rent, Not Buy.",
     excerpt:
@@ -144,188 +326,6 @@ export const commentaryPosts: BlogPost[] = [
     relatedSlugs: [
       "nvidia-96-billion-quarter-your-api-bill",
       "voice-ai-cheap-enough-for-your-front-desk",
-    ],
-  },
-  {
-    slug: "nvidia-96-billion-quarter-your-api-bill",
-    tag: "Trends",
-    date: "Oct 16, 2026",
-    readTime: "6 min read",
-    title: "NVIDIA's $96B Quarter Is a Message About Your AI Bill.",
-    excerpt:
-      "Revenue up 106%, margins at 75%, clouds sold out, a trillion dollars of orders. The read for everyone downstream: compute stays expensive — so design systems that spend it like it's expensive.",
-    image: "/opengraph-image",
-    tocItems: [
-      "The Quarter in Four Numbers",
-      "Sold Out Means Something",
-      "The Desktop AI Box Went the Wrong Way",
-      "Design API-Light",
-      "You Are the Margin",
-    ],
-    content: [
-      {
-        type: "p",
-        text: "NVIDIA [reported](https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027) US$96.2 billion in quarterly revenue in late August — up 106 percent year on year — and guided the next quarter to $108 billion. At GTC in March, Jensen Huang told the room they're looking at [around a trillion dollars in orders](https://www.cnbc.com/2026/03/16/nvidia-gtc-2026-ceo-jensen-huang-keynote-blackwell-vera-rubin.html) for their next two chip generations through 2027.",
-      },
-      {
-        type: "p",
-        text: "I don't own NVIDIA stock and this isn't investment commentary. I care about one downstream question: what does this do to the price of the AI calls inside the systems I build?",
-      },
-      { type: "h2", text: "The Quarter in Four Numbers" },
-      {
-        type: "p",
-        text: "Revenue $96.2 billion. Data centre segment $89 billion of it. Gross margin 75 percent. Next-quarter guidance $108 billion. The margin is the number to sit with — three-quarters of every dollar spent on this hardware is profit for the vendor, and every layer above it has to earn that cost back from somewhere. That somewhere eventually includes your API bill.",
-      },
-      { type: "h2", text: "Sold Out Means Something" },
-      {
-        type: "p",
-        text: "On the earnings call, management described cloud GPU capacity as sold out, with even previous-generation chips fully utilised. The next platform, Rubin, ramps in the second half of 2026 — and the demand pipe is already longer than the supply pipe. Translation for the rest of us: serious compute stays scarce and priced for hyperscalers for the foreseeable future. Cheap, abundant inference is not around the corner.",
-      },
-      { type: "h2", text: "The Desktop AI Box Went the Wrong Way" },
-      {
-        type: "p",
-        text: "The counter-argument used to be: fine, run models locally. NVIDIA sells a desktop AI machine for exactly that — and it's moving in the wrong direction. The DGX Spark launched at $3,999; a [new 64GB model now costs $4,999](https://cryptobriefing.com/nvidia-dgx-spark-64gb-launch/) with half the memory of the original, and the 128GB unit lists at $6,950. Blame the memory squeeze I wrote about separately. For a Malaysian SME, that's RM 20,000-plus of depreciating hardware versus pay-per-use APIs. It's not a contest.",
-      },
-      { type: "h2", text: "Design API-Light" },
-      {
-        type: "p",
-        text: "So the architecture answer isn't \"avoid AI\" — it's spend AI calls like they cost money, because they do and they'll keep doing so. In practice, in the systems I ship: cache aggressively so the same question never costs twice. Route routine steps to small, cheap models and reserve the frontier model for the few calls where its judgement earns the premium. Precompute what you can. Let deterministic code do everything deterministic code can do — it runs for free.",
-      },
-      { type: "h2", text: "You Are the Margin" },
-      {
-        type: "p",
-        text: "Seventy-five percent gross margin means every unnecessary AI call in your workflow is a small donation to the most profitable hardware company on earth. A well-designed system is just the discipline of not donating. That discipline is most of what you're paying for when someone builds you one.",
-      },
-    ],
-    relatedSlugs: [
-      "ram-prices-doubled-what-it-means",
-      "grab-published-its-ai-playbook-for-free",
-    ],
-  },
-  {
-    slug: "razer-is-an-ai-company-now",
-    tag: "Trends",
-    date: "Oct 16, 2026",
-    readTime: "6 min read",
-    title: "Razer Says It's an AI Company Now. The Interesting Part Is How.",
-    excerpt:
-      "The gaming brand with Southeast Asian roots pivoted to AI at CES — with shipping products, not a press release. One of them contains a pattern every small business should steal.",
-    image: "/opengraph-image",
-    tocItems: [
-      "The Pivot, in Products",
-      "The Pattern Worth Stealing",
-      "A Desk Companion With an Agenda",
-      "The Southeast Asia Thread",
-      "What a Shop Owner Should Take From This",
-    ],
-    content: [
-      {
-        type: "p",
-        text: "At CES in January, Razer — the green-snake gaming brand co-founded by Singaporean Min-Liang Tan — announced it was becoming [an AI company](https://www.digitimes.com/news/a20260107PD247/2026-accelerator-ces-2026-gaming-hardware-razer.html), complete with its first edge AI accelerator built on Tenstorrent silicon. This month the CEO told [Fortune](https://fortune.com/2026/10/14/razer-ceo-ai-everyone-gamer/) that AI will make \"everyone a gamer\" and push gaming toward a trillion-dollar industry.",
-      },
-      {
-        type: "p",
-        text: "CEO proclamations are cheap. What caught my attention is that the pivot came with shipping products — and one of them demonstrates a pattern I keep telling clients about.",
-      },
-      { type: "h2", text: "The Pivot, in Products" },
-      {
-        type: "p",
-        text: "At [GDC in March](https://www.razer.com/newsroom/company-news/razer-at-gdc-2026), Razer showed an AI ecosystem for game development: an agentic desk companion called AVA, automated QA tooling, and a haptics-plus-audio immersion runtime they claim integrates in days rather than months. Agree or not with the vision, this is a hardware brand rebuilding itself around software that does labour.",
-      },
-      { type: "h2", text: "The Pattern Worth Stealing" },
-      {
-        type: "p",
-        text: "The product that matters most to non-gamers is the QA Companion: zero-integration, vision-based testing. It watches the game's screen — no SDK, no code changes, no replatforming — and files bugs with reproduction steps. The AI adapts to the software instead of demanding the software adapt to it.",
-      },
-      {
-        type: "p",
-        text: "That's the pattern. Most small businesses I meet think adopting AI means migrating to new platforms — new POS, new CRM, new everything. The better systems go the other way: AI that reads what your staff already see. Documents, dashboards, WhatsApp threads, the screen itself. Razer just proved the zero-integration approach works well enough to sell to game studios, which are pickier about their pipelines than any mamak is about its order book.",
-      },
-      { type: "h2", text: "A Desk Companion With an Agenda" },
-      {
-        type: "p",
-        text: "AVA evolved from an esports coach into a general agentic companion — an animated assistant that watches your screen, learns your patterns, and translates intent into multi-step workflows across apps. Hardware ships later this year. I'm sceptical of animated avatars and bullish on the underlying idea: agents that operate your existing software, rather than replacing it, are where the next few years of practical AI live.",
-      },
-      { type: "h2", text: "The Southeast Asia Thread" },
-      {
-        type: "p",
-        text: "One detail for the local record: Razer's payments arm, Razer Merchant Services, grew out of Malaysia — it began life as MOLPay, which [MOL Global acquired into its group in 2011](https://www.sec.gov/Archives/edgar/data/0001604929/000119312514267730/d676326df1.pdf) before Razer bought it outright in 2018. A Southeast Asian company with Malaysian plumbing just declared itself an AI company. The region isn't watching this wave from the shore.",
-      },
-      { type: "h2", text: "What a Shop Owner Should Take From This" },
-      {
-        type: "p",
-        text: "You don't announce an AI transformation. You pick one workflow that eats real hours — QA for Razer, maybe invoice-chasing or review-replying for you — and you ship one tool that removes it. Then the next one. The press release, if you ever bother with one, writes itself afterwards.",
-      },
-    ],
-    relatedSlugs: [
-      "grab-published-its-ai-playbook-for-free",
-      "voice-ai-cheap-enough-for-your-front-desk",
-    ],
-  },
-  {
-    slug: "grab-published-its-ai-playbook-for-free",
-    tag: "Learning",
-    date: "Oct 16, 2026",
-    readTime: "8 min read",
-    title: "Grab Published Its AI Playbook. For Free. Here Are the Links.",
-    excerpt:
-      "13 AI products launched this year, several live in Malaysia — and an engineering blog that documents exactly how they build. A guided tour of the posts worth your time, and what a small business can copy from each.",
-    image: "/opengraph-image",
-    tocItems: [
-      "What Grab Shipped This Year",
-      "The Engineering Blog Is the Real Gift",
-      "The Reading List, Annotated",
-      "Copy the Pattern, Not the Scale",
-      "The Sarawak Footnote",
-    ],
-    content: [
-      {
-        type: "p",
-        text: "In April, Grab unveiled [13 AI-powered products](https://www.grab.com/my/press/others/grab-unveils-13-ai-powered-experiences-at-grabx-2026-as-southeast-asias-intelligent-everyday-guide/) built on what it calls the Grab Intelligence Layer — trained on insight from more than 20 billion rides and orders. Several are [already live in Malaysia](https://soyacincau.com/2026/04/08/grabx-2026-grab-rolls-out-13-new-ai-powered-features-for-rides-food-and-travel/): the driver AI assistant, Group Ride, GrabMaps for consumers, with more rolling out through the year.",
-      },
-      {
-        type: "p",
-        text: "That's the consumer story. The builder story is better: Grab's engineering team documents how they build this stuff, publicly, for free, at a level of honesty most companies reserve for internal wikis. If you run or build for a business in this region, their blog is the closest thing to borrowing the homework of a company operating in your exact market conditions.",
-      },
-      { type: "h2", text: "What Grab Shipped This Year" },
-      {
-        type: "p",
-        text: "Beyond the consumer features: a partnership with OpenAI to teach [practical AI skills to 30,000 drivers and merchants](https://openai.com/index/grab-openai-ai-skills-southeast-asia/) across the region — Malaysia's turn comes in 2027 — and, this month, a [framework agreement with SoftBank and PETROS](https://group.softbank/en/news/press/20261008) to explore AI and digital infrastructure in Sarawak. One clarification worth making because it gets misreported: Grab's AI Centre of Excellence is in Singapore, not Malaysia — though they do run an R&D centre in KL.",
-      },
-      { type: "h2", text: "The Engineering Blog Is the Real Gift" },
-      {
-        type: "p",
-        text: "Big tech engineering blogs are usually recruitment ads. Grab's reads like working notes — including one post whose URL still carries a typo, which tells you nobody's polishing these for PR. Below are the ones I'd actually assign as reading, each with the thing a smaller business can steal.",
-      },
-      { type: "h2", text: "The Reading List, Annotated" },
-      {
-        type: "ol",
-        text: "",
-        items: [
-          "[Grab AI Gateway](https://engineering.grab.com/grab-ai-gateway) — one door for every AI call in the company: one set of keys, one cost ledger, one place for rate limits, 300+ internal use cases behind it. The SME version is a fifty-line proxy. If your business uses AI in more than one place, build the small version of this first.",
-          "[How Grab builds and runs AI agents at scale](https://engineering.grab.com/how-grab-builds-and-runs-ai-agents-at-scale) — the architecture of agents that actually do work, with the guardrails spelled out.",
-          "[Grab Bench](https://engineering.grab.com/grab-bench-evaluating-ai) — my pick for the most transferable idea of the year: before trusting AI with your work, test it on your real tasks, not demos. Any shop can build a ten-item bench from its own invoices, messages, and reports, and score models against it before betting a workflow on one.",
-          "[Jarvis Pro: route first, answer later](https://engineering.grab.com/jarvis-pro-route-firsr-answer-later) — send each request to the cheapest model that can handle it, escalate only when needed. This is exactly how you keep an AI feature from eating its own margin. (Yes, the typo in the URL is Grab's.)",
-          "[Automated merchant review summaries](https://engineering.grab.com/automated-merchant-review-summary-system-with-integrated-feedback) — reads a flood of customer reviews, produces summaries a busy owner will actually read. A directly sellable feature for any business drowning in Google reviews; they published how it works end to end.",
-          "[How AI is transforming analytics at Grab](https://engineering.grab.com/how-ai-is-transforming-analytics) — natural-language questions over business data, and the honest friction they hit.",
-          "[Price sensitivity profiling using LLMs](https://engineering.grab.com/price-sensitivity-profiling-using-llm) — fresh this month: using models to understand which customers respond to which pricing. Read it for the method, not to copy the use case.",
-          "[GrabMart data for disease outbreak detection](https://engineering.grab.com/grabmart-data-for-faster-disease-outbreak-detection) — the most unexpected one: grocery baskets as an early-warning signal. A reminder that the data you already collect probably answers questions you haven't asked it.",
-        ],
-      },
-      { type: "h2", text: "Copy the Pattern, Not the Scale" },
-      {
-        type: "p",
-        text: "You don't have 20 billion orders. Doesn't matter. The patterns are scale-free: one gateway for AI calls. A bench of your own real tasks before trusting a model. Route to the cheapest capable model. Summarise what nobody has time to read. Every one of those works at five staff the same way it works at five thousand — the fifty-line version just costs a weekend instead of a platform team.",
-      },
-      { type: "h2", text: "The Sarawak Footnote" },
-      {
-        type: "p",
-        text: "The SoftBank-Grab-PETROS agreement is exploratory — framework agreements are intentions, not data centres. But the direction is hard to miss: serious AI infrastructure conversations are happening about Malaysia, not just near it. The companies that will benefit first are the ones whose operations are already systematised enough to plug in. That part — being ready — is a choice available at any size.",
-      },
-    ],
-    relatedSlugs: [
-      "nvidia-96-billion-quarter-your-api-bill",
-      "razer-is-an-ai-company-now",
     ],
   },
 ];
