@@ -12,7 +12,7 @@ export const services: Service[] = [
     id: '01',
     title: 'Internal Ops Dashboard',
     kicker: 'Next.js · Supabase · Role-based',
-    body: "I build the internal dashboard that replaces the spreadsheets and WhatsApp threads running your operation: orders, inventory, jobs, and staff roles in one custom-coded system with a real database behind it. Built around how your team actually works, then handed over with documentation you own. From $2,000.",
+    body: "I build the internal dashboard that replaces the spreadsheets and WhatsApp threads running your operation: orders, inventory, jobs, and staff roles in one custom-coded system with a real database behind it. Built around how your team actually works, then handed over with documentation you own.",
     chips: ['Next.js', 'Supabase', 'Role-based access'],
     deliverables: [
       'Custom dashboard built in Next.js',
@@ -27,7 +27,7 @@ export const services: Service[] = [
     id: '02',
     title: 'AI Knowledge Assistant',
     kicker: 'RAG · Claude · Your data',
-    body: "I build assistants trained on your own documents, so your team stops re-answering the same questions. Retrieval over your real data with citations back to the source, not a generic chatbot widget. From $1,500.",
+    body: "I build assistants trained on your own documents, so your team stops re-answering the same questions. Retrieval over your real data with citations back to the source, not a generic chatbot widget.",
     chips: ['RAG', 'Claude', 'pgvector'],
     deliverables: [
       'Document ingestion pipeline for your files',
@@ -42,7 +42,7 @@ export const services: Service[] = [
     id: '03',
     title: 'AI Workflow Automation',
     kicker: 'Automation · Integrations · Agents',
-    body: "I automate the repetitive work between your tools: lead intake, follow-ups, reporting, data entry. Custom-coded workflows with AI where it earns its place, wired into the systems you already use. From $1,500.",
+    body: "I automate the repetitive work between your tools: lead intake, follow-ups, reporting, data entry. Custom-coded workflows with AI where it earns its place, wired into the systems you already use.",
     chips: ['Automation', 'Integrations', 'AI agents'],
     deliverables: [
       'Automation workflows for repetitive tasks',
