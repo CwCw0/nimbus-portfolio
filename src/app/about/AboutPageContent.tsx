@@ -277,7 +277,7 @@ export default function AboutPageContent() {
             border: 1px solid var(--line);
           }
           .stack-grid :global(> *) {
-            background: var(--bg, #0a0a0f);
+            background: var(--ink-0);
           }
           .stack-cell {
             background: transparent;

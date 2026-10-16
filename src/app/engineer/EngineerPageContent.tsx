@@ -429,7 +429,7 @@ export default function EngineerPageContent() {
                   href={`/work/${project.slug}`}
                   style={{
                     display: "block",
-                    background: "var(--bg, #0a0a0f)",
+                    background: "var(--ink-0)",
                     padding: "var(--sp-8) var(--sp-6)",
                     height: "100%",
                   }}

@@ -20,7 +20,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0A0A0F",
+          background: "#0E0D0B",
           padding: "72px 80px",
           position: "relative",
           fontFamily: "sans-serif",
@@ -124,7 +124,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             style={{
               fontSize: title.length > 60 ? "48px" : title.length > 40 ? "56px" : "64px",
               fontWeight: 700,
-              color: "#EEEDF5",
+              color: "#F5F0E4",
               lineHeight: 1.1,
               letterSpacing: "-2px",
               maxWidth: "900px",

@@ -584,7 +584,7 @@ export default function CaseStudyContent({
 
   if (!caseStudy) {
     return (
-      <section className="container" style={{ padding: '200px 0', textAlign: 'center' }}>
+      <section className="container" style={{ paddingTop: 200, paddingBottom: 200, textAlign: 'center' }}>
         <h1 className="display-lg" style={{ color: 'var(--fg)' }}>Project not found</h1>
         <Link href="/work" className="body" style={{ color: 'var(--accent)', marginTop: 'var(--sp-6)', display: 'inline-block' }}>
           Back to Work
@@ -718,7 +718,7 @@ export default function CaseStudyContent({
                       alignItems: 'center',
                       gap: 'var(--sp-2)',
                       padding: '10px 20px',
-                      background: 'rgba(10,10,15,0.85)',
+                      background: 'var(--glass-bg-strong)',
                       backdropFilter: 'blur(12px)',
                       border: '1px solid var(--line-strong)',
                       color: 'var(--accent)',
@@ -912,7 +912,7 @@ export default function CaseStudyContent({
 
           {/* ── Tech stack chips ── */}
           {caseStudy.tags.length > 0 && (
-            <section className="container" style={{ padding: 'var(--sp-16) 0' }}>
+            <section className="container" style={{ paddingTop: 'var(--sp-16)', paddingBottom: 'var(--sp-16)' }}>
               <FadeIn>
                 <span className="mono" style={{ color: 'var(--fg-faint)', display: 'block', marginBottom: 'var(--sp-6)' }}>
                   TECH STACK

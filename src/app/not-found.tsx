@@ -23,12 +23,12 @@ export default function NotFound() {
             fontFamily: 'var(--f-display)',
             fontSize: 'clamp(100px, 20vw, 240px)',
             fontWeight: 700,
-            lineHeight: 0.85,
+            lineHeight: 1.06,
             letterSpacing: '-0.05em',
-            background: 'linear-gradient(180deg, var(--accent) 0%, var(--ink-0) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            background: 'none',
+            WebkitBackgroundClip: 'border-box',
+            WebkitTextFillColor: 'var(--fg)',
+            backgroundClip: 'border-box',
           }}
         >
           404
@@ -40,7 +40,7 @@ export default function NotFound() {
             fontFamily: 'var(--f-display)',
             fontSize: 'clamp(100px, 20vw, 240px)',
             fontWeight: 700,
-            lineHeight: 0.85,
+            lineHeight: 1.06,
             letterSpacing: '-0.05em',
           }}
         >
@@ -53,7 +53,7 @@ export default function NotFound() {
             fontFamily: 'var(--f-display)',
             fontSize: 'clamp(100px, 20vw, 240px)',
             fontWeight: 700,
-            lineHeight: 0.85,
+            lineHeight: 1.06,
             letterSpacing: '-0.05em',
           }}
         >

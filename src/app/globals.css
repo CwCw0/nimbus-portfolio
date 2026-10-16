@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Wix Madefor Text';
+  src: url('/fonts/madefor-normal.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Wix Madefor Text';
+  src: url('/fonts/madefor-italic.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -75,8 +90,8 @@
 
   /* ── Typography ── */
   --f-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
-  --f-serif: var(--font-madefor), system-ui, sans-serif;
-  --f-body: var(--font-madefor), system-ui, sans-serif;
+  --f-serif: 'Wix Madefor Text', system-ui, sans-serif;
+  --f-body: 'Wix Madefor Text', system-ui, sans-serif;
   --f-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* ── Type Scale (responsive clamp) ── */
@@ -144,7 +159,7 @@
   --violet-3: #8F8B82;
   --fg: #161411;
   --fg-dim: #55514A;
-  --fg-faint: #6E6A63;
+  --fg-faint: #615D55;
   --accent: #161411;
   --aurora: #161411; /* mono (light) until accent decided */
   --accent-2: #2A2A2A;
@@ -969,7 +984,7 @@ main, footer, nav, header {
 
 .nav-link-sub {
   font-family: var(--f-mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.12em;
   color: var(--fg-faint);
   text-transform: uppercase;
@@ -1892,3 +1907,9 @@ body.theme-fade *::after {
   background: currentColor;
   margin-left: 0.05em;
 }
+
+
+/* Touch targets (a11y audit 2026-10-16): stacked/footer/standalone links reach 44px */
+.footer-col-link { display: inline-flex; align-items: center; min-height: 44px; }
+.footer-legal a.link-underline { display: inline-block; padding-block: 12px; }
+.blog-filter-btn, button.mono { padding-block: 10px; }

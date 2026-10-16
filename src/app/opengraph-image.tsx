@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Nimbus Forma Studio — I build the AI-powered system that runs your operation.";
+export const alt = "nmbs. — I make businesses run smoother.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -15,7 +15,7 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "flex-end",
-          background: "#0A0A0F",
+          background: "#0E0D0B",
           padding: "72px 80px",
           position: "relative",
           fontFamily: "sans-serif",
@@ -76,7 +76,7 @@ export default async function Image() {
               letterSpacing: "-2px",
             }}
           >
-            <div style={{ display: "flex" }}>I build the AI-powered</div>
+            <div style={{ display: "flex" }}>I make businesses</div>
             <div style={{ display: "flex", color: "#F5F0E4" }}>system that runs</div>
             <div style={{ display: "flex" }}>your operation.</div>
           </div>

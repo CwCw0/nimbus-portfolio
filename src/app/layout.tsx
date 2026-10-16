@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
-import { Wix_Madefor_Text } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import ClientShell from "@/components/ClientShell";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import "./globals.css";
-
-const madefor = Wix_Madefor_Text({
-  variable: "--font-madefor",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nimbusformastudio.com";
 
@@ -50,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "nmbs. — Nimbus Forma Studio",
     description:
-      "Websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
+      "I make businesses run smoother. Custom operations systems, internal dashboards, workflow automation and AI assistants. Built with intention.",
     images: [`${siteUrl}/opengraph-image`],
   },
   robots: {
@@ -111,14 +103,14 @@ export default function RootLayout({
                   "@id": `${siteUrl}/#website`,
                   url: siteUrl,
                   name: "Nimbus Forma Studio",
-                  description: "Creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools. Built with intention.",
+                  description: "I make businesses run smoother. Custom operations systems, dashboards, automation and AI assistants. Built with intention.",
                   publisher: { "@id": `${siteUrl}/#person` },
                 },
                 {
                   "@type": "ProfessionalService",
                   "@id": `${siteUrl}/#business`,
                   name: "Nimbus Forma Studio",
-                  description: "Creative studio specializing in websites, branding, UI/UX, SEO and AI-powered tools for freelancers, startups and growing businesses. Built with intention.",
+                  description: "I make businesses run smoother. Custom operations systems, dashboards, automation and AI assistants. Built with intention.",
                   url: siteUrl,
                   email: "heyitsnimbus@gmail.com",
                   priceRange: "$$",
@@ -149,7 +141,7 @@ export default function RootLayout({
         data-theme="dark"
         data-strings="on"
         data-grain="true"
-        className={`${madefor.variable} h-full antialiased`}
+        className="h-full antialiased"
       >
         <a
           href="#main-content"

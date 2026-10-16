@@ -58,7 +58,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
 
   if (!post) {
     return (
-      <section className="container" style={{ padding: '200px 0', textAlign: 'center' }}>
+      <section className="container" style={{ paddingTop: 200, paddingBottom: 200, textAlign: 'center' }}>
         <h1 className="display-lg" style={{ color: 'var(--fg)' }}>Post not found</h1>
         <Link href="/blog" className="body" style={{ color: 'var(--accent)', marginTop: 32, display: 'inline-block' }}>
           Back to Blog
@@ -192,7 +192,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                   <blockquote
                     key={i}
                     style={{
-                      borderLeft: '2px solid var(--accent)',
+                      borderLeft: '1px solid var(--line-strong)',
                       paddingLeft: 24,
                       margin: '24px 0',
                       fontFamily: 'var(--f-serif)',
